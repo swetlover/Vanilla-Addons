@@ -1,0 +1,12 @@
+## Interface: 11200
+## Title: RangeColor
+## Title-zhCN: |CFFCCFFFF界面|r 动作条距离颜色
+## Notes: Change the icon color when out of range, no mana, etc. Use << /rc >> or << /rangecolor >> for the options menu.
+## Notes-zhCN: |CFFDD66DDRangeColor|r 根据目标距离改变施法条颜色|N设置命令/rc 
+## Author: Edswor
+## OptionalDeps: myAddOns
+## Dependencies:
+## SavedVariablesPerCharacter: RangeColor_Save2
+RangeColor.xml
+RangeColorOptions.xml
+

@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: LootHog
+## Title-zhCN: |CFF00FF00团队|r Roll点监视助手
+## Author: Suan (Khaz'goroth)
+## Notes: Help track /random 100 rolls.
+## Notes-zhCN: |CFFDD66DDLootHog|r Roll点监视助手|N设置命令/loothog
+## DefaultState: disabled
+## SavedVariables: loothog_settings, loothog_rollStats
+## OptionalDeps:myAddOns
+## Dependencies:
+LootHog.xml

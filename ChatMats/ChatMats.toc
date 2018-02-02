@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: ChatMats 1.43.11000
+## Title-zhCN: |CFFCCCCFF辅助|r 聊天框材料发布
+## Notes-zhCN: |CFFDD66DDChatMats|r Alt+左键发布该配方所需材料到聊天框 
+## Notes: Chat link a recipe's materials
+## OptionalDeps:
+## Dependencies:
+## LoadOnDemand: 1
+## LoadWith: Blizzard_TradeSkillUI, Blizzard_CraftUI
+ChatMats.xml

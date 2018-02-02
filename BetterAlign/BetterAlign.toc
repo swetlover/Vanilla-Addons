@@ -1,0 +1,9 @@
+## Interface: 11200
+## Author: DWG
+## Title: BetterAlign
+## Title-zhCN: |CFFCCFFFF界面|r 网格界面对齐
+## Notes: A better version of Align
+## Notes-zhCN: |CFFDD66DDBetterAlign|r 在界面上显示网格以便对齐插件框体|N设置命令/ba
+
+BetterAlign.xml
+BetterAlign.lua

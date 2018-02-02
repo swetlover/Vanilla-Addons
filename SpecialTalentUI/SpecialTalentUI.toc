@@ -1,0 +1,13 @@
+﻿# Do not delete the following line!
+## Interface: 11200
+## Title: SpecialTalentUI
+## Notes: Improved Talent Frame. You can see and interact with all three talent trees at once. Summary of your learned and planned talent points at the top. Plan your alts' templates.
+## Title-zhCN: |CFFCCCCFF辅助|r 天赋模拟器增强界面
+## Notes-zhCN:|CFFDD66DDSpecialTalentUI|r 天赋模拟器的增强界面。
+## X-Repple: 界面
+## LoadOnDemand: 1
+## SavedVariables: SpecialTalentPlannedSaved SpecialTalentFrameSaved SpecialTalentLearnedSaved
+## First created: Apr 2006
+SpecialTalentData.lua
+localization.lua
+SpecialTalentUI.xml

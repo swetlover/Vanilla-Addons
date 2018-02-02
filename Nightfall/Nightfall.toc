@@ -1,0 +1,9 @@
+﻿## Interface: 11200
+## Title: Nightfall
+## Notes: Will warn if you have nightfall.
+## Title-zhCN: |CFFFFFFCC职业|R |CFF9382C9术士|R夜幕触发提示
+## Notes-zhCN:|CFFDD66DDNightfall|R 提示术士获得夜幕效果|N设置命令/nfshow,/nfhide
+## DefaultState: disabled
+## Author: Xerogen
+## Version: BETA 1.0
+Nightfall.xml

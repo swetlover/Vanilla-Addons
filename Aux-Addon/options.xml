@@ -1,0 +1,286 @@
+<Ui xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+	<Script file="Options.lua"/> 
+	
+	<Frame name="AuxOptionsButtonTemplate" virtual="true" hidden="true">
+		<Size>
+			<AbsDimension x="1" y="1"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="210" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button name="AuxOptionsButton" inherits="UIPanelButtonTemplate" text="Aux">
+				<Size><AbsDimension x="50" y="22"/></Size>
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="758" y="-12"/></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						Aux_ShowOptionsFrame()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+			
+	<Frame name="AuxOptionsFrame" frameStrata="HIGH" toplevel="true" parent="UIParent" enableMouse="true" hidden="true">
+		<Size><AbsDimension x="400" y="375"/></Size>		
+		<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-170"/></Offset></Anchor></Anchors>
+
+		<Backdrop bgFile="Interface\CharacterFrame\UI-Party-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets><AbsInset left="11" right="12" top="12" bottom="11"/></BackgroundInsets>
+			<TileSize><AbsValue val="32"/></TileSize>
+			<EdgeSize><AbsValue val="32"/></EdgeSize>
+		</Backdrop>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="AuxConfigFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size x="120" y="64"/>
+					<Anchors><Anchor point="TOP"><Offset x="0" y="12"/></Anchor></Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" text="Aux">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="AuxConfigFrameHeader">
+							<Offset x="0" y="-14"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<Frame name="AuxAboutTitleText">
+				<Size><AbsDimension y="30" /></Size>		
+				<Anchors>
+					<Anchor point="TOP"><Offset><AbsDimension y="-50"/></Offset></Anchor>
+					<Anchor point="LEFT"><Offset><AbsDimension x="30"/></Offset></Anchor>
+					<Anchor point="RIGHT"><Offset><AbsDimension x="-30"/></Offset></Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString inherits="GameFontNormal" text="关于 Aux" justifyH="LEFT" justifyV="TOP"></FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			
+			<Frame>
+				<Size><AbsDimension y="35" /></Size>		
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AuxAboutTitleText" relativePoint="BOTTOM"><Offset><AbsDimension y="-5"/></Offset></Anchor>
+					<Anchor point="LEFT"><Offset><AbsDimension x="30"/></Offset></Anchor>
+					<Anchor point="RIGHT"><Offset><AbsDimension x="-30"/></Offset></Anchor>
+				</Anchors> 
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="AuxExplanation" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP" >
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+							<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+						</Anchors> 
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<Button name="AuxOptionsButton_More" inherits="UIPanelButtonTemplate" text="更多">
+				<Size><AbsDimension x="80" y="18"/>	</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AuxExplanation" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="-3" y="-5"/></Offset></Anchor>
+				</Anchors> 
+				<NormalFont inherits="GameFontNormalSmall"/>
+				<HighlightFont inherits="GameFontHighlightSmall"/>
+				<Scripts>
+					<OnClick>
+						Aux_ShowDescriptionFrame()
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<Frame name="AuxOption_Title">
+				<Size><AbsDimension y="30" /></Size>		
+				<Anchors>
+					<Anchor point="TOP"  ><Offset><AbsDimension y="-180"/></Offset></Anchor>
+					<Anchor point="LEFT" ><Offset><AbsDimension x="30"/></Offset></Anchor>
+					<Anchor point="RIGHT"><Offset><AbsDimension x="-30"/></Offset></Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="AuxConfigFrameTitle" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" text="Options">
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<Frame name="AuxOption_Enable_Alt_Box">
+				<Size><AbsDimension y="40" /></Size>		
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AuxOption_Title" relativePoint="BOTTOM" ><Offset><AbsDimension y="-5"/></Offset></Anchor>
+					<Anchor point="LEFT" ><Offset><AbsDimension x="40"/></Offset></Anchor>
+					<Anchor point="RIGHT"><Offset><AbsDimension x="-20"/></Offset></Anchor>
+				</Anchors>
+				
+				<Scripts>
+					<OnEnter>
+						Aux_ShowTooltip_EnableAlt()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+
+				<Frames>
+
+					<CheckButton name="AuxOption_Enable_Alt" inherits="UICheckButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString inherits="GameFontHighlight" text="启用ALT快捷键">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="AuxOption_Enable_Alt">
+											<Offset><AbsDimension x="8" y="1"/></Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnEnter>
+								Aux_ShowTooltip_EnableAlt()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+
+				</Frames>
+			</Frame>
+
+			<Frame name="AuxOption_Open_First_Box">
+				<Size><AbsDimension y="40" /></Size>		
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AuxOption_Title" relativePoint="BOTTOM" ><Offset><AbsDimension y="-35"/></Offset></Anchor>
+					<Anchor point="LEFT" ><Offset><AbsDimension x="40"/></Offset></Anchor>
+					<Anchor point="RIGHT"><Offset><AbsDimension x="-20"/></Offset></Anchor>
+				</Anchors>
+				
+				<Scripts>
+					<OnEnter>
+						Aux_ShowTooltip_OpenFirst()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+				
+				<Frames>
+					<CheckButton name="AuxOption_Open_First" inherits="UICheckButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString inherits="GameFontHighlight" text="自动打开Aux交易页">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="AuxOption_Open_First">
+											<Offset><AbsDimension x="8" y="1"/></Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnEnter>
+								Aux_ShowTooltip_OpenFirst()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+
+				</Frames>
+			</Frame>
+			
+			<Frame name="AuxOption_Instant_Buyout_Box">
+				<Size><AbsDimension y="40" /></Size>		
+				<Anchors>
+					<Anchor point="TOP" relativeTo="AuxOption_Title" relativePoint="BOTTOM" ><Offset><AbsDimension y="-65"/></Offset></Anchor>
+					<Anchor point="LEFT" ><Offset><AbsDimension x="40"/></Offset></Anchor>
+					<Anchor point="RIGHT"><Offset><AbsDimension x="-20"/></Offset></Anchor>
+				</Anchors>
+				
+				<Scripts>
+					<OnEnter>
+						Aux_ShowTooltip_InstantBuyout()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+				
+				<Frames>
+					<CheckButton name="AuxOption_Instant_Buyout" inherits="UICheckButtonTemplate">
+						<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString inherits="GameFontHighlight" text="启用右键快捷购买">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="AuxOption_Instant_Buyout">
+											<Offset><AbsDimension x="8" y="1"/></Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnEnter>
+								Aux_ShowTooltip_InstantBuyout()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+
+				</Frames>
+			</Frame>
+
+			<Frame>
+				<Size><AbsDimension x="150" y="40" /></Size>		
+				<Anchors>
+					<Anchor point="BOTTOMLEFT"><Offset><AbsDimension x="25" y="5"/></Offset></Anchor>
+				</Anchors> 
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="AuxVersionText" inherits="GameFontDisableSmall" justifyH="LEFT" justifyV="TOP"></FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<Button name="AuxOptionsButton_Cancel" inherits="UIPanelButtonTemplate" text="取消">
+				<Size><AbsDimension x="80" y="22"/>	</Size>
+				<Anchors><Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="-20" y="15"/></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						AuxOptionsFrame:Hide()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="AuxOptionsButton_Okay" inherits="UIPanelButtonTemplate" text="好的">
+				<Size><AbsDimension x="80" y="22"/>	</Size>
+				<Anchors><Anchor point="RIGHT" relativePoint="LEFT" relativeTo="AuxOptionsButton_Cancel"><Offset><AbsDimension x="-3" y="0"/></Offset></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						AuxOptionsSave()
+						AuxOptionsFrame:Hide()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>

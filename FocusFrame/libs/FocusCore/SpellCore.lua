@@ -1,0 +1,901 @@
+-- Modified version of spellCastingCore by kuuurtz
+-- https://github.com/zetone/enemyFrames
+
+if FSPELLCASTINGCOREgetDebuffs then return end
+
+local Cast          = {}        local casts     = {}
+local InstaBuff     = {}        local iBuffs    = {}
+local buff          = {}        local buffList  = {}
+Cast.__index        = Cast
+InstaBuff.__index   = InstaBuff
+buff.__index        = buff
+
+local Focus
+local playerName = UnitName("player")
+FSPELLCASTINGCOREstrictAuras = false
+
+-- Upvalues
+local FOCUS_CHANNELED_SPELLCASTS_TO_TRACK, FOCUS_INSTANT_SPELLCASTS_TO_TRACK =
+      FOCUS_CHANNELED_SPELLCASTS_TO_TRACK, FOCUS_INSTANT_SPELLCASTS_TO_TRACK
+
+local FOCUS_SPELLCASTS_TO_TRACK, FOCUS_TRADECASTS_TO_TRACK =
+      FOCUS_SPELLCASTS_TO_TRACK, FOCUS_TRADECASTS_TO_TRACK
+
+local FOCUS_BUFFS_TO_TRACK, FOCUS_BORDER_DEBUFFS_COLOR =
+      FOCUS_BUFFS_TO_TRACK, FOCUS_BORDER_DEBUFFS_COLOR
+
+local tinsert, tremove, strfind, gsub, ipairs, pairs, GetTime, GetNetStats, setmetatable, tgetn, strlower =
+      table.insert, table.remove, string.find, string.gsub, ipairs, pairs, GetTime, GetNetStats, setmetatable, table.getn, string.lower
+
+Cast.create = function(caster, spell, info, timeMod, time, inv)
+	local acnt = {
+		caster      = caster,
+		spell       = spell,
+		icon        = info.icon,
+		timeStart   = time,
+		timeEnd     = time + info.casttime * timeMod,
+		tick        = info.tick or 0,
+		inverse     = inv,
+		immune      = info.immune
+	}
+
+	acnt.nextTick = info.tick and time + acnt.tick or acnt.timeEnd
+	setmetatable(acnt, Cast)
+
+	return acnt
+end
+
+InstaBuff.create = function(c, b, list, time)
+	local acnt = {
+		caster       = c,
+		spell        = b,
+		timeMod      = list.mod,
+		spellList    = list.list,
+		timeStart    = time,
+		timeEnd      = time + 10
+	}
+
+	setmetatable(acnt, InstaBuff)
+
+	return acnt
+end
+
+buff.create = function(tar, t, s, buffType, factor, time, texture, debuff, magictype, debuffStack)
+	if not buffType then
+		buffType = {}
+	end
+	buffType.type = magictype and strlower(magictype) or strlower(buffType.type or "none")
+
+	local acnt = {
+		target      = tar,
+		caster      = tar,
+		spell       = t,
+		stacks      = debuffStack or s or 0,
+		icon        = texture or buffType.icon,
+		timeStart   = time,
+		timeEnd     = 0, -- TODO remove
+		prio        = buffType.prio or 0,
+		border      = FOCUS_BORDER_DEBUFFS_COLOR[buffType.type],
+		display     = true,	-- TODO remove
+		btype       = debuff,
+		debuffType  = buffType.type,
+	}
+
+	setmetatable(acnt, buff)
+
+	return acnt
+end
+
+local getAvgLatency = function()
+	local _, _, lat = GetNetStats()
+	return lat / 1000
+end
+
+local getTimeMinusPing = function()
+	return GetTime() - 0.1 -- getAvgLatency() -- standby for now
+end
+
+local removeExpiredTableEntries = function(time, tab)
+	local i = 1
+	for k, v in pairs(tab) do
+		if time > v.timeEnd then
+			tremove(tab, i)
+		end
+		i = i + 1
+	end
+end
+
+local forceHideTableItem = function(tab, caster, spell, debuffsOnly)
+	local i = 1
+
+	for k, v in pairs(tab) do
+		if v.caster == caster then
+			if not spell then
+				-- Remove all debuffs only
+				if debuffsOnly then
+					if v.btype then
+						tremove(tab, i)
+					end
+				else
+					tremove(tab, i)
+				end
+			else
+				if v.spell == spell then
+					-- TODO we should also compare texture here when mult buffs have same name
+					if debuffsOnly then
+						if v.btype then
+							tremove(tab, i)
+						end
+					else
+						tremove(tab, i)
+					end
+				end
+			end
+		end
+
+		i = i + 1
+	end
+
+	--[[if spell == "Feign Death" then
+		print("clear")
+		Focus:ClearData("feignDeath")
+	end]]
+
+	if tab == buffList and Focus:UnitIsFocus(caster, true) then
+		-- triggers UNIT_AURA for focus
+		Focus:SetData("auraUpdate", 1)
+	end
+end
+
+local lastCleared = GetTime()
+local tableMaintenance = function(reset)
+	if reset then
+		casts = {}
+		iBuffs = {}
+		buffList = {}
+		return
+	end
+
+	-- CASTS -- casts have a different removal parameter
+	local getTime = GetTime()
+	local latency = getAvgLatency()
+	local i = 1
+	for k, v in pairs(casts) do
+		if getTime > v.timeEnd or getTime > v.nextTick + latency then -- channeling cast verification
+			tremove(casts, i)
+		end
+		i = i + 1
+	end
+
+	removeExpiredTableEntries(getTime, iBuffs) -- casting speed buffs
+
+	-- Remove focus auras if focus is dead
+	if CURR_FOCUS_TARGET and Focus:IsDead() then
+		-- need to call this in OnUpdate to avoid buffs not being removed due to data
+		-- race conditions from events
+		forceHideTableItem(buffList, CURR_FOCUS_TARGET)
+	end
+
+	if not CURR_FOCUS_TARGET then
+		-- Delete ALL buffs every X sec when there is no focus target
+		-- This is needed to remove buffs that fail to expire due to no combat event found
+		-- (we can't jst remove all on every focus changed as it will make tracking very inaccurate)
+		if getTime - lastCleared > 60 then
+			if tgetn(buffList) >= 1 then
+				if not UnitAffectingCombat("player") then
+					buffList = {}
+				end
+			end
+			lastCleared = getTime
+		end
+	end
+end
+
+local removeDoubleCast = function(caster)
+	local k = 1
+	for i, j in casts do
+		if j.caster == caster then tremove(casts, k) end
+		k = k + 1
+	end
+end
+
+local checkForChannels = function(caster, spell)
+	local k = 1
+	for i, j in casts do
+		if j.caster == caster and j.spell == spell then
+			j.nextTick = GetTime() + j.tick
+			return true
+		end
+		k = k + 1
+	end
+	return false
+end
+
+local checkforCastTimeModBuffs = function(caster, spell)
+	local k = 1
+	for i, j in iBuffs do
+		if j.caster == caster then
+			if j.spellList[1] ~= "all" then
+				local a, lastT = 1, 1
+				for b, c in j.spellList do
+					if c == spell then
+						if lastT ~= 0 then -- priority to buffs that proc instant cast
+							lastT = j.timeMod
+						end
+					end
+				end
+				return lastT
+			else
+				return j.timeMod
+			end
+		end
+		k = k + 1
+	end
+
+	return 1
+end
+
+local newCast = function(caster, spell, channel)
+	if FSPELLCASTINGCOREstrictAuras then
+		if caster ~= CURR_FOCUS_TARGET then return end
+	end
+
+	local getTime = getTimeMinusPing()
+	local info
+
+	if channel then
+		if FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[spell] then
+			info = FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[spell]
+		end
+	else
+		removeDoubleCast(caster)
+		if FOCUS_SPELLCASTS_TO_TRACK[spell] then
+			info = FOCUS_SPELLCASTS_TO_TRACK[spell]
+		else
+			info = FOCUS_TRADECASTS_TO_TRACK[spell]
+		end
+	end
+
+	if info then
+		if not checkForChannels(caster, spell) then
+			removeDoubleCast(caster)
+			local tMod = checkforCastTimeModBuffs(caster, spell)
+			if tMod > 0 then
+				local n = Cast.create(caster, spell, info, tMod, getTime, channel)
+				tinsert(casts, n)
+			end
+		end
+	end
+end
+
+local newIBuff = function(caster, buff)
+	if FSPELLCASTINGCOREstrictAuras then
+		if caster ~= CURR_FOCUS_TARGET then return end
+	end
+
+	local getTime = getTimeMinusPing()
+	local b = InstaBuff.create(caster, buff, FOCUS_TIME_MODIFIER_BUFFS_TO_TRACK[buff], getTime)
+	tinsert(iBuffs, b)
+end
+
+local function newbuff(tar, b, s, castOn, texture, debuff, magictype, debuffStack, noEvent)
+	if FSPELLCASTINGCOREstrictAuras then
+		if tar ~= CURR_FOCUS_TARGET then return end
+	end
+
+	local getTime = getTimeMinusPing()
+
+	-- remove buff if it exists
+	local i = 1
+	for k, v in pairs(buffList) do
+		if v.caster == tar and v.spell == b then
+			if strlower(v.icon or "") == strlower(texture or "") then
+				-- TODO just refresh instead?
+				tremove(buffList, i)
+				break
+			end
+		end
+		i = i + 1
+	end
+
+	local n = buff.create(tar, b, s, FOCUS_BUFFS_TO_TRACK[b], 1, getTime, texture, debuff, magictype, debuffStack)
+	tinsert(buffList, n)
+
+	if not noEvent then
+		if Focus:UnitIsFocus(tar, true) then
+			--[[if texture == "Interface\Icons\Ability_Rogue_FeignDeath" then
+				print("set")
+				Focus:SetData("feignDeath", 1)
+			end]]
+			-- triggers UNIT_AURA for focus
+			Focus:SetData("auraUpdate", 1)
+		end
+	end
+end
+
+--[[local function refreshBuff(tar, b, s)
+	if FSPELLCASTINGCOREstrictAuras then
+		if tar ~= CURR_FOCUS_TARGET then return end
+	end
+
+	-- refresh if it exists
+	for i, j in pairs(FOCUS_DEBUFF_REFRESHING_SPELLS[b]) do
+		for k, v in pairs(buffList) do
+			if v.caster == tar and v.spell == j then
+				newbuff(tar, j, s, false, v.icon, v.btype, v.debuffType)
+				return
+			end
+		end
+	end
+end]]
+
+local CastCraftPerform = function()
+	-- TODO loop
+	local pcast 	= '你施放了(.+)。'						--'You cast (.+).'
+	local cast		= '(.+)施放了(.+)。'					--'(.+) casts (.+).'
+	local bcast 	= '(.+)开始施放(.+)。'					--'(.+) begins to cast (.+).'
+	local craft 	= '(.+) -> (.+)。'						--'(.+) -> (.+).'
+	local perform 	= '(.+)使用(.+)。'						--'(.+) performs (.+).'
+	local bperform 	= '(.+)开始施展(.+)。'					--'(.+) begins to perform (.+).'
+	local performOn = '(.+)对(.+)使用(.+)。'				--'(.+) performs (.+) on (.+).'
+	local pcastFin 	= '你对(.+)施放了(.+)。'				--'You cast (.+) on (.+).'
+	local castFin 	= '(.+)对(.+)施放了(.+)。'				--'(.+) casts (.+) on (.+).'
+
+	local fpcast = strfind(arg1, pcast)
+	local fcast = strfind(arg1, cast)
+	local fbcast = strfind(arg1, bcast)
+	local fcraft = strfind(arg1, craft)
+	local fperform = strfind(arg1, perform)
+	local fbperform = strfind(arg1, bperform)
+	local fperformOn = strfind(arg1, performOn)
+
+	local fpcastFin = strfind(arg1, pcastFin)
+	local fcastFin = strfind(arg1, castFin)
+
+	if fbcast or fcraft then
+		local m = fbcast and bcast or fcraft and craft or fperform and perform
+		local c = gsub(arg1, m, '%1')
+		local s = gsub(arg1, m, '%2')
+
+		newCast(c, s, false)
+
+	elseif fperform or fbperform or fperformOn then
+		local m = fperform and perform or fbperform and bperform or fperformOn and performOn
+		local c = gsub(arg1, m, '%1')
+		local s = gsub(arg1, m, '%2')
+		newCast(c, s, fperform and true or false)
+
+	-- object spawn casts (totems, traps, etc)
+	elseif fcast then
+		local m = cast
+		local c = gsub(arg1, m, '%1')
+		local s = gsub(arg1, m, '%2')
+
+		if FOCUS_SPELLCASTS_TO_TRACK[s] then
+			newCast(c, s, false)
+		else
+			forceHideTableItem(casts, c, nil)
+		end
+	end
+
+	return fcast or fbcast or fpcast or fperform or fbperform or fpcastFin or fcastFin or fperformOn
+end
+
+local processUniqueSpell = function()
+	local vanish = '(.+)使用消失。'					--'(.+) performs Vanish'
+	local fvanish = strfind(arg1, vanish)
+
+	if fvanish then
+		local c = gsub(arg1, vanish, "%1")
+
+		for k, v in pairs(FOCUS_ROOTS_SNARES) do
+			forceHideTableItem(buffList, c, k)
+		end
+	end
+
+	return fvanish
+end
+
+local DirectInterrupt = function()
+	local pintrr 	= '你打断了(.+)的(.+)。'			local fpintrr  	= strfind(arg1, pintrr)			--'You interrupt (.+)\'s (.+).'	
+	local intrr 	= '(.+)打断了(.+)的(.+)。'		local fintrr  	= strfind(arg1, intrr)				--'(.+) interrupts (.+)\'s (.+).'	
+
+	if fpintrr or fintrr then
+		local m = fpintrr and pintrr or intrr
+		local t = fpintrr and gsub(arg1, m, '%1') or gsub(arg1, m, '%2')
+		local s = fpintrr and gsub(arg1, m, '%2') or gsub(arg1, m, '%3')
+
+		forceHideTableItem(casts, t, nil)
+	end
+
+	return fpintrr  or fintrr
+end
+
+local GainAfflict = function()
+	local gain 		= '(.+)获得了(.+)的效果。'				local fgain = strfind(arg1, gain)					--'(.+) gains (.+).'
+	local pgain 	= '你获得了(.+)的效果。'				local fpgain = strfind(arg1, pgain)					--'You gain (.+).'
+	local afflict 	= '(.+)受到了(.+)效果的影响。' 			local fafflict = strfind(arg1, afflict)				--'(.+) is afflicted by (.+).' 	
+	local pafflict 	= '你受到了(.+)效果的影响。' 			local fpafflict = strfind(arg1, pafflict)			--'You are afflicted by (.+).' 
+
+	-- start channeling based on buffs (evocation, first aid, ..)
+	if fgain or fpgain then
+		local m = fgain and gain or fpgain and pgain
+		local c = fgain and gsub(arg1, m, '%1') or fpgain and playerName
+		local s = fgain and gsub(arg1, m, '%2') or fpgain and gsub(arg1, m, '%1')
+
+		-- buffs/debuffs to be displayed
+		if FOCUS_BUFFS_TO_TRACK[s] then
+			if CURR_FOCUS_TARGET and CURR_FOCUS_TARGET == c then
+				local unit = Focus:GetData("unit")
+				if unit then return end -- buffs will be added in FocusCore sync instead
+			end
+
+			newbuff(c, s, 1, false)
+		end
+		-- self-cast buffs that interrupt cast (blink, ice block ...)
+		if FOCUS_INTERRUPT_BUFFS_TO_TRACK[s] then
+			forceHideTableItem(casts, c, nil)
+		end
+		-- specific channeled spells (evocation ...)
+		if FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[s] then
+			newCast(c, s, true)
+		end
+		-- buffs that alter spell casting speed
+		if FOCUS_TIME_MODIFIER_BUFFS_TO_TRACK[s] then
+			newIBuff(c, s)
+		end
+
+	-- cast-interruting CC
+	elseif fafflict or fpafflict then
+		local m = fafflict and afflict or fpafflict and pafflict
+		local c = fafflict and gsub(arg1, m, '%1') or fpafflict and playerName
+		local s = fafflict and gsub(arg1, m, '%2') or fpafflict and gsub(arg1, m, '%1')
+
+		-- rank & stacks
+		local auxS, st = s, 1
+		if not FOCUS_BUFFS_TO_TRACK[s] then
+			local spellstacks = '(.+) %((.+)%)'
+			if strfind(s, spellstacks) then
+				s = gsub(s, spellstacks, '%1')
+				st = tonumber(gsub(auxS, spellstacks, '%2'), 10)
+			end
+		end
+
+		-- debuffs to be displayed
+		if FOCUS_BUFFS_TO_TRACK[s] then
+			--if st > 1 then
+			--	refreshBuff(c, s, st)
+			--else
+			if CURR_FOCUS_TARGET and CURR_FOCUS_TARGET == c then
+				local unit = Focus:GetData("unit")
+				if unit then return end -- buffs will be added in FocusCore sync instead
+			end
+				newbuff(c, s, st, false, nil, true)
+			--end
+		end
+
+		s = auxS
+
+		-- spell interrupting debuffs (stuns, incapacitates ...)
+		if FOCUS_INTERRUPT_BUFFS_TO_TRACK[s] then
+			forceHideTableItem(casts, c, nil)
+		end
+
+		-- debuffs that slow spellcasting speed (tongues ...)
+		if FOCUS_TIME_MODIFIER_BUFFS_TO_TRACK[s] then
+			newIBuff(c, s)
+		end
+	end
+
+	return fgain or fpgain or fafflict or fpafflict
+end
+
+local FadeRem = function()
+	local fade 		= '(.+)效果从(.+)身上消失。'			local ffade = strfind(arg1, fade)		--(.+) fades from (.+).
+	local rem 		= '(.+)的(.+)被移除了。'				local frem = strfind(arg1, rem)			--'(.+)\'s (.+) is removed'	
+	local prem 		= '你的(.+)被移除了。'					local fprem = strfind(arg1, prem)		--'Your (.+) is removed'	
+
+	-- end channeling based on buffs (evocation ..)
+	if ffade then
+		local m = fade
+		local c = gsub(arg1, m, '%2')
+		local s = gsub(arg1, m, '%1')
+
+		c = c == 'you' and playerName or c
+
+		-- buffs/debuffs to be displayed
+		--if FOCUS_BUFFS_TO_TRACK[s] then
+			forceHideTableItem(buffList, c, s)
+		--end
+		-- buff channeling casts fading
+		if FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[s] then
+			forceHideTableItem(casts, c, nil)
+		end
+
+		if FOCUS_TIME_MODIFIER_BUFFS_TO_TRACK[s] then
+			forceHideTableItem(iBuffs, c, s)
+		end
+	elseif frem or fprem then
+		local m = frem and rem or fprem and prem
+		local c = frem and gsub(arg1, m, '%1') or fprem and playerName
+		local s = frem and gsub(arg1, m, '%2') or fprem and gsub(arg1, m, '%1')
+
+		-- buffs/debuffs to be displayed
+		--if FOCUS_BUFFS_TO_TRACK[s] then
+			forceHideTableItem(buffList, c, s)
+		--end
+
+		if FOCUS_TIME_MODIFIER_BUFFS_TO_TRACK[s] then
+			forceHideTableItem(iBuffs, c, s)
+		end
+	end
+
+	return ffade or frem or fprem
+end
+
+--[[local function DelayCastTimer(caster, spell)
+	if not caster or not spell then return end
+	local pushbackDelay = 0.5
+	local getTime = GetTime()
+
+	for k, v in pairs(casts) do
+		if v.caster == caster and v.spell == spell then
+			v.timeEnd = v.timeEnd + pushbackDelay
+		end
+	end
+end]]
+
+local HitsCrits = function()
+	local hits = '(.+)的(.+)击中(.+)造成(.+)点' 			local fhits = strfind(arg1, hits)	--'(.+)\'s (.+) hits (.+) for (.+)' 	
+	local crits = '(.+)的(.+)致命一击对(.+)造成(.+)点' 		local fcrits = strfind(arg1, crits) --'(.+)\'s (.+) crits (.+) for (.+)' 
+	local absb = '(.+)的(.+)被(.+)吸收了。'					local fabsb = strfind(arg1, absb)	--'(.+)\'s (.+) is absorbed by (.+).'
+
+	local phits = '你的(.+)击中(.+)造成(.+)点' 				local fphits = strfind(arg1, phits) --'Your (.+) hits (.+) for (.+)' 
+	local pcrits = '你的(.+)对(.+)造成(.+)的致命一击伤害' 	local fpcrits = strfind(arg1, pcrits)--'Your (.+) crits (.+) for (.+)' 
+	local pabsb = '你的(.+)被(.+)吸收了。'					local fpabsb = strfind(arg1, pabsb)	--'Your (.+) is absorbed by (.+).'	
+	--local yphits = 'You hit (.+) for (.+).'				local fyphits = strfind(arg1, yphits)
+	local channelDotRes = "(.+)的(.+)被(.+)抵抗了。"		local fchannelDotRes = strfind(arg1, channelDotRes) --"(.+)'s (.+) was resisted by (.+)."
+	local pchannelDotRes = "(.+)的(.+)被抵抗了"				local fpchannelDotRes = strfind(arg1, pchannelDotRes) --"(.+)'s (.+) was resisted."	
+
+	-- other hits/crits
+	if fhits or fcrits or fabsb then
+		local m = fhits and hits or fcrits and crits or fabsb and absb
+		local c = gsub(arg1, m, '%1')
+		local s = gsub(arg1, m, '%2')
+		local t = gsub(arg1, m, '%3')
+
+		t = t == 'you' and playerName or t
+
+		-- instant spells that cancel casted ones
+		if FOCUS_INSTANT_SPELLCASTS_TO_TRACK[s] then
+			forceHideTableItem(casts, c, nil)
+		end
+
+		--[[if not fabsb then
+			DelayCastTimer(t, s)
+		end]]
+		if FOCUS_SPELLCASTS_TO_TRACK[s] then
+			removeDoubleCast(c)
+		end
+
+		local channelSpell = FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[s]
+		if channelSpell and channelSpell.tick then
+			newCast(c, s, true)
+		end
+
+		-- interrupt dmg spell
+		if FOCUS_INTERRUPTS_TO_TRACK[s] then
+			forceHideTableItem(casts, t, nil)
+		end
+
+		-- spells that refresh debuffs
+		--[[if FOCUS_DEBUFF_REFRESHING_SPELLS[s] then
+			refreshBuff(t, s)
+		end]]
+	end
+
+	-- self hits/crits
+	if fphits or fpcrits or fpabsb then
+		local m = fphits and phits or fpcrits and pcrits or fpabsb and pabsb
+		local s = gsub(arg1, m, '%1')
+		local t = gsub(arg1, m, '%2')
+
+		-- interrupt dmg spell
+		if FOCUS_INTERRUPTS_TO_TRACK[s] then
+			forceHideTableItem(casts, t, nil)
+		--elseif not fpabsb then
+		--	DelayCastTimer(t, s)
+		end
+
+		-- spells that refresh debuffs
+		--[[if FOCUS_DEBUFF_REFRESHING_SPELLS[s] then
+			refreshBuff(t, s)
+		end]]
+	end
+
+	return fhits or fcrits or fphits or fpcrits or fabsb or fpabsb --or ffails
+end
+
+--[[local function IsArcaneMissiles(spell)
+	local name = FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[spell]
+	if name == "Arcane Missile" or name == "Arcane Missiles" then
+		return true
+	end
+
+	return false
+end]]
+
+local channelDot = function()
+	local channelDot 	= "(.+)的(.+)使(.+)受到了(.+)点伤害。"		local fchannelDot = strfind(arg1, channelDot) --"(.+) suffers (.+) from (.+)'s (.+)."	
+	local channelpDot 	= '你的(.+)使(.+)受到了(.+)点伤害。'		local fchannelpDot	= strfind(arg1, channelpDot) --'(.+) suffers (.+) from your (.+).'
+	local pchannelDot 	= "你受到(.+)点伤害（(.+)的(.+)）。"		local fpchannelDot = strfind(arg1, pchannelDot) --"You suffer (.+) from (.+)'s (.+)."
+	local MDrain = '(.+)的(.+)从(.+)身上吸取了(.+)点法力值。' 		local fMDrain = strfind(arg1, MDrain) --'(.+)\'s (.+) drains (.+) Mana from (.+)' 
+
+	-- channeling dmg spells on other (mind flay, life drain(?))
+	if fchannelDot then
+		local m = channelDot
+		local c = gsub(arg1, m, '%3')
+		local s = gsub(arg1, m, '%4')
+		local t = gsub(arg1, m, '%1')
+
+		if FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[s] then
+			-- caster
+			newCast(c, s, true)
+		end
+
+		-- target
+		--[[if IsArcaneMissiles(s) then
+			DelayCastTimer(t, s)
+		end]]
+	end
+
+	-- channeling dmg spells on self (mind flay, life drain(?))
+	if fpchannelDot then
+		local m = pchannelDot
+		local c = gsub(arg1, m, '%2')
+		local s = gsub(arg1, m, '%3')
+
+		if FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[s] then
+			newCast(c, s, true)
+		end
+
+		--[[if IsArcaneMissiles(s) then
+			DelayCastTimer(t, s)
+		end]]
+	end
+
+	-- drain mana
+	if fMDrain then
+		local m = MDrain
+		local c = gsub(arg1, m, '%1')
+		local s = gsub(arg1, m, '%2')
+
+		if FOCUS_CHANNELED_SPELLCASTS_TO_TRACK[s] then
+			--print(arg1)
+			newCast(c, s, true)
+		end
+	end
+
+	return fchannelDot or fpchannelDot or fchannelpDot or fMDrain
+end
+
+local playerDeath = function()
+	local pdie 		= '你死了。'				local fpdie		= strfind(arg1, pdie)		--'You die.'
+	local dies		= '(.+)死亡了。'			local fdies		= strfind(arg1, dies)		--'(.+) dies.'	
+	local slain 	= '(.+)被(.+)干掉了！'		local fslain 	= strfind(arg1, slain)		--'(.+) is slain by (.+).'
+	local pslain 	= '你杀死了(.+)！'			local fpslain 	= strfind(arg1, pslain)		--'You have slain (.+).'
+
+	if fpdie or fdies or fslain or fpslain then
+		local m = fdies and dies or fslain and slain or fpslain and pslain
+		local c = fpdie and playerName or gsub(arg1, m, '%1')
+
+		if fpdie then
+			--tableMaintenance(true) -- cleared on RELEASE_SPIRIT instead
+		else
+			forceHideTableItem(casts, c, nil)
+			if Focus:GetName() ~= c then -- buffList is cleared in OnUpdate for focus
+				forceHideTableItem(buffList, c, nil)
+			end
+		end
+	end
+
+	return fpdie or fdies or fslain or fpslain
+end
+
+local fear = function()
+	local fear = strfind(arg1, "(.+)充满恐惧地想要转身逃跑！")
+
+	if fear then
+		local target = arg2
+		forceHideTableItem(casts, target)
+	end
+
+	return fear
+end
+
+----------------------------------------------------------------------------
+
+local parsingCheck = function(out, display)
+	if (not out) and display then
+		print('Parsing failed:')
+		print(event)
+		print(arg1)
+	end
+end
+
+local combatlogParser = function()
+	if FSPELLCASTINGCOREstrictAuras and not Focus:FocusExists() then return end
+
+	local pSpell 	= 'CHAT_MSG_SPELL_PERIODIC_(.+)'		local fpSpell 		= strfind(event, pSpell)
+	local breakAura = 'CHAT_MSG_SPELL_BREAK_AURA'			local fbreakAura 	= strfind(event, breakAura)
+	local auraGone	= 'CHAT_MSG_SPELL_AURA_GONE_(.+)'		local fauraGone 	= strfind(event, auraGone)
+	local dSpell 	= 'CHAT_MSG_SPELL_(.+)'					local fdSpell 		= strfind(event, dSpell)
+	local death		= 'CHAT_MSG_COMBAT_(.+)_DEATH'			local fdeath 		= strfind(event, death)
+	local mEmote	= 'CHAT_MSG_MONSTER_EMOTE'				local fmEmote		= strfind(event, mEmote)
+
+	-- periodic damage/buff spells
+	if fpSpell then
+		parsingCheck(channelDot() or GainAfflict(), false)
+	-- fade/remove buffs
+	elseif fbreakAura or fauraGone then
+		parsingCheck(FadeRem(), false)
+	-- direct damage/buff spells
+	elseif fdSpell then
+		parsingCheck(processUniqueSpell() or CastCraftPerform() or DirectInterrupt() or HitsCrits(), false)
+	-- player death
+	elseif fdeath then
+		parsingCheck(playerDeath(), false)
+	-- creature runs in fear
+	elseif fmEmote then
+		parsingCheck(fear(), false)
+	else
+		--print(event)
+		--print(arg1)
+	end
+end
+
+-- GLOBAL ACCESS FUNCTIONS
+
+function FSPELLCASTINGCORENewBuff(tar, b, texture, debuff, magictype, debuffStack)
+	newbuff(tar, b, 1, false, texture, debuff, magictype, debuffStack, true)
+end
+
+function FSPELLCASTINGCOREClearBuffs(caster, debuffsOnly)
+	forceHideTableItem(buffList, caster, nil, debuffsOnly)
+end
+
+--[[function FSPELLCASTINGCOREGetLastBuffInfo(caster)
+	local texture
+	local i = 0
+
+	for k, v in ipairs(buffList) do
+		if v.target == caster then
+			texture = v.icon
+			i = i + 1
+		end
+	end
+
+	return i, texture
+end]]
+
+FSPELLCASTINGCOREgetCast = function(caster)
+	if caster then
+		for k, v in pairs(casts) do
+			if v.caster == caster then
+				return v
+			end
+		end
+	end
+
+	return nil
+end
+
+do
+	local list = { buffs = {}, debuffs = {} }
+
+	FSPELLCASTINGCOREgetBuffs = function(caster) -- ran frequent
+		if not caster then return end
+		list.buffs = {} -- memory inefficient but much faster than wiping table
+		list.debuffs = {}
+
+		for k, v in ipairs(buffList) do
+			if v.target == caster then
+				if not v.btype then
+					tinsert(list.buffs, v)
+				else
+					tinsert(list.debuffs, v)
+				end
+			end
+		end
+
+		return list
+	end
+end
+
+------------------------------------
+
+do
+	local refresh, interval = 0, 0.39
+
+	local function OnUpdate()
+		refresh = refresh - arg1
+		if refresh < 0 then
+			if FSPELLCASTINGCOREstrictAuras and not Focus:FocusExists() then
+				refresh = interval
+				return
+			end
+			tableMaintenance(false)
+			refresh = interval
+		end
+	end
+
+	local function OnFocusChange()
+		if FSPELLCASTINGCOREstrictAuras then
+			tableMaintenance(true)
+		end
+	end
+
+	local events = CreateFrame("Frame")
+	local f = CreateFrame("Frame")
+	events:RegisterEvent("VARIABLES_LOADED")
+	events:SetScript("OnEvent", function()
+		if event == "VARIABLES_LOADED" then
+			Focus = assert(FocusCore, "FocusCore not loaded.")
+			FSPELLCASTINGCOREstrictAuras = FocusFrameDB and FocusFrameDB.strictAuras
+			Focus:OnEvent("FOCUS_CHANGED", OnFocusChange)
+			Focus:OnEvent("FOCUS_CLEAR", OnFocusChange)
+
+			events:UnregisterEvent("VARIABLES_LOADED")
+			events:RegisterEvent("PLAYER_ENTERING_WORLD")
+			events:RegisterEvent("PLAYER_ALIVE") -- Releases from death to a graveyard
+			events:SetScript("OnUpdate", OnUpdate)
+			f:SetScript("OnEvent", combatlogParser)
+		else
+			tableMaintenance(true)
+		end
+	end)
+
+	f:RegisterEvent'CHAT_MSG_MONSTER_EMOTE'
+	--[[f:RegisterEvent'CHAT_MSG_COMBAT_SELF_HITS'
+	f:RegisterEvent'CHAT_MSG_COMBAT_SELF_MISSES'
+	f:RegisterEvent'CHAT_MSG_COMBAT_PARTY_HITS'
+	f:RegisterEvent'CHAT_MSG_COMBAT_PARTY_MISSES'
+	f:RegisterEvent'CHAT_MSG_COMBAT_FRIENDLYPLAYER_HITS'
+	f:RegisterEvent'CHAT_MSG_COMBAT_FRIENDLYPLAYER_MISSES'
+	f:RegisterEvent'CHAT_MSG_COMBAT_HOSTILEPLAYER_HITS'
+	f:RegisterEvent'CHAT_MSG_COMBAT_HOSTILEPLAYER_MISSES'
+	f:RegisterEvent'CHAT_MSG_COMBAT_CREATURE_VS_PARTY_HITS']]
+	f:RegisterEvent'CHAT_MSG_SPELL_SELF_BUFF'
+	f:RegisterEvent'CHAT_MSG_SPELL_SELF_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_FRIENDLYPLAYER_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_FRIENDLYPLAYER_BUFF'
+	f:RegisterEvent'CHAT_MSG_SPELL_HOSTILEPLAYER_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_HOSTILEPLAYER_BUFF'
+	f:RegisterEvent'CHAT_MSG_SPELL_CREATURE_VS_CREATURE_BUFF'
+	f:RegisterEvent'CHAT_MSG_SPELL_CREATURE_VS_CREATURE_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_CREATURE_VS_PARTY_BUFF'
+	f:RegisterEvent'CHAT_MSG_SPELL_CREATURE_VS_PARTY_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_CREATURE_VS_SELF_BUFF'
+	f:RegisterEvent'CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_PARTY_BUFF'
+	f:RegisterEvent'CHAT_MSG_SPELL_PARTY_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_HOSTILEPLAYER_BUFFS'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_FRIENDLYPLAYER_BUFFS'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_HOSTILEPLAYER_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_FRIENDLYPLAYER_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_SELF_BUFFS'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_PARTY_BUFFS'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_PARTY_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE'
+	f:RegisterEvent'CHAT_MSG_SPELL_PERIODIC_CREATURE_BUFFS'
+	f:RegisterEvent'CHAT_MSG_SPELL_BREAK_AURA'
+	f:RegisterEvent'CHAT_MSG_SPELL_AURA_GONE_SELF'
+	f:RegisterEvent'CHAT_MSG_SPELL_AURA_GONE_PARTY'
+	f:RegisterEvent'CHAT_MSG_SPELL_AURA_GONE_OTHER'
+	f:RegisterEvent'CHAT_MSG_SPELL_DAMAGESHIELDS_ON_SELF'
+	f:RegisterEvent'CHAT_MSG_SPELL_DAMAGESHIELDS_ON_OTHERS'
+	f:RegisterEvent'CHAT_MSG_COMBAT_HOSTILE_DEATH'
+	f:RegisterEvent'CHAT_MSG_COMBAT_FRIENDLY_DEATH'
+	f:Hide()
+end

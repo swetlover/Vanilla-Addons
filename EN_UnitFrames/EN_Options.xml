@@ -1,0 +1,829 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="EN_OptionsLocal.lua"/>
+	<Script file="EN_Options.lua"/>
+	<!-- OptionFrame -->
+	<CheckButton name="EUF_CheckButtonTemplate" virtual="true" inherits="OptionsCheckButtonTemplate">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				EUF_OptionCheckButton_OnClick(this:GetName());
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+
+	<Button name="EUF_ButtonTemplate" virtual="true" inherits="OptionsButtonTemplate">
+		<Size>
+			<AbsDimension x="100" y="25"/>
+		</Size>
+		<Scripts>
+			<OnClick>
+				EUF_OptionButton_OnClick(this:GetName());
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<Slider name="EUF_SliderTemplate" virtual="true" inherits="OptionsSliderTemplate">
+		<Size>
+			<AbsDimension x="120" y="16"/>
+		</Size>
+		<Scripts>
+			<OnLoad>
+				getglobal(this:GetName().."Text"):SetText(EUF_TEXT_OPTION_DISPLAYTYPE);
+				getglobal(this:GetName().."High"):SetText(EUF_TEXT_OPTION_PERCENT);
+				getglobal(this:GetName().."Low"):SetText(EUF_TEXT_OPTION_NUM);
+				this:SetMinMaxValues(0,1);
+				this:SetValueStep(1);
+			</OnLoad>
+			<OnValueChanged>
+				EUF_OptionSlider_OnChange(this:GetName(), this:GetValue())
+			</OnValueChanged>
+		</Scripts>
+	</Slider>
+	<Frame name="EUF_OptionFrame" frameStrata="DIALOG" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent" enableKeyboard="true" >
+		<Size>
+			<AbsDimension x="500" y="380"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="50"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="460" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" text="EUF_TEXT_OPTION_HEADER">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentHeader">
+							<Offset>
+								<AbsDimension x="0" y="-12"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentCopyrights" inherits="GameFontNormalSmall" text="http://luodan.com/wow/addons/">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT"  relativeTo="$parent" relativePoint="BOTTOMLEFT">
+							<Offset x="28" y="20"/>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="0.75" b="0" a="0.4"/>
+				</FontString>
+				<FontString name="$parentAddonName" inherits="GameFontNormalSmall">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT"  relativeTo="$parentCopyrights" relativePoint="BOTTOMLEFT">
+							<Offset x="0" y="12"/>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="0.75" b="0" a="0.4"/>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentSelectPanel">
+				<Size>
+					<AbsDimension x="450" y="30"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Button name="EUF_OptionFramePartyTab" inherits="UIPanelButtonGrayTemplate" text="EUF_TEXT_OPTION_PARTY">
+						<Size>
+							<AbsDimension x="90" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP">
+								<Offset>
+									<AbsDimension x="-50" y="-10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								EUF_OptionFramePlayerTab:UnlockHighlight();
+								EUF_OptionFramePlayerPanel:Hide()
+								EUF_OptionFrameTargetTab:UnlockHighlight();
+								EUF_OptionFrameTargetPanel:Hide()
+								EUF_OptionFrameTargetTargetTab:UnlockHighlight();
+								EUF_OptionFrameTargetTargetPanel:Hide()
+								EUF_OptionFramePartyTab:LockHighlight();
+								EUF_OptionFramePartyPanel:Show()
+							</OnClick>
+						</Scripts>			
+					</Button>
+					<Button name="EUF_OptionFramePlayerTab" inherits="UIPanelButtonGrayTemplate" text="EUF_TEXT_OPTION_PLAYER">
+						<Size>
+							<AbsDimension x="90" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="EUF_OptionFramePartyTab" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>			
+							<OnClick>
+								EUF_OptionFramePartyTab:UnlockHighlight();
+								EUF_OptionFramePartyPanel:Hide()
+								EUF_OptionFrameTargetTab:UnlockHighlight();
+								EUF_OptionFrameTargetPanel:Hide()
+								EUF_OptionFrameTargetTargetTab:UnlockHighlight();
+								EUF_OptionFrameTargetTargetPanel:Hide()
+								EUF_OptionFramePlayerTab:LockHighlight();
+								EUF_OptionFramePlayerPanel:Show()
+							</OnClick>
+							<OnLoad>
+								EUF_OptionFramePlayerTab:LockHighlight();
+							</OnLoad>
+						</Scripts>			
+					</Button>
+					<Button name="EUF_OptionFrameTargetTab" inherits="UIPanelButtonGrayTemplate" text="EUF_TEXT_OPTION_TARGET">
+						<Size>
+							<AbsDimension x="90" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="EUF_OptionFramePartyTab" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>			
+							<OnClick>
+								EUF_OptionFramePlayerTab:UnlockHighlight();
+								EUF_OptionFramePlayerPanel:Hide()
+								EUF_OptionFramePartyTab:UnlockHighlight();
+								EUF_OptionFramePartyPanel:Hide()
+								EUF_OptionFrameTargetTargetTab:UnlockHighlight();
+								EUF_OptionFrameTargetTargetPanel:Hide()
+								EUF_OptionFrameTargetTab:LockHighlight();
+								EUF_OptionFrameTargetPanel:Show()
+							</OnClick>
+						</Scripts>			
+					</Button>
+					<Button name="EUF_OptionFrameTargetTargetTab" inherits="UIPanelButtonGrayTemplate" text="EUF_TEXT_OPTION_TARGETTARGET">
+						<Size>
+							<AbsDimension x="90" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="EUF_OptionFrameTargetTab" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>			
+							<OnClick>
+								EUF_OptionFramePlayerTab:UnlockHighlight();
+								EUF_OptionFramePlayerPanel:Hide()
+								EUF_OptionFramePartyTab:UnlockHighlight();
+								EUF_OptionFramePartyPanel:Hide()
+								EUF_OptionFrameTargetTab:UnlockHighlight();
+								EUF_OptionFrameTargetPanel:Hide()
+								EUF_OptionFrameTargetTargetTab:LockHighlight();
+								EUF_OptionFrameTargetTargetPanel:Show()
+							</OnClick>
+						</Scripts>			
+					</Button>
+				</Frames>
+			</Frame>
+			<Frame name="EUF_OptionFramePlayerPanel" inherits="OptionFrameBoxTemplate">
+				<Size>
+					<AbsDimension x="460" y="285"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-45"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="EUF_OptionFramePLAYERHP" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePlayerPanel" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="-20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<Slider name="EUF_OptionFramePLAYERHPPERCENT" inherits="EUF_SliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERHP" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+					<CheckButton name="EUF_OptionFramePLAYERMP" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERHP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<Slider name="EUF_OptionFramePLAYERMPPERCENT" inherits="EUF_SliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERMP" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+					<CheckButton name="EUF_OptionFramePLAYERAUTOHEALTHCOLOR" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERHPPERCENT" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="-30" y="-18"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYERXP" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERAUTOHEALTHCOLOR" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if this:GetChecked() then
+									EUF_OptionFramePLAYERXPAUTO:Enable();
+								else
+									EUF_OptionFramePLAYERXPAUTO:Disable();
+								end;
+								EUF_OptionCheckButton_OnClick(this:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYERXPAUTO" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERXP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYERPOSITION" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERXP" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if this:GetChecked() then
+									EUF_OptionFramePLAYERPOSITIONAUTO:Enable();
+									EUF_OptionFramePLAYERPOSITIONMANA:Enable();
+								else
+									EUF_OptionFramePLAYERPOSITIONAUTO:Disable();
+									EUF_OptionFramePLAYERPOSITIONMANA:Disable();
+								end;
+								EUF_OptionCheckButton_OnClick(this:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYERPOSITIONAUTO" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERPOSITION" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYERPOSITIONMANA" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERPOSITION" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYERELITE" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERPOSITIONMANA" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="-30" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYEREXTBAR" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERELITE" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYERCLASSICONBIG" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERELITE" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePLAYERCLASSICONSMALL" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePLAYERCLASSICONBIG" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+						this:SetBackdropColor(0.1, 0.1, 0.1, 0.7);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="EUF_OptionFramePartyPanel" inherits="OptionFrameBoxTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="460" y="285"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-45"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="EUF_OptionFramePARTYHP" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePartyPanel" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="-20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<Slider name="EUF_OptionFramePARTYHPPERCENT" inherits="EUF_SliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYHP" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+					<CheckButton name="EUF_OptionFramePARTYMP" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYHP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<Slider name="EUF_OptionFramePARTYMPPERCENT" inherits="EUF_SliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYMP" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Slider>
+					<CheckButton name="EUF_OptionFramePARTYAUTOHEALTHCOLOR" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYHPPERCENT" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="-30" y="-18"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePARTYLEVEL" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYAUTOHEALTHCOLOR" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePARTYCLASS" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYLEVEL" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if this:GetChecked() then
+									EUF_OptionFramePARTYCLASSABRV:Enable();
+								else
+									EUF_OptionFramePARTYCLASSABRV:Disable();
+								end;
+								EUF_OptionCheckButton_OnClick(this:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePARTYCLASSABRV" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYCLASS" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePARTYMANAFILTER" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYCLASSABRV" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="-30" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePARTYCLASSICONBIG" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYMANAFILTER" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFramePARTYCLASSICONSMALL" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFramePARTYCLASSICONBIG" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+						this:SetBackdropColor(0.1, 0.1, 0.1, 0.7);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="EUF_OptionFrameTargetPanel" inherits="OptionFrameBoxTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="460" y="285"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-45"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="EUF_OptionFrameTARGETHP" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTargetPanel" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="-20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETHPPERCENT" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETHP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETMP" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETHP" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETMPPERCENT" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETMP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETACCTUALHPMP" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETMP" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETAUTOHEALTHCOLOR" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETACCTUALHPMP" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETINFO" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETACCTUALHPMP" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if this:GetChecked() then
+									EUF_OptionFrameTARGETINFOLEVEL:Enable();
+									EUF_OptionFrameTARGETINFORACE:Enable();
+									EUF_OptionFrameTARGETINFOCLASS:Enable();
+									EUF_OptionFrameTARGETINFOELITE:Enable();
+								else
+									EUF_OptionFrameTARGETINFOLEVEL:Disable();
+									EUF_OptionFrameTARGETINFORACE:Disable();
+									EUF_OptionFrameTARGETINFOCLASS:Disable();
+									EUF_OptionFrameTARGETINFOELITE:Disable();
+								end;
+								EUF_OptionCheckButton_OnClick(this:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETINFOLEVEL" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETINFO" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETINFORACE" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETINFOLEVEL" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="80" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETINFOCLASS" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETINFORACE" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="80" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETINFOELITE" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETINFOCLASS" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="80" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGET16BUFFS" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETINFOLEVEL" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="-30" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETCLASSICONBIG" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGET16BUFFS" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETCLASSICONSMALL" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETCLASSICONBIG" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+						this:SetBackdropColor(0.1, 0.1, 0.1, 0.7);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="EUF_OptionFrameTargetTargetPanel" inherits="OptionFrameBoxTemplate" hidden="true">
+				<Size>
+					<AbsDimension x="460" y="285"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-45"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="EUF_OptionFrameTARGETINFOTARGET" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTargetTargetPanel" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="-20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if this:GetChecked() then
+									EUF_OptionFrameTARGETTARGETHPMPBAR:Enable();
+									EUF_OptionFrameTARGETTARGETHPPERCENT:Enable()
+									EUF_OptionFrameTARGETTARGETHPPERCENTCOLOR:Enable()
+								else
+									EUF_OptionFrameTARGETTARGETHPMPBAR:Disable();
+									EUF_OptionFrameTARGETTARGETHPPERCENT:Disable()
+									EUF_OptionFrameTARGETTARGETHPPERCENTCOLOR:Disable()
+								end;
+								EUF_OptionCheckButton_OnClick(this:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETTARGETHPMPBAR" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETINFOTARGET" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if this:GetChecked() then
+									EUF_OptionFrameTARGETTARGETHPPERCENT:Enable()
+									EUF_OptionFrameTARGETTARGETHPPERCENTCOLOR:Enable()
+								else
+									EUF_OptionFrameTARGETTARGETHPPERCENT:Disable()
+									EUF_OptionFrameTARGETTARGETHPPERCENTCOLOR:Disable()
+								end;
+								EUF_OptionCheckButton_OnClick(this:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETTARGETHPPERCENT" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETTARGETHPMPBAR" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="30" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETTARGETHPPERCENTCOLOR" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETTARGETHPPERCENT" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETINFOBROKENSHIELD" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETTARGETHPPERCENTCOLOR" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="-60" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETTARGETFRAME" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETINFOBROKENSHIELD" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if this:GetChecked() then
+									EUF_OptionFrameTARGETTARGETTARGETFRAME:Enable();
+								else
+									EUF_OptionFrameTARGETTARGETTARGETFRAME:Disable();
+								end;
+								EUF_OptionCheckButton_OnClick(this:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="EUF_OptionFrameTARGETTARGETTARGETFRAME" inherits="EUF_CheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="EUF_OptionFrameTARGETTARGETFRAME" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="200" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+						this:SetBackdropColor(0.1, 0.1, 0.1, 0.7);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Button name="$parentCONFIRM" inherits="EUF_ButtonTemplate" text="EUF_TEXT_CONFIRM">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-26" y="20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>			
+			</Button>
+			<Button name="$parentDEFAULT" inherits="EUF_ButtonTemplate" text="EUF_TEXT_DEFAULTOPTIONS">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentCONFIRM" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-10" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>			
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				if not EUF_Version then
+					EUF_Version = "";
+				end;
+				EUF_OptionFrameAddonName:SetText("Enigma Unit Frames " .. EUF_Version);
+				EUF_OptionFrame_OnShow();
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

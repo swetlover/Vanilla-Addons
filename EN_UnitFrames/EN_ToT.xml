@@ -1,0 +1,128 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="EN_ToT.lua"/>
+<!-- General -->
+	<Frame name="ETT_GENERAL" parent="UIParent">
+		<Scripts>
+			<OnUpdate>
+				ETT_OnUpdate(event);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Button name="ETT_TargetTargetFrameTemplate" parent="UIParent" toplevel="true" virtual="true" movable="true" hidden="true">
+		<Size>
+			<AbsDimension x="96" y="48"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentPortrait">
+					<Size>
+						<AbsDimension x="27" y="27"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="6" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame setAllPoints="true">
+				<Frames>
+					<Frame setAllPoints="true">
+						<Layers>
+							<Layer level="ARTWORK">
+								<Texture name="$parentTexture" file="Interface\TargetingFrame\UI-PartyFrame">
+									<Size>
+										<AbsDimension x="96" y="48"/>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="0" y="-2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</Texture>
+								<FontString name="$parentName" inherits="GameFontNormalSmall">
+									<Anchors>
+										<Anchor point="BOTTOMLEFT">
+											<Offset>
+												<AbsDimension x="34" y="38"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+					</Frame>
+				</Frames>
+			</Frame>
+			<StatusBar name="$parentHealthBar" inherits="TextStatusBar" minValue="0" maxValue="100" defaultValue="0">
+				<Size>
+					<AbsDimension x="53" y="6"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="35" y="-9"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="1" b="0"/>
+			</StatusBar>
+			<StatusBar name="$parentManaBar" inherits="TextStatusBar" minValue="0" maxValue="100" defaultValue="0">
+				<Size>
+					<AbsDimension x="53" y="6"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="35" y="-16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="0" b="1"/>
+			</StatusBar>
+		</Frames>
+	</Button>
+	<Button name="ETT_TargetTargetFrame" inherits="ETT_TargetTargetFrameTemplate">
+		<Anchors>
+			<Anchor point="LEFT" relativeTo="TargetFrame" relativePoint="RIGHT">
+				<Offset>
+					<AbsDimension x="-20" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnUpdate>
+				ETT_TargetTargetFrame_OnUpdate();
+			</OnUpdate>
+			<OnMouseDown>
+				TargetUnit("targettarget");
+			</OnMouseDown>
+		</Scripts>
+	</Button>
+	<Button name="ETT_TargetTargetTargetFrame" inherits="ETT_TargetTargetFrameTemplate">
+		<Anchors>
+			<Anchor point="TOP" relativeTo="ETT_TargetTargetFrame" relativePoint="BOTTOM">
+				<Offset>
+					<AbsDimension x="26" y="18"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnUpdate>
+				ETT_TargetTargetTargetFrame_OnUpdate();
+			</OnUpdate>
+			<OnMouseDown>
+				TargetUnit("targettargettarget");
+			</OnMouseDown>
+		</Scripts>
+	</Button>
+</Ui>

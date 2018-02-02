@@ -1,0 +1,10 @@
+## Interface: 11200
+## Version: 11200.2
+## Title: GFW_HuntersHelper
+## Title-zhCN: |CFFFFFFCC职业|R |CFFAAD372猎人|R宠物技能大全
+## DefaultState: disabled
+## Author: Gazmik Fizzwidget
+## Notes: Helps you find tameable beasts to learn pet skills from.
+## Notes-zhCN:|CFFDD66DDGFW_HuntersHelper|R 显示猎人可驯服野兽所自有的技能|N设置命令/hh
+## SavedVariables: FHH_Config, FHH_AbilityInfo, FHH_NewInfo
+HuntersHelper.xml

@@ -1,0 +1,23 @@
+## Interface: 11200
+## Title: FocusFrame 
+## Title-zhCN: |CFFFF6666PVP|r 焦点框架
+## Notes: Focus frame support for vanilla.
+## Notes-zhCN: |CFFDD66DDFocusFrame|r 焦点框架|N 设置命令/foption |N Shift+单击头像-新建焦点|N Shift+单击空白-清除焦点|N ALT+左键-移动焦点
+## DefaultState: disabled
+## Author: Wardz,https://github.com/wardz/FocusFrame
+## Version: 1.2.3
+## SavedVariables: FocusFrameDB
+## Q-CAT-Version: 000200
+
+libs\FocusCore\SpellGlobals.lua
+libs\FocusCore\SpellCore.lua
+libs\FocusCore\FocusCore.lua
+libs\FocusCore\SlashCommands.lua
+
+FocusFrame.xml
+FocusFrame.lua
+
+Plugins\Loader.lua
+Plugins\EnemyFrames.lua
+Plugins\ClassPortraits.lua
+Plugins\ClickCast.lua

@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: SpamThrottle
+## Title-zhCN: |CFFCCFFFF界面|r 聊天垃圾过滤
+## Notes: Eliminates unnecessary and annoying chat messages
+## Notes-zhCN: |CFFDD66DDSpamThrottle|r 过滤垃圾广告，各种玩家，汉字，日语，韩语。显示过滤的详细信息。关键字白名单。屏蔽玩家信息|N设置命令/st
+## Author: Mopar
+## Version:60addons 汉化
+## SavedVariablesPerCharacter: SpamThrottle_Config 
+## SavedVariables: SpamThrottle_KeywordFilterList SpamThrottle_PlayerFilterList SpamThrottle_PlayerBanTime
+SpamThrottle.xml

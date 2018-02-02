@@ -1,0 +1,13 @@
+## Interface: 11200
+## Title: Chronos
+## Notes: A Time Keeping and Scheduling System
+## Title-zhCN: |CFFFFFFCC职业|R |CFF2359FF萨满|R图腾助手依赖库
+## Notes-zhCN:|CFFDD66DDChronos|R 萨满图腾助手依赖库。
+## X-Repple: 职业
+## DefaultState: disabled
+## Author: Alexander Brazie, Thott, AnduinLothar
+localization.lua
+localization.de.lua
+localization.fr.lua
+Chronos.lua
+Chronos.xml

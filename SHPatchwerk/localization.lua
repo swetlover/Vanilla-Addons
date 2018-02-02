@@ -1,0 +1,65 @@
+
+if(GetLocale()=="zhCN") then
+
+	SHPATCHWERK_TITLE									=	"<帕奇维克陪你玩>"
+	SHPATCHWERK_VERSION								=	"0.04"
+	SHPATCHWERK_HELP									=	"输入/shpw启动设置界面"
+
+	BINDING_HEADER_SHPATCHWERK				=	SHPATCHWERK_TITLE
+	BINDING_NAME_SHPATCHWERKCAST			=	"开始施法！"
+
+	SHPATCHWERK_CASTTARGET						=	"施法目标"
+	SHPATCHWERK_SETTARGET							=	"添加当前目标"
+	SHPATCHWERK_DELTARGET							=	"删除"
+	SHPATCHWERK_TESTCAST							=	"测试施法"
+	SHPATCHWERK_TESTCASTTT						=	"按照设定的目标和法术进行施法以测试设置是否正确"	
+	SHPATCHWERK_CLOSE									=	"关闭"
+	SHPATCHWERK_CLOSETT								=	"关闭设置窗口"
+	
+	SHPATCHWERK_BOSSNAME							=	"帕奇维克"
+	SHPATCHWERK_BOSSSKILL							=	"仇恨打击"
+	SHPATCHWERK_STRING								=	"([^%s]+)%s*的%s*([^%s]+)%s*击中%s*([^%s]+)%s*造成%s*(%d+)%s*点"
+	
+	SHPATCHWERK_TARGETSETTT						=	"设定你的施法目标"
+	SHPATCHWERK_TARGETADDTT						=	"选中一个友方玩家目标点击按钮将其添加入列表"
+	SHPATCHWERK_TARGETDELTT						=	"从列表中删除当前选中的施法目标"
+	
+	SHPATCHWERK_NOTARGET							=	"请选择一个目标！"
+	SHPATCHWERK_TARGETSELF						=	"请不要选择自己！"
+	SHPATCHWERK_ERRORTARGET						=	"请选择一个友方玩家目标！"
+	SHPATCHWERK_EXISTTARGET						=	"该目标已经保存在列表中了！"
+	SHPATCHWERK_LASTTANKNAME					=	"列表中需要保留至少一名玩家作为施法目标！"
+	SHPATCHWERK_SETTARGETOK						=	" 已经被保存到列表中！"
+	SHPATCHWERK_DELTARGETOK						=	" 已经从列表中删除！"
+
+	SHPATCHWERK_TESTCASTFAIL					=	"施法失败！原因："
+	SHPATCHWERK_TESTCASTFAIL1					=	SHPATCHWERK_TESTCASTFAIL.."法术名称未定义。（非常规错误）"
+	SHPATCHWERK_TESTCASTFAIL2					=	SHPATCHWERK_TESTCASTFAIL.."玩家所学法术最高等级未定义。（非常规错误）"
+	SHPATCHWERK_TESTCASTFAIL3					=	SHPATCHWERK_TESTCASTFAIL.."实际使用的施法等级未定义。（非常规错误）"
+	SHPATCHWERK_TESTCASTFAIL4					=	SHPATCHWERK_TESTCASTFAIL.."施法目标未定义。（非常规错误）"
+	SHPATCHWERK_TESTCASTFAIL5					=	SHPATCHWERK_TESTCASTFAIL.."施法目标不存在。"
+	SHPATCHWERK_TESTCASTFAIL6					=	SHPATCHWERK_TESTCASTFAIL.."施法目标错误。"
+	
+	SHPATCHWERK_SKILLSELECTTT					=	"选择适合你的法术等级"
+	
+	SHPATCHWERK_PRIESTSKILLNAME				=	"强效治疗术"
+	SHPATCHWERK_PALADINSKILLNAME			=	"圣光术"
+	SHPATCHWERK_SHAMANSKILLNAME				=	"治疗波"
+	SHPATCHWERK_DRUIDSKILLNAME              =   "治疗之触"
+	SHPATCHWERK_RANK									=	"等级"
+	SHPATCHWERK_PLAYERCLASSERROR			=	"你的职业并不适合"
+	SHPATCHWERK_PLAYERNOSPELL					=	"请先练到60级学会技能"
+	
+	SHPATCHWERK_CHECKBUTTON1					=	"显示按钮"
+	SHPATCHWERK_CHECKBUTTON1TT				=	"显示“"..SHPATCHWERK_TITLE.."”按钮。"
+	SHPATCHWERK_CHECKBUTTON2					=	"不能施法时提示"
+	SHPATCHWERK_CHECKBUTTON2TT				=	"在你还不能进行施法时进行提示。"
+	SHPATCHWERK_CHECKBUTTON3					=	"声音报警"
+	SHPATCHWERK_CHECKBUTTON3TT				=	"当你负责的坦克被"..SHPATCHWERK_BOSSSKILL.."击中的时候发出声音进行报警"
+	
+	SHPATCHWERK_CANNOTDOIT						=	"现在的话，还不可以这样做哟！"
+	SHPATCHWERK_RESETSETTING					=	"插件设置重置。"
+	SHPATCHWERK_ACTBUTTONTT						=	"左键：在你负责的坦克被"..SHPATCHWERK_BOSSSKILL.."击中后\n　　　可以对其施展一次预设的法术\n右键：按住右键可以移动按钮"
+	SHPATCHWERK_MESSAGET							= "<60addons>"
+
+end

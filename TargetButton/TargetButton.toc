@@ -1,0 +1,9 @@
+﻿## Interface: 11200
+## Title: TargetButton
+## Notes: This little improvement adds buttons to the targeting frame when a friendly player is selected. 
+## Title-zhCN: |CFFCCFFFF界面|r 目标按钮
+## Notes-zhCN:|CFFDD66DDTargetButton|R 当你的目标是友好玩家时在目标框上加交易和查看装备的按钮。
+## X-Repple: 辅助
+## SavedVariables: 
+
+TargetButton.xml

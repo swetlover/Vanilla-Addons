@@ -1,0 +1,20 @@
+## Interface: 11200
+## Title: MailEnhance
+## Title-zhCN: |CFFCCCCFF辅助|r 邮件增强
+## Title-zhTW: 郵件增強
+## Author: ZZ69
+## Version: 4.0.1
+## Notes: Mail Enhance,Help you easy to Send mail and loot mails by a filter what u can config 
+## Notes-zhCN: |CFFDD66DDMailEnhance|R 邮件增强,邮件批量发送,可自定义的规则化收取邮件
+## Notes-zhTW: 郵件增強,郵件批量發送,可自定義的規則化收取郵件
+## X-Repple: 辅助
+## eMail: william_duckular@msn.com
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: ME_MailLootSetting,ME_Loot_Filters
+localization.lua
+localization.zhTW.lua
+MailEnhance.lua
+MailEnhance.xml
+MailEnhance_Loot.lua
+MailEnhance_Loot.xml

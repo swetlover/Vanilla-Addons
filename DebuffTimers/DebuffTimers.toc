@@ -1,0 +1,13 @@
+## Interface: 11200
+## Title: DebuffTimers
+## Title-zhCN: |CFFCCFFFF界面|r 目标Debuff时间
+## Notes: Timer Overlays for enemy buffs and debuffs
+## Notes-zhCN: |CFFDD66DDDebuffTimers|r 在目标头像下显示自己及他人的debuff计时，装了!OmniCC之后就可以把你老的冷却计时关了|N设置命令/DebuffTimers
+## Author: Renew, based on: shirsig - aurae
+## SavedVariablesPerCharacter: AUF_settings
+## OptionalDeps: DPSMate, pfUI, LunaUnitFrames, XPerl_Target, DiscordUnitFrames, modui, UnitFramesImproved_Vanilla
+
+Debuffs.lua
+Buffs.lua
+
+DebuffTimers.lua

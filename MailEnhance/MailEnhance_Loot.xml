@@ -1,0 +1,555 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Button name="FilterListUnitTemplate" virtual="true" hidden="true">
+        <Size><AbsDimension x="135" y="23"/></Size>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+		</Backdrop>
+        <Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentText" inherits="GameFontNormal" text="ME_LOOT_NEWCUSTOM_TITLE">
+					<Size><AbsDimension x="350" y="20"/></Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="-1" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+        <Scripts>
+            <OnClick>
+                ME_FilterButton_OnClick();
+            </OnClick>
+        </Scripts>
+        <HighlightTexture file="Interface\PaperDollInfoFrame\UI-Character-Tab-Highlight" alphaMode="ADD"/>
+    </Button>
+	<Frame name="MailEnhance_LootFrame" frameStrata="LOW" hidden="true">
+		<Scripts>
+			<OnLoad>
+				ME_MailLoot_Onload()
+                MailEnhance_LootFrame.total=0;
+			</OnLoad>
+			<OnEvent>
+				 ME_MailLoot_OnEvent()
+			</OnEvent>
+			<OnUpdate>
+				ME_LootProcessLoop(arg1)
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Button name="ME_MailLootButton" inherits="UIPanelButtonTemplate" parent="InboxFrame" text="ME_MAILLOOT_BUTTON">
+		<Size><AbsDimension x="95" y="22"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="75" y="-40"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+			</OnLoad>
+			<OnMouseDown>
+				ME_MailLootButton_OnMouseDown(arg1);
+			</OnMouseDown>
+			<OnEnter>
+					ME_MailLoot_GameTooltip(ME_MAILLOOT_TOOLTIP_TITLE, 1.0, 1.0, 1.0, ME_MAILLOOT_TOOLTIP_TEXT);
+			</OnEnter>
+			<OnLeave>
+					GameTooltip:Hide();
+			</OnLeave>
+			<OnShow>
+					ME_MailLootSetFiltersText();
+			</OnShow>
+		</Scripts>
+	</Button>
+	<Frame name="ME_MailLootDropDown" inherits="UIDropDownMenuTemplate" parent="InboxFrameMailLoot">
+		<Scripts>
+			<OnLoad>
+				ME_FiltersDropDown();
+			</OnLoad>
+			<OnShow>
+				ME_FiltersDropDown();
+			</OnShow>
+		</Scripts>
+	</Frame>
+	<Frame name="ME_MailLootFilters" parent ="ME_MailLootButton">
+		<Size><AbsDimension x="170" y="23"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"  relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-4" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentText" inherits="GameFontNormal" text="ME_LOOTFILTERS">
+					<Size><AbsDimension x="350" y="20"/></Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="-1" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>		
+	</Frame>
+	<Frame name="ME_MailLootFrame" parent ="InboxFrame" enableMouse="true" hidden="true">
+		<Size><AbsDimension x="360" y="430"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"  relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-35" y="-12"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="Loot Filter Config">
+					<Size><AbsDimension x="350" y="20"/></Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="-1" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>		
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="FilterList_Panle">
+				<Size><AbsDimension x="330" y="350"/></Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-31"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="4" right="4" top="4" bottom="4" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="16" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="16" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="FilterNameText" inherits="GameFontNormal" justifyH="RIGHT" text="ME_FILTERNAME">
+							<Size><AbsDimension x="90" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="FilterFromText" inherits="GameFontNormal" justifyH="RIGHT" text="ME_FILTERFROME">
+							<Size><AbsDimension x="90" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-34"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="FilterSubjectText" inherits="GameFontNormal" justifyH="RIGHT" text="ME_FILTERSUBJECT">
+							<Size><AbsDimension x="90" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-60"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+                        <FontString name="TakeItemText" inherits="GameFontNormal" justifyH="LEFT" text="ME_TAKEITEMTEXT">
+							<Size><AbsDimension x="150" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="45" y="-106"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+                        <FontString name="TakeMoneyText" inherits="GameFontNormal" justifyH="LEFT" text="ME_TAKEMONEYTEXT">
+							<Size><AbsDimension x="150" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="45" y="-132"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+                        <FontString name="TakeCODItemText" inherits="GameFontNormal" justifyH="LEFT" text="ME_TAKECODITEMTEXT">
+							<Size><AbsDimension x="150" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="45" y="-158"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+                        <FontString name="TakeTextItemText" inherits="GameFontNormal" justifyH="LEFT" text="ME_TAKETEXTITEMTEXT">
+							<Size><AbsDimension x="150" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="45" y="-184"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+                        <FontString name="DeletemptyText" inherits="GameFontNormal" justifyH="LEFT" text="ME_DELETEMPTYTEXT">
+							<Size><AbsDimension x="150" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="45" y="-210"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+                        <FontString name="DelteTextOnlyText" inherits="GameFontNormal" justifyH="LEFT" text="ME_DELETETEXTONLYTEXT">
+							<Size><AbsDimension x="150" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="45" y="-236"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+                        <FontString name="IgnoreUnreadText" inherits="GameFontNormal" justifyH="LEFT" text="ME_IGNOREUNREADTEXT">
+							<Size><AbsDimension x="150" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="45" y="-262"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<EditBox name="FilterNameEditBox" autoFocus="false" inherits="InputBoxTemplate">
+                        <Size><AbsDimension x="200" y="19"/></Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="FilterNameText" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="20" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnTabPressed>
+                                FilterFromEditBox:SetFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                        <FontString inherits="ChatFontNormal"/>
+                    </EditBox>
+                    <EditBox name="FilterFromEditBox" autoFocus="false" inherits="InputBoxTemplate">
+                        <Size><AbsDimension x="200" y="19"/></Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="FilterFromText" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="20" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnTabPressed>
+                                FilterSubjectEditBox:SetFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                        <FontString inherits="ChatFontNormal"/>
+                    </EditBox>
+                    <EditBox name="FilterSubjectEditBox" autoFocus="false" inherits="InputBoxTemplate">
+                        <Size><AbsDimension x="200" y="19"/></Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="FilterSubjectText" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="20" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnTabPressed>
+                                FilterFromEditBox:SetFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                        <FontString inherits="ChatFontNormal"/>
+                    </EditBox>
+                    
+                    <CheckButton name="CheckButtonTakeItemText" inherits="UICheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="TakeItemText" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+                    <CheckButton name="CheckButtonTakeMoneyText" inherits="UICheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="TakeMoneyText" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+                    <CheckButton name="CheckButtonTakeCODItemText" inherits="UICheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="TakeCODItemText" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+                    <CheckButton name="CheckButtonTakeTextItemText" inherits="UICheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="TakeTextItemText" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+                    <CheckButton name="CheckButtonDeletemptyText" inherits="UICheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="DeletemptyText" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+                    <CheckButton name="CheckButtonDelteTextOnlyText" inherits="UICheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="DelteTextOnlyText" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+                    <CheckButton name="CheckButtonIgnoreUnreadText" inherits="UICheckButtonTemplate">
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="IgnoreUnreadText" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+				
+                    <Button name="NewFilterButton1" inherits="FilterListUnitTemplate" id="1">
+                        <Anchors>
+        					<Anchor point="TOPRIGHT">
+        						<Offset>
+        							<AbsDimension x="-5" y="-107"/>
+        						</Offset>
+        					</Anchor>
+        				</Anchors>
+                    </Button>
+                    <Button name="NewFilterButton2" inherits="FilterListUnitTemplate" id="2">
+                        <Anchors>
+        					<Anchor point="TOP" relativeTo="NewFilterButton1" relativePoint="BOTTOM" >
+        						<Offset>
+        							<AbsDimension x="0" y="0"/>
+        						</Offset>
+        					</Anchor>
+        				</Anchors>
+                    </Button>
+                    <Button name="NewFilterButton3" inherits="FilterListUnitTemplate" id="3">
+                        <Anchors>
+        					<Anchor point="TOP" relativeTo="NewFilterButton2" relativePoint="BOTTOM" >
+        						<Offset>
+        							<AbsDimension x="0" y="0"/>
+        						</Offset>
+        					</Anchor>
+        				</Anchors>
+                    </Button>
+                    <Button name="NewFilterButton4" inherits="FilterListUnitTemplate" id="4">
+                        <Anchors>
+        					<Anchor point="TOP" relativeTo="NewFilterButton3" relativePoint="BOTTOM" >
+        						<Offset>
+        							<AbsDimension x="0" y="0"/>
+        						</Offset>
+        					</Anchor>
+        				</Anchors>
+                    </Button>
+                    <Button name="NewFilterButton5" inherits="FilterListUnitTemplate" id="5">
+                        <Anchors>
+        					<Anchor point="TOP" relativeTo="NewFilterButton4" relativePoint="BOTTOM" >
+        						<Offset>
+        							<AbsDimension x="0" y="0"/>
+        						</Offset>
+        					</Anchor>
+        				</Anchors>
+                    </Button>
+                    <Button name="NewFilterButton6" inherits="FilterListUnitTemplate" id="6">
+                        <Anchors>
+        					<Anchor point="TOP" relativeTo="NewFilterButton5" relativePoint="BOTTOM" >
+        						<Offset>
+        							<AbsDimension x="0" y="0"/>
+        						</Offset>
+        					</Anchor>
+        				</Anchors>
+                    </Button>
+                    <Button name="NewFilterButton7" inherits="FilterListUnitTemplate" id="7">
+                        <Anchors>
+        					<Anchor point="TOP" relativeTo="NewFilterButton6" relativePoint="BOTTOM" >
+        						<Offset>
+        							<AbsDimension x="0" y="0"/>
+        						</Offset>
+        					</Anchor>
+        				</Anchors>
+                    </Button>
+                    <Button name="NewFilterButton8" inherits="FilterListUnitTemplate" id="8">
+                        <Anchors>
+        					<Anchor point="TOP" relativeTo="NewFilterButton7" relativePoint="BOTTOM" >
+        						<Offset>
+        							<AbsDimension x="0" y="0"/>
+        						</Offset>
+        					</Anchor>
+        				</Anchors>
+                    </Button>
+                </Frames>
+			</Frame>	
+			<Button name ="ME_CreatNewFilter" inherits="UIPanelButtonTemplate" text="ME_NEWFILTER">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="12" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ME_CreatNewFilter_OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name ="ME_DeletFliter" inherits="UIPanelButtonTemplate"  text="ME_DELETFLITER">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="98" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ME_ME_DeletFliter_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name ="ME_ResetToDefault" inherits="UIPanelButtonTemplate"  text="ME_RESETTODEFAULT">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-97" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ME_ResetToDefault_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name ="ME_APPLYALL" inherits="UIPanelButtonTemplate"  text="ME_APPLYALL">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-11" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ME_ApplyAll_OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+		</Frames>
+	</Frame>
+	
+</Ui>

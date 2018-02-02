@@ -1,0 +1,7 @@
+## Interface: 11200
+## Title: Spell Book Tag 0.41
+## Notes: by evil.oz
+## Title-zhCN: |CFFCCCCFF辅助|r 法术书标签
+## Notes-zhCN:|CFFDD66DDSpellBookTag|r 如果玩家将法术书内的技能摆放在动作条上，那么就会在法术书内红色高亮该技能。
+## X-Repple: 界面
+SpellBookTag.xml

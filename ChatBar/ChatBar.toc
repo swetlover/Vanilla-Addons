@@ -1,0 +1,15 @@
+## Interface: 11200
+## Title: ChatBar
+## Title-zhCN: |CFFCCFFFF界面|r 聊天按钮
+## Notes: Button Bar for openning chat messages of each type.
+## Notes-ruRU: Панель кнопок для открытия сообщений каждого типа.
+## Notes-deDE: Button-Leiste zum Senden von Chatnachrichten jedes Typs.
+## Notes-frFR: Barre de boutons pour ouvrir les message de discussions de chaque type.
+## Notes-esES: Barra de botones para abrir los mensajes de chat de cada tipo.
+## Notes-zhCN: |CFFDD66DDChatBar|r 点击按钮打开聊天频道
+## Author: AnduinLothar, Lichery
+## Version: 2.5
+## OptionalDeps: VisibilityOptions
+## SavedVariablesPerCharacter: ChatBar_VerticalDisplay, ChatBar_AlternateOrientation, ChatBar_HideSpecialChannels, ChatBar_TextOnButtonDisplay, ChatBar_ButtonFlashing, ChatBar_BarBorder, ChatBar_ButtonText, ChatBar_StoredStickies, ChatBar_HiddenButtons, ChatBar_TextChannelNumbers
+
+ChatBar.xml

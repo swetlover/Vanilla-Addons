@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: SW_FixLogStrings
+## Title-zhCN: |CFF00FF00团队|r 战斗数据统计(同步)
+## Notes-zhCN: |CFFDD66DDSW_FixLogStrings|r 战斗数据统计(同步)
+## DefaultState: disabled
+## Author: Artack (Madmortem EU DE) artack@sw-stats.com
+## Version: 2.0
+## Notes: Adds a function to fix some log strings. If you turn this off SW Stats may parse incorrect things. If you turn it on other addons might be affected.
+FixLogStrings.lua

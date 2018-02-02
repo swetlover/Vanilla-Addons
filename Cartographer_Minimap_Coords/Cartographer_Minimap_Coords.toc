@@ -1,0 +1,16 @@
+## Interface: 11200
+## Title: Cartographer Minimap Coords
+## Title-zhCN: |CFFCCFFFF界面|r 地图增强-|cff7fff7f小地图坐标|r
+## Notes: Show coordinates on minimap
+## Notes-ruRU: Показывает координаты на миникарте
+## Notes-zhCN: |CFFDD66DDCartographer_Minimap_Coords|r 在小地图上显示坐标
+## Author: Jebus905
+## Version: 2.40b
+## Dependencies: Cartographer
+## X-Credits: Jebus905
+## X-Email: jasondpowell@gmail.com
+## X-Category: Map
+## X-AceForum: 11498
+## SavedVariables: Cartographer_MiniMapCoordsDB
+
+Cartographer_Minimap_Coords.lua

@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: |cff33ffcc库存|cffffffff
+## Title-zhCN: |CFFCCFFFF界面|r 物品计数
+## Author: Eric (Shagu) Mauser, 2016
+## Notes: A fork of InventoryCounter. Shows the count of items in your inventory of all charactes on the same account.
+## Notes-zhCN: |CFFDD66DDShaguInventory|r 物品计数并且可以显示同一账号下该物品的所有数量
+## Version: 0.1
+## SavedVariables: InventoryCounterDB
+ShaguInventory.lua

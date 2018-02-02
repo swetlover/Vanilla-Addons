@@ -1,0 +1,18 @@
+## Interface: 11200
+## Title: Banana
+## Title-zhCN: |CFF00FF00团队|r 团队标记助手
+## Author: Carsten Jendro
+## Version: 1.5 
+## Notes: 9 new buttons to set raid symbols/huntersmark, target by symbol and many other features. 
+## Notes-zhCN: |CFFDD66DDBanana|r 显示9个标记图标按钮.有效帮助队伍和团队标记监视和帮助|N设置命令/bb；/bbr
+## eMail: bananabar@ea31.de
+## URL: http://www.ea31.de/ceejay/banana
+## DefaultState: disabled
+## SavedVariables: BANANA_DEBUG,BANANA_BUTTON_LAYOUT,BANANA_HIDE_UNUSED_BUTTONS,BANANA_BUTTON_SCALE,BANANA_HIDE_BUTTON_FRAMES,BANANA_GREY_OUT_DEATH,BANANA_POS,BANANA_SHOW_IN_RAID,BANANA_SHOW_IN_PARTY,BANANA_SHOW_OUT_OF_GROUP,BANANA_SHOW_EXTRA_INFO
+Banana.lua
+Banana.xml
+BananaConfig.xml
+Bindings.xml
+BananaConfig.lua
+Localization.lua
+BananaLayout.lua

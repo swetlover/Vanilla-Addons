@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: Advanced v0.04
+## Title-zhCN: |CFF00FF00团队|r 帕奇维克陪你玩
+## Author: Fionee(Yuee)
+## Notes-zhCN: |CFFDD66DDSHPatchwerk|r 纳克萨玛斯帕奇维克治疗协助插件|N设置命令/shpw
+## DefaultState: disabled
+## SavedVariables: SHPatchwerk_Options
+localization.lua
+SHPatchwerk.lua
+SHPatchwerkOpt.xml
+SHPatchwerkButton.xml

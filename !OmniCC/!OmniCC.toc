@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: OmniCC
+## Title-zhCN:|CFFCCFFFF界面|r 动作条冷却计时
+## Notes: CooldownCount for Everything
+## Notes-zhCN:|CFFDD66DDOmniCC|r 在动作栏显示法术、技能和物品的冷却时间|N设置命令/Omnicc
+## Author: Tuller
+## Version: 6.8.30
+## Dependencies:
+## SavedVariables: OmniCC
+cooldown.lua
+main.lua

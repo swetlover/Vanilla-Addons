@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: Notes
+## Title-zhCN: |CFFCCCCFF辅助|r 记事本
+## Version: 1.3
+## Notes: Take Note!
+## Notes-zhCN: |CFFDD66DDNotes|R 游戏内记事本|N设置命令/notes
+## SavedVariables: Notes_Notes, Notes_LUAMode, Notes_CommMode, Notes_CommSpeedMode, Notes_ExportMode, Notes_PrintMaxInterval
+## SavedVariablesPerCharacter: Notes_IconPos, Notes_ShowIcon, Notes_SelectedComm, Notes_SelectedChan
+Notes.xml
+ChatThrottleLib.lua

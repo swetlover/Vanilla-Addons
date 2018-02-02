@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: Bow Before Nef by Raknor
+## Title-zhCN: |CFFFFFFCC职业|R |CFFAAD372猎人|R奈法自动换弓
+## Version: 1.0
+## Author: Raknor
+## URL: http://www.curse-gaming.com/mod.php
+## Notes: Automatically unequips your bow at the classcall during Nefarian Stage 2.
+## Notes-zhCN:|CFFDD66DDBowBeforeNef|R 进入第二阶段，手动卸下远程武器一次，直到boss第一次召唤，当Nefarian猎人职业召唤前2秒，自动卸下远程武器，之后自动装备
+## DefaultState: disabled
+BowBeforeNef.xml

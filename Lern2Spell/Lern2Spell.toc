@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: Lern2Spell
+## Title-zhCN: |CFFCCCCFF辅助|r 自动替换高等级法术
+## Notes: Automatically upgrades spells on your actionbars |cffff4488By Tekkub Stoutwrithe|r
+## Notes-zhCN:|CFFDD66DDLern2Spell|R 学习高等级技能后自动替换动作栏的低等级法术|N设置命令/l2s
+## Author: Tekkub Stoutwrithe
+
+Tooltip.xml
+GratuityLib\GratuityLib.lua
+SEEmbedLearnSpell\SEEmbedLearnSpell.lua
+Lern2Spell.lua

@@ -1,0 +1,72 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.blizzard.com/wow/ui/ 
+..\FrameXML\UI.xsd">
+
+    <Script file="Localization.lua"/>
+    <Script file="TargetButton.lua"/>
+    <Frame name="TargetButtonsFrame">
+        <Scripts>
+            <OnLoad>
+                this:RegisterEvent("PLAYER_TARGET_CHANGED");
+                this:RegisterEvent("VARIABLES_LOADED");
+            </OnLoad>
+            <OnEvent>
+                TargetButton_Redraw();
+            </OnEvent>
+            <OnUpdate>
+                TargetButton_CheckRange();
+            </OnUpdate>
+        </Scripts>
+    </Frame>
+    <Button name="TradeButton" parent="UIParent" toplevel="true">
+        <Size>
+            <AbsDimension x="24" y="24"/>
+        </Size>
+        <Scripts>
+            <OnEnter>
+                GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+                GameTooltip:SetText(TargetButton_Trade, 1.0, 1.0, 1.0);
+                GameTooltip:Show();
+            </OnEnter>
+            <OnLoad>
+                this:GetFrameLevel(this:GetFrameLevel()+5)
+            </OnLoad>
+            <OnLeave>
+                GameTooltip:Hide();
+            </OnLeave>
+            <OnClick>
+                Trade_onClick();
+            </OnClick>
+        </Scripts>
+        <NormalTexture file="Interface\AddOns\TargetButton\Images\Trade-Up"/>
+        <PushedTexture file="Interface\AddOns\TargetButton\Images\Trade-Down"/>
+        <DisabledTexture file="Interface\AddOns\TargetButton\Images\Trade-Disabled"/>
+        <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+    </Button>
+    <Button name="InspectButton" parent="UIParent" toplevel="true">
+        <Size>
+            <AbsDimension x="24" y="24"/>
+        </Size>
+        <Scripts>
+            <OnEnter>
+                GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+                GameTooltip:SetText(TargetButton_Inspect, 1.0, 1.0, 1.0);
+                GameTooltip:Show();
+            </OnEnter>
+            <OnLoad>
+                this:GetFrameLevel(this:GetFrameLevel()+5)
+            </OnLoad>
+            <OnLeave>
+                GameTooltip:Hide();
+            </OnLeave>
+            <OnClick>
+                Inspect_onClick();
+            </OnClick>
+        </Scripts>
+        <NormalTexture file="Interface\AddOns\TargetButton\Images\Inspect-Up"/>
+        <PushedTexture file="Interface\AddOns\TargetButton\Images\Inspect-Down"/>
+        <DisabledTexture file="Interface\AddOns\TargetButton\Images\Inspect-Disabled"/>
+        <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+    </Button>
+</Ui>

@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: PlayerLinkEnhance
+## Title-zhCN: |CFFCCCCFF辅助|r 玩家链接增强
+## Notes: PlayerLinkEnhance
+## Notes-zhCN: |CFFDD66DDPlayerLink|R 直接点姓名可邀请入队、密语、加入公会等
+## X-Repple: 界面
+## Version: 1.6
+## Author: hdll
+PlayerLinkEnhance.xml

@@ -1,0 +1,17 @@
+## Interface: 11200
+## Title: Decursive
+## Title-zhCN: |CFF00FF00团队|r 一键驱散
+## Notes: Simple status ailment cleaning mod. Cleans party, raid party, and pets.
+## Notes-zhCN: |CFFDD66DDDecursive|r 一键驱散队友、团队成员、宠物的Debuff|N设置命令/deucecomm
+## DefaultState: disabled
+## SavedVariablesPerCharacter: Dcr_Saved, DCR_REMOTE_DEBUG
+## Version 1.9.8.4
+## Author:Archarodim (Originally coded by Quu)
+## eMail: Archarodim _(AT)_ Teaser _(DOT)_ FR
+## URL: http://www.2072productions.com/?to=decursive.php
+Libs\AceLibrary\AceLibrary.lua
+Libs\Compost-2.0\Compost-2.0.lua
+localization.lua
+localization.cn.lua
+Decursive.lua
+Decursive.xml

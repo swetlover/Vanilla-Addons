@@ -1,0 +1,27 @@
+## Title: Informant
+## Title-zhCN: |CFFCCFFFF界面|r 物品数据库
+## Notes: Displays detailed item information in tooltips, and can produce item reports by binding an information window to a keypress.
+## Notes-zhCN: |CFFDD66DDInformant|r 显示物品详细信息，通过绑定快捷键可以生产物品信息报告。
+## Interface: 11200
+## LoadOnDemand: 0
+## OptionalDeps: Khaos
+## SavedVariables: InformantConfig
+##
+## Version: 3.9.0.1003
+
+Stubby.lua
+Stubby.xml
+TinyMoneyFrame.xml
+Tooltip.xml
+Babylonian.lua
+
+InfStrings.lua
+InfLocale.lua
+
+Informant.lua
+InfCommand.lua
+InfTrades.lua
+InfQuests.lua
+InfData.lua
+
+Informant.xml

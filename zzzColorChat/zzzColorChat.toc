@@ -1,0 +1,21 @@
+﻿## Title: zzzColorChat 
+## Notes: Enables Colored chat for Private servers.
+## Title-zhCN: |CFFCCCCFF辅助|r 聊天框着色
+## Notes-zhCN: |CFFDD66DDzzzColorChat|R 使用方法：/cchat red red2 blue blue2 green yellow yellow2 white pink gold purple teal |N/cchat red 红色 |N/cchat normal 恢复 |N/cchat off 禁用
+## Author: vorkez
+## X-Author-Server: Classic 1.12
+## X-Author-Faction: Both
+## Interface: 11200
+## Version: 0.1
+## DefaultState: Enabled
+## Q-CAT-Version: 000100
+
+libs\AceLibrary\AceLibrary.lua
+libs\AceOO-2.0\AceOO-2.0.lua
+libs\AceEvent-2.0\AceEvent-2.0.lua
+libs\AceAddon-2.0\AceAddon-2.0.lua
+libs\AceHook-2.1\AceHook-2.1.lua
+libs\RosterLib-2.0\RosterLib-2.0.lua
+
+zzzmain.lua
+zzzmain.xml

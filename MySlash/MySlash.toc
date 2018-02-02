@@ -1,0 +1,16 @@
+## Interface:11200
+## Title: MySlash
+## Notes: recording your Slash.
+## Title-zhCN: |CFFCCCCFF辅助|r 插件命令控制台
+## Notes-zhCN: |CFFDD66DDMySlash|R 单体插件快速设置命令的控制台|N设置命令/cj
+## Author:fix by 狗血编剧男
+## Version:1.0
+## X-Repple: 辅助
+## RequiredDeps: Blizzard_AuctionUI
+## SavedVariablesPerCharacter:SlashLibSaved,SlashLibSavedData
+SlashLib.lua
+SlashLibMinimap.lua
+SlashLib.xml
+SlashLibList.xml
+SlashLiblog.lua
+SlashLiblog.xml

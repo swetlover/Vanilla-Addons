@@ -1,0 +1,22 @@
+## Interface: 11200
+## Title: EzPoison
+## Title-zhCN: |CFFFFFFCC职业|R |CFFFFF468盗贼|R+|CFFC69B6D战士|R一键上毒磨刀石
+## Author: Renew
+## X-Website: https://github.com/Voidmenull
+## Notes: A simple poison helper for rogues.
+## Notes-zhCN:|CFFDD66DDEzPoison|R 盗贼和战士一键上毒磨刀石|N设置命令/ezpoison
+## Version: 1.2
+## DefaultState: disabled
+## LoadOnDemand: 0
+## SavedVariablesPerCharacter: EZPcfg
+
+libs\AceLibrary\AceLibrary.lua
+libs\AceOO-2.0\AceOO-2.0.lua
+libs\AceAddon-2.0\AceAddon-2.0.lua
+libs\AceEvent-2.0\AceEvent-2.0.lua
+libs\Dewdrop-2.0\Dewdrop-2.0.lua
+libs\Tablet-2.0\Tablet-2.0.lua
+libs\FuBarPlugin-2.0\FuBarPlugin-2.0.lua
+
+
+EzPoison.lua

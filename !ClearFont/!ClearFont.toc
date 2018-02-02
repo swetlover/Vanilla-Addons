@@ -1,0 +1,12 @@
+## Interface: 11200
+## Title: ClearFont |cffffffffv11200-2
+## Title-zhCN: |CFFCCFFFF界面|r 字体自适应
+## Version: v11200-2
+## Author: Kirkburn
+## Notes: Magical UI font-changer by |cff66ff33Kirkburn|r!
+## Notes-zhCN:|CFFDD66DDClearFont|R 自动适应显示游戏字体.复制你的字体文件至Interface\addons\!ClearFont\Fonts.重命名你的字体文件为1.ttf.双击AutoFontsCN文件
+## URL: http://www.clearfont.co.uk/
+## DefaultState: Enabled
+## LoadOnDemand: 0
+ClearFont.lua
+ClearFontAddons.lua

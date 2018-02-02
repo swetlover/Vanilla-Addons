@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: PackUp
+## Title-zhCN: |CFFCCFFFF界面|r 背包整理 
+## Notes: Pack Up Items of Invertory & Bank
+## Notes-zhCN: |CFFDD66DDPackUp|r 整理背包和银行|N设置命令/pack bag;/pack bank
+## Author: Cosin
+## Version: 0.7.0 Alpha
+## Dependencies:
+## OptionalDeps: !!Warmup
+PackUp.xml

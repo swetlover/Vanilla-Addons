@@ -1,0 +1,23 @@
+## Interface: 11200
+## Title: MasterLute 
+## Title-zhCN: |CFF00FF00团队|r 团队拍分Roll点助手
+## Notes-zhCN: |CFFDD66DDMasterLute|r SHIFT+点击物品|N设置命令/masterlute enable |N/masterlute enable (启用插件)|N/masterlute disable (禁用插件)|N/masterlute autoload (自动在当前区域启动或禁用)|N/masterlute price set <物品链接或物品ID> <数字> (设置物品的默认价格)|N/masterlute price get <物品链接或物品ID> (查看物品价格)|N/masterlute price list [, page] (物品价格列表)
+## Author: moh
+## DefaultState: disabled
+## Version: 1.13
+## X-Notes: Made for Fumtech
+## SavedVariables: MasterLute_Data
+## Q-CAT-Version: 000350
+
+Global.lua
+
+locale\Locale.lua
+locale\LocaleTable.lua
+
+locale\enUS.lua
+locale\zhCN.lua
+
+Core.lua
+Commands.lua
+UI.lua
+Main.lua

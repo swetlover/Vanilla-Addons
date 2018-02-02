@@ -1,0 +1,32 @@
+﻿## Interface: 11200
+## Title: ChatLog |cff7fff7f-Ace2-|r
+## Title-zhCN: |CFFCCFFFF界面|r 聊天记录查看保存
+## Notes: Logs and displays the chat.
+## Notes-frFR: Enregistre et affiche le chat.
+## Notes-deDE: Loggt den chat und zeigt ihn an.
+## Notes-zhCN: |CFFDD66DDChatLog|r 能查看、复制、保存所有频道的聊天记录|N设置命令/chatlog
+## Author: pb_ee1
+## Version: 2.0
+## SavedVariables: CHATLOG_SAVED_CONF
+## SavedVariablesPerCharacter: CHATLOG_LOGS
+## OptionalDeps: Ace2
+## X-Category: Chat/Communication
+## X-Credits: harl, Antikleia & 月色狼影
+## X-RelSite-WoWI: http://www.wowinterface.com/downloads/fileinfo.php?id=5423
+## X-RelSite-Curse: http://www.curse-gaming.com/en/wow/addons-4231-1-chatlog.html
+## X-RelSite-UI.WoW: http://ui.worldofwar.net/ui.php?id=3176
+
+Libs\AceLibrary\AceLibrary.lua
+Libs\AceOO-2.0\AceOO-2.0.lua
+Libs\AceAddon-2.0\AceAddon-2.0.lua
+Libs\AceConsole-2.0\AceConsole-2.0.lua
+Libs\AceEvent-2.0\AceEvent-2.0.lua
+Libs\AceLocale-2.2\AceLocale-2.2.lua
+Libs\Dewdrop-2.0\Dewdrop-2.0.lua
+
+Locale-enUS.lua
+Locale-frFR.lua
+Locale-deDE.lua
+Locale-zhCN.lua
+ChatLog.lua
+ChatLog.xml

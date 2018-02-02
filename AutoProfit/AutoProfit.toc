@@ -1,0 +1,9 @@
+﻿## Title: AutoProfit v3.11a
+## Title-zhCN: |CFFCCCCFF辅助|r 自动卖垃圾
+## Interface: 11200
+## Version: 3.11a
+## SavedVariables: autoProfitExceptions, autoSell, autoSilent
+## X-Credits: Roadblock
+## Notes: Automatically sells low quality gray items to the vendor. Disconnect protection for Nostalrius.
+## Notes-zhCN: |CFFDD66DDAutoProfit|r 自动卖垃圾稳定不掉线版本|N设置命令/ap
+AutoProfit.xml

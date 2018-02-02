@@ -1,0 +1,1047 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="CT_RaidTrackerItemOptions.lua"/>
+	
+	<Button name="CT_RaidTracker_ItemOptions_EntryTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="150" y="14" />
+		</Size>
+		<NormalText name="$parentNormalText" inherits="GameFontNormalSmall" justifyH="LEFT" nonspacewrap="true">
+			<Size>
+				<AbsDimension x="150" y="10"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="5" y="1"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+		</NormalText>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\QuestFrame\UI-QuestLogTitleHighlight" alphaMode="ADD" name="$parentMouseOver" hidden="true"/>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				getglobal(this:GetName() .. "MouseOver"):Show();
+				GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+				if(GetItemInfo("item:"..this.itemid..":0:0:0")) then
+					GameTooltip:SetHyperlink("item:"..this.itemid..":0:0:0");
+					GameTooltip:Show();
+				else
+					GameTooltip:SetText("这件物品没有在你的缓存中,你可以尝试右键点击此物品以获得此物品的信息,<可能掉线>!)", 1.0, 1.0, 1.0, 1.0, 1);
+					GameTooltip:Show();
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+				if(CT_RaidTracker_ItemOptions_selected ~= this.id) then
+					getglobal(this:GetName() .. "MouseOver"):Hide();
+				end
+			</OnLeave>
+			<OnLoad>
+				this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+				getglobal(this:GetName() .. "MouseOver"):SetAlpha(0.4);
+				getglobal(this:GetName() .. "MouseOver"):SetVertexColor(1, 1, 0);
+			</OnLoad>
+			<OnShow>
+				if(CT_RaidTracker_ItemOptions_selected == this.id) then
+					getglobal(this:GetName() .. "MouseOver"):Show();
+				end
+			</OnShow>
+			<OnClick>
+				if(arg1 == "RightButton") then
+					GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+					GameTooltip:SetHyperlink("item:"..this.itemid..":0:0:0");
+					GameTooltip:Show();
+					CT_RaidTracker_ItemOptions_ScrollBar_Update();
+				end
+				CT_RaidTracker_ItemOptions_SetFrame(this.id)
+				CT_RaidTracker_ItemOptions_selected = this.id;
+				for i=1, 22 do
+					getglobal("CT_RaidTracker_ItemOptions_Entry"..i.."MouseOver"):Hide();
+				end
+				getglobal(this:GetName() .. "MouseOver"):Show();
+				CT_RaidTracker_Debug(this:GetName());
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<Frame name="CT_RaidTrackerItemOptionsFrame" hidden="true" enableMouse="true" movable="true">
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Size>
+			<AbsDimension x="410" y="400"/>
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />	
+				<Size>
+					<AbsDimension x="128" y="17" />
+				</Size>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<!-- Frame header background texture -->
+				<Texture name="RaidWarnFrameTitle" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="400" y="64" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				
+				<!-- Frame header label -->
+				<FontString inherits="GameFontNormalSmall" text="CT_RaidTracker物品选项">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-3" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="CT_RaidTracker_ItemOptions_ScrollFrame" frameStrata="MEDIUM" hidden="false">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="13" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="185" y="357"/>
+				</Size>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Frames>
+		      <ScrollFrame name="CT_RaidTracker_ItemOptions_ScrollBar" inherits="FauxScrollFrameTemplate">
+		        <Anchors>
+		          <Anchor point="TOPLEFT">
+		            <Offset>
+		              <AbsDimension x="-5" y="-10"/>
+		            </Offset>
+		          </Anchor>
+		        </Anchors>
+		        <Size>
+							<AbsDimension x="160" y="340"/>
+						</Size>
+		        <Scripts>
+		          <OnVerticalScroll>
+		            FauxScrollFrame_OnVerticalScroll(14, CT_RaidTracker_ItemOptions_ScrollBar_Update);
+		          </OnVerticalScroll>
+		          <OnShow>
+		            CT_RaidTracker_ItemOptions_ScrollBar_Update();
+		          </OnShow>
+		        </Scripts>
+		      </ScrollFrame>
+		      <Button name="CT_RaidTracker_ItemOptions_Entry1" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+		        <Anchors>
+		          <Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_ScrollBar" relativePoint="TOPLEFT">
+		            <Offset>
+		              <AbsDimension x="8" y="0"/>
+		            </Offset>
+		           </Anchor>
+		        </Anchors>
+		      </Button>
+		      <Button name="CT_RaidTracker_ItemOptions_Entry2" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+		        <Anchors>
+		          <Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry1" relativePoint="BOTTOMLEFT"/>
+		        </Anchors>
+		      </Button>
+		      <Button name="CT_RaidTracker_ItemOptions_Entry3" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+		        <Anchors>
+		          <Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry2" relativePoint="BOTTOMLEFT"/>
+		        </Anchors>
+		      </Button>
+		      <Button name="CT_RaidTracker_ItemOptions_Entry4" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+		        <Anchors>
+		          <Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry3" relativePoint="BOTTOMLEFT"/>
+		        </Anchors>
+		      </Button>
+		      <Button name="CT_RaidTracker_ItemOptions_Entry5" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+		        <Anchors>
+		          <Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry4" relativePoint="BOTTOMLEFT"/>
+		        </Anchors>
+		      </Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry6" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry5" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry7" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry6" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry8" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry7" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry9" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry8" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry10" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry9" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry11" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry10" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry12" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry11" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry13" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry12" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry14" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry13" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry15" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry14" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry16" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry15" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry17" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry16" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry18" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry17" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry19" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry18" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry20" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry19" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry21" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry20" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry22" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry21" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry23" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry22" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+					<Button name="CT_RaidTracker_ItemOptions_Entry24" inherits="CT_RaidTracker_ItemOptions_EntryTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="CT_RaidTracker_ItemOptions_Entry23" relativePoint="BOTTOMLEFT"/>
+						</Anchors>
+					</Button>
+				</Frames>
+			</Frame>
+			
+			<Frame name="CT_RaidTracker_ItemOptions_EditFrame" frameStrata="MEDIUM" hidden="true">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-13" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="200" y="357"/>
+				</Size>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_Item" inherits="GameFontNormalSmall" justifyH="CENTER" justifyV="TOP" text="未知物品">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Size>
+								<AbsDimension x="160" y="25"/>
+							</Size>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_TrackText" inherits="GameFontNormalSmall" text="追踪该物品:">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-35" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_TrackDefaultText" inherits="GameFontNormalSmall" text="默认">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="26" y="-51" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_TrackAlwaysText" inherits="GameFontNormalSmall" text="总是">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="89" y="-51" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_TrackNeverText" inherits="GameFontNormalSmall" text="从不">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="151" y="-51" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_GroupText" inherits="GameFontNormalSmall" text="分组该物品:">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-70" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_GroupDefaultText" inherits="GameFontNormalSmall" text="默认">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="26" y="-86" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_GroupAlwaysText" inherits="GameFontNormalSmall" text="总是">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="89" y="-86" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_GroupNeverText" inherits="GameFontNormalSmall" text="从不">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="151" y="-86" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingText" inherits="GameFontNormalSmall" text="尝试获得物品价值:">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-105" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingDefaultText" inherits="GameFontNormalSmall" text="默认">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="26" y="-121" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingAlwaysText" inherits="GameFontNormalSmall" text="总是">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="89" y="-121" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingNeverText" inherits="GameFontNormalSmall" text="从不">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="151" y="-121" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_AskCostsText" inherits="GameFontNormalSmall" text="询问物品价值:">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-140" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_AskCostsDefaultText" inherits="GameFontNormalSmall" text="默认">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="26" y="-159" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_AskCostsAlwaysText" inherits="GameFontNormalSmall" text="总是">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="89" y="-159" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString name="CT_RaidTracker_ItemOptions_EditFrame_AskCostsNeverText" inherits="GameFontNormalSmall" text="从不">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="151" y="-159" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_TrackDefault">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="-50" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(not CT_RaidTracker_ItemOptions[this:GetParent().id]["status"]) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_TrackAlways:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_TrackNever:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_TrackAlways">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="72" y="-50" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(CT_RaidTracker_ItemOptions[this:GetParent().id]["status"] and CT_RaidTracker_ItemOptions[this:GetParent().id]["status"] == 1) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_TrackDefault:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_TrackNever:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_TrackNever">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="135" y="-50" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(CT_RaidTracker_ItemOptions[this:GetParent().id]["status"] and CT_RaidTracker_ItemOptions[this:GetParent().id]["status"] == 0) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_TrackDefault:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_TrackAlways:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_GroupDefault">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="-85" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(not CT_RaidTracker_ItemOptions[this:GetParent().id]["group"]) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_GroupAlways:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_GroupNever:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_GroupAlways">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="72" y="-85" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(CT_RaidTracker_ItemOptions[this:GetParent().id]["group"] and CT_RaidTracker_ItemOptions[this:GetParent().id]["group"] == 1) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_GroupDefault:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_GroupNever:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_GroupNever">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="135" y="-85" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(CT_RaidTracker_ItemOptions[this:GetParent().id]["group"] and CT_RaidTracker_ItemOptions[this:GetParent().id]["group"] == 0) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_GroupDefault:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_GroupAlways:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingDefault">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="-120" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(not CT_RaidTracker_ItemOptions[this:GetParent().id]["costsgrabbing"]) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingAlways:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingNever:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingAlways">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="72" y="-120" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(CT_RaidTracker_ItemOptions[this:GetParent().id]["costsgrabbing"] and CT_RaidTracker_ItemOptions[this:GetParent().id]["costsgrabbing"] == 1) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingDefault:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingNever:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingNever">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="135" y="-120" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(CT_RaidTracker_ItemOptions[this:GetParent().id]["costsgrabbing"] and CT_RaidTracker_ItemOptions[this:GetParent().id]["costsgrabbing"] == 0) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingDefault:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_CostsGrabbingAlways:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_AskCostsDefault">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="-158" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(not CT_RaidTracker_ItemOptions[this:GetParent().id]["askcosts"]) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_AskCostsAlways:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_AskCostsNever:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_AskCostsAlways">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="72" y="-158" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(CT_RaidTracker_ItemOptions[this:GetParent().id]["askcosts"] and CT_RaidTracker_ItemOptions[this:GetParent().id]["askcosts"] == 1) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_AskCostsDefault:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_AskCostsNever:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<CheckButton name="CT_RaidTracker_ItemOptions_EditFrame_AskCostsNever">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="135" y="-158" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								if(CT_RaidTracker_ItemOptions[this:GetParent().id]["askcosts"] and CT_RaidTracker_ItemOptions[this:GetParent().id]["askcosts"] == 0) then
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnShow>
+							<OnClick>
+								if (this:GetChecked()) then
+									CT_RaidTracker_ItemOptions_EditFrame_AskCostsDefault:SetChecked(0);
+									CT_RaidTracker_ItemOptions_EditFrame_AskCostsAlways:SetChecked(0);
+									this:SetChecked(1);
+								else
+									this:SetChecked(0);
+								end
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+						</NormalTexture>
+						<HighlightTexture file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
+						</HighlightTexture>
+						<CheckedTexture file="Interface\Buttons\UI-RadioButton">
+							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
+						</CheckedTexture>
+					</CheckButton>
+					
+					<Button name="CT_RaidTracker_ItemOptions_EditFrame_SaveButton" inherits="UIPanelButtonTemplate" text="保存">
+						<Size>
+							<AbsDimension x="90" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="-320" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								CT_RaidTracker_ItemOptions_Save();
+							</OnClick>
+						</Scripts>
+					</Button>
+					
+					<Button name="CT_RaidTracker_ItemOptions_EditFrame_DeleteButton" inherits="UIPanelButtonTemplate" text="删除">
+						<Size>
+							<AbsDimension x="90" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="100" y="-320" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								CT_RaidTracker_ItemOptions_Delete(this:GetParent().id);
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			
+			<Button name="CT_RaidTracker_ItemOptions_CloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(CT_RaidTrackerItemOptionsFrame);
+					</OnClick>
+				</Scripts>
+			</Button>
+	  </Frames>
+	  <Scripts>
+		  <OnShow>
+		  	if(EquipCompare_RegisterExclusion) then
+		  		EquipCompare_RegisterExclusion("^CT_RaidTracker_ItemOptions_Entry");
+		  	end
+		  </OnShow>
+		  <OnMouseDown>
+ 				if ( arg1 == "LeftButton" ) then
+ 					this:StartMoving();
+ 				end
+ 			</OnMouseDown>
+ 			<OnMouseUp>
+ 				if ( arg1 == "LeftButton" ) then
+ 					this:StopMovingOrSizing();
+ 				end
+ 			</OnMouseUp>
+		 </Scripts>
+	</Frame>
+</Ui>

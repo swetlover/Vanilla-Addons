@@ -1,0 +1,21 @@
+## Interface: 11200
+## Author: Cogwheel
+## Url: http://cogwheel.wowinterface.com
+## eMail: mcogwheel@gmail.com
+## Title: BuyEmAll
+## Title-zhCN: |CFFCCCCFF辅助|r 批量购买
+## Version: 2.2
+## Notes: Enhances shift-click interface at vendors
+## Notes-zhCN:|CFFDD66DDBuyEmAll|R 按住shift键批量购买各种物品
+## X-Category: Interface Enhancements
+
+Ace2\AceLibrary\AceLibrary.lua
+Ace2\AceOO-2.0\AceOO-2.0.lua
+Ace2\AceHook-2.0\AceHook-2.0.lua
+Ace2\AceLocale-2.1\AceLocale-2.1.lua
+Ace2\AceEvent-2.0\AceEvent-2.0.lua
+Ace2\AceAddon-2.0\AceAddon-2.0.lua
+
+localization.lua
+BuyEmAll.lua
+BuyEmAll.xml

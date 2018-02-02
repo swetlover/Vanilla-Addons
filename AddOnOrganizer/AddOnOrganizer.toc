@@ -1,0 +1,9 @@
+﻿## Interface: 11200
+## Title: Add On Organizer
+## Title-zhCN: |CFFCCCCFF辅助|r 插件管理
+## Notes: Lists and organizes all of you'r addons, let's you create global profiles.
+## Notes-zhCN: |CFFDD66DDAddOnOrganizer|r 游戏内插件管理器.按ESC呼出
+## SavedVariables: AddOnOrganizer_Profiles
+## Author: Christian Schubert
+AddOnOrganizer.xml
+

@@ -1,0 +1,16 @@
+## Interface: 11200
+## Author: Neronix
+## Title: DeuceCommander |cff7fff7f -Ace2-|r
+## Notes:Provides a graphical interface to Ace2 addon /commands 
+## Title-zhCN: |CFFCCCCFF辅助|R ACE2类插件控制台
+## Notes-zhCN:|CFFDD66DDDeuceCommander|R 为你使用的所有的ACE2类插件提供一个综合配置的平台|N控制台被隐藏输入/DeuceCommander standby 
+## X-Repple: 辅助
+## Dependencies: !Libs
+## eMail: neronix@gmail.com
+## Version: 1.1
+## OptionalDeps: !Libs,Ace2, DewdropLib, TabletLib, FuBar, FuBarPlugin-2.0
+## X-Category: Miscellaneous
+## X-eMail: neronix@gmail.com
+## SavedVariables: DeuceCommanderDB
+
+DeuceCommander.lua

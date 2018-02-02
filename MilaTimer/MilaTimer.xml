@@ -1,0 +1,96 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+	..\FrameXML\UI.xsd">	
+	<Script file="MilaTimer.lua"/>
+    <Frame name="SpellTimerFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="false"  parent="PlayerFrame">
+        <Size>
+            <AbsDimension x="125" y="26"/>
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER">
+                <Offset>
+                    <AbsDimension x="0" y="0"/>
+                </Offset>
+            </Anchor>
+        </Anchors>
+		<TitleRegion setAllPoints="true"/>
+		<Backdrop bgFile="" edgeFile="" tile="false">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="3" bottom="3"/>
+			</BackgroundInsets>
+		</Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <FontString name="SpellTimerTitleText" inherits="GameFontHighlight" text="">
+                    <Size>
+                        <AbsDimension x="100" y="14"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-15"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+			</Layer>
+            <Layer level="BACKGROUND">
+                <FontString name="SpellTimerCountText" inherits="GameFontHighlight" text="5" hidden="true">
+                    <Size>
+                        <AbsDimension x="100" y="70"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="15" y="60"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+			</Layer>
+        </Layers>
+        <Frames>
+		<StatusBar name="SpellTimerBar" minValue="0" maxValue="100" level="BACKGROUND" parent="PlayerFrame">
+			<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+			<Size>
+				<AbsDimension x="114" y="15"/>
+			</Size>
+                    <Anchors>
+                        <Anchor point="right">
+                            <Offset>
+                                <AbsDimension x="-9" y="18"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+			<BarColor r=".93" g=".096" b=".82"/>
+		</StatusBar>            
+		</Frames>
+		<Scripts>
+            <OnLoad>
+                SpellTimer_OnLoad();
+            </OnLoad>
+            <OnEvent>
+                SpellTimer_OnEvent(event);
+            </OnEvent>
+			<OnUpdate>
+				SpellTimer_OnUpdate();
+				SpellTimerBar:SetAlpha("0.8")
+			</OnUpdate>
+			<OnMouseDown>
+			    if (arg1 == "LeftButton") and (IsShiftKeyDown()) then
+				SpellTimerFrame:StartMoving();
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				if(arg1 == "LeftButton") then
+				SpellTimerFrame:StopMovingOrSizing();
+				end
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+</Ui>

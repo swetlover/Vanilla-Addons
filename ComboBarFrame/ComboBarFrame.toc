@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: ComboBarFrame
+## Notes: ComboBarFrame
+## Title-zhCN: |CFFFFFFCC职业|R |CFFFFF468盗贼|R+|CFFFF7C0A德鲁伊|R连击点显示
+## Notes-zhCN:|CFFDD66DDComboBarFrame|R 盗贼连击点显示，按住ALT用鼠标可以托拽|N设置命令/cb
+## X-Repple: 盗贼 德鲁伊
+## Author: Reaper (Nuga - Zendedar)
+## DefaultState: disabled
+ComboBarFrame.xml

@@ -1,0 +1,14 @@
+## Interface: 11200
+## Version: 1800.2
+## Author: Narwick
+## Title: AH Favorites|cff007fff -Ace-|r
+## Title-zhCN: |CFFCCCCFF辅助|r AH搜索物品保存
+## Notes: Saves AH searches in a favorites list
+## Notes-zhCN: |CFFDD66DDAHFavorites|r 保存拍卖行搜索的物品名称
+## OptionalDeps: myAddOns, Fizzwidget ShoppingList
+## SavedVariables: AHFavDB
+## LoadOnDemand: 1
+## LoadWith: Blizzard_AuctionUI
+AHFavLocals_deDE.lua
+AHFavLocals.lua
+AHFavorites.xml

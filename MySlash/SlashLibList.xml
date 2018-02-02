@@ -1,0 +1,325 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	
+	<!-- ============================= TEMPLATES ============================ -->
+	
+	<!-- ================== BTN CADRE GRIS ================ -->
+	<button name="BtnOptFrameBoxTemplate23" enableMouse="true" virtual="true">
+		<Size><AbsDimension x="162" y="24"/></Size>!-- y = hauteur ligne + 3 -->
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parent_Texte" inherits="GameFontNormalSmall" nonspacewrap="false" maxLines="0" justifyH="CENTER" justifyV="MIDDLE" bytes="28" text=""><!-- bytes : nbre de chars visibles -->
+					<Color r="0.4" g="0.8" b="0.6" a="1"/>
+					<Anchors>
+						<anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+							<Offset><AbsDimension x="0" y="2"/></Offset>
+						</anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_Tex">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="4" y="-4"/></Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+							<Offset><AbsDimension x="-4" y="4"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize><AbsValue val="16"/></EdgeSize>
+			<TileSize><AbsValue val="16"/></TileSize>
+			<BackgroundInsets><AbsInset left="5" right="5" top="5" bottom="5"/></BackgroundInsets>
+		</Backdrop>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.5,0.5,0.5);
+			</OnLoad>
+			<OnEnter>
+				this:SetBackdropColor(0.5,0.5,0.5,0.6);
+			</OnEnter>
+			<OnLeave>
+				this:SetBackdropColor(0.2,0.2,0.2,0.6);
+			</OnLeave>
+			<OnShow>
+				this:SetBackdropColor(0.2,0.2,0.2,0.6);
+			</OnShow>
+			<OnClick>
+				slibUIEditListClick(getglobal(this:GetName().."_Texte"):GetText());
+			</OnClick>
+		</Scripts>
+	</button>
+	
+	<!-- ============================ UI LISTE CMDS ========================= -->
+	<Frame name="SlibListCmdsFrame" toplevel="true" frameStrata="DIALOG" hidden="true" parent="SlibFrame">
+		<Size><AbsDimension x="216" y="553"/></Size>
+		<Anchors>
+			<Anchor relativePoint="TOPRIGHT" point="TOPLEFT">
+				<offset><AbsDimension x="-8" y="-7"/></offset>
+			</Anchor>
+		</Anchors>
+		
+		<TitleRegion setAllPoints="true"/>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32"/>
+			</EdgeSize>
+		</Backdrop>
+		<!-- ================ CARTOUCHE TITRE =============== -->
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size><AbsDimension x="260" y="64"/></Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset><AbsDimension x="1" y="12"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="SlibListTitleText" inherits="GameFontNormal" nonspacewrap="true" text="可用命令">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentHeader">
+							<Offset><AbsDimension x="0" y="-13"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		
+		<!-- =================== UI LISTE ==================== -->
+		<Frames>
+			<Frame name="$parent_fond" parent="SlibListCmdsFrame" setAllPoints="true" alpha="1">
+				<Layers>
+					<Layer level="ARTWORK">
+						<!-- ============= INFOS ========== -->
+						<FontString name="SlibListInfos" inherits="GameFontDisableSmall" justifyH="RIGHT" nonspacewrap="true" text="点击可执行。">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset><AbsDimension x="20" y="-30"/></Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<!-- ========== CADRE LISTE ======= -->
+			<Frame name="SlibListCadre" inherits="OptionFrameBoxTemplate">
+				<Size><AbsDimension x="186" y="449"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SlibListInfos" relativePoint="TOPLEFT">
+						<Offset><AbsDimension x="-5" y="-25"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.5,0.5,0.5);
+						this:SetBackdropColor(0,0,0,0.9);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			
+			<!-- =========== ASCENSEUR ======== -->
+			<ScrollFrame name="SlibListFrameScroller" inherits="FauxScrollFrameTemplate" hidden="false">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SlibListCadre">
+						<Offset><AbsDimension x="2" y="-5"/></Offset>
+					</Anchor>
+					<Anchor point="TOPRIGHT" relativeTo="SlibListCadre">
+						<Offset><AbsDimension x="-27" y="-5"/></Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="SlibListCadre">
+						<Offset><AbsDimension x="-27" y="4"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- ======== LIGNES ======= -->
+					<button name="SlibListLigneBtn_1" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListFrameScroller" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="3"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_2" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_1" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_3" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_2" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_4" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_3" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_5" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_4" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_6" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_5" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_7" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_6" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_8" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_7" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_9" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_8" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_10" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_9" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_11" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_10" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_12" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_11" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_13" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_12" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_14" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_13" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_15" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_14" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_16" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_15" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_17" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_16" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_18" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_17" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_19" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_18" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_20" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_19" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+					<button name="SlibListLigneBtn_21" text="" inherits="BtnOptFrameBoxTemplate23">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibListLigneBtn_20" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</button>
+				</Frames>
+				<Scripts>
+					<OnVerticalScroll>
+						FauxScrollFrame_OnVerticalScroll(SLIBSCROLLHEIGHT,slibScrollerListUpdate);
+					</OnVerticalScroll>
+				</Scripts>
+			</ScrollFrame>
+		
+			<!-- ================ BOUTONS DLOG ================ -->
+			<Button name="SlibListBtnClose" text="关闭" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="80" y="25"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+						<Offset><AbsDimension x="-15" y="15"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SlibListCmdsFrame:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		
+		<!-- ================== SCRIPTS==================== -->
+		<Scripts>
+			<!-- ========== EVENTS ========== -->
+			<OnLoad>
+				SlibListCmdsFrame:SetClampedToScreen("true");
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

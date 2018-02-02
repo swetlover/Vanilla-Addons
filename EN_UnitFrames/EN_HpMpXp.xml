@@ -1,0 +1,415 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="EN_HpMpXp.lua"/>
+<!-- General -->
+	<Frame name="EUF_HpMpXp_Genreal" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>
+				EUF_HpMpXp_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				EUF_HpMpXp_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+<!-- Player Frame -->
+	<Frame name="EUF_PlayerFrame" parent="PlayerFrame">
+		<Frames>
+			<Frame>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBackground">
+							<Size>
+								<AbsDimension x="71" y="42"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="PlayerFrame">
+									<Offset>
+										<AbsDimension x="65" y="-23"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="0" g="0" b="0" a="0.5"/>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<Texture name="$parentTextureExt" file="Interface\TargetingFrame\UI-TargetingFrame">
+							<Size>
+								<AbsDimension x="102" y="128"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="225" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.3984375" right="0" top="0" bottom="1"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						this:SetFrameLevel(this:GetFrameLevel() - 1);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<StatusBar name="$parentXPBar" inherits="TextStatusBar">
+				<Size>
+					<AbsDimension x="190" y="12"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="107" y="-65"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="$parentBkg">
+									<Size>
+										<AbsDimension x="10" y="6"/>
+									</Size>
+									<Anchors>
+										<Anchor point="BOTTOM" relativeTo="PlayerFrame">
+											<Offset>
+												<AbsDimension x="-28" y="22"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<Color r="0" g="0" b="0" a="0.5"/>
+								</Texture>
+								<Texture name="$parentBkgExt">
+									<Size>
+										<AbsDimension x="122" y="12"/>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT" relativeTo="PlayerFrame">
+											<Offset>
+												<AbsDimension x="105" y="-64"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<Color r="0" g="0" b="0" a="0.5"/>
+								</Texture>
+							</Layer>
+							<Layer level="OVERLAY">
+								<Texture name="$parentBorder" file="Interface\AddOns\EN_UnitFrames\EN_HpMpXp">
+									<Size>
+										<AbsDimension x="146" y="32"/>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT" relativeTo="PlayerFrame">
+											<Offset>
+												<AbsDimension x="78" y="-57"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.5703125" top="0" bottom="1"/>
+								</Texture>
+								<Texture name="$parentBorderExt" file="Interface\AddOns\EN_UnitFrames\EN_HpMpXp">
+									<Size>
+										<AbsDimension x="9" y="32"/>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT" relativeTo="PlayerFrame">
+											<Offset>
+												<AbsDimension x="224" y="-57"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.84765625" right="0.8828125" top="0" bottom="1"/>
+								</Texture>
+							</Layer>
+						</Layers>
+					</Frame>
+				</Frames>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0.1" g="0.5" b="0"/>
+				<Scripts>
+					<OnLoad>
+						this:SetFrameLevel(this:GetFrameLevel() + 1);
+					</OnLoad>
+				</Scripts>
+			</StatusBar>
+			<Frame>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentPosition" inherits="GameTooltipTextSmall">
+							<FontHeight>
+								<AbsValue val="16"/>
+							</FontHeight>
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="262" y="-35"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="0" g="1" b="0"/>
+							<Shadow>
+								<Offset>
+									<AbsDimension x="1" y="-1"/>
+								</Offset>
+								<Color r="0" g="0" b="0"/>
+							</Shadow>
+
+						</FontString>
+						<FontString name="$parentHP" inherits="GameTooltipTextSmall">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="262" y="-47"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="1" g="0.75" b="0"/>
+							<Shadow>
+								<Offset>
+									<AbsDimension x="1" y="-1"/>
+								</Offset>
+								<Color r="0" g="0" b="0"/>
+							</Shadow>
+						</FontString>
+						<FontString name="$parentHPPercent" inherits="GameTooltipTextSmall" hidden="true">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="262" y="-47"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="1" g="0.75" b="0"/>
+							<Shadow>
+								<Offset>
+									<AbsDimension x="1" y="-1"/>
+								</Offset>
+								<Color r="0" g="0" b="0"/>
+							</Shadow>
+						</FontString>
+						<FontString name="$parentMP" inherits="GameTooltipTextSmall">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="262" y="-58"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="0.75" g="0.75" b="1"/>
+							<Shadow>
+								<Offset>
+									<AbsDimension x="1" y="-1"/>
+								</Offset>
+								<Color r="0" g="0" b="0"/>
+							</Shadow>
+						</FontString>
+						<FontString name="$parentMPPercent" inherits="GameTooltipTextSmall" hidden="true">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="262" y="-58"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="0.75" g="0.75" b="1"/>
+							<Shadow>
+								<Offset>
+									<AbsDimension x="1" y="-1"/>
+								</Offset>
+								<Color r="0" g="0" b="0"/>
+							</Shadow>
+						</FontString>
+						<FontString name="$parentXP" inherits="GameTooltipTextSmall">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="PlayerFrame" relativePoint="CENTER">
+									<Offset>
+										<AbsDimension x="90" y="-19"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Shadow>
+								<Offset>
+									<AbsDimension x="1" y="-1"/>
+								</Offset>
+								<Color r="0" g="0" b="0"/>
+							</Shadow>
+							<Color r="1" g="1" b="0"/>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						this:SetFrameLevel(this:GetFrameLevel() + 1);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnUpdate>
+				EUF_PlayerFramePosition_Update();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+<!-- TargetFrame -->
+	<Frame name="EUF_TargetFrame" parent="TargetFrame">
+		<Size>
+			<AbsDimension x="200" y="150"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentHP" inherits="GameTooltipTextSmall" text="">
+					<Anchors>
+						<Anchor point="BOTTOM" relativeTo="TargetFrameHealthBar">
+							<Offset x="-2" y="0"/>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="1" b="1" a="0.9"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentMP" inherits="GameTooltipTextSmall" text="">
+					<Anchors>
+						<Anchor point="BOTTOM" relativeTo="TargetFrameManaBar">
+							<Offset x="-2" y="0"/>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="1" b="1" a="0.9"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentHPPercent" inherits="GameTooltipTextSmall" text="">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPLEFT">
+							<Offset x="2" y="-41"/>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="0.75" b="0"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentMPPercent" inherits="GameTooltipTextSmall" text="">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPLEFT">
+							<Offset x="2" y="-52"/>
+						</Anchor>
+					</Anchors>
+					<Color r="0.75" g="0.75" b="1"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:SetFrameLevel("3");
+			</OnLoad>
+		</Scripts>
+	</Frame>
+<!-- Party Frame -->
+	<Frame name="EUF_PartyFrameTemplate" frameStrata="MEDIUM" virtual="true">
+		<Size>
+			<AbsDimension x="220" y="100"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentHP" inherits="GameFontNormalSmall" font="Fonts\FZLBJW.TTF">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="119" y="-9"/>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="0.75" b="0"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentHPPercent" inherits="GameFontNormalSmall" font="Fonts\FZLBJW.TTF" hidden="true">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="119" y="-9"/>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="0.75" b="0"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentMP" inherits="GameFontNormalSmall" font="Fonts\FZLBJW.TTF">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="119" y="-18"/>
+						</Anchor>
+					</Anchors>
+					<Color r="0.75" g="0.75" b="1"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentMPPercent" inherits="GameFontNormalSmall" font="Fonts\FZLBJW.TTF" hidden="true">
+					<FontHeight>
+						<AbsValue val="13"/>
+					</FontHeight>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="119" y="-18"/>
+						</Anchor>
+					</Anchors>
+					<Color r="0.75" g="0.75" b="1"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Frame name="EUF_PartyFrame1" inherits="EUF_PartyFrameTemplate" parent="PartyMemberFrame1" id="1"/>
+	<Frame name="EUF_PartyFrame2" inherits="EUF_PartyFrameTemplate" parent="PartyMemberFrame2" id="2"/>
+	<Frame name="EUF_PartyFrame3" inherits="EUF_PartyFrameTemplate" parent="PartyMemberFrame3" id="3"/>
+	<Frame name="EUF_PartyFrame4" inherits="EUF_PartyFrameTemplate" parent="PartyMemberFrame4" id="4"/>
+</Ui>

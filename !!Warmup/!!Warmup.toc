@@ -1,0 +1,16 @@
+## Interface: 11200
+## Title: !!Warmup
+## Title-zhCN: |CFFCCCCFF辅助|r 插件负载监视
+## Notes: Tracks how long between loadup events
+## Notes-zhCN:|CFFDD66DD!!Warmup|r 可以很好的看见你的哪些插件占用的内存大，哪些插件拖慢了你的游戏速度|设置命令/wu
+## DefaultState: disabled
+## Author: Tekkub Stoutwrithe
+## X-Category: Development Tools
+## X-RelSite-WoWI: 4939
+## X-RelSite-Curse: 3792
+## X-WoWIPortal: tekkub
+## X-AceForum: 669
+
+## SavedVariables: WarmupSV
+
+Warmup.xml

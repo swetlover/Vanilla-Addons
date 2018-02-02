@@ -1,0 +1,43 @@
+﻿## Interface: 11200
+## Title: Atlas1.13.0版本 loot增强
+## Title-zhCN: |CFFCCFFFF界面|r Atlasloot
+## Notes: Shows the possible loot from the bosses
+## Notes-zhCN: |CFFDD66DDAtlasLoot|r 显示副本BOSS掉落
+## Notes-ruRU: Показывает возможную добычу с боссов
+## Author: Daviesh, laytya, Lichery
+## Version: 4.07.01
+## X-Date: 01.04.2017
+## Author: Dan Gilbert, Daviesh, Thandrenn, Asurn, Loather, Rabidmax, Dazerdude, laytya, Lichery
+## X-Email: loglow@gmail.com
+## X-Website: https://github.com/laytya/Atlas
+## X-Category: Map
+## X-OptionsFrame: AtlasLootOptionsFrame
+## SavedVariablesPerCharacter: AtlasLootCharDB
+## OptionalDeps: Alphamap, AtlasLoader, LootLink, ItemSync, DewdropLib, Ace2, EquipCompare, EQCompare
+
+Libs\AceLibrary\AceLibrary.lua
+Libs\AceOO-2.0\AceOO-2.0.lua
+Libs\AceEvent-2.0\AceEvent-2.0.lua
+Libs\AceDB-2.0\AceDB-2.0.lua
+Libs\AceLocale-2.2\AceLocale-2.2.lua
+Libs\AceAddon-2.0\AceAddon-2.0.lua
+Libs\Babble-Boss-2.2\Babble-Boss-2.2.lua
+Libs\Babble-Class-2.2\Babble-Class-2.2.lua
+Libs\Babble-Faction-2.2\Babble-Faction-2.2.lua
+Libs\Babble-ItemSet-2.2\Babble-ItemSet-2.2.lua
+Libs\Babble-Spell-2.2\Babble-Spell-2.2.lua
+Libs\Babble-Zone-2.2\Babble-Zone-2.2.lua
+Libs\Dewdrop-2.0\Dewdrop-2.0.lua
+
+Locale\Locale.xml
+Bossnames\BossNames.xml
+Sets\Sets.xml
+Crafting\Crafting.xml
+PvP\PvP.xml
+WorldEvents\WorldEvents.xml
+Factions\Factions.xml
+Instances\Instances.xml
+WorldBosses\WorldBosses.xml
+TableRegister\TableRegister.xml
+Tooltips\knowntooltips.lua
+Core\AtlasLoot.xml

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bindings>
+  <Binding name="WIM启用" header="WIMMOD">
+			WIM_Bindings_EnableWIM();
+	</Binding>
+  <Binding name="WIM历史" header="WIMMOD">
+			WIM_HistoryFrame:Show();
+	</Binding>
+  <Binding name="WIM显示新的信息" header="WIMMOD">
+			WIM_ShowNewMessages();
+	</Binding>
+  <Binding name="WIMT切换" header="WIMMOD">
+			WIM_ToggleWindow_Toggle();
+	</Binding>
+  <Binding name="WIM显示所有" header="WIMMOD">
+			WIM_ShowAll();
+	</Binding>
+  <Binding name="WIM隐藏" header="WIMMOD">
+			WIM_HideAll();
+	</Binding>
+</Bindings>

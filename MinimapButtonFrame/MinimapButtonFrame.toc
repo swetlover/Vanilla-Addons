@@ -1,0 +1,33 @@
+## Interface: 11200
+## Title: MBF
+## Title-zhCN: |CFFCCCCFF辅助|r 小地图插件图标整合
+## Notes: Collects the minimap buttons and puts them into a moveable frame.
+## Notes-deDE: Sammelt die Minikarte Tasten und stellt sie in einen beweglichen Rahmen.
+## Notes-esES: Reúne el minimapa botones y los pone en un marco de muebles.
+## Notes-esMX: Reúne el minimapa botones y los pone en un marco de muebles.
+## Notes-frFR: Collecte de la mini-boutons et les met dans un cadre mobile.
+## Notes-koKR: 미니 단추와 그들을 집결 선수야 프레임 이동합니다.
+## Notes-ruRU: Собирает кнопки с мини-карты и помещает их в отдельное, передвижное окно.
+## Notes-zhCN: |CFFDD66DDMinimapButtonFrame|r 收集minimap按钮和使他们成为一个可移动的框架|N设置命令/mbf |N/mbf add |N/mbf remove
+## Notes-zhTW: 收集minimap按鈕和使他們成為一個可移動的框架。
+## Author: Bachlott, laytya
+## Q-CAT-Version: 000200
+## Version: 1.10e
+## SavedVariablesPerCharacter: MBF_Vars, MBF_Ignore, MBF_Include, MBF_FrameLocation
+## OptionalDeps: Ace2, Titan
+## X-Category: Interface Enhancements
+
+localization\localization-en.lua
+localization\localization-deDE.lua
+localization\localization-ruRU.lua
+localization\localization-frFR.lua
+localization\localization-esES.lua
+localization\localization-koKR.lua
+localization\localization-zhCN.lua
+localization\localization-zhTW.lua
+
+MinimapButtonFrame.lua
+MinimapButtonFrame.xml
+
+MBFTitan.lua
+MBFTitan.xml

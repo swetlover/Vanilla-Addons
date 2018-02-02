@@ -1,0 +1,10 @@
+﻿## Interface: 11200
+## Title: zTip
+## Notes: Enhance Unit Tooltip, and customize tip position|n made by Zero Fire (zero_wows@yahoo.com.cn)
+## Title-zhCN: |CFFCCFFFF界面|r 鼠标提示
+## Notes-zhCN:|CFFDD66DDzTip|R 人物信息提示增强及跟随鼠标
+## Version: 1.18.1
+## Author: Zero Fire
+## Author-zhCN: 炽火 Zero ℃
+## OptionalDeps: !!Warmup
+zTip.lua

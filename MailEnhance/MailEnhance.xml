@@ -1,0 +1,694 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<CheckButton name="MassMail_RadioButtonTemplate" inherits="UIRadioButtonTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				MassMail_RadioButton_OnClick(this:GetID());
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+	
+	<Button name="MassMail_ItemNodeTemplate" virtual="true">
+		<Size><AbsDimension x="310" y="20"/></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Anchors>
+					<Anchor point="RIGHT">
+						<Offset>
+							<AbsDimension x="-1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT" text="$parentName">
+					<Size><AbsDimension x="290" y="20"/></Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="-1" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentIcon">
+				<Size><AbsDimension x="19" y="19"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+						<AbsDimension x="1" y="-1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\Buttons\UI-Slot-Background">
+							<Size>
+								<AbsDimension x="19" y="19"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.640625" top="0" bottom="0.640625"/>
+						</Texture>
+					</Layer>
+					<Layer name="BORDER">
+						<Texture name="$parentTexture"/>	
+					</Layer>
+				</Layers>
+				<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>				
+			</Button>
+		</Frames>
+		<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
+		<Scripts>
+			<OnLoad>
+				this:Hide();
+			</OnLoad>
+			<OnClick>
+				ItemNodeButton_Onclick(this:GetID());
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<Frame name="ME_MassMailFrame"  parent="SendMailFrame" toplevel="true" enableMouse="true" hidden="false">
+		<Size><AbsDimension x="360" y="430"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"  relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-35" y="-12"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="Enhance Mass Mail">
+					<Size><AbsDimension x="350" y="20"/></Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="-1" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentNote" inherits="GameFontNormal" text="HELP">
+					<Size><AbsDimension x="300" y="20"/></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="25" y="-21"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12"/>
+					</FontHeight>
+				</FontString>
+				<FontString name="ME_MassMailErrorText" inherits="GameFontRedSmall" hidden="true">
+					<Size>
+						<AbsDimension x="0" y="10"/>
+					</Size>
+				</FontString>
+				<Texture name="ME_MassMailErrorCoin" file="Interface\MoneyFrame\UI-MoneyIcons" hidden="true">
+					<Size>
+						<AbsDimension x="10" y="10"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="ME_MassMailErrorText" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="1" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.25" top="0" bottom="1"/>
+				</Texture>			
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="ItemList_Panle">
+				<Size><AbsDimension x="330" y="270"/></Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-41"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="4" right="4" top="4" bottom="4" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="16" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="16" />
+					</EdgeSize>
+				</Backdrop>
+				<Frames>
+					<Button name="$parentNode1" inherits="MassMail_ItemNodeTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="5" y="-10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode2" inherits="MassMail_ItemNodeTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode1" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode3" inherits="MassMail_ItemNodeTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode2" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode4" inherits="MassMail_ItemNodeTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode3" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode5" inherits="MassMail_ItemNodeTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode4" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode6" inherits="MassMail_ItemNodeTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode5" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode7" inherits="MassMail_ItemNodeTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode6" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode8" inherits="MassMail_ItemNodeTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode7" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode9" inherits="MassMail_ItemNodeTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode8" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode10" inherits="MassMail_ItemNodeTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode9" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode11" inherits="MassMail_ItemNodeTemplate" id="11">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode10" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					
+					<Button name="$parentNode12" inherits="MassMail_ItemNodeTemplate" id="12">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parentNode11" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="-1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+							
+					<Slider name="ItemList_PanleScrollFrame" enableMouse="true" minValue="1" maxValue="260" defaultValue="1" valueStep="1">     
+						<Size>
+							<AbsDimension x="12" y="268" />
+						</Size>
+						<Anchors>
+		                    <Anchor point="TOPRIGHT" >
+		                        <Offset>
+		                            <AbsDimension x="-4" y="-1"/>		                       
+		                        </Offset>
+		                    </Anchor>
+		                </Anchors>
+						<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+							<BackgroundInsets>
+								<AbsInset left="3" right="3" top="6" bottom="6" />
+							</BackgroundInsets>
+							<TileSize>
+								<AbsValue val="8" />
+							</TileSize>
+							<EdgeSize>
+								<AbsValue val="8" />
+							</EdgeSize>
+						</Backdrop>
+						<HitRectInsets>
+							<AbsInset left="0" right="0" top="-10" bottom="-10" />
+						</HitRectInsets>
+						<Scripts>
+							<OnValueChanged>
+								ItemList_Panel_Update();
+							</OnValueChanged>
+							<OnMouseDown>
+								this.isscroll = true;
+							</OnMouseDown>
+							<OnMouseUp>
+								this.isscroll = false;
+							</OnMouseUp>
+						</Scripts>
+						<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+							<Size>
+								<AbsDimension x="32" y="32" />
+							</Size>							
+						</ThumbTexture>
+					</Slider>
+	
+				</Frames>
+			</Frame>
+			
+			<Frame name="$parentMoneyFrame" enableMouse="true" hidden="true">
+				<Size><AbsDimension x="330" y="60"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="4" right="4" top="4" bottom="4" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="16" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="16" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="MassMail_MoneyText" inherits="GameFontNormalSmall" text="ME_AMOUNT_TO_SEND">
+							<Size><AbsDimension x="80" y="22"/></Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-5"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Frame name="MassMail_MoneyFrame" inherits="MoneyInputFrameTemplate">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="15" y="10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>				
+					</Frame>
+					<Button name="MassMail_CODItemButton">
+						<Size><AbsDimension x="37" y="37"/></Size>
+						<Anchors>
+							<Anchor point="RIGHT">
+								<Offset>
+								<AbsDimension x="-12" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\Buttons\UI-Slot-Background">
+									<Size>
+										<AbsDimension x="37" y="37"/>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.640625" top="0" bottom="0.640625"/>
+								</Texture>
+							</Layer>
+							<Layer level="ARTWORK">
+								<FontString name="$parentCount" inherits="NumberFontNormal" justifyH="RIGHT">
+									<Anchors>
+										<Anchor point="BOTTOMRIGHT">
+											<Offset>
+												<AbsDimension x="-5" y="2"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+							<Layer name="BORDER">
+								<Texture name="$parentTexture"/>	
+							</Layer>
+						</Layers>
+						<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
+						<Scripts>
+							<OnLoad>
+								this:RegisterForDrag("LeftButton");
+							</OnLoad>
+							<OnReceiveDrag>
+								ME_Mail_MoneyFrame_OnClick()
+							</OnReceiveDrag>
+							<OnClick>
+								ME_Mail_MoneyFrame_OnClick()
+							</OnClick>
+						</Scripts>	
+					</Button>
+					<CheckButton name="MassMail_SendMoneyButton" inherits="MassMail_RadioButtonTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-130" y="-19"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								getglobal(this:GetName().."Text"):SetText(SEND_MONEY);
+								this:SetChecked(1);
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="MassMail_CODButton" inherits="MassMail_RadioButtonTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="MassMail_SendMoneyButton" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								getglobal(this:GetName().."Text"):SetText(COD);
+								this:Disable();
+								getglobal(this:GetName().."Text"):SetTextColor(GRAY_FONT_COLOR.r, GRAY_FONT_COLOR.g, GRAY_FONT_COLOR.b)
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<Button name="MassMailMoneyAcceptButton" inherits="UIPanelButtonTemplate" text="ME_MONEYACCEPT">
+						<Size><AbsDimension x="80" y="22"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="85" y="-7"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:Disable();
+								this.timer=0;
+								ME_MassMailErrorText:SetText(format(MAIL_COD_ERROR, MAX_COD_AMOUNT));
+								ME_MassMailErrorText:SetPoint("BOTTOMLEFT", "ME_MassMailFrameMoneyFrame", "TOPLEFT", 15, 1);
+							</OnLoad>
+							<OnClick>
+								ME_MoneyMailAdd_OnClick();
+							</OnClick>
+							<OnUpdate>
+								ME_MoneyMailAdd_IsVisable(arg1);
+							</OnUpdate>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						this:Hide();
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			
+			<Button name="$parentItemAddFrame" hidden="false">
+				<Size><AbsDimension x="330" y="60"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="4" right="4" top="4" bottom="4" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="16" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="16" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentNote" inherits="GameFontNormalSmall" text="ADDHELP">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-5"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForDrag("LeftButton");
+					</OnLoad>
+					<OnReceiveDrag>
+						MassMail_ItemAddFrame_OnClick();
+					</OnReceiveDrag>
+					<OnClick>
+						MassMail_ItemAddFrame_OnClick();
+					</OnClick>
+					<OnEnter>
+						
+					</OnEnter>
+				</Scripts>
+			</Button>
+			
+			<Button name="$parentSendButton" inherits="UIPanelButtonTemplate" hidden="false" text="SEND_LABEL" id="1">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-97" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:Disable();
+						this.timer=0;
+					</OnLoad>
+					<OnClick>
+						MailEnhanceFrame.total=getn(MassMail_ItemList);
+						MassMail_SendPrepare();
+						MailEnhanceFrame:Show();
+						MM_CanSendNext = 1;
+					</OnClick>
+					<OnUpdate>
+						MassMail_CanSend(arg1)
+					</OnUpdate>
+				</Scripts>
+			</Button>
+						
+			<Button name="$parentMoneyMailButton" inherits="UIPanelButtonTemplate" hidden="false" text="MONEYMASS" id="2">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="12" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:Disable();
+					</OnLoad>
+					<OnClick>
+						MassMail_MoneyItem_OnClick(this:GetID());
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<Button name="$parentItemMailButton" inherits="UIPanelButtonTemplate" hidden="false" text="ITEMMASS" id="3">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="12" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:Hide();
+					</OnLoad>
+					<OnClick>
+						MassMail_MoneyItem_OnClick(this:GetID());
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<Button name="$parentClearButton" inherits="UIPanelButtonTemplate" hidden="false" text="CLEAR" id="4">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="98" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						MassMail_MoneyItem_OnClick(this:GetID());
+					</OnClick>
+				</Scripts>
+			</Button>
+		
+			<Button name="$parentCancelButton" inherits="UIPanelButtonTemplate" hidden="false" text="CANCEL" id="5">
+				<Size><AbsDimension x="80" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-11" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ME_MassMailFrame:Hide();
+						MassMail_MoneyItem_OnClick(this:GetID());
+					</OnClick>
+				</Scripts>
+			</Button>
+		
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:Hide();
+				this:RegisterEvent("MAIL_CLOSED");
+			</OnLoad>
+			<OnEvent>
+				if(event=="MAIL_CLOSED") then 
+					this:Hide() 
+					MassItemList_Clear()
+				end
+			</OnEvent>
+		</Scripts>			
+	</Frame>
+	<Frame name="MailEnhanceFrame" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnUpdate>
+				MassMail_SendProcessQueue(arg1);
+			</OnUpdate>
+			<OnLoad>
+				this.total = 0;
+				this.sendmail = 0;
+				this:RegisterEvent("MAIL_SEND_SUCCESS");
+			</OnLoad>
+			<OnEvent>
+				MailEnhance_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	
+	<Button name="MassMail_ToggleButton"  inherits="UIPanelButtonTemplate"  parent ="SendMailFrame" text="MASSMAIL">
+		<Size><AbsDimension x="80" y="22"/></Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-55" y="-14"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				if(ME_MassMailFrame:IsShown()) then 
+					ME_MassMailFrame:Hide() 
+				else
+					ME_MassMailFrame:Show() 
+				end
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<GameTooltip name="MailEnhance_Tooltip" inherits="GameTooltipTemplate">
+		<Scripts>
+			<OnLoad>
+				this:SetOwner(WorldFrame, "ANCHOR_NONE");
+			</OnLoad>
+		</Scripts>
+	</GameTooltip>
+</Ui>

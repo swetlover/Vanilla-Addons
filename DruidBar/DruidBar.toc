@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: Druid Bar v3.26
+## Title-zhCN: |CFFFFFFCC职业|R |CFFFF7C0A德鲁伊|R德鲁伊法力条
+## Notes: Shows mana in bear/cat form.
+## Notes-zhCN: |CFFDD66DD Druid Bar|R 显示德鲁伊法力条|N设置命令/dbar 
+## DefaultState: disabled
+## X-Repple: 德鲁伊
+## Author: SkaDemon
+## SavedVariables: DruidBarKey
+DruidBar.xml

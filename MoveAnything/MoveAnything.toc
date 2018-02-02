@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: MoveAnything!
+## Title-zhCN: |CFFCCCCFF辅助|r 界面部件移动
+## Notes: vJ-11000.2
+## Author: Skrag - Mod by Jason
+## Notes: Updated for patch 1.10 by Scorpia with Xanuri fix for MainMenuBar
+## Notes-zhCN:|CFFDD66DDMoveAnything|R 可以通过到游戏主菜单选择进入MoveAnything|N设置命令/move
+## X-Repple: 界面
+## SavedVariables: MoveAnything_CustomFrames, MoveAnything_CharacterSettings, MoveAnything_UseCharacterSettings
+## OptionalDeps: myAddOns, MCP
+MoveAnything.xml

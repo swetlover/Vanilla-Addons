@@ -1,0 +1,11 @@
+## Interface: 11200
+## Version: 4.43
+## Title: Mik's Scrolling Battle Text Options
+## Title-zhCN: |CFFCCFFFF界面|r 战斗数值增强设置
+## Notes: Load on demand options for Mik's Scrolling Battle Text
+## Notes-zhCN: |CFFDD66DDMikScrollingBattleTextOptions|r 战斗事件数值增强设置界面%a是伤害数字;%n是伤害目标%s是法术名字%t是伤害类型|N设置命令/msbt
+## Dependencies: MikScrollingBattleText
+## LoadOnDemand: 1
+localization_options.lua
+MSBTOptions.lua
+MSBTOptions.xml

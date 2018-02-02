@@ -1,0 +1,12 @@
+## Interface: 11200
+## Title: Attackbar
+## Title-zhCN:|CFFCCFFFF界面|r 全职业攻击计时条
+## Version: 5.01
+## Author: Udokus
+## X-Credits: Roablock for cleanup
+## Notes: Displays a progress bar for your and enemy attack speed
+## Notes-zhCN:|CFFDD66DDAttackbar|r |根据近战武器攻击速度显示攻击计时条|N设置命令/abar
+## DefaultState: disabled
+
+## SavedVariables: AttackBarDB
+Attackbar.xml

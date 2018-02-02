@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: EasyUnlock
+## Title-zhCN: |CFFFFFFCC职业|R |CFFFFF468盗贼|R交易界面开锁
+## Notes: Makes unlocking of lockboxes easier (inventory/tradewindow) and shows level requirements on lockbox tooltips
+## Notes-zhCN:|CFFDD66DDEasyUnlock|R 在交易界面显示开锁技能快捷键，使开锁极为方便
+## X-Repple: 盗贼
+## Author: Athaeus (J. de Gram)
+## eMail: j.de.gram@gmail.com
+## Version: 1.15
+## DefaultState: disabled
+EasyUnlock.xml

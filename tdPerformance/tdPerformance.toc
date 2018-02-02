@@ -1,0 +1,8 @@
+## Interface: 11200
+## Title: tdPerformance
+## Title-zhCN: |CFFCCFFFF界面|R 信息条 
+## Notes: tdPerformance
+## Notes-zhCN: |CFFDD66DDtdPerformance|R 信息条插件
+## X-Repple: 界面
+## Author: 修改by狗血编剧男
+tdPerformance.lua

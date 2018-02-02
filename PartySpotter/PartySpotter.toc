@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: Party Spotter v3.10.11200
+## Title-zhCN: |CFFCCFFFF界面|r 高亮队友
+## Notes: Highlight Party members on the WorldMap and distinguish them from Raid members, and players of the same faction in BattleGrounds
+## Notes-deDE: Zeige Gruppenmitglieder auf der Weldkarte und zeigt diese anders als Raidmitglieder an, so wie die beteiligten der Schaltfeldgruppe
+## Notes-zhCN: |CFFDD66DDPartySpotter|r 在地图上高亮队友以区分团队成员，战场有效|N设置命令/pspot 
+## SavedVariables: PartySpotterSettings
+## OptionalDeps:
+## Dependencies:
+PartySpotter.xml

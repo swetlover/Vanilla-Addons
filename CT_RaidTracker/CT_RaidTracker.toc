@@ -1,0 +1,13 @@
+## Interface: 11200
+## Title: CT_RaidTracker
+## Title-zhCN: |CFF00FF00团队|r DKP记录系统
+## Version: 1.25.12 (modded)
+## Notes: Counts raid loot and attendance
+## Notes-zhCN: |CFFDD66DDCT_RaidTracker|r 帮助你监视团队里的队友的HP等辅助功能，Raid必备。|N/rt - 显示插件面板|N/rt options/o - 显示选项面板|N/rt io - 显示物品控制面板\nhttp://www.dkper.com/上传工会DKP分数
+## DefaultState: disabled
+## X-Repple: 团队
+## SavedVariables: CT_RaidTracker_Online, CT_RaidTracker_RaidLog, CT_RaidTracker_Options, CT_RaidTracker_SortOptions, CT_RaidTracker_ItemOptions, CT_RaidTracker_ItemOptions_selected, CT_RaidTracker_VersionFix, CT_RaidTracker_GetCurrentRaid, CT_RaidTracker_TimeOffsetStatus,CT_RaidTracker_CustomZoneTriggers
+## OptionalDeps: CT_MasterMod, HoB_DKP, AdvancedItemTooltip
+CT_RaidTrackerOptions.xml
+CT_RaidTrackerItemOptions.xml
+CT_RaidTracker.xml

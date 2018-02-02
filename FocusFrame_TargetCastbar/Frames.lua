@@ -1,0 +1,51 @@
+local castbar = CreateFrame("StatusBar", "Focus_TargetCastingBar", TargetFrame)
+castbar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+castbar:SetStatusBarColor(0.4, 1, 0)
+castbar:SetHeight(13)
+castbar:SetWidth(151)
+castbar:SetPoint("BOTTOMLEFT", TargetFrame, 15, -60)
+castbar:SetValue(0)
+castbar:Hide()
+
+castbar.spark = castbar:CreateTexture("Focus_TargetCastingBarSpark", "OVERLAY")
+castbar.spark:SetTexture("Interface\\CastingBar\\UI-CastingBar-Spark")
+castbar.spark:SetHeight(26)
+castbar.spark:SetWidth(26)
+castbar.spark:SetBlendMode("ADD")
+
+castbar.border = castbar:CreateTexture("Focus_TargetCastingBarBorder", "OVERLAY")
+castbar.border:SetPoint("TOPLEFT", -23, 20)
+castbar.border:SetPoint("TOPRIGHT", 23, 20)
+castbar.border:SetHeight(50)
+castbar.border:SetTexture("Interface\\AddOns\\FocusFrame\\Media\\UI-CastingBar-Border-Small.blp")
+
+castbar.text = castbar:CreateFontString("Focus_TargetCastingBarText", "OVERLAY")
+castbar.text:SetTextColor(1, 1, 1)
+castbar.text:SetFont(STANDARD_TEXT_FONT, 10,  'OUTLINE')
+castbar.text:SetShadowColor(0, 0, 0)
+castbar.text:SetPoint("CENTER", castbar, 0, 2)
+castbar.text:SetText("Drain Life")
+
+castbar.timer = castbar:CreateFontString("Focus_TargetCastingBarTimer", "OVERLAY")
+castbar.timer:SetTextColor(1, 1, 1)
+castbar.timer:SetFont(STANDARD_TEXT_FONT, 10,  'OUTLINE')
+castbar.timer:SetShadowColor(0, 0, 0)
+castbar.timer:SetPoint("RIGHT", castbar, 28, 2)
+castbar.timer:SetText("2.0")
+
+castbar.icon = castbar:CreateTexture("Focus_TargetCastingBarIcon", "OVERLAY", nil, 7)
+castbar.icon:SetWidth(20)
+castbar.icon:SetHeight(20)
+castbar.icon:SetPoint("LEFT", castbar, -23, 1)
+castbar.icon:SetTexture("Interface\\Icons\\Spell_shadow_lifedrain02")
+
+castbar.shield = castbar:CreateTexture("Focus_TargetCastingBarShield", "OVERLAY")
+castbar.shield:SetPoint("TOPLEFT", -28, 20)
+castbar.shield:SetPoint("TOPRIGHT", 18, 20)
+castbar.shield:SetHeight(50)
+castbar.shield:SetTexture("Interface\\AddOns\\FocusFrame\\Media\\UI-CastingBar-Small-Shield.blp")
+castbar.shield:Hide()
+
+if FocusFrameDB.strictAuras then
+    DEFAULT_CHAT_FRAME:AddMessage("Warn: TargetCastbar doesn't work with strict auras enabled.")
+end

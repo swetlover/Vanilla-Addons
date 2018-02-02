@@ -1,0 +1,14 @@
+﻿## Interface: 11200
+## Title: Aux
+## Title-zhCN: |CFFCCFFFF界面|r 拍卖增强
+## Notes: A lightweight addon designed to help manage auctions
+## Notes-zhCN: |CFFDD66DDaux-addon|r 拍卖行页面增强|N设置命令/aux
+## SavedVariablesPerCharacter: AUX_ENABLE_ALT, AUX_OPEN_FIRST, AUX_INSTANT_BUYOUT, AUX_AUCTION_DURATION
+## SavedVariables: auxSellEntries
+core.xml
+scan.xml
+sell.xml
+buy.xml
+options.xml
+about.xml
+

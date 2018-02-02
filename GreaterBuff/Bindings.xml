@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="GREATERBUFF" description="GreaterBuff Mod" header="GREATERBUFF">
+		GreaterBuff_Toggle();
+	</Binding>
+</Bindings>

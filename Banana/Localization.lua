@@ -1,0 +1,8 @@
+﻿BANANALOC_RESET_BUTTON_POSITIONS = "复位按钮位置";
+
+BANANA_LAYOUT1 = "8个按钮在一条横线"
+BANANA_LAYOUT2 = "2条横线4个按钮"
+BANANA_LAYOUT3 = "4条横线2个按钮"
+BANANA_LAYOUT4 = "8个按钮在一条竖线"
+BANANA_LAYOUT5 = "8个按钮自由排列"
+

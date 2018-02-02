@@ -1,0 +1,341 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	
+	<CheckButton name="SHPatchwerkOptionsCheckButtonTemplate" inherits="OptionsCheckButtonTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				SHPWCheckButton_Click();
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+
+	<Frame name="SHPatchwerkOptionsFrame"  movable="true" enableMouse="true" hidden="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="260" y="310"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="SHPatchwerkOptionsFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="256" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" text ="SHPATCHWERK_TITLE">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="SHPatchwerkOptionsFrameHeader">
+							<Offset>
+								<AbsDimension x="0" y="-14"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		
+		<Frames>
+			<Frame name="SHPatchwerkTankNameDropDown" inherits="UIDropDownMenuTemplate" enableMouse="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SHPatchwerkOptionsFrame">
+						<Offset>
+							<AbsDimension x="85" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parentLabel" inherits="GameFontNormalSmall" text="SHPATCHWERK_CASTTARGET">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="6" y="-5"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						this:SetWidth(115); 
+					</OnLoad>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_TARGETSETTT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Frame>
+
+
+
+			<Button name="SHPatchwerkOptionsFrameSetTarget" inherits="GameMenuButtonTemplate" text="SHPATCHWERK_SETTARGET">
+				<Size>
+					<AbsDimension x="125" y="23"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"  relativeTo="SHPatchwerkTankNameDropDown" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="-60" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("gsTitleOptionOK");
+						SHPWSetTarget();
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_TARGETADDTT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>					
+				</Scripts>
+			</Button>
+			
+			<Button name="SHPatchwerkOptionsFrameDelTarget" inherits="GameMenuButtonTemplate" text="SHPATCHWERK_DELTARGET">
+				<Size>
+					<AbsDimension x="66" y="23"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"  relativeTo="SHPatchwerkOptionsFrameSetTarget" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="17" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("gsTitleOptionOK");
+						SHPWDelTarget();
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_TARGETDELTT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>					
+
+			<Slider name="SHPatchwerkOptionsFrameSlider1" inherits="OptionsSliderTemplate" id="1">
+				<Size>
+					<AbsDimension x="200" y="17"/>
+				</Size>			
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SHPatchwerkOptionsFrameSetTarget" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnValueChanged>
+						SHPWSpellRankSet_OnValueChanged();
+					</OnValueChanged>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_SKILLSELECTTT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnLoad>
+						this:SetValueStep(1);
+					</OnLoad>
+				</Scripts>				
+			</Slider>
+
+			<CheckButton name="SHPatchwerkOptionsFrameCheckButton1" inherits="SHPatchwerkOptionsCheckButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SHPatchwerkOptionsFrameSlider1" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="14" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_CHECKBUTTON1TT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText(SHPATCHWERK_CHECKBUTTON1);
+					</OnLoad>
+				</Scripts>				
+			</CheckButton>
+			<CheckButton name="SHPatchwerkOptionsFrameCheckButton2" inherits="SHPatchwerkOptionsCheckButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SHPatchwerkOptionsFrameCheckButton1" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_CHECKBUTTON2TT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText(SHPATCHWERK_CHECKBUTTON2);
+					</OnLoad>
+				</Scripts>				
+			</CheckButton>
+			<CheckButton name="SHPatchwerkOptionsFrameCheckButton3" inherits="SHPatchwerkOptionsCheckButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SHPatchwerkOptionsFrameCheckButton2" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_CHECKBUTTON3TT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText(SHPATCHWERK_CHECKBUTTON3);
+					</OnLoad>
+				</Scripts>				
+			</CheckButton>				
+
+			<Button name="SHPatchwerkOptionsFrameTestCast" inherits="GameMenuButtonTemplate" text="SHPATCHWERK_TESTCAST">
+				<Size>
+					<AbsDimension x="88" y="23"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"  relativeTo="SHPatchwerkOptionsFrameCheckButton3" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="-14" y="-9"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SHPWCastSpell();
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_TESTCASTTT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>						
+				</Scripts>
+			</Button>
+			
+			<Button name="SHPatchwerkOptionsFrameClose" inherits="GameMenuButtonTemplate" text="SHPATCHWERK_CLOSE">
+				<Size>
+					<AbsDimension x="88" y="23"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"  relativeTo="SHPatchwerkOptionsFrameTestCast" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="32" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("gsTitleOptionOK");
+						SHPatchwerkOptionsFrame:Hide();
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(SHPATCHWERK_CLOSETT);
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>					
+				</Scripts>
+			</Button>
+
+					
+		</Frames>
+		
+		
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("PLAYER_ENTERING_WORLD")
+			</OnLoad>
+			<OnEvent>
+        if(event=="PLAYER_ENTERING_WORLD") then
+        	SHPatchwerk_OnLoad();
+        end
+			</OnEvent>
+			<OnMouseDown>
+				if (arg1 == 'LeftButton') then
+					this:StartMoving();
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				if (arg1 == 'LeftButton') then
+					this:StopMovingOrSizing();
+				end
+			</OnMouseUp>			
+		</Scripts>
+	</Frame>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</Ui>

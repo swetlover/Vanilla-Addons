@@ -1,0 +1,17 @@
+## Interface: 11200
+## Title-zhCN: |CFFCCCCFF辅助|r 一键换装
+## Notes: Outfitter
+## Notes-zhCN: |CFFDD66DDOutfitter|R 一键换装智能自动判定换装条件|N设置命令/outfitter
+## OptionalDeps: TankPoints
+## RequiredDeps: 
+## SavedVariablesPerCharacter: gOutfitter_Settings
+
+OutfitterStrings.lua
+OutfitterStrings_de.lua
+OutfitterStrings_fr.lua
+OutfitterStrings_cn.lua
+OutfitterStrings_tw.lua
+OutfitterStrings_kr.lua
+
+Outfitter.lua
+Outfitter.xml

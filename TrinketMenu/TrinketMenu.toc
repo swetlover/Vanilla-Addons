@@ -1,0 +1,15 @@
+## Interface: 11200
+## Title: TrinketMenu
+## Title-zhCN: |CFFCCCCFF辅助|r 饰品管理助手
+## Author: Gello
+## Notes: AddOn to manage trinkets
+## Notes-zhCN:|CFFDD66DDTrinketMenu|r 额外显示两个饰品框|N设置命令/trinket
+## SavedVariables: TrinketMenuOptions
+## SavedVariablesPerCharacter: TrinketMenuPerOptions, TrinketMenuQueue
+localization.lua
+TrinketMenu.lua
+TrinketMenu.xml
+TrinketMenuOpt.lua
+TrinketMenuOpt.xml
+TrinketMenuQueue.lua
+TrinketMenuQueue.xml

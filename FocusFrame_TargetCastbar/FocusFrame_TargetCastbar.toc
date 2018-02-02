@@ -1,0 +1,13 @@
+## Interface: 11200
+## Title: FocusFrame_TargetCastbar 
+## Title-zhCN: |CFFFF6666PVP|r 目标施法条
+## Notes: Adds an extra castbar for your current target.
+## Notes-zhCN: |CFFDD66DDFocusFrame_TargetCastbar|r 目标下显示施法条
+## DefaultState: disabled
+## RequiredDeps: FocusFrame
+## LoadOnDemand: 1
+## LoadWith: FocusFrame
+## Author: Wardz,https://github.com/wardz/FocusFrame_TargetCastbar/releases
+
+Frames.lua
+TargetCastbar.lua

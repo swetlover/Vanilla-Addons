@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: GreaterBuff
+## Title-zhCN: |CFFFFFFCC职业|R |CFFF48CBA圣骑士|R大祝福助手
+## Notes: This add-on gives you 7 buttons to click cast blessings on a class.
+## Notes-zhCN:|CFFDD66DDGreaterBuff|R 提供了7个按钮来点击对一个职业施法祝福|N设置命令/gb
+## DefaultState: disabled
+## Dependencies:
+## OptionalDeps:
+## SavedVariables: GB_Config
+## Version: 1.57
+GreaterBuff.xml

@@ -1,0 +1,8 @@
+## Interface: 11200
+## Title:MilaTimer
+## Title-zhCN: |CFFCCFFFF界面|r 头像框架5秒回蓝监视
+## Notes: MP/5
+## Notes-zhCN: |CFFDD66DDMilaTimer|r 头像框架5秒回蓝监视|N设置命令/ml
+## X-Repple: 界面
+## Author: @MILA@                                       
+MilaTimer.xml

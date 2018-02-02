@@ -1,0 +1,18 @@
+﻿## Interface: 11200
+## Title: BGAssist
+## Title-zhCN: |CFFFF6666PVP|r 战场助手
+## Notes: Handy stuff Battlegrounds
+## Notes-zhCN: |CFFDD66DDBGAssist|r 显示旗手、资源预估、占领时间|N设置命令/bga
+## DefaultState: disabled
+## Author: Marc aka Saien on Hyjal, continued my Lokimur on Lothar (EU)
+## SavedVariables: BGAssist_Config
+## OptionalDeps: Ace2, AceLibrary, Babble-Zone-2.0, Deformat-2.0, AceEvent-2.0, AceConsole-2.0
+lib\AceLibrary\AceLibrary.lua
+lib\AceLocale-2.0\AceLocale-2.0.lua
+lib\Babble-Zone-2.0\Babble-Zone-2.0.lua
+lib\AceOO-2.0\AceOO-2.0.lua
+lib\AceEvent-2.0\AceEvent-2.0.lua
+lib\AceConsole-2.0\AceConsole-2.0.lua
+lib\Deformat-2.0\Deformat-2.0.lua
+lib\Glory-2.0\Glory-2.0.lua
+BGAssist.xml

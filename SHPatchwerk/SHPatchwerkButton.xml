@@ -1,0 +1,47 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+<Button name="SHPatchwerkActButton" inherits="UIPanelButtonTemplate2" text="SHPATCHWERK_TITLE" parent="UIParent" movable="true">
+	<Size>
+		<AbsDimension x="175" y="24"/>
+	</Size>
+	<Anchors>
+		<Anchor point="TOP">
+			<Offset>
+				<AbsDimension x="0" y="-385"/>
+			</Offset>
+		</Anchor>
+	</Anchors>
+	<Scripts>
+		<OnMouseDown>
+			if (arg1 == 'RightButton') then
+				this:StartMoving();
+			end
+		</OnMouseDown>
+		<OnMouseUp>
+			if (arg1 == 'RightButton') then
+				this:StopMovingOrSizing();
+			end
+		</OnMouseUp>
+		<OnLoad>
+			SHPatchwerk_Register();
+		</OnLoad>
+		<OnClick>
+			SHPatchwerk_Click(arg1);
+		</OnClick>
+		<OnEvent>
+			SHPatchwerk_OnEvent();
+		</OnEvent>
+		<OnEnter>
+			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+			GameTooltip:SetText(SHPATCHWERK_ACTBUTTONTT);
+			GameTooltip:Show();
+		</OnEnter>
+		<OnLeave>
+			GameTooltip:Hide();
+		</OnLeave>		
+	</Scripts>
+</Button>
+
+
+</Ui>

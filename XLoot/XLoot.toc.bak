@@ -1,0 +1,43 @@
+## Interface: 11200
+## Title: XLoot |cff7fff7f -Ace2-|r
+## Notes: A remake of the built-in lootframe. |cffff4488By Xuerian|r.
+## Notes-zhTW: 拾取物品增強
+## Version: 0.9
+## Author: Xuerian
+## X-Category: Inventory
+## X-AceForum: 2278
+## X-eMail: sky.shell@gmail.com
+## X-Website: http://wowace.com/index.php/XLoot
+## X-Credits: Arm of Aman Thul on Argent Dawn for testing, the authors of all the embeds XLoot uses, #wowace on Freenode.net for being my support group and helping fix bugs, fenlis for koKR translation, Cinedelle for frFR translation
+
+## OptionalDeps: Ace2, DewdropLib, Deformat, AnchorsAway
+## X-Embeds: Ace2, DewdropLib, Deformat, AnchorsAway
+## SavedVariables: XLootDB
+
+libs\AceLibrary\AceLibrary.lua
+libs\AceOO\AceOO-2.0.lua
+libs\AceEvent\AceEvent-2.0.lua
+libs\AceAddon\AceAddon-2.0.lua
+libs\AceHook\AceHook-2.1.lua
+libs\AceLocale\AceLocale-2.2.lua
+libs\AceDB\AceDB-2.0.lua
+libs\AceConsole\AceConsole-2.0.lua
+libs\AceModuleCore\AceModuleCore-2.0.lua
+libs\AnchorsAway\AnchorsAway-1.0.lua
+ 
+libs\Dewdrop\Dewdrop-2.0.lua
+libs\Deformat\Deformat-2.0.lua
+
+XLoot.lua
+XLootSkin.lua
+XLootOptions.lua
+
+XLootUtilities.lua
+XLootRowTools.lua
+
+localization.enUS.lua
+localization.koKR.lua
+localization.zhTW.lua
+localization.zhCN.lua
+localization.deDE.lua
+localization.frFR.lua

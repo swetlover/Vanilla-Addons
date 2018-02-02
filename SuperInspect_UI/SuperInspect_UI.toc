@@ -1,0 +1,17 @@
+## Interface: 11200
+## Title: SuperInspect_UI
+## Title-zhCN: |CFFCCFFFF界面|r 目标装备配置界面
+## Notes: This is the UI that is loaded when SuperInspect loads.
+## Notes-zhCN:|CFFDD66DDSuperInspect_UI|r 查看目标装备属性状态配置界面|N设置命令/superinspect
+## Author: Chester
+## Dependencies: SuperInspect
+## LoadOnDemand: 1
+..\..\FrameXML\Fonts.xml
+..\..\FrameXML\UIPanelTemplates.xml
+..\..\FrameXML\CharacterFrameTemplates.xml
+..\..\FrameXML\ItemButtonTemplate.xml
+..\..\FrameXML\HonorFrameTemplates.xml
+..\..\FrameXML\GameTooltipTemplate.xml
+..\..\FrameXML\MoneyFrame.xml
+
+SuperInspect_UI.xml

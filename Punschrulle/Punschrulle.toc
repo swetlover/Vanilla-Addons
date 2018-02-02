@@ -1,0 +1,19 @@
+## Interface: 11200
+## Title: Punschrulle
+## Title-zhCN: |CFFCCFFFF界面|r 施法条美化
+## Notes: Highly customizable castbar.
+## Notes-zhCN: |CFFDD66DDPunschrulle|r 高可定制性施法条美化，可以显示法术等级、瞄准射击等|N设置命令/punsch config
+## Author: Attero
+## Version: 1.0
+## Dependencies: 
+## SavedVariables: PunschrulleDB
+## SavedVariablesPerCharacter: PunschrulleProfile
+
+Punschrulle.lua
+media\media.lua
+core\Tables.lua
+core\Options.lua
+core\Entity.lua
+core\Bar.lua
+core\Castbar.lua
+core\Mirror.lua

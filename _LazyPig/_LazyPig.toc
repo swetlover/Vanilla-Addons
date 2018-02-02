@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: _LazyPig
+## Title-zhCN: |CFFCCCCFF辅助|r 懒猪自动系列
+## Notes-zhCN: |CFFDD66DD_LazyPig|r 拯救祝福自动取消，召唤自动接受，复活脱战接受，增强右键，自动下马，闲谈自动处理，自动卖垃圾，自动修理|N设置命令/lp
+## Version: 5.37
+## Notes: UI Enhancements
+## Author: Ogrisch and mrmr
+## SavedVariables: LPCONFIG, LPMULTIBOX
+
+LazyPig.xml

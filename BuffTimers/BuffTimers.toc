@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: BuffTimers
+## Title-zhCN: |CFFCCFFFF界面|r Buff时间显示
+## Notes: Adds mini buff timers under the top right buff icons.
+## Notes-zhCN: |CFFDD66DDBuffTimers|r 在你的BUFF下面精确显示剩余时间，并用颜色区分时间长短
+## X-Repple: 界面
+
+BuffTimers.xml
+

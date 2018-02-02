@@ -1,0 +1,13 @@
+## Interface: 11200
+## Title: BugGrabber
+## Title-zhCN: |CFFCCCCFF辅助|r 插件错误信息屏蔽
+## Notes-zhCN:|CFFDD66DD!BugGrabber|R 屏蔽插件出现的错误|N设置命令/buggrabber
+## X-Repple: 辅助
+## Title-koKR: |CFF99FF99B|CFFFFFFFFug|CFF99FF99G|CFFFFFFFFrabber
+## Version: 2.1.0
+## Notes:|CFFDD66DD!BugGrabber|R 收集你在进行游戏时插件出现的错误信息，让信息不会在屏幕中央显示干扰你。
+## Dependencies: !Libs
+## Author: Fritti, Rabbit
+## X-Credits: Rowne, Ramble, kergoth, ckknight
+## SavedVariables: BugGrabberDB
+BugGrabber.lua

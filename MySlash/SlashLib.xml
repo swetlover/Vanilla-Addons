@@ -1,0 +1,720 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	
+	<!-- ============================= TEMPLATES ============================ -->
+	<!-- ==================== BTN RADIO =================== -->
+	<CheckButton name="SlibRadBtnTemplate" virtual="true">
+		<Size><AbsDimension x="20" y="20"/></Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString inherits="GameFontNormalSmall" name="$parent_Txt" text="">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="1" b="1"/>
+				</FontString>
+			</Layer>
+		</Layers>
+		<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-RadioButton"> 
+			<TexCoords left="0" right="0.25" top="0" bottom="1"/> 
+		</NormalTexture>		
+		<DisabledTexture name="$parentDisabledTexture" file="Interface\Buttons\UI-RadioButton"> 
+			<TexCoords left="0" right="0.25" top="0" bottom="1"/> 
+		</DisabledTexture>		
+		<PushedTexture name="$parentPushedTexture" file="Interface\Buttons\UI-RadioButton"> 
+			<TexCoords left="0.25" right="0.5" top="0" bottom="1"/> 
+		</PushedTexture> 
+		<HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-RadioButton" alphaMode="ADD">
+			<TexCoords left="0.51" right="0.75" top="0" bottom="1"/> 
+		</HighlightTexture>
+		<CheckedTexture name="$parentCheckedTexture" file="Interface\Buttons\UI-RadioButton"> 
+			<TexCoords left="0.25" right="0.5" top="0" bottom="1"/> 
+		</CheckedTexture> 
+		<DisabledCheckedTexture name="$parentDisabledCheckedTexture" file="Interface\Buttons\UI-RadioButton"> 
+			<TexCoords left="0.25" right="0.5" top="0" bottom="1"/> 
+		</DisabledCheckedTexture>
+		<Scripts>
+			<OnClick>
+				slibUIEditAllumeRadios(string.sub(this:GetName(),-1,-1));
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+	
+	<!-- =================== FRAME LIGNE ================== -->
+	<Frame name="SlibLigneTemplate" virtual="true">
+		<Size><AbsDimension x="300" y="21"/></Size><!-- 21 = hauteur ligne -->
+		<!-- ========== BOUTON G =========== -->
+		<Frames>
+			<Frame name="SlibCadreBtn" inherits="OptionFrameBoxTemplate" alpha="0.5" virtual="true">
+				<Size><AbsDimension x="100" y="24"/></Size><!-- y = hauteur ligne -->
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset><AbsDimension x="-2" y="1"/></Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Button name="$parent_BtnTitre" enableMouse="true">
+				<Size><AbsDimension x="94" y="19"/></Size><!-- y = hauteur ligne -2 -->
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset><AbsDimension x="2" y="-2"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BORDER">
+						<FontString name="$parent_TxtTitre" inherits="GameFontNormalSmall" nonspacewrap="false" maxLines="0" justifyH="CENTER" justifyV="MIDDLE" bytes="16" text=""><!-- bytes : nbre de chars visibles -->
+							<Color r="0.9" g="0.9" b="0.4" a="1"/>
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+									<Offset><AbsDimension x="0" y="2"/></Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_Tex">
+							<Color r="0.8" g="0.8" b="0.8" a="0.1"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset><AbsDimension x="2" y="-2"/></Offset>
+								</Anchor>
+								<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+									<Offset><AbsDimension x="-4" y="4"/></Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						getglobal(this:GetName().."_Tex"):SetAlpha(1);
+					</OnEnter>
+					<OnLeave>
+						getglobal(this:GetName().."_Tex"):SetAlpha(0.1);
+					</OnLeave>
+					<OnShow>
+						getglobal(this:GetName().."_Tex"):SetAlpha(0.1);
+					</OnShow>
+					<OnClick>
+						slibUIDo(this:GetName());
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- ========== BOUTON D =========== -->
+			<Button name="$parent_BtnCmd" enableMouse="true">
+				<Size><AbsDimension x="204" y="16"/></Size><!-- y = hauteur ligne -5 -->
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset><AbsDimension x="97" y="-3"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_Tex" setAllPoints="true">
+							<Color r="0.3" g="0.3" b="0.3" a="0.4" />
+						</Texture>
+					</Layer>
+					<Layer level="BORDER">
+						<FontString name="$parent_TxtCmd" inherits="GameFontNormalSmall" nonspacewrap="false" maxLines="0" justifyH="LEFT" justifyV="MIDDLE" bytes="36" text=""><!-- bytes : nbre de chars visibles -->
+							<Color r="0.7" g="0.7" b="0.7" a="1"/>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="3" y="1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						getglobal(this:GetName().."_Tex"):SetAlpha(0.8);
+					</OnEnter>
+					<OnLeave>
+						getglobal(this:GetName().."_Tex"):SetAlpha(0.4);
+					</OnLeave>
+					<OnShow>
+						getglobal(this:GetName().."_Tex"):SetAlpha(0.4);
+						getglobal(this:GetName().."_Tex"):SetTexture(0.3,0.3,0.3,0.4);
+					</OnShow>
+					<OnClick>
+						--if (IsControlKeyDown()) then
+						--slibUIEditDelete(this:GetName());
+						--else
+						slibUIEdit(this:GetName());
+						--end;
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+	
+	<!-- ============================ BTN MINIMAP =========================== -->
+	<Button name="Slib_MinimapBtn" toplevel="true" frameStrata="LOW" parent="Minimap" enableMouse="true" movable="true" hidden="true">
+		<Size><AbsDimension x="33" y="33"/></Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset><AbsDimension x="-27" y="-33"/></Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="Slib_MinimapBtn_Icon" file="Interface\AddOns\MySlash\UiLogo">
+					<Size><AbsDimension x="21" y="21"/></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset><AbsDimension x="7" y="-6"/></Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.075" right="0.925" top="0.075" bottom="0.925"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Size><AbsDimension x="56" y="56"/></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+		<Scripts>
+			<OnLoad>
+				slibMinimapButton_OnLoad();
+			</OnLoad>
+			<OnEnter>
+				slibMinimapButton_OnEnter();
+			</OnEnter>
+			<OnMouseDown>
+         	slibMinimapButton_OnMouseDown();
+			</OnMouseDown>
+			<OnMouseUp>
+				slibMinimapButton_OnMouseUp();
+			</OnMouseUp>
+			<OnLeave>
+				slibMinimapButton_OnLeave();
+			</OnLeave>
+			<OnDragStart>
+				slibMinimapButton_DragStart();
+			</OnDragStart>
+			<OnDragStop>
+				slibMinimapButton_DragEnd();
+			</OnDragStop>
+			<OnUpdate>
+			   if (this.IsDragging) then slibMinimapButton_UpdateDragPosition(); end;
+			</OnUpdate>
+			<OnClick>
+				slibMinimapButton_OnClick();
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<!-- ========================= EVENT CATCHER + UI ======================= -->
+	
+	<Frame name="SlibFrame" toplevel="true" frameStrata="false" enableMouse="true" movable="true" hidden="true" parent="UIParent">
+		<Size><AbsDimension x="352" y="384"/></Size>
+		<Anchors>
+			<Anchor relativePoint="CENTER" point="CENTER">
+				<Offset><AbsDimension x="0" y="100"/></Offset><!-- decalage par rapport aux bords de l'ecran -->
+			</Anchor>
+		</Anchors>
+		
+		<!-- ==================== DECO ==================== -->
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="SlibFramePortrait" file="Interface\AddOns\MySlash\UiLogo">
+					<Size><AbsDimension x="60" y="60"/></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<offset><AbsDimension x="7" y="-6"/></offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture file="Interface\PaperDollInfoFrame\UI-Character-General-TopLeft">
+					<Size><AbsDimension x="256" y="256"/></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\PaperDollInfoFrame\UI-Character-General-TopRight">
+					<Size><AbsDimension x="128" y="256"/></Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset><AbsDimension x="32" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\PaperDollInfoFrame\SkillFrame-BotLeft">
+					<Size><AbsDimension x="256" y="222"/></Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset><AbsDimension x="0" y="-72"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\PaperDollInfoFrame\SkillFrame-BotRight">
+					<Size><AbsDimension x="128" y="222"/></Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset><AbsDimension x="32" y="-72"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="SlibTitre" inherits="GameFontNormal" text="SLIB_NOM">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset><AbsDimension x="24" y="-18"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<!-- =================== INFOS ==================== -->
+			<Layer level="OVERLAY">
+				<FontString name="InfosTxt" inherits="GameFontDisableSmall" nonspacewrap="false" maxLines="3" justifyH="LEFT" text="|CFFFF8000点击左边标签执行命令|n点击右边标签进行内容编辑|r">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="75" y="-40"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+			
+		<!-- =================== ASCENSEUR ================ -->
+		<Frames>
+			<ScrollFrame name="SlibFrameScroller" inherits="FauxScrollFrameTemplate" hidden="true">
+				<Size><AbsDimension x="310" y="291"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset><AbsDimension x="22" y="-75"/></Offset>
+					</Anchor>
+					<Anchor point="TOPRIGHT">
+						<Offset><AbsDimension x="-35" y="-75"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<!-- ======== LIGNES ======= -->
+					<Frame name="SlibFrameLine_1" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameScroller" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="-2" y="2"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_2" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_1" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset><!-- y = hauteur ligne -->
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_3" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_2" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset></Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_4" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_3" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_5" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_4" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_6" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_5" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_7" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_6" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_8" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_7" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_9" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_8" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_10" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_9" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_11" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_10" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_12" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_11" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_13" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_12" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+					<Frame name="SlibFrameLine_14" inherits="SlibLigneTemplate" enableMouse="true" hidden="false" parent="SlibFrameScroller">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SlibFrameLine_13" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-21"/></Offset>
+							</Anchor>
+						</Anchors>
+					</Frame>
+				</Frames>
+				<Scripts>
+					<OnVerticalScroll>
+						FauxScrollFrame_OnVerticalScroll(SLIBSCROLLHEIGHT,slibScrollerUpdate);
+					</OnVerticalScroll>
+				</Scripts>
+			</ScrollFrame>
+		
+			<!-- ================ BOUTONS DLOG ================ -->
+			<Button name="SlibBtnCloseX" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset><AbsDimension x="2" y="-8"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						slibUIClose();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SlibBtnClose" text="关闭" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="80" y="21"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset><AbsDimension x="-8" y="-3"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						slibUIClose();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SlibBtnNew" text="新建" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="80" y="21"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset><AbsDimension x="14" y="-3"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						slibUINew();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<CheckButton name="SlibCheckClose" inherits="OptionsCheckButtonTemplate">
+				<Size><AbsDimension x="23" y="23"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset><AbsDimension x="-55" y="-4"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("运行命令后关闭");
+					</OnLoad>
+					<OnShow>
+						this:SetChecked(SlashLibSaved["closeRun"]);
+					</OnShow>
+					<OnClick>
+						SlashLibSaved["closeRun"] = booleanToBin(this:GetChecked());
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<!-- ================== SCRIPTS==================== -->
+		<Scripts>
+			<!-- ========== EVENTS ========== -->
+			<OnLoad>
+				SlibFrame:SetClampedToScreen("true");
+				tinsert(UISpecialFrames,"SlibFrame");
+				this:RegisterEvent("VARIABLES_LOADED");
+ 				this:RegisterForDrag("LeftButton","RightButton");
+			</OnLoad>
+			<OnEvent>
+				if (event == "VARIABLES_LOADED") then
+					slibChargement();
+				end
+			</OnEvent>
+			<OnDragStart>
+				this:StartMoving();
+				this.isMoving = true;
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+				this.isMoving = false;
+			</OnDragStop>
+			<OnShow>
+				SlibTitre:SetText(SLIB_NOM.."   "..SLIB_VERS);
+			</OnShow>
+		</Scripts>
+	</Frame>
+		
+	<!-- ============================== UI EDIT ============================= -->
+	<Frame name="SlibEditFrame" toplevel="true" frameStrata="DIALOG" hidden="true" parent="SlibFrame">
+		<Size><AbsDimension x="348" y="176"/></Size>
+		<Anchors>
+			<Anchor point="TOP" relativeTo="$parent" relativePoint="BOTTOM">
+				<Offset><AbsDimension x="4" y="0"/></Offset>
+			</Anchor>
+		</Anchors>
+		<TitleRegion setAllPoints="true"/>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32"/>
+			</EdgeSize>
+		</Backdrop>
+		<!-- ================ CARTOUCHE TITRE =============== -->
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size><AbsDimension x="220" y="64"/></Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset><AbsDimension x="1" y="12"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="SlibEditTitleText" inherits="GameFontNormal" nonspacewrap="true" text="编辑">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentHeader">
+							<Offset><AbsDimension x="0" y="-13"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+
+		</Layers>
+		<!-- =============== EDITION : LIBELLES ============== -->
+		<Frames>
+			<Frame name="$parent_Fond" parent="SlibEditFrame" setAllPoints="true" alpha="1">
+				<Layers>
+					<Layer level="ARTWORK">
+						<!-- =========== NAME LIB ========= -->
+						<FontString name="SlibNameTitle" inherits="GameFontNormalSmall" justifyH="RIGHT" nonspacewrap="true" text="名称:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset><AbsDimension x="20" y="-31"/></Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="0.9" g="0.9" b="0.4" a="1"/>
+						</FontString>
+						<!-- ========== SCRIPT LIB ======== -->
+						<FontString name="SlibCmdTitle" inherits="GameFontNormalSmall" nonspacewrap="false" justifyH="RIGHT" maxLines="0" text="脚本:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="SlibNameTitle" relativePoint="TOPLEFT">
+									<Offset><AbsDimension x="0" y="-23"/></Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="0.9" g="0.9" b="0.4" a="1"/>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnShow>
+						SlibEditTitleText:SetText(SLIB_NOM.." Edit");
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<!-- ============== EDITION : EDIT BOXES ============= -->
+			<!-- =========== NAME DEF ========= -->
+			<EditBox name="SlibNameDef" inherits="InputBoxTemplate" letters="15" multiLine="false" historyLines="0" ignoreArrows="false" autoFocus="false">
+				<Size><AbsDimension x="110" y="32"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="SlibNameTitle">
+						<Offset><AbsDimension x="10" y="10"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEscapePressed>
+						this:ClearFocus();
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<!-- ======= BTN LISTE CMDS ======= -->
+			<Button name="SlibShowListBtn" text="显示所有命令" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="123" y="21"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SlibNameDef" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension x="15" y="-5"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						slibUIEditListShow();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- ============ CMD DEF ========= -->
+			<Frame name="SlibCadreEdit" inherits="OptionFrameBoxTemplate">
+				<Size><AbsDimension x="272" y="64"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SlibCmdTitle" relativePoint="TOPRIGHT">
+						<Offset><AbsDimension x="3" y="5"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.5,0.5,0.5);
+						this:SetBackdropColor(0,0,0,0.9);
+					</OnLoad>
+				</Scripts>
+				<Frames>
+					<ScrollFrame name="SlibCmdDefScrollBar" inherits="UIPanelScrollFrameTemplate" parent="SlibCadreEdit">
+						<Size><AbsDimension x="239" y="55"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="6" y="-5"/></Offset>
+							</Anchor>
+						</Anchors>
+						<ScrollChild>
+							<EditBox name="SlibCmdDef" multiLine="true" letters="10000" autoFocus="false">
+								<Size><AbsDimension x="239" y="55"/></Size>
+								<Scripts>
+									<OnTextChanged>
+										local scrollBar = getglobal(this:GetParent():GetName().."ScrollBar")
+										this:GetParent():UpdateScrollChildRect();
+										local min,max = scrollBar:GetMinMaxValues();
+										if (max > 0 and (this.max ~= max)) then
+											this.max = max;
+											scrollBar:SetValue(max);
+										end;
+									</OnTextChanged>
+									<OnEscapePressed>
+										this:ClearFocus();
+									</OnEscapePressed>
+								</Scripts>
+								<FontString inherits="GameFontHighlightSmall"/>
+							</EditBox>
+						</ScrollChild>
+					</ScrollFrame>
+				</Frames>
+			</Frame>
+			
+			<!-- ========== RADIO BTNS ======== -->
+			<CheckButton name="SlibRadBtn1" inherits="SlibRadBtnTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="BOTTOMLEFT" relativeTo="SlibCmdDefScrollBar">
+						<Offset><AbsDimension x="0" y="-15"/></Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="SlibRadBtn2" inherits="SlibRadBtnTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="SlibRadBtn1">
+						<Offset><AbsDimension x="75" y="0"/></Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="SlibRadBtn3" inherits="SlibRadBtnTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="SlibRadBtn2">
+						<Offset><AbsDimension x="55" y="0"/></Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			
+			<!-- ==================== BTNS DLOG ================== -->
+			<Button name="SlibDeleteBtn" text="删除" inherits="UIPanelButtonGrayTemplate">
+				<Size><AbsDimension x="80" y="25"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+						<Offset><AbsDimension x="20" y="15"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						slibUIEditDelete();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SlibSaveBtn" text="保存" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="80" y="25"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOM" relativeTo="$parent" relativePoint="BOTTOM">
+						<Offset><AbsDimension x="0" y="15"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						slibUIEditSave();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SlibCancelBtn" text="取消" inherits="UIPanelButtonTemplate">
+				<Size><AbsDimension x="80" y="25"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+						<Offset><AbsDimension x="-20" y="15"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						slibUIEditCancel();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		
+		<Scripts>
+			<OnLoad>
+				SlibEditFrame:SetClampedToScreen("true");
+				SlibRadBtn1_Txt:SetText("命令");
+				SlibRadBtn2_Txt:SetText("表情");
+				SlibRadBtn3_Txt:SetText("宏");
+			</OnLoad>
+		</Scripts>
+	
+	</Frame>
+</Ui>

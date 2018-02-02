@@ -1,0 +1,303 @@
+<Ui xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+	<Script file="Sell.lua"/> 
+  
+	<!-- Frame to handle all core events --> 
+	<Frame>
+		<Scripts> 
+		</Scripts> 
+	</Frame> 
+
+	<Button name="AuxSellEntryTemplate" virtual="true" hidden="true">
+		<Size><AbsDimension y="16" /></Size>		
+		<Frames>
+			<Frame>
+				<Size><AbsDimension x="120" y="16" /></Size>
+				<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="22" y="0"/></Offset></Anchor></Anchors>
+				<Frames>
+					<Frame name="$parent_UnitPrice" inherits="SmallMoneyFrameTemplate">
+						
+						<Anchors><Anchor point="RIGHT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						<Scripts>
+							<OnLoad>
+								SmallMoneyFrame_OnLoad()
+								MoneyFrame_SetType("STATIC")
+							</OnLoad>
+						</Scripts>
+					</Frame>
+				</Frames>
+			</Frame>
+			
+			<Frame>
+				<Size><AbsDimension x="100" y="16"/></Size>
+				<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="185" y="-3"/></Offset></Anchor></Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parent_Stacks" inherits="GameFontHighlightSmall">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<Frame>
+				<Size><AbsDimension x="100" y="16"/></Size>
+				<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="340" y="-3"/></Offset></Anchor></Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parent_Time" inherits="GameFontHighlightSmall">
+							<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<Frame>
+				<Size><AbsDimension x="120" y="16"/></Size>
+				<Anchors><Anchor point="LEFT"><Offset><AbsDimension x="440" y="0"/></Offset></Anchor></Anchors>
+				<Frames>
+					<Frame name="$parent_TotalPrice" inherits="SmallMoneyFrameTemplate">
+						<Anchors><Anchor point="RIGHT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						<Scripts>
+							<OnLoad>
+								SmallMoneyFrame_OnLoad()
+								MoneyFrame_SetType("STATIC")
+							</OnLoad>
+						</Scripts>
+					</Frame>
+				</Frames>
+			</Frame>
+		</Frames>
+
+		<HighlightTexture file="Interface\HelpFrame\HelpFrameButton-Highlight" alphaMode="ADD">
+			<TexCoords left="0" right="1.0" top="0.0" bottom="0.6"/>
+		</HighlightTexture>
+		<Scripts>
+			<OnClick>
+				AuxSellEntry_OnClick()
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Frame name="AuxSellTemplate" virtual="true" hidden="true">
+		<Size>
+			<AbsDimension x="694" y="447"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="210" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>	
+
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString inherits="GameFontNormal" text="Aux 拍卖">
+					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="20" y="-18"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString name="AuxMessage" inherits="GameFontNormal">
+					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="170" y="-100"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString name="AuxRecommendText" inherits="GameFontNormal" text="建议收购价格">
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="287" y="-98"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString name="AuxRecommendBasisText" inherits="GameFontHighlightSmall" text="基于">
+					<Anchors><Anchor point="LEFT" relativePoint="RIGHT" relativeTo="AuxRecommendText"><Offset><AbsDimension x="20" y="-2"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString name="AuxRecommendPerStackText" inherits="GameFontHighlightSmall" text="每组">
+					<Anchors><Anchor point="TOPLEFT" relativeTo="AuxRecommendText"><Offset><AbsDimension x="152" y="-28"/></Offset></Anchor></Anchors>
+				</FontString>
+				
+				<FontString name="AuxRecommendPerItemText" inherits="GameFontHighlightSmall" text="每个物品">
+					<Anchors><Anchor point="TOPLEFT" relativeTo="AuxRecommendText"><Offset><AbsDimension x="152" y="-51"/></Offset></Anchor></Anchors>
+				</FontString>
+				
+				<FontString name="AuxRecommendStaleText" inherits="GameFontRedLarge">
+					<Anchors><Anchor point="TOPLEFT" relativeTo="AuxRecommendText"><Offset><AbsDimension x="430" y="-65"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+					<Size><AbsDimension x="606" y="64"/></Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="216" y="-167"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1"/>
+				</Texture>
+
+				<FontString inherits="GameFontHighlightSmall" text="单价">
+					<Anchors><Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parentMiddle"><Offset><AbsDimension x="80" y="1"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString inherits="GameFontHighlightSmall" text="组叠">
+					<Anchors><Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parentMiddle"><Offset><AbsDimension x="189" y="1"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString inherits="GameFontHighlightSmall" text="剩余时间">
+					<Anchors><Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parentMiddle"><Offset><AbsDimension x="341" y="1"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString inherits="GameFontHighlightSmall" text="总价">
+					<Anchors><Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parentMiddle"><Offset><AbsDimension x="496" y="1"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>		
+			<Button>
+				<Size><AbsDimension x="612" y="118"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="213" y="-70"/></Offset></Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND"></Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						this:RegisterEvent("NEW_AUCTION_UPDATE")
+						this:RegisterForDrag("LeftButton")
+					</OnLoad>
+					<OnEvent>
+						if event == "NEW_AUCTION_UPDATE" then
+							Aux_Hilite1:Hide()
+						end
+					</OnEvent>
+					<OnClick>
+						ClickAuctionSellItemButton()
+						ClearCursor()
+						AuctionsFrameAuctions_ValidateAuction()
+					</OnClick>
+					<OnReceiveDrag>
+						ClickAuctionSellItemButton()
+						AuctionsFrameAuctions_ValidateAuction()
+					</OnReceiveDrag>
+					<OnEnter>
+						Aux_Hilite1:Show()
+					</OnEnter>
+					<OnLeave>
+						Aux_Hilite1:Hide()
+					</OnLeave>
+				</Scripts>
+				
+				<Frames>
+					<Frame name="Aux_Hilite1" hidden="true">
+						<Anchors>
+							<Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+							<Anchor point="BOTTOMRIGHT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+						</Anchors>
+
+						<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+							<EdgeSize>
+								<AbsValue val="16"/>
+							</EdgeSize>
+						</Backdrop>
+					</Frame>			
+				</Frames>		
+			</Button>
+
+			<Button name="AuxRecommendItemTex">
+				<Size><AbsDimension x="37" y="37"/></Size>
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="234" y="-87"/></Offset></Anchor></Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentCount" inherits="NumberFontNormal" justifyH="RIGHT" hidden="true">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-5" y="2"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Button>
+
+			<Frame>
+				<Size><AbsDimension x="120" y="20"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AuxRecommendText">
+						<Offset><AbsDimension x="32" y="-24"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="AuxRecommendPerStackPrice" inherits="SmallMoneyFrameTemplate">
+						<Size><AbsDimension x="120" y="16" /></Size>
+						<Anchors><Anchor point="RIGHT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						<Scripts><OnLoad>AuxMoneyFrame_OnLoad()</OnLoad></Scripts>
+					</Frame>
+				</Frames>
+			</Frame>
+
+			<Frame>
+				<Size><AbsDimension x="120" y="20"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AuxRecommendText">
+						<Offset><AbsDimension x="32" y="-46"/></Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="AuxRecommendPerItemPrice" inherits="SmallMoneyFrameTemplate">
+						<Size><AbsDimension x="120" y="16" /></Size>
+						<Anchors><Anchor point="RIGHT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+						<Scripts><OnLoad>AuxMoneyFrame_OnLoad()</OnLoad></Scripts>
+					</Frame>
+				</Frames>
+			</Frame>
+
+			<Button name="AuxSellRefreshButton" inherits="UIPanelButtonTemplate" text="刷新">
+				<Size><AbsDimension x="126" y="22"/></Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="51" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AuxSellRefreshButton_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<ScrollFrame name="AuxScrollFrame" inherits="FauxScrollFrameTemplate">
+				<Size><AbsDimension x="588" y="194"/></Size>
+				<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="210" y="-213"/></Offset></Anchor></Anchors>
+
+				<Scripts>
+					<OnVerticalScroll>
+						FauxScrollFrame_OnVerticalScroll(16, Aux_ScrollbarUpdate)
+					</OnVerticalScroll>
+					<OnShow>
+						<!--Aux_ScrollbarUpdate();-->
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>
+
+			<Button name="AuxSellEntry1" inherits="AuxSellEntryTemplate">
+			<Anchors><Anchor point="TOPLEFT" relativeTo="AuxScrollFrame" relativePoint="TOPLEFT"><Offset><AbsDimension x="8" y="0"/></Offset></Anchor></Anchors>
+			</Button>
+			<Button name="AuxSellEntry2"  inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry1"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry3"  inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry2"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry4"  inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry3"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry5"  inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry4"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry6"  inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry5"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry7"  inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry6"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry8"  inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry7"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry9"  inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry8"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry10" inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry9"  relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry11" inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry10" relativePoint="BOTTOMLEFT"/></Anchors></Button>
+			<Button name="AuxSellEntry12" inherits="AuxSellEntryTemplate"><Anchors><Anchor point="TOPLEFT" relativeTo="AuxSellEntry11" relativePoint="BOTTOMLEFT"/></Anchors></Button>   
+		</Frames>
+	</Frame>
+</Ui>

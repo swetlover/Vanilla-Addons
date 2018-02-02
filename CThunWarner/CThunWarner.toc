@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: C'Thun Warner - ViroUI
+## Version: 1.33.7
+## Notes: Provides information for C'Thun raids.
+## Title-zhCN: |CFF00FF00团队|r 克苏恩预警
+## Notes-zhCN:|CFFDD66DDC'Thun Warner|r 克苏恩距离监视器,以红/绿灯号显示队友距离是否过近并以音效警告,于第二阶段时显示位于胃中的队友名字|N设置命令/CTW
+## DefaultState: disabled
+## X-Repple: 团队
+## SavedVariablesPerCharacter: CThunWarnerStatus_Alarm, CThunWarnerStatus_Timer, CThunWarnerStatus_Locked, CThunWarnerStatus_PlaySound, CThunWarnerStatus_Scale, CThunWarnerStatus_ShowList, CThunWarnerStatus_SoundPhase2
+CThunWarner.xml

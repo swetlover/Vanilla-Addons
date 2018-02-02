@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: CombatSentryGizmo
+## Title-zhCN: |CFFFF6666PVP|r 敌对阵营追踪
+## Notes: |CFFDD66DDCombatSentryGizmo|R 
+## Notes-zhCN: |CFFDD66DDCombatSentryGizmo|r 当附近有敌人时自动显示出对方的名字、职业等信息 
+## DefaultState: disabled
+## Author: chester
+## SavedVariables: CSGiz
+## DefaultState: disabled
+CombatSentryGizmo.xml

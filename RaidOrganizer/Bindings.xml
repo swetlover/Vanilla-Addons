@@ -1,0 +1,5 @@
+<Bindings>
+    <Binding name="SHOWRaidOrganizer" header="RaidOrganizer">
+        RaidOrganizer:Dialog()
+    </Binding>
+</Bindings>

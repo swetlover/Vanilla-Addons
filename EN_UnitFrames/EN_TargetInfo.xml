@@ -1,0 +1,211 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="EN_TargetInfo.lua"/>
+	<Script file="EN_TargetInfoLocal.lua"/>
+<!-- Target Info -->
+	<Frame name="EUF_TargetInfo_General" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				EUF_TargetInfo_OnLoad()
+			</OnLoad>
+			<OnUpdate>
+				EUF_TargetInfo_Update();
+			</OnUpdate>
+			<OnEvent>
+				EUF_TargetInfo_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	<Frame parent="TargetFrame">
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="EUF_TargetInfo" inherits="GameTooltipTextSmall" text="">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="TargetFrame">
+							<Offset x="5" y="-7"/>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="0.75" b="0"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+	<Button name="EUF_TargetInfoTarget" parent="TargetFrame">
+		<Size>
+			<AbsDimension x="100" y="30"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset x="126" y="-83"/>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame>
+				<Size>
+					<AbsDimension x="80" y="28"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<AbsDimension x="0" y="0"/>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="EUF_TargetInfoTargetName" inherits="GameTooltipText" text="">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset x="0" y="0"/>
+								</Anchor>
+							</Anchors>
+							<Color r="1" g="0.75" b="0"/>
+							<Shadow>
+								<Offset>
+									<AbsDimension x="1" y="-1"/>
+								</Offset>
+								<Color r="0" g="0" b="0"/>
+							</Shadow>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnUpdate>
+						EUF_TargetInfoTarget_Update();
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+			<Frame name="EUF_TargetInfoTargetHPMPBar" hidden="true">
+				<Frames>
+					<StatusBar name="EUF_TargetInfoTargetHPBar" inherits="TextStatusBar">
+						<Size>
+							<AbsDimension x="60" y="5"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="EUF_TargetInfoTargetName">
+								<Offset>
+									<AbsDimension x="33" y="-2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<BarTexture file="Interface\TargetingFrame\UI-TargetingFrame-BarFill"/>
+						<BarColor r="0" g="1" b="0"/>
+					</StatusBar>
+					<StatusBar name="EUF_TargetInfoTargetMPBar" inherits="TextStatusBar">
+						<Size>
+							<AbsDimension x="60" y="5"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOP" relativeTo="EUF_TargetInfoTargetHPBar">
+								<Offset>
+									<AbsDimension x="0" y="-6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<BarTexture file="Interface\TargetingFrame\UI-TargetingFrame-BarFill"/>
+						<BarColor r="0" g="0" b="1"/>
+					</StatusBar>
+					<StatusBar name="EUF_TargetInfoTargetHPBkg" inherits="TextStatusBar">
+						<Size>
+							<AbsDimension x="60" y="5"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOP" relativeTo="EUF_TargetInfoTargetHPBar">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<BarTexture file="Interface\TargetingFrame\UI-TargetingFrame-BarFill"/>
+						<BarColor r="0" g="1" b="0" a="0.2"/>
+					</StatusBar>
+					<StatusBar name="EUF_TargetInfoTargetMPBkg" inherits="TextStatusBar">
+						<Size>
+							<AbsDimension x="60" y="5"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOP" relativeTo="EUF_TargetInfoTargetMPBar">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<BarTexture file="Interface\TargetingFrame\UI-TargetingFrame-BarFill"/>
+						<BarColor r="0" g="0" b="1" a="0.2"/>
+					</StatusBar>
+				<Frame>
+				<Layers>
+					<Layer>
+						<FontString name="EUF_TargetInfoTargetHPPercent" inherits="GameTooltipText" text="">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="EUF_TargetInfoTargetHPBar">
+									<Offset x="3" y="2"/>
+								</Anchor>
+							</Anchors>
+							<Color r="1" g="0.75" b="0"/>
+							<Shadow>
+								<Offset>
+									<AbsDimension x="1" y="-1"/>
+								</Offset>
+								<Color r="0" g="0" b="0"/>
+							</Shadow>
+						</FontString> 
+					</Layer>
+				</Layers>
+				</Frame>
+				</Frames>
+				<Scripts>
+					<OnUpdate>
+						EUF_TargetInfoTargetHPMP_Update();
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				TargetUnit("targettarget"); 
+			</OnClick>
+		</Scripts>
+	</Button>
+	<Frame name="EUF_TargetInfoShield" parent="TargetFrame">
+		<Size>
+			<AbsDimension x="100" y="30"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="EUF_TargetInfoTarget">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="EUF_TargetInfoShieldValue" inherits="GameTooltipText">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="0.75" b="0"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnUpdate>
+				EUF_TargetInfoShield_Update();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

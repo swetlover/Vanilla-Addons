@@ -1,0 +1,14 @@
+## Interface: 11200
+## Title: VF_WarriorAddon
+## Title-zhCN: |CFFFFFFCC职业|R |CFFC69B6D战士|R坦克技能报警
+## Author: Dilatazu (EmeraldDream @ www.emeralddream.com) Dilatazu@gmail.com
+## Version: 1.0
+## Notes: VF_WarriorAddon
+## Notes-zhCN:|CFFDD66DDVF_WarriorAddon|R 嘲讽，惩戒痛击，挑战怒吼 抵抗警报，盾墙，破釜沉舟 激活警报在聊天框自动通知
+## DefaultState: disabled
+## Dependencies: 
+## OptionalDeps: 
+## SavedVariablesPerCharacter: 
+## SavedVariables: 
+VF_WarriorAddon.xml
+VF_WarriorAddon.lua

@@ -1,0 +1,18 @@
+## Interface: 11200
+## Title: iLoot
+## Notes: iLoot tells you who looted a boss when in a raid.
+## Title-zhCN: |CFF00FF00团队|r 拾取报告
+## Notes-zhCN: |CFFDD66DDiLoot|r 通知你谁摸了BOSS尸体|N设置命令/iloot
+## DefaultState: disabled
+## Author: fixed by Xiaoshui
+## Version: 1.7
+## Dependencies:!Libs
+libs\AceLibrary\AceLibrary.lua
+libs\AceAddon\AceAddon-2.0.lua
+libs\AceEvent\AceEvent-2.0.lua
+libs\AceDB\AceDB-2.0.lua
+libs\AceDebug\AceDebug-2.0.lua
+libs\AceLocale\AceLocale-2.1.lua
+libs\AceConsole\AceConsole-2.0.lua
+
+iLoot.lua

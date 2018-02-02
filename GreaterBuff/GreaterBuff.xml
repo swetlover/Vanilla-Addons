@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd" xmlns="http://www.blizzard.com/wow/ui/">
+  <Script file="GreaterBuff.lua" />
+  <Script file="localization.en.lua" />
+  <Script file="localization.de.lua" />
+  <Script file="localization.fr.lua" />
+  <!-- Frame to handle all core events -->
+  <Frame name="GreaterBuff_Core" hidden="false">
+    <Scripts>
+      <OnLoad>
+				GreaterBuff_OnLoad();
+			</OnLoad>
+      <OnEvent>
+				GreaterBuff_OnEvent(event);
+			</OnEvent>
+      <OnUpdate>
+				GreaterBuff.OnUpdate(arg1)
+			</OnUpdate>
+    </Scripts>
+  </Frame>
+  <Frame name="GreaterBuffButtons" toplevel="true" frameStrata="LOW" parent="UIParent" enableMouse="true" movable="true" hidden="true">
+    <Size>
+      <AbsDimension x="125" y="236" />
+    </Size>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <TileSize>
+        <AbsValue val="32" />
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32" />
+      </EdgeSize>
+      <BackgroundInsets>
+        <AbsInset left="11" right="12" top="12" bottom="11" />
+      </BackgroundInsets>
+    </Backdrop>
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString name="$parent_Symbols" inherits="GameFontNormal" text="Symbols: ">
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="20" y="-210" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <!-- UIPanelCloseButton  -->
+      <Button name="$parent_Button3" inherits="UIPanelCloseButton">
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-4" y="-4" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Button>
+      <!-- UIPanelButtonTemplate is just the normal Button -->
+      <Button name="$parent_Config" inherits="UIPanelButtonTemplate" text="设置" id="1">
+        <Size>
+          <AbsDimension x="75" y="20" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <!-- UIPanelButtonTemplate is just the normal Button -->
+      <Button name="$parent_Priest" inherits="UIPanelButtonTemplate" text="Priest" id="3">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-52" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Druid" inherits="UIPanelButtonTemplate" text="Druid" id="4">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-74" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Mage" inherits="UIPanelButtonTemplate" text="Mage" id="5">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-96" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Warlock" inherits="UIPanelButtonTemplate" text="Warlock" id="6">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-118" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Hunter" inherits="UIPanelButtonTemplate" text="Hunter" id="7">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-140" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Paladin" inherits="UIPanelButtonTemplate" text="Paladin" id="2">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-30" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Rogue" inherits="UIPanelButtonTemplate" text="Rogue" id="8">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-162" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Warrior" inherits="UIPanelButtonTemplate" text="Warrior" id="9">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-184" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+    <Scripts>
+      <OnMouseUp>
+			      if (this.isMoving) then
+				this:StopMovingOrSizing();
+				this.isMoving = false;
+			      end
+		      </OnMouseUp>
+      <OnMouseDown>
+			      if ((( not this.isLocked ) or ( this.isLocked == 0 )) and (arg1 == "LeftButton")) then
+				this:StartMoving();
+				this.isMoving = true;
+			      end
+		      </OnMouseDown>
+      <OnHide>
+			      if (this.isMoving) then
+				this:StopMovingOrSizing();
+				this.isMoving = false;
+			      end
+		      </OnHide>
+    </Scripts>
+  </Frame>
+  <Frame name="GreaterBuff_Config" toplevel="true" frameStrata="DIALOG" enableMouse="true" movable="true" hidden="true">
+    <Size>
+      <AbsDimension x="125" y="172" />
+    </Size>
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <TileSize>
+        <AbsValue val="32" />
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32" />
+      </EdgeSize>
+      <BackgroundInsets>
+        <AbsInset left="11" right="12" top="12" bottom="11" />
+      </BackgroundInsets>
+    </Backdrop>
+    <Frames>
+      <!-- UIPanelCloseButton  -->
+      <Button name="$parent_Button3" inherits="UIPanelCloseButton">
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-4" y="-4" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Button>
+      <!-- UIPanelButtonTemplate is just the normal Button -->
+      <Button name="$parent_Done" inherits="UIPanelButtonTemplate" text="完成" id="11">
+        <Size>
+          <AbsDimension x="75" y="20" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <!-- UIPanelButtonTemplate is just the normal Button -->
+      <Button name="$parent_Might" inherits="UIPanelButtonTemplate" text="Might" id="12">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-30" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Wisdom" inherits="UIPanelButtonTemplate" text="Wisdom" id="13">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-52" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Light" inherits="UIPanelButtonTemplate" text="Light" id="14">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-74" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Salvation" inherits="UIPanelButtonTemplate" text="Salvation" id="15">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-96" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Kings" inherits="UIPanelButtonTemplate" text="Kings" id="16">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-118" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parent_Sanctuary" inherits="UIPanelButtonTemplate" text="Sanctuary" id="17">
+        <Size>
+          <AbsDimension x="100" y="22" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="13" y="-140" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnClick>GreaterBuff_OnClick(arg1)</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+    <Scripts>
+      <OnMouseUp>
+			      if (this.isMoving) then
+				this:StopMovingOrSizing();
+				this.isMoving = false;
+			      end
+		      </OnMouseUp>
+      <OnMouseDown>
+			      if ((( not this.isLocked ) or ( this.isLocked == 0 )) and (arg1 == "LeftButton")) then
+				this:StartMoving();
+				this.isMoving = true;
+			      end
+		      </OnMouseDown>
+      <OnHide>
+			      if (this.isMoving) then
+				this:StopMovingOrSizing();
+				this.isMoving = false;
+			      end
+		      </OnHide>
+    </Scripts>
+  </Frame>
+</Ui>

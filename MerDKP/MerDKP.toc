@@ -1,0 +1,13 @@
+﻿## Interface: 11200
+## Title: |cff8000FF[DKP] MerDKP for DKPER
+## Title-zhCN: |CFF00FF00团队|r DKP密语查询系统
+## Version: 2.3.0
+## Author: Mermaid
+## Notes:A game multiple DKP queries addons, a variety of data sources and powerful query functions, and supports data retention and export
+## Notes-zhCN: |CFFDD66DDMerDKP|r 一个游戏内多DKP查询的插件，多样化的数据来源和强大的查询功能，并且支持数据保存和导出|N查询命令mydkp|N设置命令/merdkp
+## DefaultState: disabled
+## X-Repple: 团队
+## SavedVariables: MerDKP_SavedVars
+MER.xml
+dkp_list.lua
+Mer_DKP.xml

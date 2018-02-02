@@ -1,0 +1,7 @@
+## Interface: 11200
+## Title: |cFF006699Optional -|r AutoInvite
+## Title-zhCN: |CFFCCCCFF辅助|r 密语自动邀请
+## Notes: Automatically sends a group invite to someone who whispers you using the prescribed string.
+## Notes-zhCN: |CFFDD66DDAutoInvite|r 自动邀请使用关键字密语你的玩家,另外该插件还能自动邀请指定列表中的玩家,在该插件的PriorityList文件中修改|N设置命令/ai
+## SavedVariables: AutoInviteOptions
+AutoInvite.xml

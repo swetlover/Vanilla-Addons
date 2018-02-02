@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="TOGGLE" header="CHATLOG">
+		ChatLog:Toggle()
+	</Binding>
+</Bindings>

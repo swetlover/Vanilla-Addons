@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: |cff33ffccShagu|cffffffffStance
+## Title-zhCN: |CFFFFFFCC职业|R |CFFC69B6D战士|R根据技能切姿态形态
+## Author: Eric (Shagu) Mauser, 2016
+## Notes: automatically switches to the required stance of your attacks.
+## Notes-zhCN:|CFFDD66DDShaguStance|R 根据技能切姿态形态，支持盗贼潜行、德鲁伊各种形态、暗牧形态
+## DefaultState: disabled
+## Version: 1.0
+ShaguStance.lua

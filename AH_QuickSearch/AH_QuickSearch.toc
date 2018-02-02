@@ -1,0 +1,8 @@
+## Interface: 11200
+## Title: AH QuickSearch
+## Title-zhCN: |CFFCCCCFF辅助|r AH快速搜索
+## Notes: Shift-clicking an item in chat, AH or bags when at AH puts the name of the item in the search field.
+## Notes-zhCN: |CFFDD66DDAH_QuickSearch|r Shift-左键 聊天框物品或者包裹里物品,直接在AH搜索栏快速搜索
+## Author: AnduinLothar
+## OptionalDeps: EngInventory, AllInOneInventory
+AH_QuickSearch.lua

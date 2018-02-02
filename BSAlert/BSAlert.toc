@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: BSAlert
+## Title-zhCN: |CFFFFFFCC职业|R |CFFC69B6D战士|R战斗怒吼警报
+## Author: Ollowain, adapted from ShaguCombat
+## Notes: Notifies you when BattleShout is not up
+## Notes-zhCN:|CFFDD66DDBSAlert|R 缺少战斗怒吼全屏白光警报
+## DefaultState: disabled
+## Version: 0.0.1
+BSAlert.lua
+BSAlert.xml

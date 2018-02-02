@@ -1,0 +1,17 @@
+﻿## Interface:11200
+## Title: EN_UnitFrames
+## Notes: EN_UnitFrames
+## Title-zhCN: |CFFCCFFFF界面|r 头像增强
+## Notes-zhCN: |CFFDD66DDEN_UnitFrames|r 显示目标的目标的目标，并显示破甲值等信息，小队头像显示队员职业等级 并显示生命值及法力值|N设置命令/euf
+## X-Repple: 界面
+## Author: Enigma @ http://luodan.com
+## SavedVariables: EUF_Options
+EN_UnitFrames.xml
+EN_Options.xml
+EN_HpMpXp.xml
+EN_Buff.xml
+EN_PartyInfo.xml
+EN_TargetInfo.xml
+EN_ToT.xml
+EN_ClassIcon.xml
+MobHealth.xml

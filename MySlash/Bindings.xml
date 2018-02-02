@@ -1,0 +1,13 @@
+<Bindings>
+	<Binding name="SLIBshow" runOnUp="false" header="SLASHLIB">
+		slibUIShow();
+	</Binding>
+	<Binding name="OPENIT" header="OPENIT_TITLE">UpdateAttributes();</Binding>
+  <Binding name="ShortLayout1" header="ShortLayoutHeader">
+   ShortLayout.Load()
+  </Binding>  
+  <Binding name="ShortLayout2">
+   ShortLayout.GetMouseFrame()
+  </Binding>  
+
+</Bindings>

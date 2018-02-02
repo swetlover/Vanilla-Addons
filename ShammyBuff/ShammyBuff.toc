@@ -1,0 +1,13 @@
+## Interface: 11200
+## Title: Shammy Buff
+## Title-zhCN: |CFFFFFFCC职业|R |CFF2359FF萨满|R自动Buff助手
+## Author: kneeki
+## Email: geekbocks@yahoo.com
+## Notes: Simplifies self buffing and cleansing. Alot of other options as well.
+## Notes-zhCN:|CFFDD66DDShammyBuff|R 萨满自动Buff,增强萨适用|N设置命令/sbuff
+## DefaultState: disabled
+## SavedVariables: SBVAR
+## OptionalDeps: Decursive
+localization.lua
+ShammyBuff.xml
+CheckAndCast.lua

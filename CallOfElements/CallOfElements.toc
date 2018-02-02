@@ -1,0 +1,16 @@
+## Interface: 11200
+## Title: Call Of Elements
+## Notes: The All-In-One Shaman Addon
+## Title-zhCN: |CFFFFFFCC职业|R |CFF2359FF萨满|R图腾助手
+## Notes-zhCN:|CFFDD66DDCall Of Elements|R CallOfElements，简称COE，萨满图腾助手。图腾计时器，图腾面板等功能|N设置命令/coe 
+## X-Repple: 职业
+## OptionalDeps:
+## Dependencies: Chronos
+## DefaultState: disabled
+## SavedVariables: COE_Saved
+## SavedVariablesPerCharacter: COE_SavedTotemSets, COE_CustomTotemSets, COE_DisplayedTotems, COE_TotemBars
+CallOfElements.xml
+COE_ConfigTemplates.xml
+COE_Config.xml
+COE_Totem.xml
+COE_Heal.xml

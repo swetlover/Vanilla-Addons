@@ -1,0 +1,8 @@
+﻿EUF_TEXT_TARGET = "目标 ";
+EUF_TEXT_BROKENSHIELD = "破甲 ";
+
+EUF_TEXT_LEVELTAG = "%s级";
+EUF_TEXT_ELITE = "精英";
+EUF_TEXT_WORLDBOSS =	"世界精英";
+EUF_TEXT_RARE = "稀有";
+EUF_TEXT_RAREELITE = "稀有精英";

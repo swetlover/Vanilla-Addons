@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: EnergyTicker
+## Title-zhCN: |CFFFFFFCC职业|R |CFFFFF468盗贼|R+|CFFFF7C0A德鲁伊|R能量恢复监视
+## Notes: |CFFDD66DDEnergyTicker|R 
+## Notes-zhCN:|CFFDD66DDEnergyTicker|R 盗贼或德鲁伊（豹形态）能量恢复监视
+## X-Repple: 盗贼 德鲁伊
+## Author: modernist，狗血编剧男
+## DefaultState: disabled
+energy.lua
+

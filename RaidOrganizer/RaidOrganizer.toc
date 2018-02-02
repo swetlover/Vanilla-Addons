@@ -1,0 +1,37 @@
+## Interface: 11200
+## Title: Raid Organizer
+## Notes: User friendly raid organizer
+## Title-zhCN: |CFF00FF00团队|r 团长任务分配助手
+## Notes-zhCN: |CFFDD66DDRaidOrganizer|r 方便团长进行治疗、坦克、打断、变羊、放逐等分配|N设置命令/ro
+## Author: Tylka (based on Progman work)
+## DefaultState: disabled
+## Version: 60addons
+## X-Category: Raid
+
+## OptionalDeps: Ace2 DewdropLib
+## X-Embeds: Ace2
+
+## SavedVariables: RaidOrganizerDB RaidOrganizerFubarDB RO_HybrideSpec
+## SavedVariablesPerCharacter: RaidOrganizerDBPerChar RO_RaiderTable RO_CurrentSet RO_syncTab
+
+Libs\AceLibrary\AceLibrary.lua
+Libs\AceOO-2.0\AceOO-2.0.lua
+Libs\AceDebug-2.0\AceDebug-2.0.lua
+Libs\AceAddon-2.0\AceAddon-2.0.lua
+Libs\AceDB-2.0\AceDB-2.0.lua
+Libs\AceConsole-2.0\AceConsole-2.0.lua
+Libs\AceModuleCore-2.0\AceModuleCore-2.0.lua
+Libs\AceEvent-2.0\AceEvent-2.0.lua
+Libs\AceLocale-2.1\AceLocale-2.1.lua
+Libs\ChatThrottleLib\ChatThrottleLib.lua
+Libs\Dewdrop\Dewdrop-2.0.lua
+Libs\FuBarPlugin-2.0\FuBarPlugin-2.0.lua
+Libs\Tablet-2.0\Tablet-2.0.lua
+
+RaidOrganizer-deDE.lua
+RaidOrganizer-enUS.lua
+RaidOrganizer-enGB.lua
+RaidOrganizer-frFR.lua
+RaidOrganizer.lua
+RaidOrganizer.xml
+Options.lua

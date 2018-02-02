@@ -1,0 +1,1590 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	
+	<CheckButton name="RaidOrganizer_TabTemplate" virtual="true" hidden="true">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\SpellBook\SpellBook-SkillLineTab">
+					<Size>
+						<AbsDimension x="64" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="-3" y="11"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				RaidOrganizer_Tab_OnClick(this:GetID());
+			</OnClick>
+			<OnEnter>
+				GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+				GameTooltip:SetText(this.tooltiptext);
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+		<NormalTexture/>
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+		<CheckedTexture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD"/>
+	</CheckButton>
+	
+    <!-- {{{ ButtonTemplate -->
+    <Button name="RaidOrganizerDialogButtonTemplate" parent="RaidOrganizerDialogEinteilung" virtual="true" movable="true">
+        <Size>
+            <AbsDimension x="98" y="13" />
+        </Size>
+        <Anchors>
+            <Anchor point="TOP"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentColor">
+                    <Color r="0.7" g="0.6" b="0.5" a="0"/>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString name="$parentLabel" inherits="GameFontNormal" text="NAME XY">
+                    <Size>
+                        <AbsDimension x="96" y="12"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                RaidOrganizer:RaiderOnLoad()
+            </OnLoad>
+            <OnClick>
+                RaidOrganizer:RaiderOnClick(arg1)
+            </OnClick>
+            <OnDragStart>
+                RaidOrganizer:RaiderOnDragStart()
+            </OnDragStart>
+            <OnDragStop>
+                RaidOrganizer:RaiderOnDragStop()
+            </OnDragStop>
+			<OnMouseWheel>
+                RaidOrganizer:RaiderOnMouseWheel(arg1)
+            </OnMouseWheel>
+        </Scripts>
+    </Button>
+    <!-- }}} -->
+    <!-- {{{ SlotTemplate -->
+    <Frame name="RaidOrganizerDialogSlotTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="98" y="13"/>
+        </Size>
+        <Anchors>
+            <Anchor point="TOP"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentColor">
+                    <Color r="0.1" g="0.1" b="0.1" />
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString name="$parentLabel" inherits="GameFontDarkGraySmall" text="EMPTY_LOCALE">
+                    <Size>
+                        <AbsDimension x="96" y="12"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+			<OnLoad>
+				RaidOrganizer:GroupSlot_OnLoad();
+			</OnLoad>
+			<OnClick>
+				RaidOrganizer:GroupSlot_OnClick(arg1)
+			</OnClick>
+            <OnMouseWheel>
+                RaidOrganizer:OnMouseWheel(arg1)
+            </OnMouseWheel>
+        </Scripts>
+    </Frame>
+    <!-- }}} -->
+    <!-- {{{ Obertemplate fuer die Gruppen -->
+    <Frame name="RaidOrganizerDialogGroupTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="100" y="178"/>
+        </Size>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture>
+                    <Color r="0.4" g="0.4" b="0.1" a="0.0"/>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Button name="$parentLabel" text="GROUP_LOCALE">
+                <ButtonText name="$parentText"/>
+                <NormalFont inherits="GameFontNormal"/>
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="15" />
+                        </Offset> 
+                    </Anchor>
+                </Anchors>
+                <Size>
+                    <AbsDimension x="98" y="15"/>
+                </Size>
+                <Scripts>
+                    <OnClick>
+                        RaidOrganizer:EditGroupLabel(this:GetParent())
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+    </Frame>
+    <!-- }}} -->
+    <!-- {{{ Template fuer pool, 20 slots  -->
+    <Frame name="RaidOrganizerDialogRaiderpoolTemplate" inherits="RaidOrganizerDialogGroupTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="98" y="313"/>
+        </Size>
+        <Frames>
+            <!-- Slots {{{ -->
+            <Button name="$parentSlot1" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot2" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot1" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot3" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot2" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot4" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot3" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot5" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot4" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot6" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot5" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot7" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot6" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot8" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot7" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot9" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot8" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot10" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot9" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot11" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot10" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot12" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot11" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot13" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot12" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot14" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot13" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot15" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot14" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot16" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot15" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot17" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot16" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot18" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot17" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot19" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot18" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot20" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot19" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot21" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot20" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot22" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot21" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot23" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot22" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot24" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot23" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot25" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot1" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot26" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot2" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot27" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot3" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot28" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot4" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot29" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot5" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot30" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot6" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot31" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot7" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot32" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot8" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot33" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot9" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot34" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot10" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot35" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot11" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot36" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot12" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot37" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot13" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot38" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot14" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot39" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot15" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot40" hidden="true" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot16" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+            <!-- }}} -->
+        </Frames>
+    </Frame>
+    <!-- }}} -->
+    <!-- {{{ Template fuer die MT-gruppen, 4 slots, muss reichen...  -->
+    <Frame name="RaidOrganizerDialogMainTargetTemplate" inherits="RaidOrganizerDialogGroupTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="100" y="131"/>
+        </Size>
+        <Frames>
+            <!-- {{{ Buttons -->
+            <Button name="$parentSlot1" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot2" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot1" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot3" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot2" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentSlot4" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot3" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot5" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot4" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot6" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot5" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot7" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot6" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot8" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot7" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot9" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot8" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot10" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot9" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot11" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot10" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot12" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot11" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot13" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot12" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot14" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot13" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot15" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot14" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot16" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot15" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot17" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot16" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot18" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot17" relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot19" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot1" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot20" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot2" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot21" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot3" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot22" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot4" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot23" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot5" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot24" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot6" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot25" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot7" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot26" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot8" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot27" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot9" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot28" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot10" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot29" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot11" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+			<Button name="$parentSlot30" inherits="RaidOrganizerDialogSlotTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentSlot12" relativePoint="TOPRIGHT" />
+                </Anchors>
+            </Button>
+            <!-- }}}-->
+        </Frames>
+    </Frame>
+	<Frame name="RaidOrganizerButtonsBar" 
+            hidden="true"
+            movable="true"
+            enableMouse="true"
+            frameStrata="MEDIUM"
+            clampedToScreen="true"
+            parent="UIParent">
+        <Size>
+            <AbsDimension x="288" y="40" />
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+        <Scripts>
+            <OnMouseDown>
+                this:StartMoving(); 
+            </OnMouseDown>
+            <OnMouseUp> 
+                this:StopMovingOrSizing();
+            </OnMouseUp>
+            <OnDragStop>
+                this:StopMovingOrSizing();
+            </OnDragStop>
+        </Scripts>
+		<Frames>
+			<Button name="$parentTab1" id="1">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())	
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+			<Button name="$parentTab2" id="2">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab1" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+			<Button name="$parentTab3" id="3">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab2" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+			<Button name="$parentTab4" id="4">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab3" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+			<Button name="$parentTab5" id="5">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab4" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+			<Button name="$parentTab6" id="6">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab5" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+			<Button name="$parentTab7" id="7">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab6" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+			<Button name="$parentTab8" id="8">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab7" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+			<Button name="$parentTab9" id="9">
+				<Size><AbsDimension x="30" y="30"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab8" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RaidOrganizer:TabButton_OnClick(this:GetID())
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						RaidOrganizer:WriteTooltipText(this:GetID())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"></HighlightTexture>
+			</Button>
+		</Frames>
+	</Frame>
+	
+    <!-- }}} -->
+    <!-- {{{ Maindialog -->
+    <Frame name="RaidOrganizerDialog" 
+            hidden="true"
+            movable="true"
+            enableMouse="true"
+            frameStrata="DIALOG"
+            clampedToScreen="true"
+            parent="UIParent">
+        <Size>
+            <AbsDimension x="480" y="600" />
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+                <TileSize>
+                        <AbsValue val="32"/>
+                </TileSize>
+                <EdgeSize>
+                        <AbsValue val="32"/>
+                </EdgeSize>
+                <BackgroundInsets>
+                        <AbsInset left="11" right="12" top="12" bottom="11"/>
+                </BackgroundInsets>
+        </Backdrop>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture name="$parentHeaderTexture" file="Interface\DialogFrame\UI-DialogBox-Header">
+	            <Size>
+		        <AbsDimension x="256" y="64"/>
+		    </Size>
+		    <Anchors>
+		        <Anchor point="TOP">
+			    <Offset>
+			        <AbsDimension x="0" y="12"/>
+			    </Offset>
+			</Anchor>
+		    </Anchors>
+		</Texture>
+                <FontString name="$parentHeaderText"
+                        inherits="GameFontNormal"
+                        text="Raid Organizer">
+		    <Anchors>
+			<Anchor point="TOP" relativeTo="$parentHeaderTexture">
+		            <Offset>
+			        <AbsDimension x="0" y="-14"/>
+			    </Offset>
+			</Anchor>
+                    </Anchors>
+		</FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                table.insert(UISpecialFrames,this:GetName());
+            </OnLoad>
+            <OnMouseDown>
+                this:StartMoving(); 
+            </OnMouseDown>
+            <OnMouseUp> 
+                this:StopMovingOrSizing();
+            </OnMouseUp>
+            <OnDragStop>
+                this:StopMovingOrSizing();
+            </OnDragStop>
+        </Scripts>
+        <Frames>
+            <Frame name="$parentEinteilung" inherits="OptionFrameBoxTemplate"> <!-- {{{ -->
+                <Size> 
+                    <AbsDimension x="460" y="450"/> 
+                </Size>
+                <Anchors> 
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="-30" />
+                        </Offset>
+                    </Anchor>
+                </Anchors> 
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="$parentRest" inherits="GameFontNormal" text="REST_LOCALE">
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT">
+                                    <Offset x="10" y="90"/>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <!-- {{{ Groups -->
+                    <Frame name="$parentRaiderpool" inherits="RaidOrganizerDialogRaiderpoolTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-22"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup1" inherits="RaidOrganizerDialogMainTargetTemplate" id="1">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentRaiderpool" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup2" inherits="RaidOrganizerDialogMainTargetTemplate" id="2">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHealGroup1" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup3" inherits="RaidOrganizerDialogMainTargetTemplate" id="3">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHealGroup2" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup4" inherits="RaidOrganizerDialogMainTargetTemplate" id="4">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHealGroup1" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-16"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup5" inherits="RaidOrganizerDialogMainTargetTemplate" id="5">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHealGroup4" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup6" inherits="RaidOrganizerDialogMainTargetTemplate" id="6">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHealGroup5" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup7" inherits="RaidOrganizerDialogMainTargetTemplate" id="7">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHealGroup4" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-16"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup8" inherits="RaidOrganizerDialogMainTargetTemplate" id="8">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHealGroup7" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <Frame name="$parentHealGroup9" inherits="RaidOrganizerDialogMainTargetTemplate" id="9">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentHealGroup8" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </Frame>
+                    <!-- }}} -->
+					<Frame name="$parentSets" inherits="OptionFrameBoxTemplate"> <!-- {{{ -->
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0" />
+                                </Offset>
+                            </Anchor>
+                            <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="70" />
+                                </Offset>
+                            </Anchor>
+                            <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+                                <Offset>
+                                    <AbsDimension x="-10" y="10" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Frames>
+                            <Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate">
+                                <Anchors>
+                                    <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+                                        <Offset>
+                                            <AbsDimension x="0" y="10" />
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                            </Frame>
+                            <Button name="$parentSave" inherits="UIPanelButtonTemplate" text="SAVE_LOCALE">
+                                <Size>
+                                    <AbsDimension x="70" y="24"/>
+                                </Size>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentDropDown" relativePoint="TOPRIGHT">
+                                        <Offset>
+                                            <AbsDimension x="5" y="0"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        RaidOrganizer:SetSave()
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+                            <Button name="$parentSaveAs" inherits="UIPanelButtonTemplate" text="SAVEAS_LOCALE">
+                                <Size>
+                                    <AbsDimension x="70" y="24"/>
+                                </Size>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentSave" relativePoint="TOPRIGHT">
+                                        <Offset>
+                                            <AbsDimension x="5" y="0"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        StaticPopup_Show("RaidOrganizer_SETSAVEAS")
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+                            <Button name="$parentDelete" inherits="UIPanelButtonTemplate" text="DELETE_LOCALE">
+                                <Size>
+                                    <AbsDimension x="70" y="24"/>
+                                </Size>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentSaveAs" relativePoint="TOPRIGHT">
+                                        <Offset>
+                                            <AbsDimension x="5" y="0"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        RaidOrganizer:SetDelete()
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+                        </Frames>
+                    </Frame> <!-- }}} -->
+                    <Frame name="$parentStats" inherits="OptionFrameBoxTemplate"> <!-- {{{ -->
+                        <Size>
+                            <AbsDimension x="150" y="140" />
+                        </Size>
+                        <Anchors>
+                            <Anchor point="BOTTOMRIGHT" relativeTo="$parentSets" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="-5" y="5"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentClass1" inherits="GameFontNormal" text="">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT">
+                                            <Offset>
+                                                <AbsDimension x="10" y="-10"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                                <FontString name="$parentClass2" inherits="GameFontNormal" text="">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" relativeTo="$parentClass1" relativePoint="TOPRIGHT">
+                                            <Offset>
+                                                <AbsDimension x="20" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                                <FontString name="$parentClass3" inherits="GameFontNormal" text="">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" relativeTo="$parentClass1" relativePoint="BOTTOMLEFT">
+                                            <Offset>
+                                                <AbsDimension x="0" y="-8"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+								<FontString name="$parentClass4" inherits="GameFontNormal" text="">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" relativeTo="$parentClass3" relativePoint="TOPRIGHT">
+                                            <Offset>
+                                                <AbsDimension x="20" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+								<FontString name="$parentClass5" inherits="GameFontNormal" text="">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" relativeTo="$parentClass3" relativePoint="BOTTOMLEFT">
+                                            <Offset>
+                                                <AbsDimension x="0" y="-8"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+								<FontString name="$parentClass6" inherits="GameFontNormal" text="">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" relativeTo="$parentClass5" relativePoint="TOPRIGHT">
+                                            <Offset>
+                                                <AbsDimension x="20" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+								<FontString name="$parentClass7" inherits="GameFontNormal" text="">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" relativeTo="$parentClass5" relativePoint="BOTTOMLEFT">
+                                            <Offset>
+                                                <AbsDimension x="0" y="-8"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+								<FontString name="$parentClass8" inherits="GameFontNormal" text="">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" relativeTo="$parentClass7" relativePoint="TOPRIGHT">
+                                            <Offset>
+                                                <AbsDimension x="20" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                    </Frame> <!-- }}} -->
+					<Frame name="$parentOptionen" inherits="OptionFrameBoxTemplate"> <!-- {{{ -->
+                        <Size>
+                            <AbsDimension x="130" y="100" />
+                        </Size>
+                        <Anchors>
+                            <Anchor point="BOTTOMRIGHT" relativeTo="$parentStats" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="-5" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Frames>
+                            <Button name="$parentAutofill" inherits="UIPanelButtonTemplate" text="AUTOFILL_LOCALE">
+                                <Size x="100" y="24"/>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT">
+                                        <Offset x="10" y="-10"/>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        RaidOrganizer:AutoFill()
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+							<CheckButton name="$parentMultipleArrangementCheckBox" inherits="UICheckButtonTemplate" text="MULT_ARR_LOCALE">
+                                <Size x="18" y="18"/>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentAutofill" relativePoint="BOTTOMLEFT">
+                                        <Offset x="0" y="-5"/>
+                                    </Anchor>
+                                </Anchors>
+								<Scripts>
+                                    <OnClick>
+										RaidOrganizer:MultipleArrangementCheckBox_OnClick()	
+                                    </OnClick>
+                                </Scripts>
+                            </CheckButton>
+							<CheckButton name="$parentDisplayGroupNb" inherits="UICheckButtonTemplate" text="DisplayGroup_LOCALE">
+                                <Size x="18" y="18"/>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativeTo="$parentMultipleArrangementCheckBox" relativePoint="BOTTOMLEFT">
+                                        <Offset x="0" y="-5"/>
+                                    </Anchor>
+                                </Anchors>
+								<Scripts>
+                                    <OnClick>
+										RaidOrganizer:DisplayGroupNbCheckBox_OnClick()	
+                                    </OnClick>
+                                </Scripts>
+                            </CheckButton>
+                        </Frames>
+                    </Frame> <!-- }}} -->
+					<CheckButton name="RaidOrganizer_Tab1" inherits="RaidOrganizer_TabTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-3" y="-50"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab2" inherits="RaidOrganizer_TabTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab1" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab3" inherits="RaidOrganizer_TabTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab2" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab4" inherits="RaidOrganizer_TabTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab3" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab5" inherits="RaidOrganizer_TabTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab4" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab6" inherits="RaidOrganizer_TabTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab5" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab7" inherits="RaidOrganizer_TabTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab6" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab8" inherits="RaidOrganizer_TabTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab7" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab9" inherits="RaidOrganizer_TabTemplate" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab8" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab10" inherits="RaidOrganizer_TabTemplate" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="RaidOrganizer_Tab9" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+					<CheckButton name="RaidOrganizer_Tab11" inherits="RaidOrganizer_TabTemplate" id="11">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativeTo="RaidOrganizer_Tab1" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="17"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+                    <EditBox name="$parentRestAction" letters="40" autoFocus="false">
+                        <Size>
+                            <AbsDimension x="100" y="32"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentRest" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                    <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                                            <Size>
+                                                    <AbsDimension x="100" y="32"/>
+                                            </Size>
+                                            <Anchors>
+                                                <Anchor point="LEFT">
+                                                    <Offset x="-5" y="0"/>
+                                                </Anchor>
+                                            </Anchors>
+                                    </Texture>
+                                    <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+                                            <Size>
+                                                    <AbsDimension x="100" y="32"/>
+                                            </Size>
+                                            <Anchors>
+                                                    <Anchor point="RIGHT"/>
+                                            </Anchors>
+                                    </Texture>
+                            </Layer>
+                        </Layers>
+                        <FontString inherits="ChatFontNormal"/>
+                        <Scripts>
+                            <OnTextChanged>
+                            </OnTextChanged>
+                            <OnEscapePressed>
+                                RaidOrganizer:Dialog()
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    
+                    <!-- {{{ Buttons reservieren, 20, denn mehr passt in Rest nicht rein -->
+                    <Button name="RaidOrganizerDialogButton1" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton2" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton3" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton4" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton5" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton6" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton7" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton8" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton9" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton10" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton11" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton12" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton13" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton14" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton15" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton16" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton17" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton18" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton19" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton20" inherits="RaidOrganizerDialogButtonTemplate"/>
+					<Button name="RaidOrganizerDialogButton21" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton22" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton23" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton24" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton25" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton26" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton27" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton28" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton29" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton30" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton31" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton32" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton33" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton34" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton35" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton36" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton37" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton38" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton39" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton40" inherits="RaidOrganizerDialogButtonTemplate"/>
+					<Button name="RaidOrganizerDialogButton41" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton42" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton43" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton44" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton45" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton46" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton47" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton48" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton49" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton50" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton51" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton52" inherits="RaidOrganizerDialogButtonTemplate"/>
+					<Button name="RaidOrganizerDialogButton53" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton54" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton55" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton56" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton57" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton58" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton59" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton60" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton61" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton62" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton63" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton64" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton65" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton66" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton67" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton68" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton69" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton70" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton71" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton72" inherits="RaidOrganizerDialogButtonTemplate"/>
+					<Button name="RaidOrganizerDialogButton73" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton74" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton75" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton76" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton77" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton78" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton79" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <Button name="RaidOrganizerDialogButton80" inherits="RaidOrganizerDialogButtonTemplate"/>
+                    <!-- }}} -->
+                </Frames>
+            </Frame> <!-- }}} -->
+            <Frame name="$parentBroadcast" inherits="OptionFrameBoxTemplate"> <!-- {{{ -->
+                <Size> 
+                    <AbsDimension x="460" y="75"/> 
+                </Size>
+                <Anchors> 
+                    <Anchor point="TOP" relativeTo="$parentEinteilung" relativePoint="BOTTOM">
+                        <Offset>
+                            <AbsDimension x="0" y="-10"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <Button name="$parentChannel" inherits="UIPanelButtonTemplate" text="CHANNEL_LOCALE">
+                        <Size>
+                            <AbsDimension x="100" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="10" y="-10"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>RaidOrganizer:BroadcastChan()</OnClick>
+                        </Scripts>
+                    </Button>
+                    <EditBox name="$parentChannelEditbox" letters="20" autoFocus="false">
+                        <Size>
+                            <AbsDimension x="150" y="32"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentChannel" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                    <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                                            <Size>
+                                                    <AbsDimension x="77" y="32"/>
+                                            </Size>
+                                            <Anchors>
+                                                <Anchor point="LEFT">
+                                                    <Offset x="-2" y="0"/>
+                                                </Anchor>
+                                            </Anchors>
+                                    </Texture>
+                                    <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+                                            <Size>
+                                                    <AbsDimension x="75" y="32"/>
+                                            </Size>
+                                            <Anchors>
+                                                    <Anchor point="RIGHT"/>
+                                            </Anchors>
+                                    </Texture>
+                            </Layer>
+                        </Layers>
+                        <FontString inherits="ChatFontNormal"/>
+                        <Scripts>
+                            <OnTextChanged>
+                                RaidOrganizer:Debug("OnTextChanged")
+                                RaidOrganizer:ChangeChan()
+                            </OnTextChanged>
+                            <OnEscapePressed>
+                                RaidOrganizer:Dialog()
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <Button name="$parentRaid" inherits="UIPanelButtonTemplate" text="RAID_LOCALE">
+                        <Size>
+                            <AbsDimension x="100" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentChannel" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-4" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>RaidOrganizer:BroadcastRaid()</OnClick>
+                        </Scripts>
+                    </Button>
+                    <CheckButton name="$parentWhisper" inherits="UICheckButtonTemplate" text="WHISPER_LOCALE">
+                        <Size>
+                            <AbsDimension x="30" y="30" />
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentRaid">
+                                <Offset x="10" y="0" />
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+					<Button name="$parentSync" inherits="UIPanelButtonTemplate" text="Sync_LOCALE">
+                        <Size>
+                            <AbsDimension x="100" y="36"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="$parentChannel" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="300" y="26" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+							RaidOrganizer:RaidOrganizer_SyncOnClick()
+							</OnClick>
+                        </Scripts>
+                    </Button>
+					<CheckButton name="$parentAutoSync" inherits="UICheckButtonTemplate" text="AutoSync_LOCALE">
+                        <Size>
+                            <AbsDimension x="20" y="20" />
+                        </Size>	
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentSync">
+                                <Offset x="0" y="0" />
+                            </Anchor>
+                        </Anchors>
+						<Scripts>
+							<OnClick>RaidOrganizer:AutoSync_OnClick()</OnClick>
+						</Scripts>
+                    </CheckButton>
+                </Frames>
+            </Frame> <!-- }}} -->
+            <!-- {{{ Buttons -->
+            <Button name="$parentClose" inherits="UIPanelButtonTemplate" text="CLOSE_LOCALE">
+                <Size> 
+                    <AbsDimension x="100" y="24"/> 
+                </Size>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="-15" y="15"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>RaidOrganizer:Dialog()</OnClick>
+                </Scripts>
+            </Button>
+			<Button name="$parentReset" inherits="UIPanelButtonTemplate" text="RESET_LOCALE">
+                <Size> 
+                    <AbsDimension x="100" y="24"/> 
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentClose" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-10" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>RaidOrganizer:ResetData()</OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parentResetTab" inherits="UIPanelButtonTemplate" text="RESET_LOCALE_TAB">
+                <Size> 
+                    <AbsDimension x="100" y="24"/> 
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentReset" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-10" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>RaidOrganizer:ResetTab()</OnClick>
+                </Scripts>
+            </Button>
+			<Button name="$parentAllRemain" inherits="UIPanelButtonTemplate" text="RESET_LOCALE_ALLREMAIN">
+                <Size> 
+                    <AbsDimension x="100" y="24"/> 
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentResetTab" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-10" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+						RaidOrganizer:SetAllRemain()
+					</OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+    </Frame>
+</Ui>

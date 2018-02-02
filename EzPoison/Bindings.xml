@@ -1,0 +1,11 @@
+<Bindings>
+	<Binding name="Auto-Apply Poisons" header="HEAD"> EzPoisonApply() </Binding>
+	<Binding name="show/hide the UI"> EzPoisonToggle() </Binding>
+	<Binding name="Set Profile 1"> EzPoisonProfile(1) </Binding>
+	<Binding name="Set Profile 2"> EzPoisonProfile(2) </Binding>
+	<Binding name="Set Profile 3"> EzPoisonProfile(3) </Binding>
+	<Binding name="Set Profile 4"> EzPoisonProfile(4) </Binding>
+	<Binding name="Set Profile 5"> EzPoisonProfile(5) </Binding>
+	<Binding name="Set Profile 6"> EzPoisonProfile(6) </Binding>
+	<Binding name="Set Profile 7"> EzPoisonProfile(7) </Binding>
+</Bindings>

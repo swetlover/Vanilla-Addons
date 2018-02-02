@@ -1,0 +1,71 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ 
+..\..\FrameXML\UI.xsd"> 
+<Frame name="ChatLogCopyFrame" toplevel="true" parent="UIParent" hidden="true">
+	<Size x="500" y="500" />
+	<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+		<EdgeSize>
+			<AbsValue val="16" />
+		</EdgeSize>
+		<TileSize>
+			<AbsValue val="16" />
+		</TileSize>
+		<BackgroundInsets>
+			<AbsInset left="5" right="5" top="5" bottom="5" />
+		</BackgroundInsets>
+	</Backdrop>
+	<Layers>
+		<Layer level="ARTWORK">
+			<Texture file="Interface\DialogFrame\UI-DialogBox-Header">
+				<Size>
+					<AbsDimension x="256" y="64" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="12" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Texture>
+			<FontString name="$parentTitleText" inherits="GameFontNormal">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-2" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</FontString>
+		</Layer>
+	</Layers>
+	<Frames>
+		<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate">
+			<Size x="425" y="425" />
+			<Anchors>
+				<Anchor point="TOP">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<ScrollChild name="$parentScrollChild">
+				<EditBox name="$parentEditBox" letters="50000" multiLine="true">
+					<Size>
+						<AbsDimension x="420" y="425"/>
+					</Size>
+					<FontString inherits="ChatFontNormal" />
+				</EditBox>
+			</ScrollChild>
+		</ScrollFrame>
+		<Button name="$parentButtonHide" inherits="OptionsButtonTemplate">
+			<Anchors>
+				<Anchor point="BOTTOM">
+					<Offset>
+						<AbsDimension x="0" y="15"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</Button>
+	</Frames>
+</Frame>
+</Ui>

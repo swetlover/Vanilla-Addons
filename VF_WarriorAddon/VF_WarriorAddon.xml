@@ -1,0 +1,17 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="VF_WarriorAddon.lua"/>
+	<Frame name="VF_WAFrame" parent="UIParent" hidden="false">
+		<Scripts>
+			<OnLoad>
+				VF_WA_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				VF_WA_OnEvent();
+			</OnEvent>
+			<OnUpdate>
+				VF_WA_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

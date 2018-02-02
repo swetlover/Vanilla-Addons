@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: SuperInspect
+## Title-zhCN: |CFFCCFFFF界面|r 目标装备
+## Version: 1.192.sm11b
+## Notes: SuperInspect
+## Notes-zhCN:|CFFDD66DDSuperInspect|r 查看目标装备属性状态|N设置命令/superinspect
+## Author: Chester, smurfy
+## Dependencies: SuperInspect_UI
+## SavedVariables: SI_Save
+
+SuperInspect.xml

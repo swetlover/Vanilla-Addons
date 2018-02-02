@@ -1,0 +1,17 @@
+## Interface: 11200
+## Author: Neronix
+## Title-zhCN: |CFFCCFFFF界面|r |cff7fff7f 详细显血|r暴雪
+## X-eMail: neronix@gmail.com
+## X-Category: Combat
+## X-Date: 2006-08-29
+## Version: 1.2
+## OptionalDeps: Ace2
+## Dependencies: MobHealth
+## Notes: Shows MobHealth3 data on the Blizzard target frame
+## Notes-zhCN: |CFFDD66DDMobHealth3_MH3_Blizzard|r 显示怪物血量<暴雪框架>|N设置命令/mh3
+## SavedVariables: MH3BlizzConfig
+Libs\AceLibrary\AceLibrary.lua
+Libs\AceOO-2.0\AceOO-2.0.lua
+Libs\AceEvent-2.0\AceEvent-2.0.lua
+Libs\AceAddon-2.0\AceAddon-2.0.lua
+MH3_Blizzard.lua

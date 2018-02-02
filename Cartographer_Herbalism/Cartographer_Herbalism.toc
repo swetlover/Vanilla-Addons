@@ -1,0 +1,21 @@
+## Interface: 11200
+## Title: Cartographer_Herbalism |cff7fff7f -Ace2-|r
+## Title-zhCN: |CFFCCFFFF界面|r 地图增强-|cff7fff7f草药学|r
+## Notes: Herbalism mapnotes for Cartographer (based on PinPoint by Ammo)
+## Notes-ruRU: Заметки на карте по травничеству для Cartographer (основан на PinPoint)
+## Notes-koKR: Cartographer용 약초채집 노트 플러그인 - PinPoint(제작자 Ammo) 기반
+## Notes-zhCN: |CFFDD66DDCartographer_Herbalism|r 草药标记|N/carto_import herbalism
+## Author: Chris "kergoth" Larson
+## Version: 1.0
+## X-Category: Map
+## X-eMail: clarson@kergoth.com
+## X-Cartographer-Prof: Herbalism
+## DefaultState: Enabled
+## LoadOnDemand: 1
+## OptionalDeps: Ace2, Babble-2.2
+## RequiredDeps: Cartographer
+## SavedVariables: Cartographer_HerbalismDB
+
+libs\Deformat-2.0\Deformat-2.0.lua
+
+addon.lua

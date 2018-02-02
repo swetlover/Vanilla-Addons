@@ -1,0 +1,17 @@
+## Interface: 11200
+## Title: Cartographer |r[|cffeda55fData|r]
+## Title-zhCN: |CFFCCFFFF界面|r 地图增强-[|cffeda55f数据依赖|r]
+## Notes: Cartographer_Herbalism, Cartographer_Mining and Cartographer_Treasure data updated daily
+## Notes-ruRU: Cartographer_Herbalism, Cartographer_Mining и Cartographer_Treasure данные обновляются ежедневно
+## Notes-zhCN: |CFFDD66DDCartographer_Data|r 草药、矿石、宝藏数据库
+## Author: Ominous
+## Version: 1.0
+## X-Category: Map
+## X-eMail: alastair@ominous.me.uk
+## OptionalDeps: Ace2, Cartographer_Notes
+## RequiredDeps: Cartographer
+
+core.lua
+Herbalism.lua
+Mining.lua
+Treasure.lua

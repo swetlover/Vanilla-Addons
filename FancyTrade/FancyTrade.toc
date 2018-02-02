@@ -1,0 +1,12 @@
+## Interface: 11200
+## Title: FancyTrade
+## Notes: Contains a lot of functions
+## Title-zhCN: |CFFCCCCFF辅助|r 交易快捷右键
+## Notes-zhCN:|CFFDD66DDFancyTrade|R 交易东西右键即可，不必拖动。
+## X-Repple: 辅助
+## Author: Anaron
+## Version: 1.0.0
+## Dependencies:
+
+
+FancyTrade.lua

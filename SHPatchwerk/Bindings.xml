@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="SHPATCHWERKCAST" description="cast spell" header="SHPATCHWERK">
+		SHPatchwerk_Click('LeftButton');
+	</Binding>
+</Bindings>

@@ -1,0 +1,55 @@
+## Interface: 11200
+## Author: Moonsorrow
+## Title: XRaidStatus |cff7fff7f -Ace2-|r
+## Notes: Status Information about the Raid Group
+## Title-zhCN: |CFF00FF00团队|R 团队状态检查
+## Notes-zhCN:|CFFDD66DDXRS|R 监视团队的HP、MP总量，各种BUFF的缺少情况（可以根据职业过滤）等，左键点击自动找人补单体BUFF|N设置命令/xrs
+## X-Repple: 团队
+## Notes-zhTW: 團隊狀態訊息插件
+## Version: 1.12.4
+## DefaultState: disabled
+## Dependencies: !Libs
+## X-Build: $Revision: 16865 $
+## X-ReleaseDate: "$Date: 2006-11-13 12:24:03 -0500 (Mon, 13 Nov 2006) $"
+## X-Category: Raid
+## X-eMail: moonsorrow@gmx.de
+## X-Website: http://www.for-the-horde.de
+## X-AceForum: 1757
+## X-Embeds: Ace2
+
+## SavedVariables: XRSDB
+## OptionalDeps: !Libs, Ace2, BabbleLib, CompostLib, CrayonLib, DewdropLib, GratuityLib, SpecialEventsEmbed, TabletLib, oRA2, CT_RaidAssist, SurfaceLib
+
+libs\AceLibrary\AceLibrary.lua
+libs\AceOO\AceOO-2.0.lua
+libs\AceEvent\AceEvent-2.0.lua
+libs\AceDB\AceDB-2.0.lua
+libs\AceConsole\AceConsole-2.0.lua
+libs\AceAddon\AceAddon-2.0.lua
+libs\AceLocale\AceLocale-2.2.lua
+libs\AceDebug\AceDebug-2.0.lua
+
+libs\Dewdrop\Dewdrop-2.0.lua
+libs\Babble-Class\Babble-Class-2.2.lua
+libs\Babble-Spell\Babble-Spell-2.2.lua
+libs\Tablet\Tablet-2.0.lua
+libs\Compost\Compost-2.0.lua
+libs\Gratuity\Gratuity-2.0.lua
+libs\SpecialEvents-Aura\SpecialEvents-Aura-2.0.lua
+libs\Crayon\Crayon-2.0.lua
+libs\RosterLib\RosterLib-2.0.lua
+libs\Surface\Surface-1.0.lua
+
+localizations\enUS.lua
+localizations\deDE.lua
+localizations\koKR.lua
+localizations\zhCN.lua
+localizations\zhTW.lua
+localizations\frFR.lua
+
+XRS_Defaults.lua
+XRS.lua
+
+XRS_BarClass.lua
+XRS_TooltipClasses.lua
+XRS_BuffClass.lua

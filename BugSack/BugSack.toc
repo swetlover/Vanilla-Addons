@@ -1,0 +1,40 @@
+## Interface: 11200
+## Title: BugSack |cff7fff7f -Ace2-|r
+## Title-koKR: |CFF99FF99B|CFFFFFFFFug|CFF99FF99S|CFFFFFFFFack  |cff7fff7f -Ace2-|r
+## Version: 2.1.0
+## Notes: Toss those bugs inna sack.
+## Title-zhCN: |CFFCCCCFF辅助|r 插件错误信息收集
+## Notes-zhCN:|CFFDD66DDBugSack|R 收集插件出现的错误|N设置命令/bs
+## X-Repple: 辅助
+## Dependencies: !Libs
+## Author: Fritti, Rabbit
+## X-Credits: Rowne, Ramble, kergoth, ckknight, Gamefaq, thomasmo, damjau
+## SavedVariables: BugSackDB
+## RequiredDeps: !BugGrabber
+## OptionalDeps: FuBar, Ace2, DewdropLib, FuBarPlugin-2.0, TabletLib
+## X-Embeds: !Libs, Ace2, DewdropLib, FuBarPlugin-2.0, TabletLib
+## X-Category: Development Tools
+## X-RelSite-WoWI: 5995
+## X-AceForum: 1769
+## X-License: CC-BY-NC-SA-2.5
+
+libs\AceLibrary\AceLibrary.lua
+libs\AceOO\AceOO-2.0.lua
+libs\AceEvent\AceEvent-2.0.lua
+libs\AceDB\AceDB-2.0.lua
+libs\AceConsole\AceConsole-2.0.lua
+libs\AceAddon\AceAddon-2.0.lua
+libs\AceLocale\AceLocale-2.2.lua
+
+BugSack.xml
+BugSack-enUS.lua
+BugSack-zhCN.lua
+BugSack-deDE.lua
+BugSack-koKR.lua
+BugSack.lua
+
+libs\Dewdrop\Dewdrop-2.0.lua
+libs\Tablet\Tablet-2.0.lua
+libs\FuBarPlugin\FuBarPlugin-2.0.lua
+BugSackFu.lua
+

@@ -1,0 +1,16 @@
+# Do not delete the following line!
+## Interface: 11200
+## Title: SuperMacro
+## Title-zhCN: |CFFCCCCFF辅助|r 超级宏
+## Notes: Unlimited 'Super' macros hold up to 7000 letters. Run macros with keybindings and through other macros and from events. In-game code extender editor. Item link into macros. Tooltips over macros on actionbars. Convenient slash commands and functions.
+## Notes-ruRU: Неограниченные макросы «Супер» могут содержать до 7000 букв. Запуск макросов с привязками клавиш, событиями и другими макросы. Расширеный редактор кода игры. Ссылка на предмет в макрос. Всплывающие подсказки над макросами в области действий. Удобные команды и функции.
+## Notes-zhCN: |CFFDD66DDSuperMacro|r  让你突破暴雪默认宏字符数255的限制并支持延迟宏等|N设置命令/SuperMacro
+## DefaultState: abled
+## First created: Mar 2005
+## OptionalDeps: 
+## SavedVariables: SM_VARS SM_EXTEND SM_ACTION_SUPER SM_SUPER
+##..\..\FrameXML\Fonts.xml
+##..\..\FrameXML\UIPanelTemplates.xml
+##..\..\FrameXML\ClassTrainerFrameTemplates.xml
+SuperMacro.xml
+SuperMacroOptions.xml

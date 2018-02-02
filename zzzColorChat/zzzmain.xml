@@ -1,0 +1,10 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+  <Script file="zzzmain.lua" />
+  <Frame name="zzzmain" parent="UIParent" toplevel="true" hidden="true">
+    <Scripts>
+      <OnLoad>
+        zzzmain_OnLoad();
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>

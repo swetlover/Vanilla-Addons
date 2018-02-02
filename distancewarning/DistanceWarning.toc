@@ -1,0 +1,10 @@
+﻿## Interface:11200
+## Title:DistanceWarning 
+## Title-zhCN: |CFFCCFFFF界面|r 战斗距离提示
+## Notes:Shows the distance between you and the target.
+## Notes-zhCN: |CFFDD66DDDistanceWarning|r 全职业通用距离显示插件|N设置命令/dw
+## Author:卡特铁角
+## SavedVariables:DISTANCEWARNING_SAVE
+## OptionalDeps:
+## Dependencies:
+DistanceWarning.xml
