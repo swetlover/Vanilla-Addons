@@ -73,8 +73,8 @@ function MobHealth3:OnInitialize()
 		type = "group",
 		args = {
 			save = {
-				name = "Save Data",
-				desc = "Save data across sessions. This is optional, and |cff00ff00not really needed|r. A cache is always kept that has data for every enemy you fought this session. Remember, recalculating an enemy's health is |cff00ff00TRIVIAL|r",
+				name = "保存数据",
+				desc = "保存游戏数据.这是可选选项, |cff00ff00非必须|r. 始终保存着每个战斗数据缓存. 记住, 会重新计算敌人血量 |cff00ff00非常琐碎|r",
 				type = "toggle",
 				get = function() return not not MobHealth3DB end, -- "Double negatives for the not lose!" -Wobin
 				set = function(val)
@@ -88,8 +88,8 @@ function MobHealth3:OnInitialize()
 				end,
 			},
 			precision = {
-				name = "Estimation Precision",
-				desc = "Adjust how accurate you want MobHealth3 to be (A number 2-99). This is how many percent a mob's health needs to to change before we will trust the estimated maximum health and display it. The lower this value is, the quicker you'll see a value and the less accurate it will be. Raiding players may want to turn this down a bit. If you don't care about accuracy and want info ASAP, set this to 1.",
+				name = "估算精确度",
+				desc = "你想要mob3如何精确的调整 (取2-99一个数值). 这是一个怪物的血量需要改变多少百分比，然后我们将相信估计的最大血量和显示它. 这个值越低, 你越快看到一个值，它就越不准确. 团队中的玩家可能想把这个变小一点. 如果你不关心准确性和需要信息, 就把他设成 1.",
 				type = "range",
                 step = 1,
 				min = 1,
@@ -98,15 +98,15 @@ function MobHealth3:OnInitialize()
 				set = function(val) MobHealth3Config.precision = tonumber(val) end,
 			},
             stablemax = {
-                name = "Stable Max",
-                desc = "When turned on, the max HP only updates once your target changes. If data for the target is unknown, MH3 will update once during the battle when the precision percentage is reached",
+                name = "最大稳定",
+                desc = "如果开启, 最大血量改变只更新目标一次. 如果目标的数据未知, MH3 将在战斗中更新一次，达到精确百分比。",
                 type = "toggle",
                 get = function() return MobHealth3Config.stableMax end,
                 set = function(val) MobHealth3Config.stableMax = val end,
             },
             reset = {
-                name = "Reset Cache/DB",
-                desc = "Reset the session cache and the DB if you have saving turned on",
+                name = "重置数据",
+                desc = "如果打开，会重置数据库",
                 type = "execute",
                 func = function()
                     MH3Cache = {}
@@ -132,7 +132,7 @@ function MobHealth3:OnInitialize()
                 MH3Cache[k] = maxHP
             end
         end
-        self:Print("Old MobHealth/MobHealth2/MobInfo2 database detected and converted. MH3 has also automatically turned on saving for you to preserve the data")
+        self:Print("老的 MobHealth/MobHealth2/MobInfo2 数据库删除和转换. MH3 自动打开保存为您保存的数据")
     end
 
     MobHealthDB = { thisIsADummyTable = true }
@@ -172,7 +172,7 @@ function MobHealth3:PLAYER_TARGET_CHANGED()
 	-- We ignore pets. There's simply far too many pets that share names with players so we let players take priority
 
 	local creatureType = UnitCreatureType("target") -- Saves us from calling it twice
-	if UnitCanAttack("player", "target") and not UnitIsDead("target") and not UnitIsFriend("player", "target") and not ( (creatureType == "Beast" or creatureType == "Demon") and UnitPlayerControlled("target") ) then
+	if UnitCanAttack("player", "target") and not UnitIsDead("target") and not UnitIsFriend("player", "target") and not ( (creatureType == "野兽" or creatureType == "恶魔") and UnitPlayerControlled("target") ) then
 
 		targetName = UnitName("target")
 		targetLevel = UnitLevel("target")
@@ -366,7 +366,7 @@ function MobHealth3:GetUnitHealth(unit, current, max, name, level)
         -- Beast Lore check (Does UnitHealthMax give us the real value?)
 
 	local creatureType = UnitCreatureType(unit) -- Saves us from calling it twice
-	if max == 100 and not ( (creatureType == "Beast" or creatureType == "Demon") and UnitPlayerControlled(unit) ) then 
+	if max == 100 and not ( (creatureType == "野兽" or creatureType == "恶魔") and UnitPlayerControlled(unit) ) then 
 		local maxHP = MH3Cache[string.format("%s:%d", name, level)]
 
 		if maxHP then return math.floor(current/100 * maxHP + 0.5), maxHP, true; end

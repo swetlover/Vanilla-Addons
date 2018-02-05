@@ -1,5 +1,6 @@
 ## Interface: 11200
 ## Author: Neronix
+## Title: MobHealth3
 ## Title-zhCN: |CFFCCFFFF界面|r 详细显血
 ## X-eMail: neronix@gmail.com
 ## X-Category: Combat
@@ -16,3 +17,4 @@ Libs\AceAddon-2.0\AceAddon-2.0.lua
 Libs\AceConsole-2.0\AceConsole-2.0.lua
 Libs\AceDebug-2.0\AceDebug-2.0.lua
 MobHealth3.lua
+## Q-CAT-Version: 000300

@@ -54,8 +54,8 @@ function MH3Blizz:OnInitialize()
         type = "group",
 		args = {
 			abshealth = {
-				name = "Show absolute health",
-				desc = "Toggles showing absolute health on the target frame",
+				name = "显示绝对血量",
+				desc = "在目标框架显示绝对健康",
 				type = "toggle",
 				get = function() return MH3BlizzConfig.healthAbs end,
 				set = function(val)
@@ -64,8 +64,8 @@ function MH3Blizz:OnInitialize()
                 end,
 			},
 			perchealth = {
-				name = "Show health percentage",
-				desc = "Toggles showing percentage health on the target frame",
+				name = "显示血量百分比",
+				desc = "在目标框架上显示健康百分比",
 				type = "toggle",
 				get = function() return MH3BlizzConfig.healthPerc end,
 				set = function(val)
@@ -74,8 +74,8 @@ function MH3Blizz:OnInitialize()
                 end,
 			},
 			abspower = {
-				name = "Show absolute power",
-				desc = "Toggles showing absolute mana/energy/rage on the target frame",
+				name = "显示绝对能量",
+				desc = "在目标框上显示绝对的法力/能量/怒气",
 				type = "toggle",
 				get = function() return MH3BlizzConfig.powerAbs end,
 				set = function(val)
@@ -84,8 +84,8 @@ function MH3Blizz:OnInitialize()
                 end,
 			},
 			percpower = {
-				name = "Show power percentage",
-				desc = "Toggles showing percentage mana/energy/rage on the target frame",
+				name = "显示百分比能量",
+				desc = "在目标框上显示百分比的法力/能量/怒气",
 				type = "toggle",
 				get = function() return MH3BlizzConfig.powerPerc end,
 				set = function(val)
@@ -94,8 +94,8 @@ function MH3Blizz:OnInitialize()
                 end,
 			},
 			healthx = {
-				name = "Health X offset",
-				desc = "Adjusts the X offset of the health text",
+				name = "血量 X 偏移",
+				desc = "调整 X 血量文本偏移",
 				type = "text",
 				usage = "<number>",
 				get = function() return MH3BlizzConfig.healthX end,
@@ -105,8 +105,8 @@ function MH3Blizz:OnInitialize()
                 end,
 			},
 			healthy = {
-				name = "Health Y offset",
-				desc = "Adjusts the Y offset of the health text",
+				name = "血量 Y 偏移",
+				desc = "调整 Y 血量文本偏移",
 				type = "text",
 				usage = "<number>",
 				get = function() return MH3BlizzConfig.healthY end,
@@ -116,8 +116,8 @@ function MH3Blizz:OnInitialize()
                 end,
 			},
 			powerx = {
-				name = "Power X offset",
-				desc = "Adjusts the X offset of the power text",
+				name = "能量 X 偏移",
+				desc = "调整 X 能量文本偏移",
 				type = "text",
 				usage = "<number>",
 				get = function() return MH3BlizzConfig.powerX end,
@@ -127,8 +127,8 @@ function MH3Blizz:OnInitialize()
                 end,
 			},
 			powery = {
-				name = "Power Y offset",
-				desc = "Adjusts the Y offset of the power text",
+				name = "能量 Y 偏移",
+				desc = "调整 X 能量文本偏移",
 				type = "text",
 				usage = "<number>",
 				get = function() return MH3BlizzConfig.powerY end,

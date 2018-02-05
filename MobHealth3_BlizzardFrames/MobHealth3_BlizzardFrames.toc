@@ -1,5 +1,6 @@
 ## Interface: 11200
 ## Author: Neronix
+## Title: MobHealth3
 ## Title-zhCN: |CFFCCFFFF界面|r |cff7fff7f 详细显血|r暴雪
 ## X-eMail: neronix@gmail.com
 ## X-Category: Combat
