@@ -6,6 +6,7 @@
 2018年2月5日
 1. 移除了`AH_QuickSearch`、`FancyAH`、`FancyTrade`，因为`_LazyPig`已有这3个功能。  
 2. 更新了`MobHealth`、`MobHealth3_BlizzardFrames`插件。
+3. 德鲁伊、暗牧自动解除形态需要，增加了`Automaton`插件，同时移除了`AutoAttack`插件。
 ***
 2018年2月2日
 1. 上传了目前正在使用的插件。
