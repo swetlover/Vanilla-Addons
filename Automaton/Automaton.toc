@@ -1,0 +1,47 @@
+﻿## Interface: 11200
+## Title: |CFFFF8000辅助|R Automaton
+## Title-zhCN: |CFFCCCCFF辅助|r 自动系列插件
+## Notes-zhCN: |CFFDD66DDAutomaton|r 包括：自动接受工会和好友的组队邀请、自动显示敌对目标血槽、自动在战场中释放灵魂、自动接受复活等。
+## Notes-esES: Reduce el tedio de la interfaz haciendo pequenyas cosas por ti
+## Version: 1.3.0
+## Author: weab
+## X-Repple: 辅助
+
+## X-Category: Interface Enhancements
+## X-Credits: gxam (co-author), sayclub (koKR translations)
+## X-Embeds: Ace2, AbacusLib, DewdropLib, FuBarPlugin-2.0, GratuityLib, Waterfall-1.0
+## X-RelSite-WoWI: 5610
+## X-AceForum: 2887
+
+## OptionalDeps: Ace2, AbacusLib, DewdropLib, FuBarPlugin-2.0, GratuityLib, Waterfall-1.0
+## SavedVariables: AutomatonDB
+Core.lua
+
+modules\Dismount.lua
+modules\Filter.lua
+modules\Gossip\Locale-enUS.lua
+modules\Gossip\Locale-deDE.lua
+modules\Gossip\Locale-frFR.lua
+modules\Gossip\Locale-koKR.lua
+modules\Gossip\Locale-esES.lua
+modules\Gossip\Locale-zhCN.lua
+modules\Gossip\Locale-zhTW.lua
+modules\Gossip\Gossip.lua
+modules\Gossip\GossipData.lua
+modules\Group.lua
+modules\Loner.lua
+modules\LootBOP.lua
+modules\Mailer.lua
+modules\Plates.lua
+modules\Queue.lua
+modules\Release.lua
+modules\Repair.lua
+modules\Rez.lua
+modules\Sell.lua
+modules\Stand.lua
+modules\Summon.lua
+modules\Unshapeshift.lua
+modules\Whine.lua
+modules\Wuss.lua
+modules\AutoAttack.Lua
+modules\AutoTrade.lua
