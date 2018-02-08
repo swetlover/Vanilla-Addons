@@ -8,6 +8,7 @@
 2. 新增了猎人设计计时插件`YaHT`及假死显示生命值插件`SimpleFeignHealth`。
 3. 更新了`pfQuest`插件。
 4. 将hosq版`BigWigs`替换为xorann版。
+5. 更新了xorann版`BigWigs`，新增开怪计时模块命令/pull。
 ***
 2018年2月5日
 1. 移除了`AH_QuickSearch`、`FancyAH`、`FancyTrade`，因为`_LazyPig`已有这3个功能。  

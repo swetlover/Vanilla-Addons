@@ -66,7 +66,7 @@ L:RegisterTranslations("zhCN", function() return {
 	["Toggle broadcasting the messages to the raidwarning channel."] = "显示使用团队警告(RW)频道广播的消息.",
 
 	["Gives timer bars and raid messages about common buffs and debuffs."] = "对通常的Buff和Debuff使用计时条并且发送团队信息.",
-	["Common Auras"] = "공통 버프",
+	["Common Auras"] = "常见的光环",
 } end )
 
 L:RegisterTranslations("deDE", function() return {

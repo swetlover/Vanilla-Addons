@@ -6148,7 +6148,7 @@ BabbleSpell:RegisterTranslations("zhCN", function()
 		["Libram"] = "圣物",
 		["Life Tap"] = "生命分流",
 		["Lifebloom"] = "Lifebloom",  --  Need to translated
-		["Lifegiving Gem"] = "Lifegiving Gem",
+		["Lifegiving Gem"] = "生命宝石",
 		["Lightning Bolt"] = "闪电箭",
 		["Lightning Breath"] = "闪电吐息",
 		["Lightning Mastery"] = "闪电掌握",

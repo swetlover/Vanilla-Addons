@@ -31,6 +31,10 @@ local sounds = {
     
     Murloc = "Sound\\Creature\\Murloc\\mMurlocAggroOld.wav",
     Pain = "Sound\\Creature\\Thaddius\\THAD_NAXX_ELECT.wav",
+	
+	Warning = "Sound\\Doodad\\BellTollNightElf.wav",
+	Special = "Sound\\Spells\\PVPFlagTaken.wav",
+	RaidAlert = "Sound\\interface\\levelup2.wav"
 }
 
 local isImportantDay = false
@@ -54,15 +58,12 @@ L:RegisterTranslations("enUS", function() return {
 
 L:RegisterTranslations("zhCN", function() return {
 	["Sounds"] = "声音",
-	["sounds"] = "声音",
 	["Options for sounds."] = "声音设置.",
 
-	["toggle"] = "切换",
 	["Use sounds"] = "使用声音",
-	["Toggle sounds on or off."] = "切换声音开和关.",
-	["default"] = "默认",
-	["Default only"] = "默认",
-	["Use only the default sound."] = "只选用默认声音.",
+	["Toggle sounds on or off."] = "切换声音开或关.",
+	["Default only"] = "只使用默认",
+	["Use only the default sound."] = "只使用默认声音.",
 } end)
 
 L:RegisterTranslations("deDE", function() return {

@@ -1,8 +1,8 @@
 ## Interface: 11200
-## Title: BigWigs |cff7fff7fxorann|r v1.0
+## Title: BigWigs |cff7fff7fxorann|r v1.1
 ## Title-zhCN: |CFF00FF00团队|r BigWigs团队报警
 ## Notes: Boss Mods with Timer bars.
-## Notes-zhCN: |CFFDD66DDBigWigs|r 团队首领战信息提示插件，带有计时条|N设置命令/bw
+## Notes-zhCN: |CFFDD66DDBigWigs|r 团队首领战信息提示|N设置命令/bw|N开怪倒计时/pull 5
 ## DefaultState: disabled
 ## Author: Tekkub Stoutwrithe, Ammo, Shyva, Rabbit, LYQ, Dorann & Others
 ## Version: 2.0.0
@@ -75,7 +75,7 @@ Plugins\LoathebTactical.lua
 Plugins\RespawnTimers.lua
 Plugins\WarningSign.lua
 Plugins\BossRecords.lua
-#Plugins\ReadyCheck.lua
+Plugins\ReadyCheck.lua
 Plugins\RaidOfficer.lua
 Plugins\AutoReply.lua
 Plugins\Proximity.lua
@@ -87,6 +87,7 @@ Plugins\AFKick.lua
 Plugins\CombatlogFilter.lua
 Plugins\WorldBuffTimers.lua
 Plugins\FrostBlast.lua
+Plugins\Pulltimer.lua
 
 # ###################################
 # Boss modules
@@ -230,6 +231,8 @@ Raids\Naxxramas\Heigan\I18n.lua
 Raids\Naxxramas\Heigan\Core.lua
 Raids\Naxxramas\Loatheb\I18n.lua
 Raids\Naxxramas\Loatheb\Core.lua
+Raids\Naxxramas\LivingMonstrosity\I18n.lua
+Raids\Naxxramas\LivingMonstrosity\Core.lua
 Raids\Naxxramas\Patchwerk\I18n.lua
 Raids\Naxxramas\Patchwerk\Core.lua
 Raids\Naxxramas\Grobbulus\I18n.lua
@@ -424,6 +427,7 @@ Raids\Naxxramas\Maexxna\Default.lua
 Raids\Naxxramas\Noth\Default.lua
 Raids\Naxxramas\Heigan\Default.lua
 Raids\Naxxramas\Loatheb\Default.lua
+Raids\Naxxramas\LivingMonstrosity\Default.lua
 Raids\Naxxramas\Patchwerk\Default.lua
 Raids\Naxxramas\Grobbulus\Default.lua
 Raids\Naxxramas\Gluth\Default.lua
