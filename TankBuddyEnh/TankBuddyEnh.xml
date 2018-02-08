@@ -1,0 +1,1244 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+	<Script file="localization.lua"/>
+	<Script file="TankBuddyEnh.lua"/>
+
+	<CheckButton name="myCheckButtons" inherits="OptionsCheckButtonTemplate" virtual="true">
+		<HitRectInsets>
+			<AbsInset left="0" right="0" top="0" bottom="0"/>
+		</HitRectInsets>
+		<Scripts>
+			<OnClick>
+				TB_Channels_OnClick();
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+
+	<CheckButton name="TB_TabTemplate" virtual="true" hidden="true">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\SpellBook\SpellBook-SkillLineTab">
+					<Size>
+						<AbsDimension x="64" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="-3" y="11"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				TB_Tab_OnClick();
+			</OnClick>
+			<OnEnter>
+				GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+				GameTooltip:SetText(this.tooltiptext);
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+		<NormalTexture/>
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+		<CheckedTexture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD"/>
+	</CheckButton>
+
+	<Frame name="TankBuddyEnhFrame" frameStrata="BACKGROUND" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true">
+		<Size><AbsDimension x="384" y="512"/></Size>
+		<Scripts>
+			<OnLoad>
+				TB_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				TB_OnEvent(event);
+			</OnEvent>
+			<OnMouseUp>
+				if ( this.isMoving ) then
+					this:StopMovingOrSizing();
+					this.isMoving = false;
+				end
+			</OnMouseUp>
+			<OnMouseDown>
+				if ( ( ( not this.isLocked ) or ( this.isLocked == 0 ) ) and ( arg1 == "LeftButton" ) ) then
+					this:StartMoving();
+					this.isMoving = true;
+				end
+			</OnMouseDown>
+			<OnHide>
+				if ( this.isMoving ) then
+					this:StopMovingOrSizing();
+					this.isMoving = false;
+				end
+			</OnHide>
+		</Scripts>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Frames>
+			<Button name="TB_ButtonClose" inherits="OptionsButtonTemplate" text="TB_GUI_Close">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-12" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>TB_Close();</OnClick>
+				</Scripts>
+			</Button>
+            
+            <Button name="TB_ButtonHelp" inherits="OptionsButtonTemplate" text="TB_GUI_Help">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="12" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>TB_Help();</OnClick>
+				</Scripts>
+			</Button>
+
+			<Frame name="TB_Title" frameStrata="MEDIUM" toplevel="true" enableMouse="true" movable="true" parent="TankBuddyEnhFrame">
+				<Size><AbsDimension x="125" y="32"/></Size>
+				<Anchors>
+					<Anchor point="TOP" relativeTo="TankBuddyEnhFrame">
+						<Offset>
+							<AbsDimension x="0" y="15"/>
+						</Offset>
+  					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="TitleText" inherits="GameFontNormal" text="Tank Buddy">
+							<Anchors>
+								<Anchor point="TOP" relativeTo="TB_Title">
+									<Offset>
+  										<AbsDimension x="0" y="-10" /> 
+  									</Offset>
+  								</Anchor>
+  							</Anchors>
+						</FontString>
+						<FontString name="HeaderText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP" relativeTo="TB_Title">
+									<Offset>
+										<AbsDimension x="0" y="-40" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Backdrop bgFile="Interface\AuctionFrame\UI-AuctionFrame-Bid-Bot" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="24"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="64"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+ 				</Backdrop>
+			</Frame>
+
+			<Frame name="TB_GeneralOptions" frameStrata="MEDIUM" toplevel="true" enableMouse="true" movable="true" parent="TankBuddyEnhFrame">
+				<Size>
+					<AbsDimension x="384" y="1"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativeTo="TankBuddyEnhFrame">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<CheckButton name="TB_EnableCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="30" y="-50"></AbsDimension>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString name="TankBuddyEnhFrameSetCustomChannelText" inherits="GameFontNormalSmall" text="TB_GUI_EnableTankBuddyEnh">
+                                    <Anchors>
+										<Anchor point="LEFT" relativepoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>TB_toggleStatus();</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="TB_DisableInBGCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+        				<Size>
+					    	<AbsDimension x="25" y="25"/>
+					    </Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="TB_EnableCheckButton">
+								<Offset>
+									<AbsDimension x="4" y="3"></AbsDimension>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString name="TankBuddyEnhFrameSetCustomChannelText" inherits="GameFontNormalSmall" text="TB_GUI_DisableInBG">
+									<Anchors>
+										<Anchor point="LEFT" relativepoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>TB_toggleBGStatus();</OnClick>
+						</Scripts>
+					</CheckButton>
+
+					<Frame name="TB_RemoveBuffsFrame" frameStrata="BACKGROUND" toplevel="true" enableMouse="true" movable="true">
+						<Size>
+							<AbsDimension x="360" y="200"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="TankBuddyEnhFrame">
+								<Offset>
+									<AbsDimension x="0" y="-130"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <FontString name="RemoveBuffsText" inherits="GameFontNormalSmall" text="TB_GUI_RemoveBuffs" justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="TOP">
+                                            <Offset>
+                                                <AbsDimension x="0" y="-20"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+						<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+							<EdgeSize>
+								<AbsValue val="24"/>
+							</EdgeSize>
+							<TileSize>
+								<AbsValue val="64"/>
+							</TileSize>
+							<BackgroundInsets>
+								<AbsInset left="5" right="5" top="5" bottom="5"/>
+							</BackgroundInsets>
+						</Backdrop>
+						<frames>
+                            <CheckButton name="TB_AlwaysRemoveCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT">
+                                        <Offset>
+                                            <AbsDimension x="30" y="-50"></AbsDimension>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <FontString name="AlwaysRemoveBuffsText" inherits="GameFontNormalSmall" text="TB_GUI_RemoveBuffsAlways">
+                                            <Anchors>
+                                                <Anchor point="LEFT" relativepoint="RIGHT">
+                                                    <Offset>
+                                                        <AbsDimension x="5" y="0" />
+                                                    </Offset>
+                                                </Anchor>
+                                            </Anchors>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+                                <Scripts>
+                                    <OnClick>TB_toggleRemoveBuffStatus();</OnClick>
+                                </Scripts>
+                            </CheckButton>
+                            <CheckButton name="TB_DefensiveBearCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativepoint="BOTTOMLEFT" relativeto="TB_AlwaysRemoveCheckButton">
+                                        <Offset>
+                                            <AbsDimension x="0" y="-35"></AbsDimension>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <FontString name="SalvDefensiveBearText" inherits="GameFontNormalSmall" text="TB_GUI_RemoveBuffsDefensive">
+                                            <Anchors>
+                                                <Anchor point="LEFT" relativepoint="RIGHT">
+                                                    <Offset>
+                                                        <AbsDimension x="5" y="0" />
+                                                    </Offset>
+                                                </Anchor>
+                                            </Anchors>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+                                <Scripts>
+                                    <OnClick>TB_toggleRemoveBuffStatus();</OnClick>
+                                </Scripts>
+                            </CheckButton>
+        
+                            <EditBox name="TB_EditboxAlwaysRemoveBuffs" letters="150">
+                                <Size>
+                                    <AbsDimension x="300" y="32"></AbsDimension>
+                                </Size>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativepoint="BOTTOMLEFT" relativeto="TB_AlwaysRemoveCheckButton">
+                                        <Offset>
+                                            <AbsDimension x="0" y="0"></AbsDimension>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BORDER">
+                                        <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                                            <Size>
+                                                <AbsDimension x="60" y="32"></AbsDimension>
+                                            </Size>
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT">
+                                                    <Offset>
+                                                        <AbsDimension x="-15" y="0"></AbsDimension>
+                                                    </Offset>
+                                                </Anchor>
+                                            </Anchors>
+                                            <TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+                                        </Texture>
+                                        <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+                                            <Size>
+                                                <AbsDimension x="60" y="32"></AbsDimension>
+                                            </Size>
+                                            <Anchors>
+                                                <Anchor point="TOPRIGHT">
+                                                    <Offset>
+                                                        <AbsDimension x="15" y="0"></AbsDimension>
+                                                    </Offset>
+                                                </Anchor>
+                                            </Anchors>
+                                            <TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+                                        </Texture>
+                                        <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                                            <Size>
+                                                <AbsDimension x="210" y="32"></AbsDimension>
+                                            </Size>
+                                            <Anchors>
+                                                <Anchor point="TOP">
+                                                    <Offset>
+                                                        <AbsDimension x="0" y="0"></AbsDimension>
+                                                    </Offset>
+                                                </Anchor>
+                                            </Anchors>
+                                            <TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                                <Scripts>
+                                    <OnLoad></OnLoad>
+                                </Scripts>
+                                <FontString inherits="ChatFontNormal"></FontString>
+                            </EditBox>
+        
+                            <EditBox name="TB_EditboxRemoveBuffsInDefensiveBear" letters="150">
+                                <Size>
+                                    <AbsDimension x="300" y="32"></AbsDimension>
+                                </Size>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativepoint="BOTTOMLEFT" relativeto="TB_DefensiveBearCheckButton">
+                                        <Offset>
+                                            <AbsDimension x="0" y="0"></AbsDimension>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BORDER">
+                                        <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                                            <Size>
+                                                <AbsDimension x="60" y="32"></AbsDimension>
+                                            </Size>
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT">
+                                                    <Offset>
+                                                        <AbsDimension x="-15" y="0"></AbsDimension>
+                                                    </Offset>
+                                                </Anchor>
+                                            </Anchors>
+                                            <TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+                                        </Texture>
+                                        <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+                                            <Size>
+                                                <AbsDimension x="60" y="32"></AbsDimension>
+                                            </Size>
+                                            <Anchors>
+                                                <Anchor point="TOPRIGHT">
+                                                    <Offset>
+                                                        <AbsDimension x="15" y="0"></AbsDimension>
+                                                    </Offset>
+                                                </Anchor>
+                                            </Anchors>
+                                            <TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+                                        </Texture>
+                                        <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                                            <Size>
+                                                <AbsDimension x="210" y="32"></AbsDimension>
+                                            </Size>
+                                            <Anchors>
+                                                <Anchor point="TOP">
+                                                    <Offset>
+                                                        <AbsDimension x="0" y="0"></AbsDimension>
+                                                    </Offset>
+                                                </Anchor>
+                                            </Anchors>
+                                            <TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                                <Scripts>
+                                    <OnLoad></OnLoad>
+                                </Scripts>
+                                <FontString inherits="ChatFontNormal"></FontString>
+                            </EditBox>
+						</frames>
+					</Frame>
+				</Frames>
+				<Layers>
+					<Layer level="BACKGROUND">						
+						<FontString name="IntroText" inherits="GameFontNormalSmall" justifyV="TOP" justifyH="LEFT" text="TB_GUI_IntroText">
+							<Size>
+								<AbsDimension x="350" y="450"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-370" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<CheckButton name="TB_Tab1" inherits="TB_TabTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-3" y="-50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="TB_Tab2" inherits="TB_TabTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="TB_Tab1" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="TB_Tab3" inherits="TB_TabTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="TB_Tab2" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="TB_Tab4" inherits="TB_TabTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="TB_Tab3" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="TB_Tab5" inherits="TB_TabTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="TB_Tab4" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="TB_Tab6" inherits="TB_TabTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="TB_Tab5" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="TB_Tab7" inherits="TB_TabTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="TB_Tab6" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="TB_Tab8" inherits="TB_TabTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="TB_Tab7" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="TB_Tab9" inherits="TB_TabTemplate" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="TB_Tab8" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-17"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+
+			<Frame name="TB_OtherOptions" frameStrata="MEDIUM" toplevel="true" enableMouse="true" movable="true" parent="TankBuddyEnhFrame">
+				<Size>
+					<AbsDimension x="384" y="1"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativeTo="TankBuddyEnhFrame">
+						<Offset>
+							<AbsDimension x="0" y="15"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<frames>
+					<Frame name="TB_CheckButtons" frameStrata="BACKGROUND" toplevel="true" enableMouse="true" movable="true">
+						<Size>
+							<AbsDimension x="360" y="310"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="TankBuddyEnhFrame">
+								<Offset>
+									<AbsDimension x="0" y="-65"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString name="cRaidText" inherits="GameFontNormalSmall" text="TB_GUI_Raid">
+									<Anchors>
+										<Anchor point="CENTER" relativePoint="TOPLEFT">
+											<Offset>
+												<AbsDimension x="70" y="-20"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="cPartyText" inherits="GameFontNormalSmall" text="TB_GUI_Party">
+									<Anchors>
+										<Anchor point="CENTER" relativePoint="TOPLEFT">
+											<Offset>
+												<AbsDimension x="130" y="-20"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="cAloneText" inherits="GameFontNormalSmall" text="TB_GUI_Alone">
+									<Anchors>
+										<Anchor point="CENTER" relativePoint="TOPLEFT">
+											<Offset>
+												<AbsDimension x="190" y="-20"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+
+								<FontString name="rCTRaidText" inherits="GameFontNormalSmall" text="TB_GUI_Channel_Ctraid">
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="220" y="-43"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="rRaidWarningText" inherits="GameFontNormalSmall" text="TB_GUI_Channel_RaidWarning">
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="220" y="-73"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="rRaidText" inherits="GameFontNormalSmall" text="TB_GUI_Channel_Raid">
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="220" y="-103"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="rGuildText" inherits="GameFontNormalSmall" text="TB_GUI_Channel_Guild">
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="220" y="-133"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="rPartyText" inherits="GameFontNormalSmall" text="TB_GUI_Channel_Party">
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="220" y="-163"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="rYellText" inherits="GameFontNormalSmall" text="TB_GUI_Channel_Yell">
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="220" y="-193"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="rSayText" inherits="GameFontNormalSmall" text="TB_GUI_Channel_Say">
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="220" y="-223"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString name="rCustomText" inherits="GameFontNormalSmall" text="TB_GUI_Channel_Custom">
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="220" y="-253"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+							<EdgeSize>
+								<AbsValue val="24"/>
+							</EdgeSize>
+							<TileSize>
+								<AbsValue val="64"/>
+							</TileSize>
+							<BackgroundInsets>
+								<AbsInset left="5" right="5" top="5" bottom="5"/>
+							</BackgroundInsets>
+						</Backdrop>
+						<frames>
+							<CheckButton name="TB_RaidCTRaidCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="TB_CheckButtons">
+										<Offset>
+											<AbsDimension x="70" y="-50"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_RaidRaidWarningCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidCTRaidCheckButton">
+										<Offset>
+											<AbsDimension x="0" y="-30"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_RaidRaidCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidRaidWarningCheckButton">
+										<Offset>
+											<AbsDimension x="0" y="-30"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_RaidGuildCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidRaidCheckButton">
+										<Offset>
+											<AbsDimension x="0" y="-30"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_RaidPartyCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidGuildCheckButton">
+										<Offset>
+											<AbsDimension x="0" y="-30"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_RaidYellCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidPartyCheckButton">
+										<Offset>
+											<AbsDimension x="0" y="-30"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_RaidSayCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidYellCheckButton">
+										<Offset>
+											<AbsDimension x="0" y="-30"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_RaidCustomCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidSayCheckButton">
+										<Offset>
+											<AbsDimension x="0" y="-30"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_PartyGuildCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidGuildCheckButton">
+										<Offset>
+											<AbsDimension x="60" y="0"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_PartyPartyCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidPartyCheckButton">
+										<Offset>
+											<AbsDimension x="60" y="0"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_PartyYellCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidYellCheckButton">
+										<Offset>
+											<AbsDimension x="60" y="0"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_PartySayCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidSayCheckButton">
+										<Offset>
+											<AbsDimension x="60" y="0"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_PartyCustomCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_RaidCustomCheckButton">
+										<Offset>
+											<AbsDimension x="60" y="0"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_AloneYellCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_PartyYellCheckButton">
+										<Offset>
+											<AbsDimension x="60" y="0"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_AloneSayCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_PartySayCheckButton">
+										<Offset>
+											<AbsDimension x="60" y="0"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+							<CheckButton name="TB_AloneCustomCheckButton" inherits="myCheckButtons">
+								<Size>
+									<AbsDimension x="25" y="25"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="TB_PartyCustomCheckButton">
+										<Offset>
+											<AbsDimension x="60" y="0"></AbsDimension>
+										</Offset>
+									</Anchor>
+								</Anchors>
+							</CheckButton>
+
+							<Button name="TB_ButtonTest" inherits="OptionsButtonTemplate" text="TB_GUI_Test">
+								<Anchors>
+									<Anchor point="BOTTOMRIGHT">
+										<Offset>
+											<AbsDimension x="-12" y="12"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick>TB_Test();</OnClick>
+								</Scripts>
+							</Button>
+
+							<Button name="TB_ButtonCopy" inherits="OptionsButtonTemplate" text="TB_GUI_Copy">
+								<Anchors>
+									<Anchor point="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="12" y="12"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick>TB_Copy();</OnClick>
+								</Scripts>
+							</Button>
+
+							<Button name="TB_ButtonPaste" inherits="OptionsButtonTemplate" text="TB_GUI_Paste">
+								<Anchors>
+									<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="TB_ButtonCopy">
+										<Offset>
+											<AbsDimension x="5" y="0"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick>TB_Paste();</OnClick>
+								</Scripts>
+							</Button>
+						</frames>
+					</Frame>
+                    <CheckButton name="TB_MBRecoveryCheckButton" inherits="OptionsCheckButtonTemplate" checked="true" hidden="true">
+						<Size>
+					    	<AbsDimension x="25" y="25"/>
+					    </Size>
+                        <Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="20" y="-390"></AbsDimension>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString name="MBRecoveryText" inherits="GameFontNormalSmall" text="TB_GUI_EnableMBRecovery">
+                                    <Anchors>
+										<Anchor point="LEFT" relativepoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>TB_toggleMBRecovery();</OnClick>
+						</Scripts>
+					</CheckButton>
+					<EditBox name="TB_MBRecoveryEditboxText" letters="150" hidden="true">
+						<Size>
+							<AbsDimension x="330" y="32"></AbsDimension>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="TankBuddyEnhFrame">
+								<Offset>
+									<AbsDimension x="0" y="-405"></AbsDimension>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString name="TB_SetMBRecoveryText" inherits="GameFontNormalSmall" text="TB_GUI_EnterNewMBRecoveryText">
+									<Anchors>
+										<Anchor point="TOP">
+											<Offset>
+												<AbsDimension x="0" y="8" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+							<Layer level="BORDER">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="60" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="-15" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="60" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPRIGHT">
+											<Offset>
+												<AbsDimension x="15" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="240" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOP">
+											<Offset>
+												<AbsDimension x="0" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad></OnLoad>
+						</Scripts>
+						<FontString inherits="ChatFontNormal"></FontString>
+					</EditBox>
+                    
+                    <EditBox name="TB_EditboxText" letters="150">
+						<Size>
+							<AbsDimension x="330" y="32"></AbsDimension>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="TankBuddyEnhFrame">
+								<Offset>
+									<AbsDimension x="0" y="-445"></AbsDimension>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString name="TB_SetTextText" inherits="GameFontNormalSmall">
+									<Anchors>
+										<Anchor point="TOP">
+											<Offset>
+												<AbsDimension x="0" y="8" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+							<Layer level="BORDER">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="60" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="-15" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="60" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPRIGHT">
+											<Offset>
+												<AbsDimension x="15" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="240" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOP">
+											<Offset>
+												<AbsDimension x="0" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad></OnLoad>
+						</Scripts>
+						<FontString inherits="ChatFontNormal"></FontString>
+					</EditBox>
+				</frames>
+			</Frame>
+			
+			<Frame name ="TB_CustomChannelFrame" frameStrata="HIGH" toplevel="true" enableMouse="true" movable="true" parent="TankBuddyEnhFrame" hidden="true">
+				<Size>
+					<AbsDimension x="250" y="85"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="TankBuddyEnhFrame"/>
+				</Anchors>
+				<Frames>
+					<EditBox name="TB_EditboxCustom" letters="150">
+						<Size>
+							<AbsDimension x="175" y="32"></AbsDimension>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP">
+								<Offset>
+									<AbsDimension x="0" y="-20"></AbsDimension>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString name="TankBuddyEnhFrameSetCustomChannelText" inherits="GameFontNormalSmall" text="TB_GUI_EnterChannelName">
+									<Anchors>
+										<Anchor point="TOP" relativeTo="TB_CustomChannelFrame">
+											<Offset>
+												<AbsDimension x="0" y="-12" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+							<Layer level="BORDER">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="60" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPLEFT">
+											<Offset>
+												<AbsDimension x="-15" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="60" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOPRIGHT">
+											<Offset>
+												<AbsDimension x="15" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="85" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="TOP">
+											<Offset>
+												<AbsDimension x="0" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad></OnLoad>
+						</Scripts>
+						<FontString inherits="ChatFontNormal"></FontString>
+					</EditBox>
+
+					<Button name="TB_ButtonCloseCustom" inherits="OptionsButtonTemplate" text="TB_GUI_Close">
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-12" y="12"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>TB_CloseCustomChannel();</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="28"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="32"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+				</Backdrop>
+			</Frame>
+            
+            <Frame name ="TB_HelpFrame" frameStrata="HIGH" toplevel="true" enableMouse="true" parent="TankBuddyEnhFrame" hidden="true">
+				<Size>
+					<AbsDimension x="512" y="512"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="TankBuddyEnhFrame"/>
+				</Anchors>
+				<Frames>
+				</Frames>
+                <Layers>
+					<Layer level="BACKGROUND">						
+						<FontString name="HelpTitle"  inherits="GameFontNormal" justifyV="TOP" justifyH="CENTER" text="TB_GUI_Help">
+							<Size>
+								<AbsDimension x="480" y="20"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer level="BACKGROUND">						
+						<FontString name="HelpText" inherits="GameFontNormalSmall" justifyV="TOP" justifyH="LEFT" text="TB_GUI_HelpText">
+							<Size>
+								<AbsDimension x="480" y="472"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-30" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+                </Layers>
+				<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="28"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="32"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="5" right="5" top="5" bottom="5"/>
+					</BackgroundInsets>
+				</Backdrop>
+			</Frame>
+
+		</Frames>
+		<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="28"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+	</Frame>
+</Ui>

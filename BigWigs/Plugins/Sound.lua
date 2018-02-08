@@ -14,30 +14,43 @@ local sounds = {
 	Alert = "Interface\\AddOns\\BigWigs\\Sounds\\Alert.mp3",
 	Alarm = "Interface\\AddOns\\BigWigs\\Sounds\\Alarm.mp3",
 	Victory = "Interface\\AddOns\\BigWigs\\Sounds\\Victory.mp3",
-
+	
 	Beware = "Interface\\AddOns\\BigWigs\\Sounds\\Beware.wav",
-	RunAway = "Interface\\AddOns\\BigWigs\\Sounds\\RunAway.wav",
-
-	One = "Interface\\AddOns\\BigWigs\\Sounds\\1.ogg",
-	Two = "Interface\\AddOns\\BigWigs\\Sounds\\2.ogg",
-	Three = "Interface\\AddOns\\BigWigs\\Sounds\\3.ogg",
-	Four = "Interface\\AddOns\\BigWigs\\Sounds\\4.ogg",
-	Five = "Interface\\AddOns\\BigWigs\\Sounds\\5.ogg",
-	Six = "Interface\\AddOns\\BigWigs\\Sounds\\6.ogg",
-	Seven = "Interface\\AddOns\\BigWigs\\Sounds\\7.ogg",
-	Eight = "Interface\\AddOns\\BigWigs\\Sounds\\8.ogg",
-	Nine = "Interface\\AddOns\\BigWigs\\Sounds\\9.ogg",
-	Ten = "Interface\\AddOns\\BigWigs\\Sounds\\10.ogg",
-
-	Murloc = "Sound\\Creature\\Murloc\\mMurlocAggroOld.wav",
-	Pain = "Sound\\Creature\\Thaddius\\THAD_NAXX_ELECT.wav",
-	Shakira = "Interface\\AddOns\\BigWigs\\Sounds\\Shakira.mp3",
+    RunAway = "Interface\\AddOns\\BigWigs\\Sounds\\RunAway.wav",
+    
+    One = "Interface\\AddOns\\BigWigs\\Sounds\\1.ogg",
+    Two = "Interface\\AddOns\\BigWigs\\Sounds\\2.ogg",
+    Three = "Interface\\AddOns\\BigWigs\\Sounds\\3.ogg",
+    Four = "Interface\\AddOns\\BigWigs\\Sounds\\4.ogg",
+    Five = "Interface\\AddOns\\BigWigs\\Sounds\\5.ogg",
+    Six = "Interface\\AddOns\\BigWigs\\Sounds\\6.ogg",
+    Seven = "Interface\\AddOns\\BigWigs\\Sounds\\7.ogg",
+    Eight = "Interface\\AddOns\\BigWigs\\Sounds\\8.ogg",
+    Nine = "Interface\\AddOns\\BigWigs\\Sounds\\9.ogg",
+    Ten = "Interface\\AddOns\\BigWigs\\Sounds\\10.ogg",
+    
+    Murloc = "Sound\\Creature\\Murloc\\mMurlocAggroOld.wav",
+    Pain = "Sound\\Creature\\Thaddius\\THAD_NAXX_ELECT.wav",
 }
 
+local isImportantDay = false
 
 ----------------------------
 --      Localization      --
 ----------------------------
+
+L:RegisterTranslations("enUS", function() return {
+	["Sounds"] = true,
+	["sounds"] = true,
+	["Options for sounds."] = true,
+
+	["toggle"] = true,
+	["Use sounds"] = true,
+	["Toggle sounds on or off."] = true,
+	["default"] = true,
+	["Default only"] = true,
+	["Use only the default sound."] = true,
+} end)
 
 L:RegisterTranslations("zhCN", function() return {
 	["Sounds"] = "声音",
@@ -50,16 +63,6 @@ L:RegisterTranslations("zhCN", function() return {
 	["default"] = "默认",
 	["Default only"] = "默认",
 	["Use only the default sound."] = "只选用默认声音.",
-} end)
-
-L:RegisterTranslations("koKR", function() return {
-	["Sounds"] = "효과음",
-	["Options for sounds."] = "효과음 옵션.",
-
-	["Use sounds"] = "효과음 사용",
-	["Toggle sounds on or off."] = "효과음을 켜거나 끔.",
-	["Default only"] = "기본음",
-	["Use only the default sound."] = "기본음만 사용.",
 } end)
 
 L:RegisterTranslations("deDE", function() return {
@@ -113,26 +116,43 @@ BigWigsSound.consoleOptions = {
 function BigWigsSound:OnEnable()
 	self:RegisterEvent("BigWigs_Message")
 	self:RegisterEvent("BigWigs_Sound")
+	
+	if string.find(date(), "04/01/") then
+		isImportantDay = true
+	end
 end
 function BigWigsSound:OnDisable()
-	BigWigs:DebugMessage("OnDisable")
+    BigWigs:DebugMessage("OnDisable")
 end
 
 function BigWigsSound:BigWigs_Message(text, color, noraidsay, sound, broadcastonly)
-	if self.db.profile.sound then
-		if not text or sound == false or broadcastonly then return end
+	if not text or sound == false or broadcastonly then 
+		return 
+	end
 
-		if sounds[sound] and not self.db.profile.defaultonly then PlaySoundFile(sounds[sound])
-		else PlaySound("RaidWarning") end
+	if sounds[sound] and not self.db.profile.defaultonly then 
+		if isImportantDay then
+			PlaySoundFile(sounds["Murloc"])
+		else
+			PlaySoundFile(sounds[sound])
+		end
+	else 
+		PlaySound("RaidWarning") 
 	end
 end
 
 function BigWigsSound:BigWigs_Sound( sound )
-	if self.db.profile.sound then
-		if sounds[sound] and not self.db.profile.defaultonly then
-			PlaySoundFile(sounds[sound])
+	if sounds[sound] and not self.db.profile.defaultonly then 
+		if isImportantDay then
+			PlaySoundFile(sounds["Murloc"])
 		else
-			PlaySound("RaidWarning")
+			PlaySoundFile(sounds[sound])
 		end
+	else 
+		PlaySound("RaidWarning") 
 	end
+end
+
+function BigWigsSound:IDontLikeMurlocs()
+	isImportantDay = false
 end

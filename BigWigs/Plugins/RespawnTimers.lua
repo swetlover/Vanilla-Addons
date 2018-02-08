@@ -19,6 +19,52 @@ local deathThrottle = nil
 ----------------------------------
 --      Localization            --
 ----------------------------------
+L:RegisterTranslations("enUS", function() return {
+	["respawntimers"] = true,
+	["Respawn Timers"] = true,
+	["Respawn timer bars and warnings for trash mobs."] = true,
+	["bars"] = true,
+	["Bars"] = true,
+	["Toggles showing bars for respawn times."] = true,
+	["messages"] = true,
+	["Messages"] = true,
+	["Toggles showing messages for respawn times."] = true,
+
+	["%s %d respawns in %d sec"] = true,
+	["%s %d respawned!"] = true,
+	["Respawn: %s %d"] = true,
+
+	-- Molten Core Triggers
+	["Ancient Core Hound"] = true,
+	["Lava Annihilator"] = true,
+	["Lava Surger"] = true,
+	["Firelord"] = true,
+	["Firewalker"] = true, -- Lava Pack
+	["%s collapses and begins to smolder."] = true, -- Hound Pack, emote.
+	-- Molten Core Messages
+	["Corehound"] = true,
+	["Annihilator"] = true,
+	["Surger"] = true,
+	-- Firelord == Firelord.
+	["Lavapack"] = true,
+	["Houndpack"] = true,
+
+	-- AQ Triggers
+	["Obsidian Eradicator"] = true,
+	["Anubisath Sentinel"] = true,
+	-- AQ Messages
+	["Eradicator"] = true,
+	["Sentinel"] = true,
+
+	-- BWL Triggers
+	["Death Talon Hatcher"] = true,
+	["Blackwing Taskmaster"] = true,
+	-- BWL Messages
+	["Death Talon"] = true,
+	["Taskmaster"] = true,
+
+} end )
+
 L:RegisterTranslations("zhCN", function() return {
 	["respawntimers"] = "respawntimers",
 	["Respawn Timers"] = "怪物刷新时间",
@@ -62,52 +108,6 @@ L:RegisterTranslations("zhCN", function() return {
 	-- BWL Messages
 	["Death Talon"] = "地卜师",
 	["Taskmaster"] = "工头",
-
-} end )
-
-L:RegisterTranslations("deDE", function() return {
-	["respawntimers"] = "respawntimers",
-	["Respawn Timers"] = "Respawn Timer",
-	["Respawn timer bars and warnings for trash mobs."] = "Respawn Timerbalken und Warnungen für Trashmobs",
-	["bars"] = "bars",
-	["Bars"] = "Balken",
-	["Toggles showing bars for respawn times."] = "Zeige Balken",
-	["messages"] = "messages",
-	["Messages"] = "Warnungen",
-	["Toggles showing messages for respawn times."] = "Sende Warnungen",
-
-	["%s %d respawns in %d sec"] = "%s %d respawnt in %d Sekunden",
-	["%s %d respawned!"] = "%s %s respawnt",
-	["Respawn: %s %d"] = "Respawn: %s %d",
-
-	-- Molten Core Triggers
-	["Ancient Core Hound"] = "Uralter Kernhund",
-	["Lava Annihilator"] = "Lavavernichter",
-	["Lava Surger"] = "Lavawoger",
-	["Firelord"] = "Feuerlord",
-	["Firewalker"] = "Feuergänger", -- Lava Pack
-	["%s collapses and begins to smolder."] = "%s bricht zusammen und beginnt zu glimmen.", -- Hound Pack, emote.
-	-- Molten Core Messages
-	["Corehound"] =  "Kernhund",
-	["Annihilator"] = "Vernichter",
-	["Surger"] = "Woger",
-	-- Firelord == Firelord.
-	["Lavapack"] = "Lavapack",
-	["Houndpack"] = "Kernhundpack",
-
-	-- AQ Triggers
-	["Obsidian Eradicator"] = "Obsidianzerstörer",
-	["Anubisath Sentinel"] = "Wächter des Anubisath",
-	-- AQ Messages
-	["Eradicator"] = "Zerstörer",
-	["Sentinel"] = "Wächter",
-
-	-- BWL Triggers
-	["Death Talon Hatcher"] = "Brutwächter der Todeskrallen",
-	["Blackwing Taskmaster"] = "Zuchtmeister der Pechschwingen",
-	-- BWL Messages
-	["Death Talon"] = "Brutwächter",
-	["Taskmaster"] = "Zuchtmeister",
 } end )
 
 -- The death table and emote table are basically the meat of this addon. The

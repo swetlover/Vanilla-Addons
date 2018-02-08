@@ -1,4 +1,4 @@
-assert(BigWigs, "BigWigs not found!")
+﻿assert(BigWigs, "BigWigs not found!")
 
 ----------------------------
 --      Localization      --
@@ -41,7 +41,7 @@ L:RegisterTranslations("zhCN", function() return {
 	["Start a custom bar, either local or global."] = "激活一条自制时间条，本地或者全局",
 	["Local"] = "本地",
 	["Global"] = "全局",
-	["<seconds> <bar text>"] = "<seconds> <bar text>",
+	["<seconds> <bar text>"] = "<秒> <条文本>",
 	["Starts a custom bar with the given parameters."] = "激活一条带参数的自制时间条",
 	["%s: %s"] = "%s: %s",
 	["%s: Timer [%s] finished."] = "%s: 计时器 [%s] 到时间",

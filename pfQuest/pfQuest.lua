@@ -49,7 +49,7 @@ local function QuestNeedsUpdate(questIndex)
   if objectives then
     for i=1, objectives, 1 do
       local text, _, finished = GetQuestLogLeaderBoard(i, questIndex)
-      local i, j, itemName, numItems, numNeeded = strfind(text, "(.*):%s*([%d]+)%s*/%s*([%d]+)")
+      local i, j, itemName, numItems, numNeeded = strfind(text, "(.*)：%s*([%d]+)%s*/%s*([%d]+)")
       if itemName then
         hash = hash .. itemName .. ( finished and "DONE" or "TODO" )
       end
@@ -72,7 +72,7 @@ local function UpdateQuestLogID(questIndex, action)
   if questIndex then
     --local title, level = GetQuestLogTitle(questIndex)
     local title, level, _, header, _, complete = GetQuestLogTitle(questIndex)
-    if header then return end
+    if header or not title then return end
 
     local watched = IsQuestWatched(questIndex)
     if not title then return end
@@ -203,7 +203,7 @@ local function AddQuestLogIntegration()
   pfQuest.buttonShow = pfQuest.buttonShow or CreateFrame("Button", "pfQuestShow", dockFrame, "UIPanelButtonTemplate")
   pfQuest.buttonShow:SetWidth(90)
   pfQuest.buttonShow:SetHeight(23)
-  pfQuest.buttonShow:SetText("Show")
+  pfQuest.buttonShow:SetText("显示地图")
   pfQuest.buttonShow:SetPoint("TOP", dockTitle, "TOP", -95, 0)
   pfQuest.buttonShow:SetScript("OnClick", function()
     local map = UpdateQuestLogID(GetQuestLogSelection(), "ADD")
@@ -213,7 +213,7 @@ local function AddQuestLogIntegration()
   pfQuest.buttonClean = pfQuest.buttonClean or CreateFrame("Button", "pfQuestClean", dockFrame, "UIPanelButtonTemplate")
   pfQuest.buttonClean:SetWidth(90)
   pfQuest.buttonClean:SetHeight(23)
-  pfQuest.buttonClean:SetText("Clean")
+  pfQuest.buttonClean:SetText("清除")
   pfQuest.buttonClean:SetPoint("TOP", dockTitle, "TOP", 0, 0)
   pfQuest.buttonClean:SetScript("OnClick", function()
     pfMap:DeleteNode("PFQUEST")
@@ -223,7 +223,7 @@ local function AddQuestLogIntegration()
   pfQuest.buttonReset = pfQuest.buttonReset or CreateFrame("Button", "pfQuestHide", dockFrame, "UIPanelButtonTemplate")
   pfQuest.buttonReset:SetWidth(90)
   pfQuest.buttonReset:SetHeight(23)
-  pfQuest.buttonReset:SetText("Reset")
+  pfQuest.buttonReset:SetText("重置")
   pfQuest.buttonReset:SetPoint("TOP", dockTitle, "TOP", 95, 0)
   pfQuest.buttonReset:SetScript("OnClick", function()
     pfMap:DeleteNode("PFQUEST")
@@ -265,7 +265,7 @@ local function AddWorldMapIntegration()
   function pfQuest.mapButton:UpdateMenu()
     local function CreateEntries()
       local info = {}
-      info.text = "All Quests"
+      info.text = "所有任务"
       info.checked = false
       info.func = function()
         UIDropDownMenu_SetSelectedID(pfQuest.mapButton, this:GetID(), 0)
@@ -278,7 +278,7 @@ local function AddWorldMapIntegration()
       UIDropDownMenu_AddButton(info)
 
       local info = {}
-      info.text = "Tracked Quests"
+      info.text = "监视的任务"
       info.checked = false
       info.func = function()
         UIDropDownMenu_SetSelectedID(pfQuest.mapButton, this:GetID(), 0)
@@ -289,7 +289,7 @@ local function AddWorldMapIntegration()
       UIDropDownMenu_AddButton(info)
 
       local info = {}
-      info.text = "Manual Selection"
+      info.text = "手动选择"
       info.checked = false
       info.func = function()
         UIDropDownMenu_SetSelectedID(pfQuest.mapButton, this:GetID(), 0)
@@ -300,7 +300,7 @@ local function AddWorldMapIntegration()
       UIDropDownMenu_AddButton(info)
 
       local info = {}
-      info.text = "Hide Quests"
+      info.text = "隐藏任务"
       info.checked = false
       info.func = function()
         UIDropDownMenu_SetSelectedID(pfQuest.mapButton, this:GetID(), 0)
@@ -368,7 +368,7 @@ pfQuest:SetScript("OnEvent", function()
       pfQuest:Show()
     elseif event == "QUEST_FINISHED" then
       UpdateQuestLogID(nil)
-    else
+    elseif not arg1 or type(arg1) == "number" then
       UpdateQuestLogID(arg1)
     end
   end
@@ -386,7 +386,7 @@ pfQuest:SetScript("OnUpdate", function()
 
   if pfQuest.mapUpdate then
     pfQuest.mapUpdate:Show()
-    pfQuest.mapUpdate:SetText("Quest Update [ " .. this.scan .. " / " .. this.smax .. " ]")
+    pfQuest.mapUpdate:SetText("任务更新 [ " .. this.scan .. " / " .. this.smax .. " ]")
   end
 
   if UpdateQuestLogID(this.scan) then
@@ -449,9 +449,9 @@ end
 
 local pfQuestHookSetItemRef = SetItemRef
 function SetItemRef(link, text, button)
-  local isQuest, _, id    = string.find(link, "quest:(%d+):.*")
-  local isQuest2, _, _   = string.find(link, "quest2:.*")
-  local _, _, questLevel = string.find(link, "quest:%d+:(%d+)")
+  local isQuest, _, id    = string.find(link, "任务:(%d+):.*")
+  local isQuest2, _, _   = string.find(link, "任务2:.*")
+  local _, _, questLevel = string.find(link, "任务:%d+:(%d+)")
 
   local playerHasQuest = false
 
@@ -497,13 +497,13 @@ function SetItemRef(link, text, button)
     end
 
     if playerHasQuest == false then
-      ItemRefTooltip:AddLine("You don't have this quest.", 1, .8, .8)
+      ItemRefTooltip:AddLine("你没有这个任务.", 1, .8, .8)
     end
 
     -- extract quest level
     if questLevel and questLevel ~= 0 and questLevel ~= "0" then
       local color = GetDifficultyColor(questLevel)
-      ItemRefTooltip:AddLine("Quest Level " .. questLevel, color.r, color.g, color.b)
+      ItemRefTooltip:AddLine("任务等级 " .. questLevel, color.r, color.g, color.b)
     end
 
     ItemRefTooltip:Show()

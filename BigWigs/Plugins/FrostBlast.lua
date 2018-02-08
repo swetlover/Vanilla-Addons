@@ -1,3 +1,8 @@
+--[[
+
+created by Hosq
+
+--]]
 
 assert( BigWigs, "BigWigs not found!")
 

@@ -12,6 +12,27 @@ local tablet = AceLibrary("Tablet-2.0")
 --      Localization      --
 ----------------------------
 
+L:RegisterTranslations("enUS", function() return {
+	["|cff00ff00Module running|r"] = true,
+	["|cffeda55fClick|r to reset all running modules. |cffeda55fCtrl+Click|r to force reboot for everyone (Requires assistant or higher). |cffeda55fAlt+Click|r to disable them. |cffeda55fCtrl+Alt+Click|r to disable Big Wigs completely."] = true,
+	["|cffeda55fClick|r to enable."] = true,
+	["Big Wigs is currently disabled."] = true,
+	["Active boss modules"] = true,
+	["hidden"] = true,
+	["shown"] = true,
+	["minimap"] = true,
+	["Minimap"] = true,
+	["Toggle the minimap button."] = true,
+	["All running modules have been reset."] = true,
+	["All running modules have been rebooted for all raid members."] = true,
+	["All running modules have been disabled."] = true,
+	["%s reset."] = true,
+	["%s disabled."] = true,
+	["%s icon is now %s."] = true,
+	["Show it again with /bw plugin minimap."] = true,
+	["You need to be an assistant or raid leader to use this function."] = true,
+} end)
+
 L:RegisterTranslations("zhCN", function() return {
 	["|cff00ff00Module running|r"] = "|cff00ff00模块运行|r",
 	["|cffeda55fClick|r to reset all running modules. |cffeda55fCtrl+Click|r to force reboot for everyone (Requires assistant or higher). |cffeda55fAlt+Click|r to disable them. |cffeda55fCtrl+Alt+Click|r to disable Big Wigs completely."] = "|cffeda55f点击|r 重置所有模块. |cffeda55fCtrl+点击|r 强制重新启动 (需要L或A). |cffeda55fAlt+点击|r 禁用. |cffeda55fCtrl+Alt+点击|r 完全禁用 Big Wigs.",
@@ -20,7 +41,7 @@ L:RegisterTranslations("zhCN", function() return {
 	["Active boss modules"] = "激活的Boss模块",
 	["hidden"] = "隐藏",
 	["shown"] = "显示",
-	["minimap"] = "迷你地图",
+	-- ["minimap"] = true,
 	["Minimap"] = "迷你地图",
 	["Toggle the minimap button."] = "切换小地图按钮.",
 	["All running modules have been reset."] = "所有运行模块已重置.",
@@ -29,28 +50,7 @@ L:RegisterTranslations("zhCN", function() return {
 	["%s reset."] = "%s 重置.",
 	["%s disabled."] = "%s 禁用.",
 	["%s icon is now %s."] = "%s 图标现在是 %s.",
-	["Show it again with /bw plugin minimap."] = "再次显示它 /bw 小地图插件.",
 	["You need to be an assistant or raid leader to use this function."] = "使用此功能要有A或RAID领导人.",
-} end)
-
-L:RegisterTranslations("deDE", function() return {
-	["|cff00ff00Module running|r"] = "|cff00ff00Modul aktiviert|r",
-	["|cffeda55fClick|r to reset all running modules. |cffeda55fCtrl+Click|r to force reboot for everyone (Requires assistant or higher). |cffeda55fAlt+Click|r to disable them. |cffeda55fCtrl+Alt+Click|r to disable Big Wigs completely."] = "|cffeda55fKlicken|r, um alle laufenden Module zurückzusetzen. |cffeda55fStrg+Klick|r um Reset für jedermann zu erzwingen (Benötigt Assistent oder höher). |cffeda55fAlt+Klick|r um alle laufenden Module zu beenden. |cffeda55fStrg+Shift+Klick|r um BigWigs komplett zu beenden.",
-	["|cffeda55fClick|r to enable."] = "|cffeda55fKlicken|r um zu aktivieren.",
-	["Big Wigs is currently disabled."] = "Big Wigs ist momentan deaktiviert.",
-	["Active boss modules"] = "Aktive Boss Module",
-	["hidden"] = "versteckt",
-	["shown"] = "angezeigt",
-	-- ["minimap"] = true,
-	["Minimap"] = "Minimap",
-	["Toggle the minimap button."] = "Minimap Button anzeigen.",
-	["All running modules have been reset."] = "Alle laufenden Module wurden zurückgesetzt.",
-	["All running modules have been rebooted for all raid members."] = "Alle laufenden Module wurden für alle Schlachtzugsmitglieder neu gestartet.",
-	["All running modules have been disabled."] = "Alle laufenden Module wurden beendet.",
-	["%s reset."] = "%s zurückgesetzt.",
-	["%s disabled."] = "%s beendet.",
-	["%s icon is now %s."] = "%s Icon ist jetzt %s.",
-	["You need to be an assistant or raid leader to use this function."] = "Du musst Schlachtzugsleiter oder Assistent sein, um diese Funktion zu benutzen.",
 } end)
 
 ----------------------------------
@@ -175,7 +175,12 @@ function BigWigsOptions:OnClick()
 			for name, module in deuce.core:IterateModules() do
 				if module:IsBossModule() and deuce.core:IsModuleActive(module) then
 					if (IsRaidLeader() or IsRaidOfficer()) then
-						deuce.core:TriggerEvent("BigWigs_SendSync", "RebootModule "..tostring(module))
+						local name = tostring(module)
+ 						if BigWigs.BabbleBoss:HasReverseTranslation(name) then
+ 							name = BigWigs.BabbleBoss:GetReverseTranslation(name)
+ 						end
+ 						BigWigs:DebugMessage("options sync ".. name)
+ 						deuce.core:TriggerEvent("BigWigs_SendSync", "RebootModule " .. name) 
 					end
 				end
 			end

@@ -1,10 +1,12 @@
-
-assert( BigWigs, "BigWigs not found!")
+assert(BigWigs, "BigWigs not found!")
 
 
 ------------------------------
---      Are you local?      --
+-- Are you local?      --
 ------------------------------
+
+if not AceLibrary:HasInstance("PaintChips-2.0") then error(vmajor .. " requires PaintChips-2.0") end
+local paint = AceLibrary("PaintChips-2.0")
 
 local L = AceLibrary("AceLocale-2.2"):new("BigWigsBars")
 local paint = AceLibrary("PaintChips-2.0")
@@ -17,7 +19,7 @@ local count = 1
 
 local new, del
 do
-	local cache = setmetatable({},{__mode="k"})
+	local cache = setmetatable({}, { __mode = "k" })
 	function new()
 		local t = next(cache)
 		if t then
@@ -27,6 +29,7 @@ do
 			return {}
 		end
 	end
+
 	function del(t)
 		if not t then return nil end
 		for k in pairs(t) do
@@ -38,41 +41,69 @@ do
 end
 
 ----------------------------
---      Localization      --
+-- Localization      --
 ----------------------------
+
+L:RegisterTranslations("enUS", function() return {
+	["Bars"] = true,
+	["bars"] = true,
+	["Options for the timer bars."] = true,
+	["Show the bar anchor frame."] = true,
+	["Set the bar scale."] = true,
+	["Group upwards"] = true,
+	["Toggle bars grow upwards/downwards from anchor."] = true,
+	["Timer bars"] = true,
+	["Show anchor"] = true,
+	["Grow bars upwards"] = true,
+	["Scale"] = true,
+	["Bar scale"] = true,
+	["Bars now grow %2$s"] = true,
+	["Scale is set to %2$s"] = true,
+	["Up"] = true,
+	["Down"] = true,
+	["Test"] = true,
+	["Close"] = true,
+	["Texture"] = true,
+	["Set the texture for the timerbars."] = true,
+	["Reset position"] = true,
+	["Reset the anchor position, moving it to the center of your screen."] = true,
+	["Reverse"] = true,
+	["Toggles if bars are reversed (fill up instead of emptying)."] = true,
+	["Emphasize"] = true,
+	["Emphasize bars that are close to completion (<10sec). Also note that bars started at less than 15 seconds initially will be emphasized right away."] = true,
+	["Enable"] = true,
+	["Enables emphasizing bars."] = true,
+	["Flash"] = true,
+	["Flashes the background red for bars that are emphasized."] = true,
+	["Move"] = true,
+	["Move bars that are emphasized to a second anchor."] = true,
+	["Set the scale for emphasized bars."] = true,
+	["Emphasize Bars"] = true,
+	["HP Bars"] = true,
+}
+end)
 
 L:RegisterTranslations("zhCN", function() return {
 	["Bars"] = "计时条",
-            
 	["bars"] = "计时条",
-
 	["Options for the timer bars."] = "计时条选项.",
 	["Show the bar anchor frame."] = "显示计时条框体，可以对计时条进行移动.",
 	["Set the bar scale."] = "调整计时条缩放比例.",
 	["Group upwards"] = "向上排列",
 	["Toggle bars grow upwards/downwards from anchor."] = "切换计时条向上/向下排列.",
-
 	["Timer bars"] = "计时条",
 	["Show anchor"] = "显示计时条框体",
 	["Grow bars upwards"] = "计时条向上延伸",
 	["Scale"] = "大小",
 	["Bar scale"] = "条大小",
-
 	["Bars now grow %2$s"] = "计时条设置为向 %2$s 延伸",
 	["Scale is set to %2$s"] = "缩放比例设置为 %2$s",
-
 	["Up"] = "向上",
 	["Down"] = "向下",
-	
 	["Test"] = "测试",
 	["Close"] = "关闭",
-
 	["Texture"] = "材质",
 	["Set the texture for the timerbars."] = "为计时条设置材质.",
-
-
-
-
 	["Reset position"] = "复位位置",
 	["Reset the anchor position, moving it to the center of your screen."] = "重置锚的位置，移动到屏幕的中心.",
 	["Reverse"] = "反向",
@@ -87,72 +118,23 @@ L:RegisterTranslations("zhCN", function() return {
 	["Move bars that are emphasized to a second anchor."] = "移动大技能图标提示条的锚点.",
 	["Set the scale for emphasized bars."] = "设置大技能图标提示条的规模.",
 	["Emphasize Bars"] = "大技能图标提示条",
-	["Enable IntervalBars"] = "开启间隔条",
-	["Keep timers visible untill the timed event happens"] = "保持计时器可见，直到计时事件发生。",
-} end)
-
-L:RegisterTranslations("deDE", function() return {
-	["Bars"] = "Anzeigebalken",
-
-	["bars"] = "balken",
-
-	["Options for the timer bars."] = "Optionen für die Timer Anzeigebalken.",
-	["Show the bar anchor frame."] = "Verankerung der Anzeigebalken anzeigen.",
-	["Set the bar scale."] = "Skalierung der Anzeigebalken wählen.",
-	["Group upwards"] = "Nach oben fortsetzen",
-	["Toggle bars grow upwards/downwards from anchor."] = "Anzeigebalken von der Verankerung aus nach oben/unten fortsetzen.",
-
-	["Timer bars"] = "Timer Anzeigebalken",
-	["Show anchor"] = "Verankerung anzeigen",
-	["Grow bars upwards"] = "Anzeigebalken nach oben fortsetzen",
-	["Scale"] = "Skalierung",
-	["Bar scale"] = "Anzeigebalken Skalierung",
-
-	["Bars now grow %2$s"] = "Anzeigebalken werden nun fortgesetzt nach: %2$s",
-	["Scale is set to %2$s"] = "Skalierung jetzt: %2$s",
-
-	["Up"] = "oben",
-	["Down"] = "unten",
-
-	["Test"] = "Test",
-	["Close"] = "Schlie\195\159en",
-
-	["Texture"] = "Textur",
-	["Set the texture for the timerbars."] = "Textur der Anzeigebalken wählen.",
-
-
-
-
-	["Reset position"] = "Position zurücksetzen",
-	["Reset the anchor position, moving it to the center of your screen."] = "Die Verankerungsposition zurücksetzen (bewegt die Balken zur Mitte deines Interfaces).",
-	["Reverse"] = "Umkehren",
-	["Toggles if bars are reversed (fill up instead of emptying)."] = "Legt fest, ob sich die Anzeigebalken füllen oder leeren sollen.",
-	["Emphasize"] = "Hervorheben",
-	["Emphasize bars that are close to completion (<10sec). Also note that bars started at less than 15 seconds initially will be emphasized right away."] = "Anzeigebalken hervorheben die kurz vor Abschluss sind (<10sek). Anzeigebalken die mit einem Timer von weniger als 15 Sekunden starten werden von Beginn weg als hervorgehobene Balken dargestellt.",
-	["Enable"] = "Aktivieren",
-	["Enables emphasizing bars."] = "Aktiviert hervorgehobene Anzeigebalken.",
-	["Flash"] = "Blinken",
-	["Flashes the background red for bars that are emphasized."] = "Lässt den Hintergrund von hervorgehobenen Anzeigebalken rot blinken.",
-	["Move"] = "Bewegen",
-	["Move bars that are emphasized to a second anchor."] = "Hervorgehobene Anzeigebalken zu einem zweiten Ankerpunkt bewegen.",
-	["Set the scale for emphasized bars."] = "Die Skalierung für hervorgehobene Anzeigebalken festlegen.",
-	["Emphasize Bars"] = "Hervorgehobene Balken",
-} end)
+}
+end)
 
 ----------------------------------
---      Module Declaration      --
+-- Module Declaration      --
 ----------------------------------
 
 BigWigsBars = BigWigs:NewModule(L["Bars"])
-BigWigsBars.revision = tonumber(string.sub("$Revision: 20003 $", 12, -3))
+BigWigsBars.revision = 20012
 BigWigsBars.defaultDB = {
 	growup = false,
 	scale = 1.0,
 	texture = "BantoBar",
-
 	posx = nil,
 	posy = nil,
-
+	hpPosx = nil,
+	hpPosy = nil,
 	emphasize = true,
 	emphasizeMove = true,
 	emphasizeFlash = true,
@@ -160,13 +142,10 @@ BigWigsBars.defaultDB = {
 	emphasizePosY = nil,
 	emphasizeScale = 1.5,
 	emphasizeGrowup = false,
-
 	duration = 0.5,
-
 	width = nil,
 	height = nil,
 	reverse = nil,
-	intervalbar = true,
 }
 BigWigsBars.consoleCmd = L["bars"]
 
@@ -177,6 +156,7 @@ local function getOption(key)
 		return BigWigsBars.db.profile[key]
 	end
 end
+
 local function setOption(key, value)
 	if key == "anchor" then
 		if value then
@@ -195,6 +175,7 @@ local function setOption(key, value)
 		BigWigsBars:SetCandyBarGroupGrowth("BigWigsEmphasizedGroup", value)
 	end
 end
+
 local function shouldDisableEmphasizeOption()
 	return not BigWigsBars.db.profile.emphasize
 end
@@ -203,7 +184,7 @@ BigWigsBars.consoleOptions = {
 	type = "group",
 	name = L["Bars"],
 	desc = L["Options for the timer bars."],
-	args   = {
+	args = {
 		anchor = {
 			type = "execute",
 			name = L["Show anchor"],
@@ -223,14 +204,6 @@ BigWigsBars.consoleOptions = {
 			name = " ",
 			order = 10,
 		},
-		intervalbar = {
-			type = "toggle",
-			name = L["Enable IntervalBars"],
-			desc = L["Keep timers visible untill the timed event happens"],
-			order = 12,
-			get = function() return BigWigsBars.db.profile.intervalbar end,
-			set = function(v) BigWigsBars.db.profile.intervalbar = v end,
-		},
 		growup = {
 			type = "toggle",
 			name = L["Grow bars upwards"],
@@ -244,7 +217,7 @@ BigWigsBars.consoleOptions = {
 			end,
 			message = L["Bars now grow %2$s"],
 			current = L["Bars now grow %2$s"],
-			map = {[true] = L["Up"], [false] = L["Down"]},
+			map = { [true] = L["Up"], [false] = L["Down"] },
 		},
 		reverse = {
 			type = "toggle",
@@ -253,7 +226,7 @@ BigWigsBars.consoleOptions = {
 			order = 14,
 			get = function() return BigWigsBars.db.profile.reverse end,
 			set = function(v) BigWigsBars.db.profile.reverse = v end,
-		--passValue = "reverse",
+			--passValue = "reverse",
 		},
 		scale = {
 			type = "range",
@@ -347,9 +320,8 @@ BigWigsBars.consoleOptions = {
 
 
 ------------------------------
---      Initialization      --
+-- Initialization      --
 ------------------------------
-
 function BigWigsBars:OnRegister()
 	self.consoleOptions.args.texture.validate = surface:List()
 	self:RegisterEvent("Surface_Registered", function()
@@ -362,6 +334,7 @@ function BigWigsBars:OnEnable()
 	self.frames = {}
 	self:SetupFrames()
 	self:SetupFrames(true)
+	self:SetupHPBarFrame()
 	self:RegisterEvent("BigWigs_ShowAnchors")
 	self:RegisterEvent("BigWigs_HideAnchors")
 	self:RegisterEvent("BigWigs_StartBar")
@@ -372,7 +345,6 @@ function BigWigsBars:OnEnable()
 	self:RegisterEvent("BigWigs_StartHPBar")
 	self:RegisterEvent("BigWigs_StopHPBar")
 	self:RegisterEvent("BigWigs_SetHPBar")
-	self:RegisterEvent("BigWigs_StartIntervalBar")
 	if not self:IsEventRegistered("Surface_Registered") then
 		self:RegisterEvent("Surface_Registered", function()
 			self.consoleOptions.args[L["Texture"]].validate = surface:List()
@@ -385,6 +357,8 @@ function BigWigsBars:OnEnable()
 		self.frames.emphasizeAnchor.moduleBars = new()
 		self.frames.emphasizeAnchor.movingBars = new()
 	end
+
+	paint:RegisterColor("Gray", 0.5, 0.5, 0.5)
 end
 
 function BigWigsBars:OnDisable()
@@ -400,11 +374,8 @@ end
 
 
 ------------------------------
---      Event Handlers      --
+-- Event Handlers      --
 ------------------------------
-local barCache = {
-	-- [i] = {text, module}
-	}
 function BigWigsBars:Disable(module)
 	if self.frames.emphasizeAnchor and self.frames.emphasizeAnchor.moduleBars[module] then
 		if self.frames.emphasizeAnchor.emphasizeTimers[module] then
@@ -432,11 +403,6 @@ function BigWigsBars:Disable(module)
 		if not next(self.frames.emphasizeAnchor.movingBars) then
 			self:CancelScheduledEvent("BigWigsBarMover")
 		end
-	else
-		for i=1, table.getn(barCache) do
-			BigWigsBars:BigWigs_StopBar(barCache[i][2], barCache[i][1])
-		end
-		barCache = {}
 	end
 end
 
@@ -452,6 +418,8 @@ function BigWigsBars:BigWigs_ShowAnchors()
 		if not self.frames.emphasizeAnchor then self:SetupFrames(true) end
 		self.frames.emphasizeAnchor:Show()
 	end
+
+	self.frames.hpAnchor:Show()
 end
 
 
@@ -462,13 +430,35 @@ function BigWigsBars:BigWigs_HideAnchors()
 	if self.frames.emphasizeAnchor then
 		self.frames.emphasizeAnchor:Hide()
 	end
+
+	self.frames.hpAnchor:Hide()
 end
 
+-- starts normal bar or irregular depending on the time input
+function BigWigsBars:StartBar(module, text, time, icon, otherc, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
+	if text and time then
+		if type(time) == "number" then
+			return BigWigsBars:BigWigs_StartBar(module, text, time, icon, otherc, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
+		elseif type(time) == "table" and time.min and time.max then
+			return BigWigsBars:StartIrregularBar(module, text, time.min, time.max, icon, otherc, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
+		end
+	end
+
+	return nil
+end
 
 function BigWigsBars:BigWigs_StartBar(module, text, time, icon, otherc, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
 	if not text or not time then return end
-	local id = "BigWigsBar "..text
+	local id = self:GetBarId(module, text) -- "BigWigsBar "..text
 	if not self.frames.anchor then self:SetupFrames() end
+
+	-- reset irregular bar
+	if self:IsEventScheduled("BigWigsBarsIrregularBar" .. text) then
+		self:CancelScheduledEvent("BigWigsBarsIrregularBar" .. text)
+	end
+	if self:IsEventScheduled("BigWigsBarsIrregularBarEnd" .. text) then
+		self:CancelScheduledEvent("BigWigsBarsIrregularBarEnd" .. text)
+	end
 
 	if self.frames.emphasizeAnchor then
 		if not self.frames.emphasizeAnchor.moduleBars[module] then
@@ -480,6 +470,7 @@ function BigWigsBars:BigWigs_StartBar(module, text, time, icon, otherc, c1, c2, 
 	local bc, balpha, txtc
 	if BigWigsColors and type(BigWigsColors) == "table" then
 		if type(otherc) ~= "boolean" or not otherc then c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 = BigWigsColors:BarColor(time) end
+		bc, balpha, txtc = BigWigsColors.db.profile.bgc, BigWigsColors.db.profile.bga, BigWigsColors.db.profile.txtc
 	end
 
 	local groupId = self.frames.anchor.candyBarGroupId
@@ -528,16 +519,11 @@ function BigWigsBars:BigWigs_StartBar(module, text, time, icon, otherc, c1, c2, 
 	self:RegisterCandyBarWithGroup(id, groupId)
 	self:SetCandyBarTexture(id, surface:Fetch(self.db.profile.texture))
 
-	if type(BigWigsColors) == "table" then
-		local bg = BigWigsColors.db.profile.bgc
-		local bga = BigWigsColors.db.profile.bga
-		if bg and bga then
-			self:SetCandyBarBackgroundColor(id, bg, bga)
-		end
-		local txt = BigWigsColors.db.profile.txtc
-		if txt then
-			self:SetCandyBarTextColor(id, txt)
-		end
+	if type(colorModule) == "table" then
+		local bg = colorModule.db.profile.barBackground
+		self:SetCandyBarBackgroundColor(id, bg.r, bg.g, bg.b, bg.a)
+		local txt = colorModule.db.profile.barTextColor
+		self:SetCandyBarTextColor(id, txt.r, txt.g, txt.b, txt.a)
 	end
 
 	if type(self.db.profile.width) == "number" then
@@ -555,24 +541,34 @@ function BigWigsBars:BigWigs_StartBar(module, text, time, icon, otherc, c1, c2, 
 	self:SetCandyBarScale(id, scale)
 
 	self:StartCandyBar(id, true)
-	tinsert(barCache,{text, module})
+
 	--[[
 	local function OnBarClick(id)
-	local exists, time, elapsed, running, paused = self:CandyBarStatus(id)
-	if exists then
-	BigWigs:TriggerEvent("BigWigs_Message", id .. " in " .. time .. "s", "Urgent", false, nil, true)
+		local exists, time, elapsed, running, paused = self:CandyBarStatus(id)
+		if exists then
+			BigWigs:TriggerEvent("BigWigs_Message", id .. " in " .. time .. "s", "Urgent", false, nil, true)
+		end
 	end
-	end
-
+	
 	self:SetCandyBarOnClick(id, OnBarClick, id)
 	]]
+
+	return id
 end
 
 function BigWigsBars:BigWigs_StopBar(module, text)
 	if not text and type(text) ~= "string" then return end
-	if self.frames.emphasizeAnchor and self.frames.emphasizeAnchor.moduleBars[module] then
-		local id = "BigWigsBar "..text
 
+	-- reset irregular bar
+	if self:IsEventScheduled("BigWigsBarsIrregularBar" .. text) then
+		self:CancelScheduledEvent("BigWigsBarsIrregularBar" .. text)
+	end
+	if self:IsEventScheduled("BigWigsBarsIrregularBarEnd" .. text) then
+		self:CancelScheduledEvent("BigWigsBarsIrregularBarEnd" .. text)
+	end
+
+	local id = self:GetBarId(module, text) -- "BigWigsBar "..text
+	if self.frames.emphasizeAnchor and self.frames.emphasizeAnchor.moduleBars[module] then
 		if self.frames.emphasizeAnchor.movingBars[id] then
 			self.frames.emphasizeAnchor.movingBars[id] = del(self.frames.emphasizeAnchor.movingBars[id])
 		end
@@ -595,25 +591,63 @@ function BigWigsBars:BigWigs_StopBar(module, text)
 		self.frames.emphasizeAnchor.moduleBars[module][id] = nil
 	end
 
-	module:UnregisterCandyBar("BigWigsBar "..text)
+	module:UnregisterCandyBar(id)
 end
 
 function BigWigsBars:GetBarStatus(module, text)
-	local id = "BigWigsBar " .. text
+	local id = self:GetBarId(module, text) -- "BigWigsBar " .. text
 	local registered, time, elapsed, running = self:CandyBarStatus(id)
 	return registered, time, elapsed, running
 end
 
-local counterBarCache = {
-	-- [i] = {text, module}
-	}
+function BigWigsBars:GetBarId(module, text)
+	return "BigWigsBar " .. text
+end
+
+-- /run BigWigsBars:StartIrregularBar(BigWigs, "test", 1, 6)
+function BigWigsBars:StartIrregularBar(module, text, minTime, maxTime, icon, otherc, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
+	-- star normal bar for the minimum timer
+	local barId = self:BigWigs_StartBar(module, text, minTime, icon, otherc, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
+
+	local function Irregularity(module, text, time)
+		local id = self:GetBarId(self, text)
+
+		-- set bar color to gray
+		self:SetCandyBarBackgroundColor(id, "Gray")
+		self:SetCandyBarColor(id, "Gray")
+
+		-- reverse direction
+		if self:IsCandyBarReversed(id) then
+			self:SetCandyBarReversed(id, false)
+		else
+			self:SetCandyBarReversed(id, true)
+		end
+
+		-- set time to the remaining time
+		self:SetCandyBarTime(id, time)
+		self:SetCandyBarTimeLeft(id, time)
+
+		-- unregister bar after the maximum time
+		self:ScheduleEvent("BigWigsBarsIrregularBarEnd" .. text, "BigWigs_StopBar", time, self, text)
+	end
+
+	-- show the irregularity after the minimum amount of time
+	self:ScheduleEvent("BigWigsBarsIrregularBar" .. text, Irregularity, minTime, self, text, maxTime - minTime)
+
+	return barId
+end
+
+local counterBarCache = {-- [i] = {text, module}
+}
 function BigWigsBars:BigWigs_StartCounterBar(module, text, max, icon, bar, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
 	if not text then return end
-	local id = "BigWigsBar "..text
+	local id = self:GetBarId(module, text) -- "BigWigsBar "..text
 	BigWigsBars:BigWigs_StartBar(module, text, max, icon, bar, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
 	module:PauseCandyBar(id)
 	module:SetCandyBarTimeFormat(id, function(t) return string.format("%d", t) end)
-	tinsert(counterBarCache,{text, module})
+	tinsert(counterBarCache, { text, module })
+
+	return id
 end
 
 function BigWigsBars:BigWigs_StopCounterBar(module, text)
@@ -623,7 +657,7 @@ end
 
 function BigWigsBars:BigWigs_SetCounterBar(module, text, value)
 	if (not text) or (value == nil) or (value < 0) then return end
-	local id = "BigWigsBar "..text
+	local id = self:GetBarId(module, text) -- "BigWigsBar "..text
 	local bar = candybar.var.handlers[id]
 	if not bar then return end
 	bar.elapsed = value
@@ -631,11 +665,13 @@ function BigWigsBars:BigWigs_SetCounterBar(module, text, value)
 	if bar.time <= value then
 		BigWigsBars:BigWigs_StopBar(module, text)
 	end
+
+	return id
 end
 
 function BigWigsBars:BigWigs_HideCounterBars()
 	-- forces to hide all counter bars cached, used on bosskills
-	for i=1, table.getn(counterBarCache) do
+	for i = 1, table.getn(counterBarCache) do
 		BigWigsBars:BigWigs_StopCounterBar(counterBarCache[i][2], counterBarCache[i][1])
 	end
 
@@ -643,11 +679,106 @@ function BigWigsBars:BigWigs_HideCounterBars()
 end
 
 function BigWigsBars:BigWigs_StartHPBar(module, text, max, bar, icon, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
-	if not text then return end
-	local id = "BigWigsBar "..text
+	--[[if not text then return end
+	if not self.frames.hpAnchor then self:SetupHPBarFrame() end
+    local id = "BigWigsBar "..text
 	BigWigsBars:BigWigs_StartBar(module, text, max, bar, icon, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
-	module:PauseCandyBar(id)
+	
+    
+    
+    local groupName = self.frames.hpAnchor.candyBarGroupId
+    local value = self.db.profile.growup
+    --local id = self:BarId(L["fleshtentacle1"])
+    module:RegisterCandyBarWithGroup(id, groupName)
+    --id = self:BarId(L["fleshtentacle2"])
+    --self:RegisterCandyBarWithGroup(id, groupName)
+    module:SetCandyBarGroupPoint(groupName, value and "BOTTOM" or "TOP", self.frames.hpAnchor, value and "TOP" or "BOTTOM", 0, 0)
+    module:SetCandyBarGroupGrowth(groupName, true)
+    
+    
+    
+    
+    module:PauseCandyBar(id)
 	module:SetCandyBarTimeFormat(id, function(t) local timetext if t == 100 then timetext = "100" elseif t == 0 then timetext = "0%%" else timetext = string.format("%d", t) end return timetext end)
+    
+    return id]]
+	if not text or not max then
+		return
+	end
+
+	if not icon then
+		icon = "Interface\\Icons\\spell_shadow_metamorphosis"
+	end
+
+	local id = self:GetBarId(module, text) -- "BigWigsBar "..text
+	if not self.frames.hpAnchor then self:SetupHPBarFrame() end
+
+	local bc, balpha, txtc
+	if BigWigsColors and type(BigWigsColors) == "table" then
+		if type(otherc) ~= "boolean" or not otherc then c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 = BigWigsColors:BarColor(max) end
+		bc, balpha, txtc = BigWigsColors.db.profile.bgc, BigWigsColors.db.profile.bga, BigWigsColors.db.profile.txtc
+	end
+
+	local groupId = self.frames.hpAnchor.candyBarGroupId
+	local scale = self.db.profile.scale or 1
+
+	if groupId == self.frames.hpAnchor.candyBarGroupId and type(module.GetBarGroupId) == "function" then
+		groupId = module:GetBarGroupId(text)
+	end
+
+	self:RegisterCandyBar(id, max, text, icon, c1, c2, c3, c4, c5, c6, c8, c9, c10)
+	self:RegisterCandyBarWithGroup(id, groupId)
+	self:SetCandyBarTexture(id, surface:Fetch(self.db.profile.texture))
+
+	if type(colorModule) == "table" then
+		local bg = colorModule.db.profile.barBackground
+		self:SetCandyBarBackgroundColor(id, bg.r, bg.g, bg.b, bg.a)
+		local txt = colorModule.db.profile.barTextColor
+		self:SetCandyBarTextColor(id, txt.r, txt.g, txt.b, txt.a)
+	end
+
+	if type(self.db.profile.width) == "number" then
+		self:SetCandyBarWidth(id, self.db.profile.width)
+	end
+	if type(self.db.profile.height) == "number" then
+		self:SetCandyBarHeight(id, self.db.profile.height)
+	end
+
+	self:SetCandyBarFade(id, .5)
+	if self.db.profile.reverse then
+		self:SetCandyBarReversed(id, self.db.profile.reverse)
+	end
+
+	self:SetCandyBarScale(id, scale)
+
+	self:StartCandyBar(id, true)
+	self:PauseCandyBar(id)
+	self:SetCandyBarTimeFormat(id, function(t)
+		local timetext
+		if t == 100 then
+			timetext = "100%%"
+		elseif t == 0 then
+			timetext = "0%%"
+		else
+			timetext = string.format("%d%%", t)
+		end
+		return timetext
+	end)
+
+
+	local function OnBarClick(id, text)
+		local exists, totalHP, lostHP, running, paused = self:CandyBarStatus(id)
+		if exists then
+			local text = self:GetCandyBarText(id)
+			local remainingHP = totalHP - lostHP
+			SendChatMessage(text .. ": " .. remainingHP .. "%", "RAID")
+		end
+	end
+
+	self:SetCandyBarOnClick(id, OnBarClick, id, text)
+
+
+	return id
 end
 
 function BigWigsBars:BigWigs_StopHPBar(module, text)
@@ -658,7 +789,7 @@ end
 
 function BigWigsBars:BigWigs_SetHPBar(module, text, value)
 	if (not text) or (value == nil) or (value < 0) then return end
-	local id = "BigWigsBar "..text
+	local id = self:GetBarId(module, text) -- "BigWigsBar "..text
 	local bar = candybar.var.handlers[id]
 	if not bar then return end
 	bar.elapsed = value
@@ -668,32 +799,26 @@ function BigWigsBars:BigWigs_SetHPBar(module, text, value)
 	end
 end
 
-function BigWigsBars:BigWigs_StartIntervalBar(module, text, intervalMin, intervalMax, icon, otherColor, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
-	self:TriggerEvent("BigWigs_StartBar", self, text, intervalMin, icon, otherColor, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10)
-	if self.db.profile.intervalbar then
-		self:SetCandyBarFade("BigWigsBar "..text, intervalMax-intervalMin)
-	end
-end
-
 -----------------------------------------------------------------------
---    Emphasized Background Flashing
+-- Emphasized Background Flashing
 -----------------------------------------------------------------------
 local flashColors
 local generateColors
 do
-	local function ColorGradient(perc, r1,g1,b1, r2,g2,b2)
+	local function ColorGradient(perc, r1, g1, b1, r2, g2, b2)
 		if perc >= 1 then
-			return r2,g2,b2
+			return r2, g2, b2
 		elseif perc <= 0 then
-			return r1,g1,b1
+			return r1, g1, b1
 		end
-		return r1 + (r2-r1)*perc, g1 + (g2-g1)*perc, b1 + (b2-b1)*perc
+		return r1 + (r2 - r1) * perc, g1 + (g2 - g1) * perc, b1 + (b2 - b1) * perc
 	end
+
 	generateColors = function()
 		flashColors = {}
 		for i = 0.1, 1, 0.1 do
-			local r, g, b = ColorGradient(i, 1,0,0, 0,0,0)
-			table.insert(flashColors, {r, g, b, 0.5})
+			local r, g, b = ColorGradient(i, 1, 0, 0, 0, 0, 0)
+			table.insert(flashColors, { r, g, b, 0.5 })
 		end
 	end
 end
@@ -706,6 +831,7 @@ local function tablelength(T)
 	for _ in pairs(T) do count = count + 1 end
 	return count
 end
+
 flashBarUp = function(id)
 	--self:SetCandyBarBackgroundColor(id, bg.r, bg.g, bg.b, bg.a)
 	local r, g, b, a = unpack(flashColors[currentColor[id]])
@@ -739,13 +865,13 @@ function BigWigsBars:FlashBar(module, id)
 end
 
 -----------------------------------------------------------------------
---    Smooth Moving of Emphasized Bars
+-- Smooth Moving of Emphasized Bars
 -----------------------------------------------------------------------
 
 -- copied from PitBull_BarFader
 local function CosineInterpolate(y1, y2, mu)
-	local mu2 = (1-math.cos(mu*math.pi))/2
-	return y1*(1-mu2)+y2*mu2
+	local mu2 = (1 - math.cos(mu * math.pi)) / 2
+	return y1 * (1 - mu2) + y2 * mu2
 end
 
 function BigWigsBars:UpdateBars()
@@ -765,17 +891,17 @@ function BigWigsBars:UpdateBars()
 			local centerX, centerY = self:GetCandyBarCenter(bar)
 			if type(centerX) == "number" and type(centerY) == "number" then
 				local effscale = self:GetCandyBarEffectiveScale(bar)
-				local tempX, tempY = centerX*effscale, centerY*effscale
+				local tempX, tempY = centerX * effscale, centerY * effscale
 
-				tempX = CosineInterpolate(tempX, opt.targetX, 1 - ((stop - now) / self.db.profile.duration) )
-				tempY = CosineInterpolate(tempY, opt.targetY, 1 - ((stop - now) / self.db.profile.duration) )
+				tempX = CosineInterpolate(tempX, opt.targetX, 1 - ((stop - now) / self.db.profile.duration))
+				tempY = CosineInterpolate(tempY, opt.targetY, 1 - ((stop - now) / self.db.profile.duration))
 				scale = (opt.stopScale - opt.startScale) * (1 - ((stop - now) / self.db.profile.duration))
 
 				self:SetCandyBarScale(bar, scale + opt.startScale)
 				effscale = self:GetCandyBarEffectiveScale(bar)
 
 				local point, rframe, rpoint = self:GetCandyBarPoint(bar)
-				self:SetCandyBarPoint(bar, point, rframe, rpoint, tempX/effscale, tempY/effscale)
+				self:SetCandyBarPoint(bar, point, rframe, rpoint, tempX / effscale, tempY / effscale)
 			end
 		end
 	end
@@ -823,9 +949,8 @@ function BigWigsBars:EmphasizeBar(module, id)
 end
 
 ------------------------------
---      Slash Handlers      --
+-- Slash Handlers      --
 ------------------------------
-
 function BigWigsBars:SetScale(msg, supressreport)
 	local scale = tonumber(msg)
 	if scale and scale >= minscale and scale <= maxscale then
@@ -842,9 +967,8 @@ end
 
 
 ------------------------------
---    Create the Anchor     --
+-- Create the Anchor     --
 ------------------------------
-
 function BigWigsBars:SetupFrames(emphasize)
 	if not self.db.profile.emphasize and self.frames.anchor then return end
 	if self.db.profile.emphasize and self.frames.emphasizeAnchor then return end
@@ -865,12 +989,15 @@ function BigWigsBars:SetupFrames(emphasize)
 	frame:SetWidth(175)
 	frame:SetHeight(75)
 	frame:SetBackdrop({
-		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", tile = true, tileSize = 16,
-		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 16,
-		insets = {left = 4, right = 4, top = 4, bottom = 4},
+		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+		tile = true,
+		tileSize = 16,
+		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 },
 	})
 	frame:SetBackdropBorderColor(.5, .5, .5)
-	frame:SetBackdropColor(0,0,0)
+	frame:SetBackdropColor(0, 0, 0)
 	frame:ClearAllPoints()
 	frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	frame:EnableMouse(true)
@@ -889,7 +1016,7 @@ function BigWigsBars:SetupFrames(emphasize)
 	cfade:SetGradientAlpha("VERTICAL", .1, .1, .1, 0, .25, .25, .25, 1)
 	frame.cfade = cfade
 
-	local cheader = frame:CreateFontString(nil,"OVERLAY")
+	local cheader = frame:CreateFontString(nil, "OVERLAY")
 	cheader:SetFont(f, 14)
 	cheader:SetWidth(150)
 	cheader:SetText(L["Bars"])
@@ -904,7 +1031,7 @@ function BigWigsBars:SetupFrames(emphasize)
 	leftbutton:SetWidth(40)
 	leftbutton:SetHeight(25)
 	leftbutton:SetPoint("RIGHT", frame, "CENTER", -10, -15)
-	leftbutton:SetScript("OnClick", function()  self:TriggerEvent("BigWigs_Test") end )
+	leftbutton:SetScript("OnClick", function() self:TriggerEvent("BigWigs_Test") end)
 
 
 	t = leftbutton:CreateTexture()
@@ -927,7 +1054,7 @@ function BigWigsBars:SetupFrames(emphasize)
 	t:SetAllPoints(leftbutton)
 	t:SetBlendMode("ADD")
 	leftbutton:SetHighlightTexture(t)
-	leftbuttontext = leftbutton:CreateFontString(nil,"OVERLAY")
+	leftbuttontext = leftbutton:CreateFontString(nil, "OVERLAY")
 	leftbuttontext:SetFontObject(GameFontHighlight)
 	leftbuttontext:SetText(L["Test"])
 	leftbuttontext:SetAllPoints(leftbutton)
@@ -939,7 +1066,7 @@ function BigWigsBars:SetupFrames(emphasize)
 	rightbutton:SetWidth(40)
 	rightbutton:SetHeight(25)
 	rightbutton:SetPoint("LEFT", frame, "CENTER", 10, -15)
-	rightbutton:SetScript( "OnClick", function() self:BigWigs_HideAnchors() end )
+	rightbutton:SetScript("OnClick", function() self:BigWigs_HideAnchors() end)
 
 
 	t = rightbutton:CreateTexture()
@@ -962,7 +1089,7 @@ function BigWigsBars:SetupFrames(emphasize)
 	t:SetAllPoints(rightbutton)
 	t:SetBlendMode("ADD")
 	rightbutton:SetHighlightTexture(t)
-	rightbuttontext = rightbutton:CreateFontString(nil,"OVERLAY")
+	rightbuttontext = rightbutton:CreateFontString(nil, "OVERLAY")
 	rightbuttontext:SetFontObject(GameFontHighlight)
 	rightbuttontext:SetText(L["Close"])
 	rightbuttontext:SetAllPoints(rightbutton)
@@ -1001,7 +1128,7 @@ function BigWigsBars:SetupFrames(emphasize)
 		if x and y then
 			local s = self.frames.anchor:GetEffectiveScale()
 			self.frames.anchor:ClearAllPoints()
-			self.frames.anchor:SetPoint("TOP", UIParent, "TOP", 0, 0)--self.frames.anchor:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x / s, y / s)
+			self.frames.anchor:SetPoint("TOP", UIParent, "TOP", 0, 0) --self.frames.anchor:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x / s, y / s)
 		else
 			self:ResetAnchor("normal")
 		end
@@ -1014,6 +1141,151 @@ function BigWigsBars:SetupFrames(emphasize)
 	end
 
 	self:RestorePosition()
+end
+
+function BigWigsBars:SetupHPBarFrame()
+	if self.frames.hpAnchor then return end
+
+	local f, t
+
+	f, _, _ = GameFontNormal:GetFont()
+
+	--self.frames = {}
+
+	local frame = CreateFrame("Frame", "BigWigsHPBarAnchor", UIParent)
+
+	frame.owner = self
+	frame:Hide()
+
+	frame:SetWidth(175)
+	frame:SetHeight(75)
+	frame:SetBackdrop({
+		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+		tile = true,
+		tileSize = 16,
+		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 },
+	})
+	frame:SetBackdropBorderColor(.5, .5, .5)
+	frame:SetBackdropColor(0, 0, 0)
+	frame:ClearAllPoints()
+	frame:SetPoint("TOP", UIParent, "TOP", 250, 0)
+	frame:EnableMouse(true)
+	frame:RegisterForDrag("LeftButton")
+	frame:SetMovable(true)
+	frame:SetScript("OnDragStart", function() this:StartMoving() end)
+	frame:SetScript("OnDragStop", function() this:StopMovingOrSizing() this.owner:SavePosition() end)
+
+
+	local cfade = frame:CreateTexture(nil, "BORDER")
+	cfade:SetWidth(169)
+	cfade:SetHeight(25)
+	cfade:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
+	cfade:SetPoint("TOP", frame, "TOP", 0, -4)
+	cfade:SetBlendMode("ADD")
+	cfade:SetGradientAlpha("VERTICAL", .1, .1, .1, 0, .25, .25, .25, 1)
+	frame.cfade = cfade
+
+	local cheader = frame:CreateFontString(nil, "OVERLAY")
+	cheader:SetFont(f, 14)
+	cheader:SetWidth(150)
+	cheader:SetText(L["HP Bars"])
+	cheader:SetTextColor(1, .8, 0)
+	cheader:ClearAllPoints()
+	cheader:SetPoint("TOP", frame, "TOP", 0, -10)
+
+	frame.cheader = cheader
+
+	local leftbutton = CreateFrame("Button", nil, frame)
+	leftbutton.owner = self
+	leftbutton:SetWidth(40)
+	leftbutton:SetHeight(25)
+	leftbutton:SetPoint("RIGHT", frame, "CENTER", -10, -15)
+	leftbutton:SetScript("OnClick", function() self:TriggerEvent("BigWigs_Test") end)
+
+
+	t = leftbutton:CreateTexture()
+	t:SetWidth(50)
+	t:SetHeight(32)
+	t:SetPoint("CENTER", leftbutton, "CENTER")
+	t:SetTexture("Interface\\Buttons\\UI-Panel-Button-Up")
+	t:SetTexCoord(0, 0.625, 0, 0.6875)
+	leftbutton:SetNormalTexture(t)
+
+	t = leftbutton:CreateTexture(nil, "BACKGROUND")
+	t:SetTexture("Interface\\Buttons\\UI-Panel-Button-Down")
+	t:SetTexCoord(0, 0.625, 0, 0.6875)
+	t:SetAllPoints(leftbutton)
+	leftbutton:SetPushedTexture(t)
+
+	t = leftbutton:CreateTexture()
+	t:SetTexture("Interface\\Buttons\\UI-Panel-Button-Highlight")
+	t:SetTexCoord(0, 0.625, 0, 0.6875)
+	t:SetAllPoints(leftbutton)
+	t:SetBlendMode("ADD")
+	leftbutton:SetHighlightTexture(t)
+	leftbuttontext = leftbutton:CreateFontString(nil, "OVERLAY")
+	leftbuttontext:SetFontObject(GameFontHighlight)
+	leftbuttontext:SetText(L["Test"])
+	leftbuttontext:SetAllPoints(leftbutton)
+
+	frame.leftbutton = leftbutton
+
+	local rightbutton = CreateFrame("Button", nil, frame)
+	rightbutton.owner = self
+	rightbutton:SetWidth(40)
+	rightbutton:SetHeight(25)
+	rightbutton:SetPoint("LEFT", frame, "CENTER", 10, -15)
+	rightbutton:SetScript("OnClick", function() self:BigWigs_HideAnchors() end)
+
+
+	t = rightbutton:CreateTexture()
+	t:SetWidth(50)
+	t:SetHeight(32)
+	t:SetPoint("CENTER", rightbutton, "CENTER")
+	t:SetTexture("Interface\\Buttons\\UI-Panel-Button-Up")
+	t:SetTexCoord(0, 0.625, 0, 0.6875)
+	rightbutton:SetNormalTexture(t)
+
+	t = rightbutton:CreateTexture(nil, "BACKGROUND")
+	t:SetTexture("Interface\\Buttons\\UI-Panel-Button-Down")
+	t:SetTexCoord(0, 0.625, 0, 0.6875)
+	t:SetAllPoints(rightbutton)
+	rightbutton:SetPushedTexture(t)
+
+	t = rightbutton:CreateTexture()
+	t:SetTexture("Interface\\Buttons\\UI-Panel-Button-Highlight")
+	t:SetTexCoord(0, 0.625, 0, 0.6875)
+	t:SetAllPoints(rightbutton)
+	t:SetBlendMode("ADD")
+	rightbutton:SetHighlightTexture(t)
+	rightbuttontext = rightbutton:CreateFontString(nil, "OVERLAY")
+	rightbuttontext:SetFontObject(GameFontHighlight)
+	rightbuttontext:SetText(L["Close"])
+	rightbuttontext:SetAllPoints(rightbutton)
+
+	frame.rightbutton = rightbutton
+
+	self.frames.hpAnchor = frame
+
+	local x = self.db.profile.hpPosx
+	local y = self.db.profile.hpPosy
+	if x and y then
+		local s = self.frames.anchor:GetEffectiveScale()
+		self.frames.hpAnchor:ClearAllPoints()
+		self.frames.hpAnchor:SetPoint("TOP", UIParent, "TOP", 0, 0) --self.frames.hpAnchor:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x / s, y / s)
+	else
+		self:ResetAnchor("normal")
+	end
+
+	local value = self.db.profile.growup
+	self.frames.hpAnchor.candyBarGroupId = "BigWigsBarHPGroup"
+	self:RegisterCandyBarGroup(self.frames.hpAnchor.candyBarGroupId)
+	self:SetCandyBarGroupPoint(self.frames.hpAnchor.candyBarGroupId, value and "BOTTOM" or "TOP", self.frames.hpAnchor, value and "TOP" or "BOTTOM", 0, 0)
+	self:SetCandyBarGroupGrowth(self.frames.hpAnchor.candyBarGroupId, value)
+
+	self:RestorePositionHP()
 end
 
 function BigWigsBars:ResetAnchor(specific)
@@ -1036,10 +1308,17 @@ function BigWigsBars:ResetAnchor(specific)
 		self.db.profile.emphasizePosX = nil
 		self.db.profile.emphasizePosY = nil
 	end
+
+	if not self.frames.hpAnchor then self:SetupHPBarFrame() end
+	self.frames.hpAnchor:ClearAllPoints()
+	self.frames.hpAnchor:SetPoint("TOP", UIParent, "TOP", 250, 0)
+	self.db.profile.hpPosx = nil
+	self.db.profile.hpPosy = nil
 end
 
 function BigWigsBars:SavePosition()
 	if not self.frames.anchor then self:SetupFrames() end
+	if not self.frames.hpAnchor then self:SetupHPBarFrame() end
 
 	local s = self.frames.anchor:GetEffectiveScale()
 	self.db.profile.posx = self.frames.anchor:GetLeft() * s
@@ -1051,6 +1330,11 @@ function BigWigsBars:SavePosition()
 		self.db.profile.emphasizePosX = self.frames.emphasizeAnchor:GetLeft() * s
 		self.db.profile.emphasizePosY = self.frames.emphasizeAnchor:GetTop() * s
 	end
+
+	-- hp anchor
+	s = self.frames.hpAnchor:GetEffectiveScale()
+	self.db.profile.hpPosx = self.frames.hpAnchor:GetLeft() * s
+	self.db.profile.hpPosy = self.frames.hpAnchor:GetTop() * s
 end
 
 
@@ -1061,6 +1345,19 @@ function BigWigsBars:RestorePosition()
 	if not x or not y then return end
 
 	local f = self.frames.anchor
+	local s = f:GetEffectiveScale()
+
+	f:ClearAllPoints()
+	f:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x / s, y / s)
+end
+
+function BigWigsBars:RestorePositionHP()
+	local x = self.db.profile.hpPosx
+	local y = self.db.profile.hpPosy
+
+	if not x or not y then return end
+
+	local f = self.frames.hpAnchor
 	local s = f:GetEffectiveScale()
 
 	f:ClearAllPoints()

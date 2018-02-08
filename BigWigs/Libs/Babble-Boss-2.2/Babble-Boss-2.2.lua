@@ -10,7 +10,7 @@ Dependencies: AceLibrary, AceLocale-2.2
 ]]
 
 local MAJOR_VERSION = "Babble-Boss-2.2"
-local MINOR_VERSION = tonumber(string.sub("$Revision: 18031 $", 12, -3))
+local MINOR_VERSION = 20005
 
 if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary") end
 
@@ -36,10 +36,11 @@ BabbleBoss:RegisterTranslations("enUS", function()
 		["Patchwerk"] = true,
 		["Grobbulus"] = true,
 		["Gluth"] = true,
+		["Living Monstrosity"] = true;
 		["Feugen"] = true,
-		["Anubisath Warder"] = true,
 		["Stalagg"] = true,
 		["Thaddius"] = true,
+		["Anubisath Warder"] = true,
 		["Anub'Rekhan"] = true,
 		["Grand Widow Faerlina"] = true,
 		["Maexxna"] = true,
@@ -55,6 +56,7 @@ BabbleBoss:RegisterTranslations("enUS", function()
 		["Heigan the Unclean"] = true,
 		["Loatheb"] = true,
 		["Sapphiron"] = true,
+		["Venom Stalker"] = true,
 		["Kel'Thuzad"] = true,
 		["Lord Victor Nefarius"] = true,
 		["Nefarian"] = true,
@@ -156,6 +158,8 @@ BabbleBoss:RegisterTranslations("enUS", function()
 		["The Unforgiven"] = true;
 		["High Interrogator Gerstahn"] = true,
 		["Highlord Omokk"] = true,
+		["Ancient Core Hound"] = true,
+		["Gurubashi Berserker"] = true,
 		["Hukku"] = true,
 		["Hurley Blackbreath"] = true,
 		["Hydrospawn"] = true,
@@ -174,8 +178,6 @@ BabbleBoss:RegisterTranslations("enUS", function()
 		["Lord Vyletongue"] = true,
 		["Lorekeeper Polkelt"] = true,
 		["Loro"] = true,
-		["Ancient Core Hound"] = true,
-		["Gurubashi Berserker"] = true,
 		["Magister Kalendris"] = true,
 		["Magistrate Barthilas"] = true,
 		["Magmus"] = true,
@@ -311,9 +313,11 @@ BabbleBoss:RegisterTranslations("enUS", function()
 		["Jed Runewatcher"] = true;
 		["Lord Valthalak"] = true;
 		["Grubbis"] = true;
+		["Necro Stalker"] = true;
 		["Chomper"] = true;
 		["Viscous Fallout"] = true;
 		["Electrocutioner 6000"] = true;
+		["Elder Mottled Boar"] = true;
 		["Crowd Pummeler 9-60"] = true;
 		["Dark Iron Ambassador"] = true;
 		["Mekgineer Thermaplugg"] = true;
@@ -1141,6 +1145,7 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Baron Charr"] = "火焰男爵查尔",
 		["Princess Tempestria"] = "泰比斯蒂亚公主",
 		["Twilight Lord Kelris"] = "暮光领主克尔里斯",
+		["Mor Grayhoof"] = "莫尔·灰蹄",
 		["Blind Hunter"] = "盲眼猎手",
 		["Grethok the Controller"] = "黑翼控制者",
 		["Patchwerk"] = "帕奇维克",
@@ -1158,34 +1163,44 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Gothik the Harvester"] = "收割者戈提克",
 		["Highlord Mograine"] = "大领主莫格莱尼",
 		["Thane Korth'azz"] = "库尔塔兹领主",
+		["Interrogator Vishas"] = "审讯员韦沙斯";
 		["Lady Blaumeux"] = "女公爵布劳缪克丝",
 		["Sir Zeliek"] = "瑟里耶克爵士",
 		["The Four Horsemen"] = "四骑士",
 		["Miner Johnson"] = "矿工约翰森";
 		["Noth the Plaguebringer"] ="瘟疫使者诺斯",
 		["Heigan the Unclean"] = "肮脏者海根",
+		["Malor the Zealous"] = "指挥官玛洛尔";
 		["Loatheb"] = "憎恨者",
 		["Sapphiron"] = "萨菲隆",
 		["Kel'Thuzad"] = "克尔苏加德",
 		["High Inquisitor Fairbanks"] = "大检察官法尔班克斯";
 		["Lord Victor Nefarius"] = "维克多·奈法里奥斯",
+		["Houndmaster Grebmar"] = "驯犬者格雷布玛尔";
 		["Nefarian"] = "奈法利安",
 		["Vaelastrasz the Corrupt"] = "堕落的瓦拉斯塔兹",
 		["Scarlet Commander Mograine"] = "血色十字军指挥官莫格莱尼";
+		["Lord Blackwood"] = "布莱克伍德公爵";
+		["Lord Valthalak"] = "瓦塔拉克公爵";
 		["Razorgore the Untamed"] = "狂野的拉佐格尔",
 		["Broodlord Lashlayer"] = "勒西雷尔",
 		["Chromaggus"] = "克洛玛古斯",
+		["Necro Stalker"] = "死灵捕猎者";
 		["The Unforgiven"] = "不可宽恕者";
+		["Sothos"] = "索托斯";
 		["Ebonroc"] = "埃博诺克",
 		["Firemaw"] = "费尔默",
 		["Flamegor"] = "弗莱格尔",
 		["Majordomo Executus"] = "管理者埃克索图斯",
 		["Electrocutioner 6000"] = "电刑器6000型";
+		["Kormok"] = "库尔莫克";
 		["Ragnaros"] = "拉格纳罗斯",
 		["Baron Geddon"] = "迦顿男爵",
+		["Death Knight Darkreaver"] = "死亡骑士达克雷尔";
 		["Golemagg the Incinerator"] = "焚化者古雷曼格",
 		["Garr"] = "加尔",
 		["Sulfuron Harbinger"] = "萨弗隆先驱者",
+		["Watchman Doomgrip"] = "卫兵杜格瑞普";
 		["Shazzrah"] = "沙斯拉尔",
 		["Charlga Razorflank"] = "卡尔加·刺肋",
 		["Lucifron"] = "鲁西弗隆",
@@ -1195,14 +1210,15 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Magmadar"] = "玛格曼达",
 		["Onyxia"] = "奥妮克希亚",
 		["Azuregos"] = "艾索雷葛斯",
+		["Deviate Faerie Dragon"] = "变异精灵龙",
 		["Lord Kazzak"] = "卡扎克",
+		["Isalien"] = "伊萨利恩",
 		["Ysondre"] = "伊森德雷",
 		["Targorr the Dread"] = "可怕的塔格尔",
 		["Chief Ukorz Sandscalp"] = "乌克兹·沙顶",
 		["Emeriss"] = "艾莫莉丝",
 		["Taerar"] = "泰拉尔",
 		["Gahz'rilla"] = "加兹瑞拉",
-		["Anubisath Warder"] = "阿努比萨斯守望者",
 		["Lethon"] = "莱索恩",
 		["Antu'sul"] = "安图苏尔",
 		["High Priestess Jeklik"] = "高阶祭司耶克里克",
@@ -1217,19 +1233,26 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Jin'do the Hexxer"] = "妖术师金度",
 		["Bloodlord Mandokir"] = "血领主曼多基尔",
 		["Gahz'ranka"] = "加兹兰卡",
+		["Elder Mottled Boar"] = "老杂斑野猪";
+		["Anub'shiah"] = "阿努希尔";
 		["Gri'lek"] = "格里雷克",
+		["Chomper"] = "咀嚼者";
 		["Crowd Pummeler 9-60"] = "群体打击者9-60";
 		["Bazil Thredd"] = "巴基尔·斯瑞德",
 		["Hazza'rah"] = "哈扎拉尔",
 		["Renataki"] = "雷纳塔基",
+		["Revanchion"] = "雷瓦克安",
 		["Wushoolay"] = "乌苏雷",
 		["Kam Deepfury"] = "卡姆·深怒",
 		["Warder Stilgiss"] = "典狱官斯迪尔基斯";
 		["Death Speaker Jargba"] = "亡语者贾格巴",
+		["Ok'thor the Breaker"] = "破坏者奥科索尔";
 		["Stonespine"] = "石脊";
+		["Plaguemaw the Rotting"] = "腐烂的普雷莫尔",
 		["Hakkar"] = "哈卡",
 		["Aku'mai"] = "阿库麦尔",
 		["Ayamiss the Hunter"] = "狩猎者阿亚米斯",
+		["Shadowpriest Sezz'ziz"] = "暗影祭司塞瑟斯",
 		["Aggem Thorncurse"] = "阿格姆",
 		["Buru the Gorger"] = "吞咽者布鲁",
 		["Grubbis"] = "格鲁比斯";
@@ -1238,8 +1261,10 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Moam"] = "莫阿姆",
 		["Glutton"] = "暴食者",
 		["Anubisath Guardian"] = "阿努比萨斯守卫者",
+		["Lady Falther'ess"] = "法瑟蕾丝夫人",
 		["Ossirian the Unscarred"] = "无疤者奥斯里安",
 		["Lord Kri"] = "克里勋爵",
+		["Balzaphon"] = "巴尔萨冯";
 		["Bloodmage Thalnos"] = "血法师萨尔诺斯";
 		["Princess Yauj"] = "亚尔基公主",
 		["Vem"] = "维姆",
@@ -1251,12 +1276,14 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Lorgus Jett"] = "洛古斯·杰特",
 		["Anubisath Defender"] = "阿努比萨斯防御者",
 		["Fankriss the Unyielding"] = "顽强的范克瑞斯",
+		["Anubisath Warder"] = "阿努比萨斯守望者",
 		["Mekgineer Thermaplugg"] = "机械师瑟玛普拉格";
 		["Skul"] = "斯库尔";
 		["Princess Huhuran"] = "哈霍兰公主",
 		["Verdan the Everliving"] = "永生者沃尔丹",
 		["Ouro"] = "奥罗",
 		["Battleguard Sartura"] = "沙尔图拉",
+		["Venom Stalker"] = "毒液捕猎者",
 		["The Prophet Skeram"] = "预言者斯克拉姆",
 		["Emperor Vek'lor"] = "维克洛尔大帝",
 		["Emperor Vek'nilash"] = "维克尼拉斯大帝",
@@ -1264,11 +1291,14 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["The Twin Emperors"] = "双子皇帝",
 		["Viscidus"] = "维希度斯",
 		["Lord Cobrahn"] = "考布莱恩",
+		["Living Monstrosity"] = "畸形妖";
 		["Alzzin the Wildshaper"] = "奥兹恩",
 		["Ambassador Flamelash"] = "弗莱拉斯大使",
 		["Anger'rel"] = "安格雷尔",
+		["Eviscerator"] = "剜眼者";
 		["Ghamoo-ra"] = "加摩拉",
 		["Archivist Galford"] = "案管理员加尔福特",
+		["Ghok Bashguud"] = "霍克·巴什古德",	
 		["Atal'alarion"] = "阿塔拉利恩",
 		["Dark Iron Ambassador"] = "黑铁大使";
 		["Ragglesnout"] = "拉戈斯诺特",
@@ -1280,6 +1310,7 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Baroness Anastari"] = "安娜丝塔丽男爵夫人",
 		["Baron Rivendare"] = "瑞文戴尔男爵",
 		["Cannon Master Willey"] = "炮手威利",
+		["Gorosh the Dervish"] = "修行者高罗什";
 		["Jergosh the Invoker"] = "祈求者耶戈什",
 		["Captain Kromcrush"] = "克罗卡斯",
 		["Gizrul the Slavener"] = "奴役者基兹鲁尔",
@@ -1314,6 +1345,7 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Bannok Grimaxe"] = "班诺克·巨斧",
 		["Hazzas"] = "哈扎斯",
 		["Hearthsinger Forresten"] = "弗雷斯特恩",
+		["Hedrum the Creeper"] = "爬行者赫杜姆";
 		["Skum"] = "斯卡姆",
 		["High Interrogator Gerstahn"] = "审讯官格斯塔恩",
 		["Highlord Omokk"] = "欧莫克大王",
@@ -1342,7 +1374,9 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["High Inquisitor Whitemane"] = "大检察官怀特迈恩";
 		["Magister Kalendris"] = "卡雷迪斯镇长",
 		["Magistrate Barthilas"] = "巴瑟拉斯镇长",
+		["Verek"] = "维雷克";
 		["Magmus"] = "玛格姆斯",
+		["Naralex"] = "纳拉雷克斯",
 		["Overlord Ramtusk"] = "主宰拉姆塔斯",
 		["Maleki the Pallid"] = "苍白的玛勒基",
 		["Marduk Blackpool"] = "马杜克·布莱克波尔",
@@ -1426,9 +1460,11 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Revelosh"] = "鲁维罗什",
 		["Ironaya"] = "艾隆纳亚",
 		["Lady Sarevess"] = "萨利维丝",
+		["Grizzle"] = "格里兹尔";
 		["Obsidian Sentinel"] = "黑曜石哨兵",
 		["Ancient Stone Keeper"] = "远古巨石卫士",
 		["Kresh"] = "克雷什",
+		["Jarien"] = "亚雷恩";
 		["Galgann Firehammer"] = "加加恩·火锤",
 		["Grimlok"] = "格瑞姆洛克",
 		["Archaedas"] = "阿扎达斯",
@@ -1440,6 +1476,7 @@ BabbleBoss:RegisterTranslations("zhCN", function()
 		["Atiesh"] = "埃提耶什",
 		["Stratholme Courier"] = "斯坦索姆信使",
 		["Ancient Core Hound"] = "上古熔火恶犬",
+		["Maur Grimtotem"] = "玛尔·恐怖图腾",
 		["Gurubashi Berserker"] = "古拉巴什狂暴者",
 	}
 end)

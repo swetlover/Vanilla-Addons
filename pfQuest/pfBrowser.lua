@@ -78,7 +78,7 @@ local function CreateSpawnEntry(i)
     local maps = { }
 
     GameTooltip:SetOwner(this.text, "ANCHOR_LEFT", -10, -5)
-    GameTooltip:SetText("Located in", .3, 1, .8)
+    GameTooltip:SetText("位于", .3, 1, .8)
 
     if spawns[name] and spawns[name]["coords"] then
       for id, data in pairs(spawns[name]["coords"]) do
@@ -232,7 +232,7 @@ local function CreateItemEntry(i)
     local count = 0
 
     GameTooltip:SetOwner(pfBrowser, "ANCHOR_CURSOR")
-    GameTooltip:SetText("Looted from", .3, 1, .8)
+    GameTooltip:SetText("拾取从", .3, 1, .8)
 
     for id, field in pairs(items[name]) do
       local f, t, mob, sellCount = strfind(field, "(.*),(.*)")
@@ -274,7 +274,7 @@ local function CreateItemEntry(i)
     local name = this:GetParent().itemName
     local count = 0
     GameTooltip:SetOwner(pfBrowser, "ANCHOR_CURSOR")
-    GameTooltip:SetText("Sold by", .3, 1, .8)
+    GameTooltip:SetText("出售者：", .3, 1, .8)
 
     for id, field in pairs(vendors[name]) do
       local f, t, vendorName, sellCount = strfind(field, "(.*),(.*)")
@@ -298,6 +298,17 @@ local function CreateItemEntry(i)
 
   return f
 end
+
+local function ReplaceQuestDetailWildcards(questText)
+   questText = string.gsub(questText, "$[Nn]", UnitName("player"))
+   questText = string.gsub(questText, "$[Cc]", strlower(UnitClass("player")))
+   questText = string.gsub(questText, "$[Rr]", strlower(UnitRace("player")))
+   questText = string.gsub(questText, "$[Bb]", "\n")
+   -- UnitSex("player") returns 2 for male and 3 for female
+   -- that's why there is an unused capture group around the $[Gg]
+   return string.gsub(questText, "($[Gg])(.+):(.+);", "%"..UnitSex("player"))
+ end
+
 
 local function CreateQuestEntry(i)
   local f = CreateFrame("Button", nil, pfBrowser.tabs.quest.list)
@@ -328,7 +339,7 @@ local function CreateQuestEntry(i)
     end
 
     if quests[this.quest]["log"] then
-      GameTooltip:AddLine(quests[this.quest]["log"], .6,1,.9,true)
+      GameTooltip:AddLine(ReplaceQuestDetailWildcards(quests[this.quest]["log"]), .6,1,.9,true)
     end
 
     GameTooltip:Show()
@@ -415,10 +426,10 @@ end)
 
 pfBrowserIcon:SetScript("OnEnter", function()
   GameTooltip:SetOwner(this, ANCHOR_BOTTOMLEFT)
-  GameTooltip:SetText("pfQuest")
-  GameTooltip:AddDoubleLine("Left-Click", "Open Browser", 1, 1, 1, 1, 1, 1)
-  GameTooltip:AddDoubleLine("Right-Click", "Open Configuration", 1, 1, 1, 1, 1, 1)
-  GameTooltip:AddDoubleLine("Shift-Click", "Move Button", 1, 1, 1, 1, 1, 1)
+  GameTooltip:SetText("pfQuest 任务数据库 60addons汉化")
+  GameTooltip:AddDoubleLine("左键", "打开浏览器", 1, 1, 1, 1, 1, 1)
+  GameTooltip:AddDoubleLine("右键", "打开设置", 1, 1, 1, 1, 1, 1)
+  GameTooltip:AddDoubleLine("Shift+左键", "移动按钮", 1, 1, 1, 1, 1, 1)
   GameTooltip:Show()
 end)
 
@@ -470,7 +481,7 @@ pfBrowser.title:SetFontObject(GameFontWhite)
 pfBrowser.title:SetPoint("TOP", pfBrowser, "TOP", 0, -8)
 pfBrowser.title:SetJustifyH("LEFT")
 pfBrowser.title:SetFont(pfUI.font_default, 14)
-pfBrowser.title:SetText("|cff33ffccpf|rQuest")
+pfBrowser.title:SetText("|cff33ffccpf|rQuest 任务数据库 60addons汉化")
 
 pfBrowser.close = CreateFrame("Button", "pfQuestBrowserClose", pfBrowser)
 pfBrowser.close:SetPoint("TOPRIGHT", -5, -5)
@@ -496,7 +507,7 @@ end)
 pfBrowser.clean.text = pfBrowser.clean:CreateFontString("Caption", "LOW", "GameFontWhite")
 pfBrowser.clean.text:SetAllPoints(pfBrowser.clean)
 pfBrowser.clean.text:SetFont(pfUI.font_default, pfUI_config.global.font_size, "OUTLINE")
-pfBrowser.clean.text:SetText("Clean Map")
+pfBrowser.clean.text:SetText("清除地图")
 pfUI.api.SkinButton(pfBrowser.clean)
 
 CreateBrowseWindow("spawn", "pfQuestBrowserSpawn", pfBrowser, "BOTTOMLEFT", 5, 5)
@@ -508,23 +519,23 @@ SelectView(pfBrowser.tabs["spawn"])
 pfBrowser.input = CreateFrame("EditBox", "pfQuestBrowserSearch", pfBrowser)
 pfBrowser.input:SetFont(pfUI.font_default, pfUI_config.global.font_size, "OUTLINE")
 pfBrowser.input:SetAutoFocus(false)
-pfBrowser.input:SetText("Search")
+pfBrowser.input:SetText("搜索")
 pfBrowser.input:SetJustifyH("LEFT")
 pfBrowser.input:SetPoint("TOPLEFT", pfBrowser, "TOPLEFT", 5, -30)
 pfBrowser.input:SetPoint("BOTTOMRIGHT", pfBrowser, "TOPRIGHT", -100, -55)
 pfBrowser.input:SetTextInsets(10,10,5,5)
 pfBrowser.input:SetScript("OnEscapePressed", function() this:ClearFocus() end)
 pfBrowser.input:SetScript("OnEditFocusGained", function()
-  if this:GetText() == "Search" then this:SetText("") end
+  if this:GetText() == "搜索" then this:SetText("") end
 end)
 
 pfBrowser.input:SetScript("OnEditFocusLost", function()
-  if this:GetText() == "" then this:SetText("Search") end
+  if this:GetText() == "" then this:SetText("搜索") end
 end)
 
 pfBrowser.input:SetScript("OnTextChanged", function()
   local text = this:GetText()
-  if text ~= "Search" then
+  if text ~= "搜索" then
     pfBrowser:SearchSpawn(text)
     pfBrowser:SearchItem(text)
     pfBrowser:SearchQuest(text)
@@ -607,7 +618,7 @@ function pfBrowser:SearchSpawn(search)
     end
   end
 
-  RefreshView(i, "spawn", "Mobs & Objects")
+  RefreshView(i, "spawn", "怪物 & 物体")
 end
 
 function pfBrowser:SearchItem(search)
@@ -685,7 +696,7 @@ function pfBrowser:SearchItem(search)
     end
   end
 
-  RefreshView(i, "item", "Items")
+  RefreshView(i, "item", "物品")
 end
 
 function pfBrowser:SearchQuest(search)
@@ -749,5 +760,5 @@ function pfBrowser:SearchQuest(search)
     end
   end
 
-  RefreshView(i, "quest", "Quests")
+  RefreshView(i, "quest", "任务")
 end

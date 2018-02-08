@@ -1,11 +1,11 @@
 ## Interface: 11200
-## Title: |cff33ffccpf|cffffffffQuest
+## Title: |cff33ffccpf|cffffffffQuest 任务数据库V0.9
 ## Author: Shagu
 ## Notes: A lightweight Questhelper and Database
-## Version: 2.1.1
+## Version: 2.1
 ## OptionalDeps: pfUI
-## DefaultState: disabled
 ## SavedVariablesPerCharacter: pfQuest_config, pfDatabase_fav, pfQuest_history, pfQuest_colors
+## Q-CAT-Version: 007200
 
 # database index
 db\init.lua

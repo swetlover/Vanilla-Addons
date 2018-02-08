@@ -1,0 +1,29 @@
+## Interface: 11200
+## Title: Tank Buddy Enhanced
+## Title-zhCN: |CFFFFFFCC职业|R |CFFC69B6D战士|R战士坦克助手
+## Version: 3.0
+## Notes: Notices Party/Raid members when you use last stand, challenging shout/roar, shield wall, lifegiving gem or when your taunt/growl/mocking blow fails. It can also remove chosen buffs automatically, either always or only in defensive stance/bear form.
+## Notes-zhCN:|CFFDD66DDTank Buddy Enhanced|R 嘲讽，惩戒痛击，挑战怒吼 抵抗警报，盾墙，破釜沉舟 激活警报在聊天框自动通知|N设置命令/TB
+## DefaultState: disabled
+## Dependencies:
+## SavedVariables: TBSettings
+## OptionalDeps: Ace2, CT_RaidAssist, SpellStatusLib, SpellCacheLib, GratuityLib, Deformat, Babble-2.2
+## X-Embeds: Ace2, Deformat, GratuityLib, SpellCacheLib, SpellStatusLib, Babble-2.2
+
+Libs\AceLibrary\AceLibrary.lua
+Libs\AceOO-2.0\AceOO-2.0.lua
+Libs\AceAddon-2.0\AceAddon-2.0.lua
+Libs\AceConsole-2.0\AceConsole-2.0.lua
+Libs\AceHook-2.1\AceHook-2.1.lua
+Libs\AceDB-2.0\AceDB-2.0.lua
+Libs\AceEvent-2.0\AceEvent-2.0.lua
+Libs\AceLocale-2.2\AceLocale-2.2.lua
+Libs\AceDebug-2.0\AceDebug-2.0.lua
+
+Libs\Deformat-2.0\Deformat-2.0.lua
+Libs\Gratuity-2.0\Gratuity-2.0.lua
+Libs\Babble-Spell-2.2\Babble-Spell-2.2.lua
+Libs\SpellCache-1.0\SpellCache-1.0.lua
+Libs\SpellStatus-1.0\SpellStatus-1.0.lua 
+
+TankBuddyEnh.xml

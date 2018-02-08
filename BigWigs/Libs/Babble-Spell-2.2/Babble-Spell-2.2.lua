@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 Name: Babble-Spell-2.2
 Revision: $Rev: 25188 $
 Author(s): ckknight (ckknight@gmail.com)
@@ -28,7 +28,6 @@ local BabbleSpell = AceLibrary("AceLocale-2.2"):new(MAJOR_VERSION)
 BabbleSpell:RegisterTranslations("enUS", function()
     return {
 		["Abolish Disease"] = true,
-		["Lifegiving Gem"] = true,
 		["Abolish Poison Effect"] = true,
 		["Abolish Poison"] = true,
 		["Acid Breath"] = true,
@@ -3159,7 +3158,7 @@ BabbleSpell:RegisterTranslations("deDE", function()
 		["Death Wish"]="Todeswunsch",
 		["Deep Sleep"]="Tiefer Schlaf",
 		["Deep Slumber"]="Tiefer Schlummer",
-		["Deep Wound"]="Tiefe Wunden",
+		["Deep Wounds"]="Tiefe Wunden",
 		["Defense"]="Verteidigung",
 		["Defensive Stance Passive"]="Verteidigungshaltung - Passiv",
 		["Defensive Stance"]="Verteidigungshaltung",
@@ -5722,7 +5721,6 @@ BabbleSpell:RegisterTranslations("zhCN", function()
 		["Disengage"] = "逃脱",
 		["Dismiss Pet"] = "解散野兽",
 		["Dispel Magic"] = "驱散魔法",
-		["Lifegiving Gem"] = "生命宝石",
 		["Distract"] = "扰乱",
 		["Distracting Shot"] = "扰乱射击",
 		["Dive"] = "俯冲",
@@ -5847,7 +5845,7 @@ BabbleSpell:RegisterTranslations("zhCN", function()
 		["Focused Mind"] = "Focused Mind",
 		["Food"] = "进食",
 		["Forbearance"] = "自律",
-		["Force of Nature"] = true,
+		["Force of Nature"] = "Force of Nature",
 		["Force of Will"] = "意志之力",
 		["Freezing Trap Effect"] = "冰冻陷阱效果",
 		["Freezing Trap"] = "冰冻陷阱",

@@ -1,6 +1,6 @@
 --[[
-by Dorann
-Reduces farclip (terrain distance) to a minimum in naxxramas to avoid screen freezes
+    by Dorann
+    Reduces farclip (terrain distance) to a minimum in naxxramas to avoid screen freezes
 --]]
 
 
@@ -16,16 +16,15 @@ local minFarclip = 177
 ----------------------------
 
 L:RegisterTranslations("zhCN", function() return {
-	["Farclip"] = "裁剪视野",
-	["farclip"] = "farclip",
-	["Reduces the terrain distance to the minimum in Naxxramas to avoid screen freezes."] = "最小减少纳克萨玛斯地形距离避免屏幕冻结",
-	["Active"] = "激活",
-	["Activate the plugin."] = "激活插件.",
-	["Default Value"] = "默认值",
-	["Set the default farclip value."] = "设置插件到默认值.",
+    ["Farclip"] = "裁剪视野",
+    ["farclip"] = true,
+    ["Reduces the terrain distance to the minimum in Naxxramas to avoid screen freezes."] = "最小减少纳克萨玛斯地形距离避免屏幕冻结",
+    ["Active"] = "激活",
+    ["Activate the plugin."] = "激活插件.",
 } end)
 
 --[[L:RegisterTranslations("deDE", function() return {
+    
 } end)
 ]]
 ----------------------------------
@@ -34,8 +33,10 @@ L:RegisterTranslations("zhCN", function() return {
 
 BigWigsFarclip = BigWigs:NewModule(L["Farclip"])
 BigWigsFarclip.revision = 20011
+BigWigsFarclip.external = true
+
 BigWigsFarclip.defaultDB = {
-	active = true,
+    active = true,
 	defaultFarclip = 777,
 }
 BigWigsFarclip.consoleCmd = L["farclip"]
@@ -45,29 +46,15 @@ BigWigsFarclip.consoleOptions = {
 	name = L["Farclip"],
 	desc = L["Reduces the terrain distance to the minimum in Naxxramas to avoid screen freezes."],
 	args   = {
-		active = {
+        active = {
 			type = "toggle",
 			name = L["Active"],
 			desc = L["Activate the plugin."],
 			order = 1,
 			get = function() return BigWigsFarclip.db.profile.active end,
 			set = function(v) BigWigsFarclip.db.profile.active = v end,
-		--passValue = "reverse",
-		},
-		default = {
-			type = "range",
-			name = L["Default Value"],
-			desc = L["Set the default farclip value."],
-			order = 2,
-			min = 177,
-			max = 777,
-			step = 60,
-			get = function() return BigWigsFarclip.db.profile.defaultFarclip end,
-			set = function(v)
-				BigWigsFarclip.db.profile.defaultFarclip = v
-				SetCVar("farclip", v)
-			end,
-		},
+			--passValue = "reverse",
+		}
 	}
 }
 
@@ -76,22 +63,18 @@ BigWigsFarclip.consoleOptions = {
 ------------------------------
 
 function BigWigsFarclip:OnEnable()
-	self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+    self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 end
 
 function BigWigsFarclip:ZONE_CHANGED_NEW_AREA()
-	self:DebugMessage(1)
-	if self.db.profile.active then
-		self:DebugMessage(2)
-		if AceLibrary("Babble-Zone-2.2")["Naxxramas"] == GetRealZoneText() then
-			--self.db.profile.defaultFarclip = GetCVar("farclip")
-			SetCVar("farclip", minFarclip) -- http://wowwiki.wikia.com/wiki/CVar_farclip
-		else
-			self:DebugMessage(3)
-			if tonumber(GetCVar("farclip")) == minFarclip then
-				self:DebugMessage(4)
-				SetCVar("farclip", self.db.profile.defaultFarclip)
-			end
-		end
-	end
+    if self.db.profile.active then
+        if AceLibrary("Babble-Zone-2.2")["Naxxramas"] == GetRealZoneText() then
+            self.db.profile.defaultFarclip = GetCVar("farclip")
+            SetCVar("farclip", minFarclip) -- http://wowwiki.wikia.com/wiki/CVar_farclip
+        else
+            if tonumber(GetCVar("farclip")) == minFarclip then
+                SetCVar("farclip", self.db.profile.defaultFarclip)
+            end
+        end
+    end
 end

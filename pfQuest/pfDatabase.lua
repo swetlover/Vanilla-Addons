@@ -19,15 +19,15 @@ SLASH_PFDB1, SLASH_PFDB2, SLASH_PFDB3, SLASH_PFDB4 = "/db", "/shagu", "/pfquest"
 SlashCmdList["PFDB"] = function(input, editbox)
   local params = {}
   if (input == "" or input == nil) then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccpf|cffffffffQuest (v" .. tostring(GetAddOnMetadata("pfQuest", "Version")) .. "):")
-    DEFAULT_CHAT_FRAME:AddMessage("/db show |cffaaaaaa - show database interface")
-    DEFAULT_CHAT_FRAME:AddMessage("/db config |cffaaaaaa - show configuration interface")
-    DEFAULT_CHAT_FRAME:AddMessage("/db spawn <mob|gameobject> |cffaaaaaa - search objects")
-    DEFAULT_CHAT_FRAME:AddMessage("/db item <item> |cffaaaaaa - search loot")
-    DEFAULT_CHAT_FRAME:AddMessage("/db vendor <item> |cffaaaaaa - vendors for item")
-    DEFAULT_CHAT_FRAME:AddMessage("/db quest <questname> |cffaaaaaa - show specific questgiver")
-    DEFAULT_CHAT_FRAME:AddMessage("/db quests <area> |cffaaaaaa - show all quest spots on the map")
-    DEFAULT_CHAT_FRAME:AddMessage("/db clean |cffaaaaaa - clean map")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccpf|cffffffffQuest任务数据库 (v" .. tostring(GetAddOnMetadata("pfQuest", "Version")) .. "):")
+    DEFAULT_CHAT_FRAME:AddMessage("/db show |cffaaaaaa - 显示数据库插件")
+    DEFAULT_CHAT_FRAME:AddMessage("/db config |cffaaaaaa - 显示配置界面")
+    DEFAULT_CHAT_FRAME:AddMessage("/db spawn <mob|gameobject> |cffaaaaaa -搜索东西")
+    DEFAULT_CHAT_FRAME:AddMessage("/db item <item> |cffaaaaaa - 搜索拾取物品")
+    DEFAULT_CHAT_FRAME:AddMessage("/db vendor <item> |cffaaaaaa - 供应商的物品")
+    DEFAULT_CHAT_FRAME:AddMessage("/db quest <questname> |cffaaaaaa - 显示具体任务给于者")
+    DEFAULT_CHAT_FRAME:AddMessage("/db quests <area> |cffaaaaaa - 在地图上显示所有的任务点")
+    DEFAULT_CHAT_FRAME:AddMessage("/db clean |cffaaaaaa - 清除地图")
   end
 
   local commandlist = { }
@@ -53,7 +53,7 @@ SlashCmdList["PFDB"] = function(input, editbox)
   if (arg1 == "item") then
     local map = pfDatabase:SearchItem(arg2)
     if not pfMap:ShowMapID(map) then
-      DEFAULT_CHAT_FRAME:AddMessage("No matches.")
+      DEFAULT_CHAT_FRAME:AddMessage("无匹配.")
     end
   end
 
@@ -61,7 +61,7 @@ SlashCmdList["PFDB"] = function(input, editbox)
   if (arg1 == "vendor") then
     local map = pfDatabase:SearchVendor(arg2)
     if not pfMap:ShowMapID(map) then
-      DEFAULT_CHAT_FRAME:AddMessage("No matches.")
+      DEFAULT_CHAT_FRAME:AddMessage("无匹配.")
     end
   end
 
@@ -69,7 +69,7 @@ SlashCmdList["PFDB"] = function(input, editbox)
   if (arg1 == "spawn") then
     local map = pfDatabase:SearchMob(arg2)
     if not pfMap:ShowMapID(map) then
-      DEFAULT_CHAT_FRAME:AddMessage("No matches.")
+      DEFAULT_CHAT_FRAME:AddMessage("无匹配.")
     end
   end
 
@@ -77,7 +77,7 @@ SlashCmdList["PFDB"] = function(input, editbox)
   if (arg1 == "quest") then
     local map = pfDatabase:SearchQuest(arg2)
     if not pfMap:ShowMapID(map) then
-      DEFAULT_CHAT_FRAME:AddMessage("No matches.")
+      DEFAULT_CHAT_FRAME:AddMessage("无匹配.")
     end
   end
 
@@ -85,7 +85,7 @@ SlashCmdList["PFDB"] = function(input, editbox)
   if (arg1 == "quests") then
     local map = pfDatabase:SearchQuests(arg2)
     if not pfMap:ShowMapID(map) then
-      DEFAULT_CHAT_FRAME:AddMessage("No matches.")
+      DEFAULT_CHAT_FRAME:AddMessage("无匹配.")
     end
   end
 

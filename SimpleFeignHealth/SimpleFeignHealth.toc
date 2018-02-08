@@ -1,0 +1,11 @@
+## Interface: 11200
+## Title: SimpleFeignHealth
+## Title-zhCN: |CFFFFFFCC职业|R |CFFAAD372猎人|R猎人假死真实生命值
+## Notes: SimpleFeignHealth
+## Notes-zhCN:|CFFDD66DDSimpleFeignHealth|R 显示所有分组的猎人假死后的生命值
+## DefaultState: disabled
+## Author: Brodrick (aka Kirov)
+## Version: 2.0
+## SavedVariables: SimpleFeignHealth_Saved
+
+SimpleFeignHealth.lua

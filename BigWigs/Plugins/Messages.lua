@@ -12,6 +12,53 @@ local paint = AceLibrary("PaintChips-2.0")
 --      Localization      --
 ----------------------------
 
+L:RegisterTranslations("enUS", function() return {
+	["Messages"] = true,
+
+	["msg"] = true,
+	["anchor"] = true,
+	["rw"] = true,
+	["color"] = true,
+	["scale"] = true,
+
+	["Options for the message frame."] = true,
+	["Anchor"] = true,
+	["Show the message anchor frame."] = true,
+	["Use RaidWarning"] = true,
+	["Toggle sending messages to the RaidWarnings frame."] = true,
+	["Use colors"] = true,
+	["Toggles white only messages ignoring coloring."] = true,
+	["Message frame scale"] = true,
+
+	["Message frame"] = true,
+	["Show anchor"] = true,
+	["Send messages to RaidWarning frame"] = true,
+	["Set the message frame scale."] = true,
+	["Colorize messages"] = true,
+	["Scale"] = true,
+
+	["|cffff0000Co|cffff00fflo|cff00ff00r|r"] = true,
+	["White"] = true,
+	["BigWigs frame"] = true,
+	["RaidWarning frame"] = true,
+	["Scale is set to %s"] = true,
+	["Messages are now sent to the %2$s"] = true,
+	["Messages are currently sent to the %2$s"] = true,
+
+	["display"] = true,
+	["Display"] = true,
+	["Set where messages are displayed."] = true,
+	["Display is now set to %2$s"] = true,
+	["Display is currently set to %2$s"] = true,
+
+	["Mik's Scrolling Battle Text"] = true,
+	["Scrolling Combat Text"] = true,
+	["Floating Combat Text"] = true,
+
+	["Test"] = true,
+	["Close"] = true,
+} end)
+
 L:RegisterTranslations("zhCN", function() return {
 	["Messages"] = "信息提示",
 
@@ -57,53 +104,6 @@ L:RegisterTranslations("zhCN", function() return {
 
 	["Test"] = "测试",
 	["Close"] = "退出",
-} end)
-
-L:RegisterTranslations("deDE", function() return {
-	["Messages"] = "Nachrichten",
-
-	["msg"] = "msg",
-	["anchor"] = "verankerung",
-	["rw"] = "rw",
-	["color"] = "farbe",
-	["scale"] = "skalierung",
-
-	["Options for the message frame."] = "Optionen f\195\188r das Nachrichtenfenster.",
-	["Anchor"] = "Verankerung",
-	["Show the message anchor frame."] = "Verankerung des Nachrichtenfensters anzeigen.",
-	["Use RaidWarning"] = "RaidWarning benutzen",
-	["Toggle sending messages to the RaidWarnings frame."] = "Nachrichten \195\188ber RaidWarning senden.",
-	["Use colors"] = "Farben benutzen",
-	["Toggles white only messages ignoring coloring."] = "Nachrichten farbig/wei\195\159 anzeigen.",
-	["Message frame scale"] = "Nachrichtenfenster Skalierung",
-
-	["Message frame"] = "Nachrichtenfenster",
-	["Show anchor"] = "Verankerung anzeigen",
-	["Send messages to RaidWarning frame"] = "Nachrichten \195\188ber RaidWarning senden.",
-	["Set the message frame scale."] = "Skalierung des Nachrichtenfensters w\195\164hlen.",
-	["Colorize messages"] = "Farbige Nachrichten",
-	["Scale"] = "Skalierung",
-
-	["|cffff0000Co|cffff00fflo|cff00ff00r|r"] = "|cffff0000Fa|cffff00ffr|cff00ff00be|r",
-	["White"] = "Wei\195\159",
-	["BigWigs frame"] = "BigWigs",
-	["RaidWarning frame"] = "RaidWarning",
-	["Scale is set to %s"] = "Skalierung jetzt: %s",
-	["Messages are now sent to the %2$s"] = "Nachrichten werden nun gesendet an: %2$s",
-	["Messages are currently sent to the %2$s"] = "Nachrichten werden zur Zeit gesendet an: %2$s",
-
-	["display"] = "anzeige",
-	["Display"] = "Anzeige",
-	["Set where messages are displayed."] = "W\195\164hle, wo Nachrichten angezeigt werden sollen.",
-	["Display is now set to %2$s"] = "Anzeige nun \195\188ber: %2$s",
-	["Display is currently set to %2$s"] = "Anzeige zur Zeit \195\188ber: %2$s",
-
-	["Mik's Scrolling Battle Text"] = "MSBT",
-	["Scrolling Combat Text"] = "SCT",
-	["Floating Combat Text"] = "FCT",
-
-	["Test"] = "Test",
-	["Close"] = "Schlie\195\159en",
 } end)
 
 ----------------------------------
@@ -231,8 +231,8 @@ end
 function BigWigsMessages:BigWigs_Message(text, color, noraidsay, sound, broadcastonly)
 	if not text then return end
 	if broadcastonly then return end
-
-	local r, g, b
+	
+    local r, g, b
 	if color ~= nil and type(color) == "table" and type(color.r) == "number" and type(color.g) == "number" and type(color.b) == "number" then
 		r, g, b = color.r, color.g, color.b
 	else
@@ -279,7 +279,7 @@ function BigWigsMessages:SetupFrames()
 		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", tile = true, tileSize = 16,
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 16,
 		insets = {left = 4, right = 4, top = 4, bottom = 4},
-	})
+		})
 	self.frames.anchor:SetBackdropBorderColor(.5, .5, .5)
 	self.frames.anchor:SetBackdropColor(0,0,0)
 	self.frames.anchor:ClearAllPoints()
@@ -308,7 +308,7 @@ function BigWigsMessages:SetupFrames()
 	self.frames.cheader:ClearAllPoints()
 	self.frames.cheader:SetPoint("TOP", self.frames.anchor, "TOP", 0, -10)
 
-
+    
 	self.frames.leftbutton = CreateFrame("Button", nil, self.frames.anchor)
 	self.frames.leftbutton.owner = self
 	self.frames.leftbutton:SetWidth(40)
@@ -341,7 +341,7 @@ function BigWigsMessages:SetupFrames()
 	self.frames.leftbuttontext:SetText(L["Test"])
 	self.frames.leftbuttontext:SetAllPoints(self.frames.leftbutton)
 
-
+    
 	self.frames.rightbutton = CreateFrame("Button", nil, self.frames.anchor)
 	self.frames.rightbutton.owner = self
 	self.frames.rightbutton:SetWidth(40)
@@ -362,7 +362,7 @@ function BigWigsMessages:SetupFrames()
 	t:SetTexCoord(0, 0.625, 0, 0.6875)
 	t:SetAllPoints(self.frames.rightbutton)
 	self.frames.rightbutton:SetPushedTexture(t)
-
+	
 	t = self.frames.rightbutton:CreateTexture()
 	t:SetTexture("Interface\\Buttons\\UI-Panel-Button-Highlight")
 	t:SetTexCoord(0, 0.625, 0, 0.6875)
