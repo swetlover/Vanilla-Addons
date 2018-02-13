@@ -3,9 +3,12 @@
 大部分的插件来自[60addons.com](http://60addons.com/ "60addons.com")，感谢站长Qcat的无私奉献！  
 ## 插件更新日志
 ***
+2018年2月13日
+1.更新了xorann版`BigWigs`，新增自动切换奥妮克希亚鳞片披风模块。
+***
 2018年2月8日
 1. 移除了`VF_WarriorAddon`插件，更换为功能更多的`TankBuddyEnh`插件。
-2. 新增了猎人设计计时插件`YaHT`及假死显示生命值插件`SimpleFeignHealth`。
+2. 新增了猎人射击计时插件`YaHT`及假死显示生命值插件`SimpleFeignHealth`。
 3. 更新了`pfQuest`插件。
 4. 将hosq版`BigWigs`替换为xorann版。
 5. 更新了xorann版`BigWigs`，新增开怪计时模块命令/pull。

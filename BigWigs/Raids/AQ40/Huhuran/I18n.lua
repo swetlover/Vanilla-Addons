@@ -13,20 +13,20 @@ L:RegisterTranslations("zhCN", function() return {
 	wyvern_name = "毒性之箭警报",
 	wyvern_desc = "毒性之箭警报",
 	frenzy_cmd = "frenzy",
-	frenzy_name = "狂乱警报",
-	frenzy_desc = "狂乱警报",
+	frenzy_name = "疯狂警报",
+	frenzy_desc = "疯狂警报",
 	berserk_cmd = "berserk",
 	berserk_name = "极度狂暴警报",
 	berserk_desc = "极度狂暴警报",
 
 	-- triggers
-	trigger_frenzyGain = "哈霍兰公主获得了狂乱的效果。",
-	trigger_frenzyGone = "狂乱效果从哈霍兰公主身上消失。",
+	trigger_frenzyGain = "哈霍兰公主获得了疯狂的效果。",
+	trigger_frenzyGone = "疯狂效果从哈霍兰公主身上消失。",
 	trigger_berserk = "Princess Huhuran goes into a berserk rage!",
 	trigger_sting = "受到了致命剧毒效果的影响。",
 
 	-- messages
-	msg_frenzy = "狂乱 - 立刻宁神!",
+	msg_frenzy = "疯狂 - 立刻宁神!",
 	msg_berserk = "极度狂暴 - 治疗注意！",
 	msg_berserkSoon = "即将极度狂暴 - 做好准备！",
 	msg_sting = "毒性之箭 - 注意只给MT驱散！",
@@ -35,7 +35,7 @@ L:RegisterTranslations("zhCN", function() return {
 	msg_berserk5 = "狂暴 5 秒!",
 
 	-- bars
-	bar_frenzy = "狂乱",
+	bar_frenzy = "疯狂",
 	bar_berserk = "狂暴",
 	bar_sting = "可能毒性之箭",
 
