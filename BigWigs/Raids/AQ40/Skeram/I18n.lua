@@ -27,7 +27,7 @@ L:RegisterTranslations("zhCN", function() return {
 	trigger_mcOtherGone = "充实效果从(.*)身上消失。",
 	trigger_deathPlayer = "你死了。",
 	trigger_deathOther = "(.*)死亡了。",
-	trigger_arcaneExplosion = "预言者斯克拉姆开始释放魔爆术。",
+	trigger_arcaneExplosion = "预言者斯克拉姆开始施放魔爆术。",
 	["You have slain %s!"] = "你杀死了%s！",
 
 	-- messages

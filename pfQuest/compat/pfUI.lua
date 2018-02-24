@@ -12,7 +12,7 @@ if not pfUI then
       bgFile = "Interface\\AddOns\\pfQuest\\compat\\col", tile = true, tileSize = 8,
       insets = {left = -1, right = -1, top = -1, bottom = -1},
     },
-    ["font_default"] = "Fonts\\ARIALN.TTF",
+    ["font_default"] = "Fonts\\FZXHLJW.TTF",
    }
 
   pfUI_config = {

@@ -19,7 +19,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	-- triggers
 	trigger_fear = "泰拉尔开始施放低沉咆哮。",
-	trigger_noxiousBreath = "afflicted by Noxious Breath",
+	trigger_noxiousBreath = "受到了毒性吐息效果",
 	trigger_engage = "Peace is but a fleeting dream! Let the NIGHTMARE reign!",
 	trigger_banish = "Children of Madness - I release you upon this world!",
 

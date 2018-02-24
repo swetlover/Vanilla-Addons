@@ -34,8 +34,8 @@ elseif GetLocale() == "zhTW" then
 	DEBUGGING = "除錯"
 	TOGGLE_DEBUGGING = "啟用/停用除錯功能"
 elseif GetLocale() == "zhCN" then
-	DEBUGGING = "\232\176\131\232\175\149"
-	TOGGLE_DEBUGGING = "\229\144\175\231\148\168/\231\166\129\231\148\168 \232\176\131\232\175\149"
+	DEBUGGING = "除错"
+	TOGGLE_DEBUGGING = "启用/停用除错功能"
 elseif GetLocale() == "ruRU" then
 	DEBUGGING = "Отладка"
 	TOGGLE_DEBUGGING = "Вкл/Выкл отладку для этого аддона."

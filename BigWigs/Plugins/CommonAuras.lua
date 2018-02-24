@@ -56,7 +56,7 @@ L:RegisterTranslations("zhCN", function() return {
 	used_bar = "%s:%s",
 
 	portal_cast = "%s打开了 %s 传送门!", --"%s|1이;가; %s|1으로;로; 가는 차원문을 엽니다!",
-	portal_regexp = ".*:(.*)",
+	portal_regexp = ".*：(.*)",
 	-- portal_bar is the spellname
 
 	["Toggle %s display."] = "选择%s显示",

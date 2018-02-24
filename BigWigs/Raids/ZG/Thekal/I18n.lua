@@ -52,7 +52,7 @@ L:RegisterTranslations("zhCN", function() return {
 	-- triggers
     trigger_phase2 = "fill me with your RAGE!",
 	trigger_tigers = "High Priest Thekal使用召唤祖利安守护者。",
-	trigger_forcepunch = "High Priest Thekal 开始施展重击。",
+	trigger_forcepunch = "High Priest Thekal开始施展重击。",
 	trigger_heal = "狂热者洛卡恩开始施放强效治疗术。",
 	trigger_enrage = "High Priest Thekal获得了激怒的效果。",
 	trigger_disarmYou = "你受到了缴械效果的影响。",
@@ -72,7 +72,7 @@ L:RegisterTranslations("zhCN", function() return {
 	trigger_lorkhan = "狂热者洛卡恩",
 	trigger_thekal = "High Priest Thekal",
 	trigger_resurrectionThekal = "High Priest Thekal开始施放复活术。",
-	trigger_resurrectionZath = "狂热者扎斯开始施放复活术。",
+	trigger_resurrectionZath = "狂热者札斯开始施放复活术。",
 	trigger_resurrectionLorkhan = "狂热者洛卡恩开始施放复活术。",
 	
 	-- messages

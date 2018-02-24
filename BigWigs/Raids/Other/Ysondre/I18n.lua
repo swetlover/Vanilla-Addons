@@ -20,7 +20,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	-- messages
 	msg_druids = "德鲁伊刷新!",
-	msg_engage = "伊森德雷相遇! 8秒后毒性吐息!",
+	msg_engage = "伊索德雷相遇! 8秒后毒性吐息!",
 	msg_noxiousBreathSoon = "5秒后毒性吐息!",
 	msg_noxiousBreathNow = "毒性吐息! 18秒后下一个!",
 

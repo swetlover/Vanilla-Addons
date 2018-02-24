@@ -22,15 +22,15 @@ L:RegisterTranslations("zhCN", function() return {
 	trigger_panicHit = "受到了恐慌效果的影响。",
 	trigger_panicImmune = "恐慌施放失败。(.+)对此免疫。",
 	trigger_panicResist = "玛格曼达的恐慌被(.*)抵抗",
-	trigger_frenzyGone = "疯狂效果从玛格曼达身上消失",
+	trigger_frenzyGone = "狂乱效果从玛格曼达身上消失",
 	
 	-- messages
-	msg_frenzy = "狂暴! 立刻宁神!",
+	msg_frenzy = "狂乱! 立刻宁神!",
 	msg_panicSoon = "恐惧马上来袭!",
-	msg_panicNow = "F群体恐惧 - 30秒后再次发动!",
+	msg_panicNow = "群体恐惧 - 30秒后再次发动!",
 	
 	-- bars
-	bar_frenzy = "狂暴",
+	bar_frenzy = "狂乱",
 	bar_panic = "恐惧",
 	
 	-- misc

@@ -8,10 +8,10 @@
 ## Version: 1.25
 ## Notes-zhCN: |CFFDD66DDsRaidFrames|R 自定义风格的团队框架|N设置命令/srf
 ## Notes-zhTW: CT_RaidAssist 風格的團隊框架
-## DefaultState: Enabled
+## DefaultState: disabled
 ## OptionalDeps: Ace2, FuBar, Babble-2.2, DewdropLib, TabletLib, FuBarPlugin-2.0, JustClick, Clique, RosterLib, BanzaiLib, ProximityLib, SurfaceLib
 ## SavedVariables: sRaidFramesDB
-## Q-CAT-Version: 000300
+## Q-CAT-Version: 000400
 
 libs\AceLibrary\AceLibrary.lua
 libs\AceOO-2.0\AceOO-2.0.lua

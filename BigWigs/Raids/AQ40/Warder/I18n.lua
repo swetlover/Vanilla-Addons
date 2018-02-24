@@ -30,10 +30,10 @@ L:RegisterTranslations("zhCN", function() return {
 	warnings_desc = "警报当前小怪显示当前的2个能力",
 
 	-- trigger
-	trigger_fear = "阿努比萨斯守望者开始施放恐惧术。",
-	trigger_silence = "阿努比萨斯守望者开始施放沉默。",
-	trigger_roots = "阿努比萨斯守望者开始施放纠缠根须。",
-	trigger_dust = "阿努比萨斯守望者开始施展尘雾之云。",
+	trigger_fear = "阿努比萨斯守卫开始施放恐惧术。",
+	trigger_silence = "阿努比萨斯守卫开始施放沉默。",
+	trigger_roots = "阿努比萨斯守卫开始施放纠缠根须。",
+	trigger_dust = "阿努比萨斯守卫开始施展尘雾之云。",
 	
 	-- bars
 	bar_fear = "恐惧!",

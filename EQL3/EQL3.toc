@@ -3,7 +3,7 @@
 ## Title: EQL3 
 ## Title-deDE: Extended QuestLog |cff71C6713.6.2 Vividz ReSkin
 ## Title-deFR: Extended QuestLog |cff71C6713.6.2 Vividz ReSkin
-## Title-zhCN: |CFFCCFFFF界面|r 扩展任务日志
+## Title-zhCN: |CFFCCFFFF界面|r 任务日志扩展
 ## Notes: Extended QuestLog is an extension of the questlog. Choose from different layouts as well as many nice features.
 ## Notes-deDE: Extended Questlog ist eine Erweiterung des Questlogs. Wдhle zwischen verschiedenen Layouts sowie jeder Menge neuer Features.
 ## Notes-frFR: "Extended QuestLog" est une extension de "Questlog". Choisissez autant de prйsentations diffйrentes que d'options agrйables.

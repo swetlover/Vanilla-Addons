@@ -24,7 +24,7 @@ L:RegisterTranslations("zhCN", function() return {
 	-- triggers
 	trigger_wingBuffet = "弗莱格尔开始施放龙翼打击。",
 	trigger_shadowFlame = "弗莱格尔开始施放暗影烈焰。",
-	trigger_frenzyGain1 = "%s gains Frenzy.",
+	trigger_frenzyGain1 = "%s获得了疯狂的效果。",
 	trigger_frenzyGain2 = "%s goes into a frenzy!",
 	trigger_frenzyGone = "效果从弗莱格尔身上消失。",
 	

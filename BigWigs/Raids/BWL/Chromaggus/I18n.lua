@@ -31,8 +31,9 @@ L:RegisterTranslations("zhCN", function() return {
 	
 	-- triggers
 	trigger_breath = "克洛玛古斯开始施放(.+)。",
-	trigger_vulnerability_direct = "^[%w]的([%w%s]+)克洛玛古斯造成(%d+)点([%w]+)伤害。", -- [Fashu's] [Firebolt] [hits] Battleguard Sartura for [44] [Fire] damage. ([14] resisted)
-	trigger_vulnerability_dot = "^[%w]的([%w%s]+)使克洛玛古斯受到了([%d]+)点([%w]+)伤害。",
+	trigger_vulnerability_direct_crit = "[^%s]+的([^%s]+)致命一击对克洛玛古斯造成(%d+)点([^%s]+)伤害。[%(]([%d])", -- [Fashu's] [Firebolt] [hits] Battleguard Sartura for [44] [Fire] damage. ([14] resisted)
+ 	trigger_vulnerability_direct_hit = "[^%s]+的([^%s]+)击中克洛玛古斯造成(%d+)点([^%s]+)伤害。[%(]([%d])", -- [Fashu's] [Firebolt] [hits] Battleguard Sartura for [44] [Fire] damage. ([14] resisted)
+	trigger_vulnerability_dot = "[^%s]+的([^%s]+)使克洛玛古斯受到了(%d+)点([^%s]+)伤害。[%(]([%d])",
 	trigger_frenzy = "goes into a killing frenzy",
 	trigger_frenzyGone = "疯狂效果从克洛玛古斯身上消失。",
 	trigger_vulnerability = "flinches as its skin shimmers.",
@@ -56,7 +57,7 @@ L:RegisterTranslations("zhCN", function() return {
 	
 	-- misc
 	hit = "击中",
-	crit = "致命一击",
+	crit = "致命一击对",
 
 	breath1 = "时间流逝",
 	breath2 = "腐蚀酸液",
@@ -104,7 +105,8 @@ L:RegisterTranslations("deDE", function() return {
 	
 	-- triggers
 	trigger_breath = "^Chromaggus beginnt (.+) zu wirken\.",
-	trigger_vulnerability_direct = "^(.+) trifft Chromaggus(.+) ([%d]+) ([%w]+)%.[%s%(]*([%d]*)",
+	trigger_vulnerability_direct_crit = "^[%w]+[%s's]* ([%w%s:]+) crits Chromaggus for ([%d]+) ([%w]+) damage%.[%s%(]*([%d]*)", -- [Fashu's] [Firebolt] [hits] Battleguard Sartura for [44] [Fire] damage. ([14] resisted)
+ 	trigger_vulnerability_direct_hit = "^[%w]+[%s's]* ([%w%s:]+) hits Chromaggus for ([%d]+) ([%w]+) damage%.[%s%(]*([%d]*)", -- [Fashu's] [Firebolt] [hits] Battleguard Sartura for [44] [Fire] damage. ([14] resisted)
 	trigger_vulnerability_dot = "^Chromaggus erleidet ([%d]+) ([%w]+)schaden[%svon]*[%s%w]* %(durch ([%w%s:]+)%)%.[%s%(]*([%d]*)",
 	trigger_frenzy = "Chromaggus wird mörderisch wahnsinnig!",
 	trigger_frenzyGone = "Raserei schwindet von Chromaggus\.",

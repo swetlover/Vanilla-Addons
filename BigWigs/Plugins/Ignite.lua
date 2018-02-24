@@ -63,7 +63,7 @@ L:RegisterTranslations("enUS", function() return {
 L:RegisterTranslations("zhCN", function() return {
     ["Show Warnings"] = "显示警告",
     ["Show Warnings from other players even if the frame is hidden."] = "显示警告从其他玩家，即使框架是隐藏的.",
-    ["Ignite"] = "点燃(无效)",
+    ["Ignite"] = "点燃",
 	["Disabled"] = "禁用",
     ["Options for the ignite Display."] = "法师点燃显示选项.",
     ["Show frame"] = "显示框架",
@@ -74,18 +74,19 @@ L:RegisterTranslations("zhCN", function() return {
     ["Send Stop messages to all raid members"] = "发送停止消息给所有RAID成员",
 	["font"] = "Fonts\\FZXHLJW.TTF",
 	
-	["Stacks"] = "堆叠",
+	["Stacks"] = "层数",
 	["Damage"] = "伤害",
-	["Owner"] = "物主",
-	["Threat"] = "威胁",
-	["n/a"] = "kA", -- no threat data available
-    ["your"] = "你的",
-	["Your"] = "你的",
+	["Owner"] = "归属",
+	["Threat"] = "仇恨",
+	["n/a"] = "n/a", -- no threat data available
+	["Stop"]= "停止",
+    ["your"] = "你",
+	["Your"] = "你",
 	
-	fire_test = "^([%w]+)的([%w%s:]+)致命一击对([%w%s:]+)造成([%d]+)点([%w]+)伤害。", -- Saandro's Feuerball trifft Wächter des Anubisath kritisch für 2779 Feuerschaden.
-	ignite_stack_test = "^([%w%s:]+)受到了点燃效果的影响[%s%（]*([%d]*）。",
-	ignite_damage_test = "^([%w]+)的点燃使([%w%s:]+)受到了([%d]+)点火焰伤害。",
-	ignite_fade_test = "^效果从([%w%s:]+)身上消失。",
+	fire_test = "[^%s]的([^%s]+)致命一击对([^%s]+)造成([%d]+)点([%w]+)伤害。", -- Saandro's Feuerball trifft Wächter des Anubisath kritisch für 2779 Feuerschaden.
+	ignite_stack_test = "^([^%s]+)受到了点燃效果的影响（([%d]*)）。",
+	ignite_damage_test = "([^%s]+)的点燃使([^%s]+)受到了([%d]+)点火焰伤害。",
+	ignite_fade_test = "^效果从([^%s]+)身上消失。",
 	
 	["Fireball"] = "火球术",
 	["Scorch"] = "灼烧",
@@ -332,7 +333,7 @@ function BigWigsIgnite:PlayerDamageEvents(msg)
     
     -- check for ignite damage
     --local ignite_damage_test = "^([%w%s:]+) suffers ([%d]+) Fire damage from ([%w]+)([%s's]*) Ignite."
-    local start, ending, victim, damage, owner = string.find(msg, L["ignite_damage_test"])
+    local start, ending, owner, victim, damage = string.find(msg, L["ignite_damage_test"])
     if victim and victim == self.target and damage and owner then
         if owner == L["your"] then
             owner = UnitName("player")
@@ -432,7 +433,7 @@ end
 
 function BigWigsIgnite:ShowWarning()
 	if self.db.profile.isVisible or self.db.profile.showWarnings then
-        self:Message("Stop Firespells!", "Urgent", true, "Pain")
+        self:Message("停止火焰法术!", "Urgent", true, "Pain")
         frame:SetBackdropColor(200/255, 30/255, 30/255)
     end
 end
@@ -545,7 +546,7 @@ function BigWigsIgnite:UpdateThreat(name)
 				local difference = tankThreat - threat
 				self.seconds = difference / (self.damage / 2 * 0.7)
 				self.seconds = tonumber(string.format("%.0f", self.seconds))
-				self.seconds = "(" .. self.seconds .. "s)"
+				self.seconds = "(" .. self.seconds .. "秒)"
 			end
 		else
             self.threat = 0

@@ -14,7 +14,7 @@ L:RegisterTranslations("zhCN", function() return {
 	noxious_desc = "毒性吐息的警报",
 	-- triggers
 	trigger_engage = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!",
-	trigger_noxiousBreath = "afflicted by Noxious Breath",
+	trigger_noxiousBreath = "受到了毒性吐息效果",
 	trigger_shadows = "Your wicked souls shall feed my power!",
 	
 	-- messages

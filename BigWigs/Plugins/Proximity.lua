@@ -283,7 +283,6 @@ end
 
 function BigWigsProximity:TestProximity()
 	--[[self:SetupFrames()
-
 	anchor.text:SetText(L["|cff777777Nobody|r"])
 	anchor.cheader:SetText(L["Close Players"])
 	anchor:Show()]]
@@ -326,6 +325,7 @@ function BigWigsProximity:UpdateProximity()
 
 	if tablelength(tooClose) == 0 then
 		anchor.text:SetText(L["|cff777777Nobody|r"])
+		anchor:SetBackdropColor(24/255, 24/255, 24/255)
 	else
         local test = table.concat(tooClose, "\n");
 		anchor.text:SetText(table.concat(tooClose, "\n"))
@@ -343,6 +343,8 @@ function BigWigsProximity:UpdateProximity()
                 end
 			end
 		end
+		
+		anchor:SetBackdropColor(200/255, 24/255, 24/255)
 	end
 end
 
@@ -445,4 +447,3 @@ function BigWigsProximity:SavePosition()
 	self.db.profile.posx = anchor:GetLeft() * s
 	self.db.profile.posy = anchor:GetTop() * s
 end
-

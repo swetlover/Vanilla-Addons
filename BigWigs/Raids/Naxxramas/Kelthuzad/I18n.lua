@@ -92,7 +92,7 @@ L:RegisterTranslations("zhCN", function() return {
 	trigger_frostboltVolley = "受到了寒冰箭效果的影响",
 	trigger_addDeath = "(.*)死亡",
 	trigger_frostBlast = "I will freeze the blood in your veins!", 
-	trigger_detonate = "^([^%s]+)([^%s]+)了自爆法力效果的影响",
+	trigger_detonate = "^([^%s]+)([^%s]+)自爆法力效果的影响",
 	
 	-- messages
 	msg_mindControl = "精神控制!",

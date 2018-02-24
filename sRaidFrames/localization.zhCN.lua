@@ -248,20 +248,20 @@ L:RegisterTranslations("zhCN", function() return {
 	["Always"] = "总是",
 	["Highlight units with aggro"] = "高亮仇恨单位",
 	["Turn the border of units who have aggro red"] = "获得仇恨的单位显示红色边框",
-	["_Range"] = "范围",
+	["_Range"] = "范围(重要)",
 	["Set about range"] = "设置范围",
 	["Show estimated range"] = "显示估计范围",
-	["Show estimated range next to player's name"] = "显示估计范围到下个玩家名字",
+	["Show estimated range next to player's name"] = "显示玩家名字旁边的估计范围",
 	["Show estimated range only for focus units"] = "只显示焦点框架的估计范围",
-	["Enable light range check"] = "启用范围检查光点",
-	["Enable 28y range check in Instances and 40y coordinates dependant range check in Outdoors and Bgs - Suggested when you neither play healing class nor using Blizzard frames, agUnitFrames or LunaUnitFrames"] = "在户外和战场开启28码范围检查情况和40码依赖范围检查,建议非治疗职业开启",
+	["Enable light range check"] = "启用光点范围检查(建议)",
+	["Enable 28y range check in Instances and 40y coordinates dependant range check in Outdoors and Bgs - Suggested when you neither play healing class nor using Blizzard frames, agUnitFrames or LunaUnitFrames"] = "启用副本28码范围检查与野外和战场40码范围坐标依赖检查 - 建议当如果你既不玩治疗职业也不使用暴雪框架,ag框架,luna框架时",
 	
 	["Enable accurate range check"] = "启用精确范围检查",
-	["Enable 40y range check that requires certain spells to be on actionbar and Blizzard frames, agUnitFrames or LunaUnitFrames to be present - Only healing classes can use accurate range check"] = "40y范围检查,这需要动作条里的法术支持,建议治疗职业开启",
+	["Enable 40y range check that requires certain spells to be on actionbar and Blizzard frames, agUnitFrames or LunaUnitFrames to be present - Only healing classes can use accurate range check"] = "启用40码检查.这就要求某些法术要在动作条和暴雪的框架里。AG框架或者luna框架支持。只有治疗职业可以使用这个选项。",
 	
 	["Enable combined range check"] = "启用组合范围检查",
-	["Enable 40y accurate range check only in combat otherwise light range check is active"] = "只有战斗中开启40码准确范围检查,否则范围检查是活动光点",
-
+	["Enable 40y accurate range check only in combat otherwise light range check is active"] = "启用只有在战斗中40码精确范围检查.否则就激活光点范围检查",
+    
 
 	["_Arrows"] = "箭头",
 	["Coordinates dependant functionality, won't work in instances"] = "坐标相关的功能,在副本中不起作用",

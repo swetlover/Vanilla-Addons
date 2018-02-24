@@ -5872,7 +5872,7 @@ BabbleSpell:RegisterTranslations("zhCN", function()
 		["Generic"] = "基本",		-- not sure about this one
 		["Ghost Wolf"] = "幽魂之狼",
 		["Ghostly Strike"] = "鬼魅攻击",
-		["Gift of Life"] = "Gift of Life",
+		["Gift of Life"] = "生命赐福",
 		["Gift of Nature"] = "自然赐福",
 		["Gift of the Wild"] = "野性赐福",
 		["Gouge"] = "凿击",

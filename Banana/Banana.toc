@@ -8,6 +8,7 @@
 ## eMail: bananabar@ea31.de
 ## URL: http://www.ea31.de/ceejay/banana
 ## DefaultState: disabled
+## LoadOnDemand: 1
 ## SavedVariables: BANANA_DEBUG,BANANA_BUTTON_LAYOUT,BANANA_HIDE_UNUSED_BUTTONS,BANANA_BUTTON_SCALE,BANANA_HIDE_BUTTON_FRAMES,BANANA_GREY_OUT_DEATH,BANANA_POS,BANANA_SHOW_IN_RAID,BANANA_SHOW_IN_PARTY,BANANA_SHOW_OUT_OF_GROUP,BANANA_SHOW_EXTRA_INFO
 Banana.lua
 Banana.xml
@@ -16,3 +17,5 @@ Bindings.xml
 BananaConfig.lua
 Localization.lua
 BananaLayout.lua
+
+## Q-CAT-Version: 000200

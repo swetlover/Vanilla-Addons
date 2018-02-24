@@ -37,13 +37,13 @@ L:RegisterTranslations("zhCN", function() return {
 	-- triggers
 	trigger_eyeBeamGiantEye = "巨眼触须开始施放眼棱。",
 	trigger_eyeBeamCthun = "克苏恩之眼开始施放眼棱。",
-	trigger_giantClawSpawn = "巨钩触须的大地破裂",
+	trigger_giantClawSpawn = "巨型利爪触须的大地破裂",
 	trigger_giantEyeSpawn = "巨眼触须的大地破裂",
-	trigger_tentacleParty = "^眼球触须的大地破裂击中(.+)造成(.+)$", -- "Eye Tentacle's Ground Rupture hits Galo for 884.",
+	trigger_tentacleParty = "^眼球触须的大地破裂击中(.+)造成(.+)", -- "Eye Tentacle's Ground Rupture hits Galo for 884.",
 	trigger_weakened = "is weakened!",
-	trigger_vulnerabilityDirectTest = "^[%w]+[%s's]* ([%w%s:]+) ([%w]+) C'Thun for ([%d]+) ([%w]+) damage%.[%s%(]*([%d]*)",
-	trigger_vulnerabilityDotsTest = "^C'Thun suffers ([%d]+) ([%w]+) damage from [%w]+[%s's]* ([%w%s:]+)%.[%s%(]*([%d]*)",
-	trigger_digestiveAcid = "You are afflicted by Digestive Acid [%s%(]*([%d]*).",
+	trigger_vulnerabilityDirectTest = "^[^%s]+的([^%s]+)([%w]+)克苏恩造成(%d+)点([^%s]+)伤害。[%(]([%d])",
+	trigger_vulnerabilityDotsTest = "^[^%s]+的([^%s]+)使克苏恩受到了(%d+)点([^%s]+)伤害。[%(]([%d])",
+	trigger_digestiveAcid = "^你受到了消化酸液效果的影响（([%d]*)）。",
 
 	-- messages
 	msg_tentacle = "巨眼触须 5 秒!",
@@ -66,7 +66,7 @@ L:RegisterTranslations("zhCN", function() return {
 	bar_darkGlareEnd = "黑暗闪耀结束",
 	bar_darkGlareCast = "黑暗闪耀施放中",
 	bar_giantEye = "可能巨眼触须!",
-	bar_giantClaw = "巨钩触须!",
+	bar_giantClaw = "巨型利爪触须!",
 	bar_weakened = "克苏恩虚弱了!",
 
 	-- misc

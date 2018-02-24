@@ -63,7 +63,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentLabel" font="Fonts\FRIZQT__.TTF" text="Info Icon Priority" justifyH="LEFT">
+                <FontString name="$parentLabel" font="Fonts\FZXHLJW.TTF" text="Info Icon Priority" justifyH="LEFT">
                   <Anchors>
                     <Anchor point="TOPLEFT" />
                     <Anchor point="BOTTOMRIGHT" />
@@ -129,7 +129,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -257,7 +257,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -385,7 +385,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -513,7 +513,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -641,7 +641,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -769,7 +769,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -897,7 +897,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -1025,7 +1025,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -1153,7 +1153,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -1281,7 +1281,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="icon" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="icon" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="238" y="10" />
                   </Size>
@@ -1406,7 +1406,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="显示目标额外信息">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示目标额外信息">
                   <Anchors>
                     <Anchor point="LEFT" relativePoint="RIGHT">
                       <Offset>
@@ -1457,7 +1457,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="目标死亡按钮变灰">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="目标死亡按钮变灰">
                   <Anchors>
                     <Anchor point="LEFT" relativePoint="RIGHT">
                       <Offset>
@@ -1508,7 +1508,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="一个人也显示框架">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="一个人也显示框架">
                   <Anchors>
                     <Anchor point="LEFT" relativePoint="RIGHT">
                       <Offset>
@@ -1559,7 +1559,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="队伍中显示框架">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="队伍中显示框架">
                   <Anchors>
                     <Anchor point="LEFT" relativePoint="RIGHT">
                       <Offset>
@@ -1625,7 +1625,7 @@
                 <AbsValue val="10" />
               </FontHeight>
             </ButtonText>
-            <NormalFont inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF">
+            <NormalFont inherits="GameFontNormal" font="Fonts\FZXHLJW.TTF">
               <FontHeight>
                 <AbsValue val="12" />
               </FontHeight>
@@ -1637,7 +1637,7 @@
                 </Offset>
               </Shadow>
             </NormalFont>
-            <HighlightFont inherits="GameFontHighlight" font="Fonts\FRIZQT__.TTF">
+            <HighlightFont inherits="GameFontHighlight" font="Fonts\FZXHLJW.TTF">
               <FontHeight>
                 <AbsValue val="12" />
               </FontHeight>
@@ -1649,7 +1649,7 @@
                 </Offset>
               </Shadow>
             </HighlightFont>
-            <DisabledFont inherits="GameFontDisable" font="Fonts\FRIZQT__.TTF">
+            <DisabledFont inherits="GameFontDisable" font="Fonts\FZXHLJW.TTF">
               <FontHeight>
                 <AbsValue val="12" />
               </FontHeight>
@@ -1681,7 +1681,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="隐藏未使用的按钮">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="隐藏未使用的按钮">
                   <Anchors>
                     <Anchor point="LEFT" relativePoint="RIGHT">
                       <Offset>
@@ -1732,7 +1732,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="团队中显示框架">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="团队中显示框架">
                   <Anchors>
                     <Anchor point="LEFT" relativePoint="RIGHT">
                       <Offset>
@@ -1779,7 +1779,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FRIZQT__.TTF" text="调整按钮的大小">
+                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FZXHLJW.TTF" text="调整按钮的大小">
                   <FontHeight>
                     <AbsValue val="12" />
                   </FontHeight>
@@ -1844,7 +1844,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FRIZQT__.TTF" text="10 %" justifyH="LEFT">
+                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FZXHLJW.TTF" text="10 %" justifyH="LEFT">
                   <FontHeight>
                     <AbsValue val="12" />
                   </FontHeight>
@@ -1906,7 +1906,7 @@
                   </Anchors>
                   <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
                 </Texture>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="Layout" justifyH="RIGHT">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="Layout" justifyH="RIGHT">
                   <Size>
                     <AbsDimension x="236" y="10" />
                   </Size>
@@ -1997,7 +1997,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FRIZQT__.TTF" text="|">
+                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FZXHLJW.TTF" text="|">
                   <FontHeight>
                     <AbsValue val="12" />
                   </FontHeight>
@@ -2026,7 +2026,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FRIZQT__.TTF" text="200 %" justifyH="RIGHT">
+                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FZXHLJW.TTF" text="200 %" justifyH="RIGHT">
                   <FontHeight>
                     <AbsValue val="12" />
                   </FontHeight>
@@ -2059,7 +2059,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text="隐藏按钮框架">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="隐藏按钮框架">
                   <Anchors>
                     <Anchor point="LEFT" relativePoint="RIGHT">
                       <Offset>
@@ -2132,7 +2132,7 @@
             </Anchors>
             <Layers>
               <Layer>
-                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FRIZQT__.TTF" text="BananaBar团队标记助手 60addons">
+                <FontString name="$parentLabel" setAllPoints="true" font="Fonts\FZXHLJW.TTF" text="BananaBar团队标记助手 60addons">
                   <FontHeight>
                     <AbsValue val="16" />
                   </FontHeight>
@@ -2186,7 +2186,7 @@
                 <AbsValue val="10" />
               </FontHeight>
             </ButtonText>
-            <NormalFont inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF">
+            <NormalFont inherits="GameFontNormal" font="Fonts\FZXHLJW.TTF">
               <FontHeight>
                 <AbsValue val="12" />
               </FontHeight>
@@ -2198,7 +2198,7 @@
                 </Offset>
               </Shadow>
             </NormalFont>
-            <HighlightFont inherits="GameFontHighlight" font="Fonts\FRIZQT__.TTF">
+            <HighlightFont inherits="GameFontHighlight" font="Fonts\FZXHLJW.TTF">
               <FontHeight>
                 <AbsValue val="12" />
               </FontHeight>
@@ -2210,7 +2210,7 @@
                 </Offset>
               </Shadow>
             </HighlightFont>
-            <DisabledFont inherits="GameFontDisable" font="Fonts\FRIZQT__.TTF">
+            <DisabledFont inherits="GameFontDisable" font="Fonts\FZXHLJW.TTF">
               <FontHeight>
                 <AbsValue val="12" />
               </FontHeight>

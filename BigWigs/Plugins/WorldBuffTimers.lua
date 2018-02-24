@@ -110,6 +110,7 @@ local timer = {
  	onyHeadAlliance = 18.4, 
  	nefHeadAlliance = 18.4, -- ??
 	zgHeart = 59, -- ??
+	zgHeart2 = 34,
 	rendHead = 16, -- test
 }
 local icon = {

@@ -173,6 +173,7 @@ BabbleZone:RegisterTranslations("enUS", function()
 		["Karazhan"] = true,
 		["Caverns of Time"] = true,
 		["Zul'Aman"] = true,
+		["Nefarians Lair"] = true,
 	}
 end)
 
@@ -772,6 +773,7 @@ BabbleZone:RegisterTranslations("zhCN", function()
 		["Karazhan"] = "卡拉赞",
 		["Caverns of Time"] = "时光之穴",
 --		["Zul'Aman"] = true,
+        ["Nefarians Lair"] = "奈法利安的巢穴",
 	}
 end)
 

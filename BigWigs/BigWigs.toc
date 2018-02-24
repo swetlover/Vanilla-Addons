@@ -88,7 +88,7 @@ Plugins\CombatlogFilter.lua
 Plugins\WorldBuffTimers.lua
 Plugins\FrostBlast.lua
 Plugins\Pulltimer.lua
-Plugins\OnyxiasCloak.lua
+Plugins\OnyxiaCloak.lua
 
 # ###################################
 # Boss modules
@@ -446,4 +446,4 @@ Raids\Other\Lethon\Default.lua
 Raids\Other\Taerar\Default.lua
 Raids\Other\Ysondre\Default.lua
 #Raids\Other\Boar\Default.lua
-## Q-CAT-Version: 000410
+## Q-CAT-Version: 000700

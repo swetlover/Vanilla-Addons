@@ -70,6 +70,9 @@ L:RegisterTranslations("zhCN", function() return {
 	["Whisper"] = "密语",
 	["Whisper warnings"] = "密语警报",
 	["Toggle whispering warnings to players."] = "切换是否通过密语向玩家发送信息",
+
+	["Show whispers"] = "显示私聊",
+	["Toggle showing whispers sent by BigWigs locally."] = "显示由bigwigs发送的私聊",
 	
 	["Use Raidchannel"] = "使用团队聊天",
 	["Toggle using the raid channel instead of the raid warning channel for boss messages."] = "切换是否使用团队聊天来代替团队警告频道来播放boss的信息",
