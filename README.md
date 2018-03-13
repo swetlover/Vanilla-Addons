@@ -4,6 +4,12 @@
 插件的更新情况及更新说明基本都来自60addons.com。  
 ## 插件更新日志
 ***
+2018年3月13日
+1. 更新了`WIM`插件，修复了字体指向。
+2. 替换了狗血编辑男的`BuffTimers`插件，永久buff显示N/A。
+3. 将xorann版`BigWigs`替换为Qcat版。
+4. 更新了`Atlas`、`AtlasLoot`、`AtlasQuest`插件，新增了世界蓝色装备掉落。
+***
 2018年2月24日
 1. 更新了`!Libs`依赖库，针对LH服务器核心端重新汉化了Babble-Boss-2.2模块。
 2. 更新了`Banana`插件，修复默认字体设置。

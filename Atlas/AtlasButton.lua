@@ -79,7 +79,7 @@ end
 
 function AtlasButton_OnEnter()
     GameTooltip:SetOwner(this, "ANCHOR_LEFT");
-    GameTooltip:SetText("Atlas");
+    GameTooltip:SetText(ATLAS_BUTTON_TOOLTIP_TITLE);
 	GameTooltipTextLeft1:SetTextColor(1, 1, 1);
     GameTooltip:AddLine(ATLAS_BUTTON_TOOLTIP_HINT);
     GameTooltip:Show();

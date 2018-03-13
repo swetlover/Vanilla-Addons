@@ -22,6 +22,12 @@
 
 --]]
 
+--Atlas, an instance map browser
+--Author: Dan Gilbert
+--Email: loglow@gmail.com
+--AIM: dan5981
+
+
 
 local Atlas_DebugMode = false;
 local function debug(info)
@@ -280,9 +286,10 @@ function Atlas_OnLoad()
 	AtlasFrame:RegisterForDrag("LeftButton");
 	
 	--Setting up slash commands involves referencing some strage auto-generated variables
-	SLASH_ATLAS1 = "/atlas";
+	SLASH_ATLAS1 = ATLAS_SLASH;
 	SlashCmdList["ATLAS"] = Atlas_SlashCommand;
 	
+
 end
 
 
@@ -343,11 +350,7 @@ function Atlas_PopulateDropdowns()
 		end
 		
 		if ( subcatOrder[n] ~= ATLAS_DDL_ALL_MENU and 
-			subcatOrder[n] ~= ATLAS_DDL_WORLDBOSSES and 
-			subcatOrder[n] ~= ATLAS_DDL_LEVELING_GUIDE_HORDE1 and 
-			subcatOrder[n] ~= ATLAS_DDL_LEVELING_GUIDE_HORDE2 and 
-			subcatOrder[n] ~= ATLAS_DDL_LEVELING_GUIDE_ALLIANCE1 and
-			subcatOrder[n] ~= ATLAS_DDL_LEVELING_GUIDE_ALLIANCE2 ) then
+			subcatOrder[n] ~= ATLAS_DDL_WORLDBOSSES )then
 			table.sort(ATLAS_DROPDOWNS[n], Atlas_SortZonesAlpha);
 		end
 		
@@ -418,21 +421,21 @@ function Atlas_Init()
 	if(EarthFeature_AddButton) then
 		EarthFeature_AddButton(
 		{
-			id = "Atlas";
-			name = "Atlas";
+			id = ATLAS_TITLE;
+			name = ATLAS_TITLE;
 			subtext = ATLAS_SUBTITLE;
 			tooltip = ATLAS_DESC;
-			icon = "Interface\\WorldMap\\WorldMap-Icon";
+			icon = "Interface\\AddOns\\Atlas\\Images\\AtlasIcon";
 			callback = Atlas_Toggle;
 			test = nil;
 		}
 	);
 	elseif(Cosmos_RegisterButton) then
 		Cosmos_RegisterButton(
-			"Atlas",
+			ATLAS_TITLE,
 			ATLAS_SUBTITLE,
 			ATLAS_DESC,
-			"Interface\\WorldMap\\WorldMap-Icon",
+			"Interface\\AddOns\\Atlas\\Images\\AtlasIcon",
 			Atlas_Toggle
 		);
 	end
@@ -440,10 +443,10 @@ function Atlas_Init()
 	--CTMod integration
 	if(CT_RegisterMod) then
 		CT_RegisterMod(
-			"Atlas",
+			ATLAS_TITLE,
 			ATLAS_SUBTITLE,
 			5,
-			"Interface\\WorldMap\\WorldMap-Icon",
+			"Interface\\AddOns\\Atlas\\Images\\AtlasIcon",
 			ATLAS_DESC,
 			"switch",
 			"",
@@ -484,7 +487,7 @@ end
 --Parses slash commands
 --If an unrecognized command is given, toggle Atlas
 function Atlas_SlashCommand(msg)
-	if(msg == "options" or msg == "opt") then
+	if(msg == ATLAS_SLASH_OPTIONS) then
 		AtlasOptions_Toggle();
 	else
 		Atlas_Toggle();

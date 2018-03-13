@@ -6115,7 +6115,7 @@ BabbleSpell:RegisterTranslations("zhCN", function()
 		["Intervene"] = "Intervene",  --  Need to translated
 		["Intimidating Shout"] = "破胆怒吼",
 		["Intimidation"] = "胁迫",
-		["Invisibility"] = "Invisibility",  --  Need to translated
+		["Invisibility"] = "隐形术",  --  Need to translated
 		["Jewelcrafting"] = "Jewelcrafting",
 		["Judgement of Command"] = "命令审判",
 		["Judgement of Justice"] = "公正审判",
@@ -6127,11 +6127,12 @@ BabbleSpell:RegisterTranslations("zhCN", function()
 		["Kick - Silenced"] = "脚踢 - 沉默",
 		["Kick"] = "脚踢",
 		["Kidney Shot"] = "肾击",
+		["Knock Away"] = "击退",
 		["Kill Command"] = "Kill Command",  --  Need to translated
 		["Killer Instinct"] = "杀戮本能",
 		["Kodo Riding"] = "骑术：科多兽",
 		["Lacerate"] = "Lacerate",
-		["Lacerate"] = "Lacerate",  --  Need to translated
+		["Lacerate"] = "割伤",  --  Need to translated
 		["Lash of Pain"] = "剧痛鞭笞",
 		["Last Stand"] = "破釜沉舟",
 		["Lasting Judgement"] = "持久审判",

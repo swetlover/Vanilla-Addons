@@ -19,21 +19,24 @@ L:RegisterTranslations("enUS", function() return {
 	["whisper"] = true,
 	["showwhispers"] = true,
 	["useraidchannel"] = true,
+	["sendsay"] = true,
 
 	["Broadcast over RaidWarning"] = true,
 	["Broadcast"] = true,
 	["Toggle broadcasting over Raidwarning."] = true,
-	
+
 	["Whisper"] = true,
 	["Whisper warnings"] = true,
 	["Toggle whispering warnings to players."] = true,
-	
+
 	["Show whispers"] = true,
 	["Toggle showing whispers sent by BigWigs locally."] = true,
 
 	["Use Raidchannel"] = true,
 	["Toggle using the raid channel instead of the raid warning channel for boss messages."] = true,
-	
+	["Announce in /say"] = true,
+	["Toggle announcing certain things in /say."] = true,
+
 	["Options for RaidWarning."] = true,
 } end )
 
@@ -43,41 +46,43 @@ L:RegisterTranslations("koKR", function() return {
 	["Broadcast over RaidWarning"] = "공격대 경고로 알림",
 	["Broadcast"] = "알림",
 	["Toggle broadcasting over Raidwarning."] = "공격대 경고로 알림 토글",
-	
+
 	["Whisper"] = "귓속말",
 	["Whisper warnings"] = "귓속말 경고",
 	["Toggle whispering warnings to players."] = "플레이어에게 귓속말 경고 알림 토글",
-	
+
 	["Use Raidchannel"] = "공격대 채널 사용",
 	["Toggle using the raid channel instead of the raid warning channel for boss messages."] = "공격대 경고 혹은 채널 사용 토글",
-	
+
 	["Options for RaidWarning."] = "공격대 경고 설정",
-	
+
 } end )
 
 L:RegisterTranslations("zhCN", function() return {
-	["RaidWarning"] = "团队警报",
+	["RaidWarning"] = "团队通知",
 
-	["raidwarn"] = "团队警报",
-	["broadcast"] = "广播",
+	["raidwarn"] = "团队通知",
+	["broadcast"] = "广播(RW)",
 	["whisper"] = "密语",
 	["useraidchannel"] = "使用团队聊天",
 
-	["Broadcast over RaidWarning"] = "通过团队警告频道发送信息",
-	["Broadcast"] = "广播",
-	["Toggle broadcasting over Raidwarning."] = "切换是否通过团队警告频道发送信息",
-	
+	["Broadcast over RaidWarning"] = "通过团队通知(RW)发送警报信息。",
+	["Broadcast"] = "广播(RW)",
+	["Toggle broadcasting over Raidwarning."] = "通过团队通知(RW)发送信息",
+
 	["Whisper"] = "密语",
 	["Whisper warnings"] = "密语警报",
 	["Toggle whispering warnings to players."] = "切换是否通过密语向玩家发送信息",
 
 	["Show whispers"] = "显示私聊",
-	["Toggle showing whispers sent by BigWigs locally."] = "显示由bigwigs发送的私聊",
-	
+	["Toggle showing whispers sent by BigWigs locally."] = "显示由BigWigs局部发送的私聊",
+
 	["Use Raidchannel"] = "使用团队聊天",
 	["Toggle using the raid channel instead of the raid warning channel for boss messages."] = "切换是否使用团队聊天来代替团队警告频道来播放boss的信息",
 
 	["Options for RaidWarning."] = "团队警告设置",
+	["Announce in /say"] = "通告在 /say",
+	["Toggle announcing certain things in /say."] = "宣布某些东西在 /say",
 } end )
 
 
@@ -92,11 +97,11 @@ L:RegisterTranslations("zhTW", function() return {
 	["Broadcast over RaidWarning"] = "通過團隊警告頻道發送訊息",
 	["Broadcast"] = "廣播",
 	["Toggle broadcasting over Raidwarning."] = "切換是否通過團隊警告頻道發送訊息",
-	
+
 	["Whisper"] = "密語",
 	["Whisper warnings"] = "密語警報",
 	["Toggle whispering warnings to players."] = "切換是否通過密語向玩家發送訊息",
-	
+
 	["Use Raidchannel"] = "使用團隊聊天",
 	["Toggle using the raid channel instead of the raid warning channel for boss messages."] = "切換是否使用團隊聊天來代替團隊警告頻道來播放boss的訊息",
 
@@ -114,14 +119,14 @@ L:RegisterTranslations("deDE", function() return {
 	["Broadcast over RaidWarning"] = "Verbreiten \195\188ber Sclachtzugswarnung",
 	["Broadcast"] = "Verbreiten",
 	["Toggle broadcasting over Raidwarning."] = "Meldungen \195\188ber Schlachtzugswarnung an Alle senden.",
-	
+
 	["Whisper"] = "Fl\195\188stern",
 	["Whisper warnings"] = "Warnungen fl\195\188stern",
 	["Toggle whispering warnings to players."] = "Warnungen an andere Spieler fl\195\188stern.",
 
 	["Use Raidchannel"] = "Schlachtzugschat benutzen",
 	["Toggle using the raid channel instead of the raid warning channel for boss messages."] = "Schlachtzugschat anstelle des Schlachtzugswarungschats für Boss Nachrichten benutzen.",
-	
+
 	["Options for RaidWarning."] = "Optionen f\195\188r RaidWarnung.",
 } end )
 
@@ -157,10 +162,11 @@ L:RegisterTranslations("frFR", function() return {
 
 BigWigsRaidWarn = BigWigs:NewModule(L["RaidWarning"], "AceHook-2.1")
 BigWigsRaidWarn.defaultDB = {
-	whisper = true,
+	whisper = false,
 	broadcast = false,
 	useraidchannel = false,
 	showwhispers = true,
+	sendsay = true,
 }
 BigWigsRaidWarn.consoleCmd = L["raidwarn"]
 BigWigsRaidWarn.consoleOptions = {
@@ -196,6 +202,13 @@ BigWigsRaidWarn.consoleOptions = {
 			get = function() return BigWigsRaidWarn.db.profile.useraidchannel end,
 			set = function(v) BigWigsRaidWarn.db.profile.useraidchannel = v end,
 		},
+		[L["sendsay"]] = {
+ 			type = "toggle",
+ 			name = L["Announce in /say"],
+ 			desc = L["Toggle announcing certain things in /say."],
+ 			get = function() return BigWigsRaidWarn.db.profile.sendsay end,
+ 			set = function(v) BigWigsRaidWarn.db.profile.sendsay = v end,
+ 		},
 	}
 }
 
@@ -206,6 +219,7 @@ BigWigsRaidWarn.consoleOptions = {
 function BigWigsRaidWarn:OnEnable()
 	self:RegisterEvent("BigWigs_Message")
 	self:RegisterEvent("BigWigs_SendTell")
+	self:RegisterEvent("BigWigs_SendSay")
 
 	sentWhispers = {}
 
@@ -218,7 +232,7 @@ end
 
 function BigWigsRaidWarn:BigWigs_Message(msg, color, noraidsay)
 	if not self.db.profile.broadcast or not msg or noraidsay or ( not IsRaidLeader() and not IsRaidOfficer() ) then
-		return 
+		return
 	end
 	if self.db.profile.useraidchannel then
 		SendChatMessage("*** "..msg.." ***", "RAID")
@@ -233,8 +247,14 @@ function BigWigsRaidWarn:BigWigs_SendTell(player, msg)
 	SendChatMessage(msg, "WHISPER", nil, player)
 end
 
+function BigWigsRaidWarn:BigWigs_SendSay(msg)
+ 	if not self.db.profile.sendsay or not msg then return end
+ 	SendChatMessage(msg)
+end
+
+
 function BigWigsRaidWarn:WhisperHandler(event)
-	if arg1 and not self.db.profile.showwhispers and sentWhispers[arg1] then
+	if not self.db.profile.showwhispers and sentWhispers[arg1] then
 		self:Debug("Suppressing self-sent whisper.", event, arg1)
 		return
 	end

@@ -26,33 +26,11 @@ local spellCasting = nil
 --      Localization        --
 ------------------------------
 
-L:RegisterTranslations("enUS", function() return {
-	fw_cast = "%s fearwarded %s.",
-	fw_bar = "%s: FW Cooldown",
-
-	used_cast = "%s used %s.",
-	used_bar = "%s: %s",
-
-	portal_cast = "%s opened a portal to %s!",
-	portal_regexp = ".*: (.*)",
-	-- portal_bar is the spellname
-
-	["Toggle %s display."] = true,
-	["Portal"] = true,
-	["broadcast"] = true,
-	["Broadcast"] = true,
-	["Toggle broadcasting the messages to the raidwarning channel."] = true,
-
-	["Gives timer bars and raid messages about common buffs and debuffs."] = true,
-	["Common Auras"] = true,
-	["commonauras"] = true,
-} end )
-
 L:RegisterTranslations("zhCN", function() return {
 	fw_cast = "%s 防护恐惧结界 %s",
 	fw_bar = "%s: 防护恐惧结界CD中",
 
-	used_cast = "对%s使用%s", --"%s|1이;가; %s|1을;를; 사용했습니다.",
+	used_cast = "%s使用了%s", --"%s|1이;가; %s|1을;를; 사용했습니다.",
 	used_bar = "%s:%s",
 
 	portal_cast = "%s打开了 %s 传送门!", --"%s|1이;가; %s|1으로;로; 가는 차원문을 엽니다!",
@@ -61,12 +39,34 @@ L:RegisterTranslations("zhCN", function() return {
 
 	["Toggle %s display."] = "选择%s显示",
 	["Portal"] = "传送门",
-	
-	["Broadcast"] = "其他施法",
-	["Toggle broadcasting the messages to the raidwarning channel."] = "显示使用团队警告(RW)频道广播的消息.",
+	["broadcast"] = "广播",
+	["Broadcast"] = "广播",
+	["Toggle broadcasting the messages to the raidwarning channel."] = "显示使用团队警告(RW)频道广播的消息。",
 
-	["Gives timer bars and raid messages about common buffs and debuffs."] = "对通常的Buff和Debuff使用计时条并且发送团队信息.",
+	["Gives timer bars and raid messages about common buffs and debuffs."] = "对通常的Buff和Debuff使用计时条并且发送团队信息",
 	["Common Auras"] = "常见的光环",
+	["commonauras"] = "commonauras",
+} end )
+
+L:RegisterTranslations("koKR", function() return {
+	fw_cast = "%s님이 %s에게 공포의 수호물을 시전합니다.", --"%s|1이;가; %s에게 공포의 수호물을 시전합니다.",
+	fw_bar = "%s: FW 재사용 대기시간",
+
+	used_cast = "%s님이 %s 사용했습니다.", --"%s|1이;가; %s|1을;를; 사용했습니다.",
+	used_bar = "%s: %s",
+
+	portal_cast = "%s님이 %s 차원문을 엽니다!", --"%s|1이;가; %s|1으로;로; 가는 차원문을 엽니다!",
+	portal_regexp = ".*: (.*)",
+	-- portal_bar is the spellname
+
+	["Toggle %s display."] = "%s 표시를 전환합니다.",
+	["Portal"] = "차원문",
+
+	["Broadcast"] = "알림",
+	["Toggle broadcasting the messages to the raidwarning channel."] = "공격대 경보 채널에 메세지 알림을 전환합니다.",
+
+	["Gives timer bars and raid messages about common buffs and debuffs."] = "공통 버프와 디버프에 대한 공격대 메세지와 타이머 바를 제공합니다.",
+	["Common Auras"] = "공통 버프",
 } end )
 
 L:RegisterTranslations("deDE", function() return {
@@ -293,15 +293,15 @@ function BigWigsCommonAuras:SpellStatus_SpellCastInstant(sId, sName, sRank, sFul
 		end
 		self:TriggerEvent("BigWigs_SendSync", "BWCAFW "..targetName)
 	elseif sName == BS["Shield Wall"] then
-        local shieldWallDuration
-        local talentName, _, _, _, currentRank, _, _, _ = GetTalentInfo(3, 13)
-        if currentRank == 0 then
-            shieldWallDuration = 10
-        elseif currentRank == 1 then
-            shieldWallDuration = 13
-        else
-            shieldWallDuration = 15
-        end
+		local shieldWallDuration
+		local talentName, _, _, _, currentRank, _, _, _ = GetTalentInfo(3, 13)
+		if currentRank == 0 then
+			shieldWallDuration = 10
+		elseif currentRank == 1 then
+			shieldWallDuration = 13
+		else
+			shieldWallDuration = 15
+		end
 		self:TriggerEvent("BigWigs_SendSync", "BWCASW "..tostring(shieldWallDuration))
 	elseif sName == BS["Last Stand"] then
 		self:TriggerEvent("BigWigs_SendSync", "BWCALS")
@@ -344,69 +344,69 @@ end
 ------------------------------
 --[[
 function BigWigsCommonAuras:UseAction(a1, a2, a3)
-	self.hooks["UseAction"](a1, a2, a3)
-	if GetActionText(a1) then return end
-	if SpellIsTargeting() then return
-	elseif a3 then
-		spellTarget = UnitName("player")
-	elseif UnitExists("target") then
-		spellTarget = UnitName("target")
-	end
+self.hooks["UseAction"](a1, a2, a3)
+if GetActionText(a1) then return end
+if SpellIsTargeting() then return
+elseif a3 then
+spellTarget = UnitName("player")
+elseif UnitExists("target") then
+spellTarget = UnitName("target")
+end
 end
 
 function BigWigsCommonAuras:BigWigsCommonAurasOnMouseDown()
-	if UnitName("mouseover") then
-		spellTarget = UnitName("mouseover")
-	elseif GameTooltipTextLeft1:IsVisible() then
-		local _, _, name = string.find(GameTooltipTextLeft1:GetText(), "^Corpse of (.+)$")
-		if name then
-			spellTarget = name
-		end
-	end
-	self.hooks[WorldFrame]["OnMouseDown"]()
+if UnitName("mouseover") then
+spellTarget = UnitName("mouseover")
+elseif GameTooltipTextLeft1:IsVisible() then
+local _, _, name = string.find(GameTooltipTextLeft1:GetText(), "^Corpse of (.+)$")
+if name then
+spellTarget = name
+end
+end
+self.hooks[WorldFrame]["OnMouseDown"]()
 end
 
 function BigWigsCommonAuras:CastSpell(spellId, spellbookTabNum)
-	self.hooks["CastSpell"](spellId, spellbookTabNum)
-	if UnitExists("target") then
-		spellTarget = UnitName("target")
-	end
-	spellCasting = true
+self.hooks["CastSpell"](spellId, spellbookTabNum)
+if UnitExists("target") then
+spellTarget = UnitName("target")
+end
+spellCasting = true
 end
 
 function BigWigsCommonAuras:CastSpellByName(a1, a2)
-	self.hooks["CastSpellByName"](a1, a2)
-	if a1 then
-		spellCasting = true
-		if not SpellIsTargeting() then
-			spellTarget = UnitName("target")
-		end
-	end
+self.hooks["CastSpellByName"](a1, a2)
+if a1 then
+spellCasting = true
+if not SpellIsTargeting() then
+spellTarget = UnitName("target")
+end
+end
 end
 
 function BigWigsCommonAuras:SpellTargetUnit(a1)
-	local shallTargetUnit
-	if SpellIsTargeting() then
-		shallTargetUnit = true
-	end
-	self.hooks["SpellTargetUnit"](a1)
-	if shallTargetUnit and spellCasting and not SpellIsTargeting() then
-		spellTarget = UnitName(a1)
-	end
+local shallTargetUnit
+if SpellIsTargeting() then
+shallTargetUnit = true
+end
+self.hooks["SpellTargetUnit"](a1)
+if shallTargetUnit and spellCasting and not SpellIsTargeting() then
+spellTarget = UnitName(a1)
+end
 end
 
 
 function BigWigsCommonAuras:SpellStopTargeting()
-	self.hooks["SpellStopTargeting"]()
-	spellCasting = nil
-	spellTarget = nil
+self.hooks["SpellStopTargeting"]()
+spellCasting = nil
+spellTarget = nil
 end
 
 function BigWigsCommonAuras:TargetUnit(a1)
-	self.hooks["TargetUnit"](a1)
-	if spellCasting and UnitExists(a1) then
-		spellTarget = UnitName(a1)
-	end
+self.hooks["TargetUnit"](a1)
+if spellCasting and UnitExists(a1) then
+spellTarget = UnitName(a1)
+end
 end]]
 
 ------------------------------

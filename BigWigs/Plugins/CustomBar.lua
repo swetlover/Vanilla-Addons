@@ -1,4 +1,4 @@
-﻿assert(BigWigs, "BigWigs not found!")
+assert(BigWigs, "BigWigs not found!")
 
 ----------------------------
 --      Localization      --
@@ -41,7 +41,7 @@ L:RegisterTranslations("zhCN", function() return {
 	["Start a custom bar, either local or global."] = "激活一条自制时间条，本地或者全局",
 	["Local"] = "本地",
 	["Global"] = "全局",
-	["<seconds> <bar text>"] = "<秒> <条文本>",
+	["<seconds> <bar text>"] = "<seconds> <bar text>",
 	["Starts a custom bar with the given parameters."] = "激活一条带参数的自制时间条",
 	["%s: %s"] = "%s: %s",
 	["%s: Timer [%s] finished."] = "%s: 计时器 [%s] 到时间",
@@ -90,7 +90,7 @@ L:RegisterTranslations("frFR", function() return {
 ----------------------------------
 
 BigWigsCustomBar = BigWigs:NewModule(L["Custom Bars"])
-BigWigsCustomBar.revision = tonumber(string.sub("$Revision: 15073 $", 12, -3))
+BigWigsCustomBar.revision = 20001
 BigWigsCustomBar.external = true
 BigWigsCustomBar.consoleCmd = L["custombar"]
 BigWigsCustomBar.consoleOptions = {
@@ -138,6 +138,10 @@ end
 
 function BigWigsCustomBar:BigWigs_RecvSync(sync, rest, nick)
 	if sync ~= "BWCustomBar" or not rest or not nick or not self.enabled then return end
+	if string.find(rest, "bwPullTimer") then
+ 		return
+ 	end
+
 
 	if UnitInRaid("player") then
 		for i = 1, GetNumRaidMembers() do

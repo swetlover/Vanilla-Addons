@@ -1,6 +1,6 @@
 --[[
 --
--- BigWigs Strategy Module 
+-- BigWigs Strategy Module
 --
 -- Warns the raid when someone is Dazed.
 --
@@ -76,15 +76,15 @@ function BigWigsZombieFood:OnEnable()
 end
 
 function BigWigsZombieFood:SpecialEvents_UnitDebuffGained(unitid, debuffName, applications, debuffType, texture)
-    local modulesLoaded = false
-    for name, module in self.core:IterateModules() do
-        if module:IsBossModule() and self.core:IsModuleActive(module) then
-            modulesLoaded = true
-            break
-        end
-    end
-    if not modulesLoaded then return end
-    
+	local modulesLoaded = false
+	for name, module in self.core:IterateModules() do
+		if module:IsBossModule() and self.core:IsModuleActive(module) then
+			modulesLoaded = true
+			break
+		end
+	end
+	if not modulesLoaded then return end
+
 	if unitid and UnitIsFriend("player", unitid) and UnitIsPlayer(unitid) and debuffName == L["Dazed"] then
 		local unitName = UnitName(unitid)
 		if unitName and (not times[unitName] or (times[unitName] + 5) < GetTime()) then

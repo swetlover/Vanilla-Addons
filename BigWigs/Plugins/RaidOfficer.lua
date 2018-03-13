@@ -1,11 +1,11 @@
 --[[
-    by LYQ(Virose / MOUZU)
-    https://github.com/MOUZU/BigWigs
-    
-    This small plugin simply allows to move players in the raidgroup
-    from one subgroup to another, if the player using this version
-    is a RaidAssistant.
-    Previously this was possible in blizzards API but not implemented.
+by LYQ(Virose / MOUZU)
+https://github.com/MOUZU/BigWigs
+
+This small plugin simply allows to move players in the raidgroup
+from one subgroup to another, if the player using this version
+is a RaidAssistant.
+Previously this was possible in blizzards API but not implemented.
 --]]
 
 ----------------------------------
@@ -19,7 +19,7 @@ BigWigsRaidOfficer = BigWigs:NewModule("RaidOfficer")
 ------------------------------
 
 function BigWigsRaidOfficer:OnEnable()
-    self:ScheduleEvent(self.SetupFrames,2)
+	self:ScheduleEvent(self.SetupFrames,2)
 end
 
 ------------------------------
@@ -45,7 +45,7 @@ function BigWigs_RaidGroupButton_OnDragStop(raidButton)
 	if ( not raidButton ) then
 		raidButton = this;
 	end
-	
+
 	raidButton:StopMovingOrSizing();
 	MOVING_RAID_MEMBER = nil;
 	if ( TARGET_RAID_SLOT and TARGET_RAID_SLOT:GetParent():GetID() ~= raidButton.subgroup ) then
@@ -70,14 +70,14 @@ function BigWigs_RaidGroupButton_OnDragStop(raidButton)
 end
 
 function BigWigsRaidOfficer:SetupFrames()
-    -- I know someone else did a similar AddOn, my BigWigs might get in conflict with the other one
-    -- but I don't know what the name of the other AddOn is. TODO: Change 'unknownyet'
-    if not IsAddOnLoaded("unknownyet") then
-        -- backup the old ones just in case
-        ORIGINAL_RaidGroupButton_OnDragStart = RaidGroupButton_OnDragStart
-        ORIGINAL_RaidGroupButton_OnDragStop = RaidGroupButton_OnDragStop
-        -- overwrite them
-        RaidGroupButton_OnDragStart = BigWigs_RaidGroupButton_OnDragStart
-        RaidGroupButton_OnDragStop = BigWigs_RaidGroupButton_OnDragStop
-    end
+	-- I know someone else did a similar AddOn, my BigWigs might get in conflict with the other one
+	-- but I don't know what the name of the other AddOn is. TODO: Change 'unknownyet'
+	if not IsAddOnLoaded("unknownyet") then
+		-- backup the old ones just in case
+		ORIGINAL_RaidGroupButton_OnDragStart = RaidGroupButton_OnDragStart
+		ORIGINAL_RaidGroupButton_OnDragStop = RaidGroupButton_OnDragStop
+		-- overwrite them
+		RaidGroupButton_OnDragStart = BigWigs_RaidGroupButton_OnDragStart
+		RaidGroupButton_OnDragStop = BigWigs_RaidGroupButton_OnDragStop
+	end
 end

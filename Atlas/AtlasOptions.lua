@@ -155,3 +155,4 @@ function AtlasOptionsFrameDropDownCats_OnClick()
 	AtlasFrameDropDownType_OnShow();
 	AtlasFrameDropDown_OnShow();
 end
+

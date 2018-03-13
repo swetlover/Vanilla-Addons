@@ -1,25 +1,25 @@
 --[[
-	
+
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 - 2008 Dan Gilbert
 	Email me at loglow@gmail.com
-	
+
 	This file is part of Atlas.
-	
+
 	Atlas is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
 	(at your option) any later version.
-	
+
 	Atlas is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
-	
+
 	You should have received a copy of the GNU General Public License
 	along with Atlas; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-	
+
 --]]
 
 -- Atlas English Localization
@@ -30,749 +30,1328 @@
 --************************************************
 -- Global Atlas Strings
 --************************************************
-local AL = AceLibrary("AceLocale-2.2"):new("Atlas");
+
+if ( GetLocale() == "enUS" or GetLocale() == "enGB" ) then
+
+local BLUE = "|cff6666ff";
+local GREY = "|cff999999";
+local GREN = "|cff66cc33";
+local _RED = "|cffcc6666";
+local ORNG = "|cffcc9933";
+local PURP = "|cff9900ff";
+local WHIT = "|cffffffff";
+local INDENT = "   ";
 
 AtlasSortIgnore = {"the (.+)"};
 
-BINDING_HEADER_ATLAS_TITLE = "Atlas 快捷键"
-BINDING_NAME_ATLAS_TOGGLE = "切换 Atlas"
-BINDING_NAME_ATLAS_OPTIONS = "切换 设置"
-BINDING_NAME_ATLAS_AUTOSEL = "自动选择"
+ATLAS_TITLE = "Atlas";
+ATLAS_SUBTITLE = "Instance Map Browser";
+ATLAS_DESC = "Atlas is an instance map browser.";
 
-ATLAS_SUBTITLE = "副本地图浏览器"
-ATLAS_DESC = "Atlas 是一个副本地图浏览器."
+BINDING_HEADER_ATLAS_TITLE = "Atlas Bindings";
+BINDING_NAME_ATLAS_TOGGLE = "Toggle Atlas";
+BINDING_NAME_ATLAS_OPTIONS = "Toggle Options";
+BINDING_NAME_ATLAS_AUTOSEL = "Auto-Select";
 
-ATLAS_STRING_LOCATION = "位置"
-ATLAS_STRING_LEVELRANGE = "等级范围"
-ATLAS_STRING_PLAYERLIMIT = "玩家限制"
-ATLAS_STRING_SELECT_CAT = "选择类别"
-ATLAS_STRING_SELECT_MAP = "选择地图"
-ATLAS_STRING_SEARCH = "搜索"
-ATLAS_STRING_CLEAR = "清除"
-ATLAS_STRING_MINLEVEL = "最低等级"
+ATLAS_SLASH = "/atlas";
+ATLAS_SLASH_OPTIONS = "options";
 
-ATLAS_OPTIONS_BUTTON = "设置"
-ATLAS_OPTIONS_SHOWBUT = "显示小地图按钮"
-ATLAS_OPTIONS_AUTOSEL = "自动选择副本地图"
-ATLAS_OPTIONS_BUTPOS = "按钮位置"
-ATLAS_OPTIONS_TRANS = "透明度"
-ATLAS_OPTIONS_DONE = "完成"
-ATLAS_OPTIONS_RCLICK = "右键世界地图"
-ATLAS_OPTIONS_SHOWMAPNAME = "显示地图名字"
-ATLAS_OPTIONS_RESETPOS = "重置位置"
-ATLAS_OPTIONS_ACRONYMS = "显示缩略词"
-ATLAS_OPTIONS_SCALE = "大小"
-ATLAS_OPTIONS_BUTRAD = "按钮半径"
-ATLAS_OPTIONS_CLAMPED = "屏幕上锁住窗口"
-ATLAS_OPTIONS_HELP = "左键+拖动窗口"
+ATLAS_STRING_LOCATION = "Location";
+ATLAS_STRING_LEVELRANGE = "Level Range";
+ATLAS_STRING_PLAYERLIMIT = "Player Limit";
+ATLAS_STRING_SELECT_CAT = "Select Category";
+ATLAS_STRING_SELECT_MAP = "Select Map";
+ATLAS_STRING_SEARCH = "Search";
+ATLAS_STRING_CLEAR = "Clear";
+ATLAS_STRING_MINLEVEL = "Minimum Level";
+
+ATLAS_OPTIONS_BUTTON = "Options";
+ATLAS_OPTIONS_TITLE = "Atlas Options";
+ATLAS_OPTIONS_SHOWBUT = "Show Button on Minimap";
+ATLAS_OPTIONS_AUTOSEL = "Auto-Select Instance Map";
+ATLAS_OPTIONS_BUTPOS = "Button Position";
+ATLAS_OPTIONS_TRANS = "Transparency";
+ATLAS_OPTIONS_DONE = "Done";
+ATLAS_OPTIONS_REPMAP = "Replace the World Map";
+ATLAS_OPTIONS_RCLICK = "Right-Click for World Map";
+ATLAS_OPTIONS_SHOWMAPNAME = "Show map name";
+ATLAS_OPTIONS_RESETPOS = "Reset Position";
+ATLAS_OPTIONS_ACRONYMS = "Display Acronyms";
+ATLAS_OPTIONS_SCALE = "Scale";
+ATLAS_OPTIONS_BUTRAD = "Button Radius";
+ATLAS_OPTIONS_CLAMPED = "Clamp window to screen";
+ATLAS_OPTIONS_HELP = "Left-click and drag to move this window.";
+ATLAS_OPTIONS_CTRL = "Hold down Control for tooltips";
+ATLAS_OPTIONS_COORDS = "Show coordinates on the World Map";
 
 ATLAS_BUTTON_TOOLTIP_TITLE = "Atlas";
-ATLAS_BUTTON_TOOLTIP_HINT = "左键打开 Atlas.\n中键单击 Atlas 设置.\n右键+拖动这个按钮."
-ATLAS_TITAN_HINT = "左键打开 Atlas.\n中键单击 Atlas 设置.\n右键+拖动这个按钮."
+ATLAS_BUTTON_TOOLTIP_HINT = "Left-click to open Atlas.\nMiddle-click for Atlas options.\nRight-click and drag to move this button.";
+ATLAS_TITAN_HINT = "Left-click to open Atlas.\nMiddle-click for Atlas options.\nRight-click for the display menu.";
 
-ATLAS_OPTIONS_CATDD = "副本地图排序:"
-ATLAS_DDL_CONTINENT = "大陆"
-ATLAS_DDL_CONTINENT_EASTERN = "东部王国的副本"
-ATLAS_DDL_CONTINENT_KALIMDOR = "卡利姆多的副本"
-ATLAS_DDL_LEVEL = "等级";
-ATLAS_DDL_PARTYSIZE = "队伍规模";
-ATLAS_DDL_PARTYSIZE_5 = "副本 5 人"
-ATLAS_DDL_PARTYSIZE_10 = "副本 10 人"
-ATLAS_DDL_PARTYSIZE_20 = "副本 20 人"
-ATLAS_DDL_PARTYSIZE_40 = "副本 40 人"
-ATLAS_DDL_ALL = "所有"
-ATLAS_DDL_ALL_MENU = "显示所有副本"
-ATLAS_DDL_TYPE = "类型"
-ATLAS_DDL_TYPE_DUNGEONS = "副本"
-ATLAS_DDL_TYPE_RAIDS = "团本"
-ATLAS_DDL_WORLDBOSSES = "世界 Boss"
-ATLAS_DDL_TYPE_ENTRANCE = "入口"
-ATLAS_DDL_BGS = "战场"
-ATLAS_DDL_DUNGEON_LOCATIONS = "副本位置"
-ATLAS_DDL_FLIGHT_PATHS = "飞行地图"
-ATLAS_DDL_LEVELING_GUIDE = "升级指南"
-ATLAS_DDL_LEVELING_GUIDE_ALLIANCE1 = "联盟升级指南 Part 1"
-ATLAS_DDL_LEVELING_GUIDE_ALLIANCE2 = "联盟升级指南 Part 2"
-ATLAS_DDL_LEVELING_GUIDE_HORDE1 = "部落升级指南 Part 1"
-ATLAS_DDL_LEVELING_GUIDE_HORDE2 = "部落升级指南 Part 2"
+ATLAS_OPTIONS_CATDD = "Sort Instance Maps by:";
+ATLAS_DDL_CONTINENT = "Continent";
+ATLAS_DDL_CONTINENT_EASTERN = "Eastern Kingdoms Instances";
+ATLAS_DDL_CONTINENT_KALIMDOR = "Kalimdor Instances";
+ATLAS_DDL_LEVEL = "Level";
+ATLAS_DDL_LEVEL_MENU = "Instances sorted by level";
+ATLAS_DDL_PARTYSIZE = "Party Size";
+ATLAS_DDL_PARTYSIZE_5 = "Instances for 5 Players";
+ATLAS_DDL_PARTYSIZE_10 = "Instances for 10 Players";
+ATLAS_DDL_PARTYSIZE_20 = "Instances for 20 Players";
+ATLAS_DDL_PARTYSIZE_40 = "Instances for 40 Players";
+ATLAS_DDL_ALL = "All";
+ATLAS_DDL_ALL_MENU = "Showing all instances";
+ATLAS_DDL_TYPE = "Type";
+ATLAS_DDL_TYPE_DUNGEONS = "Dungeons";
+ATLAS_DDL_TYPE_RAIDS = "Raids";
+ATLAS_DDL_WORLDBOSSES = "World Bosses";
+ATLAS_DDL_TYPE_ENTRANCE = GREN.."Entrances";
+ATLAS_DDL_BGS = GREN.."Battlegrounds";
+ATLAS_DDL_DUNGEON_LOCATIONS = GREN.."Dungeon Locations";
+ATLAS_DDL_FLIGHT_PATHS = GREN.."Flight Path Maps";
+ATLAS_DDL_LEVELING_GUIDE = "Leveling Guide";
+ATLAS_DDL_LEVELING_GUIDE_ALLIANCE1 = "Alliance Leveling Guide Part 1";
+ATLAS_DDL_LEVELING_GUIDE_ALLIANCE2 = "Alliance Leveling Guide Part 2";
+ATLAS_DDL_LEVELING_GUIDE_HORDE1 = "Horde Leveling Guide Part 1";
+ATLAS_DDL_LEVELING_GUIDE_HORDE2 = "Horde Leveling Guide Part 2";
 
-ATLAS_INSTANCE_BUTTON = "副本"
-ATLAS_ENTRANCE_BUTTON = "入口"
-ATLAS_SEARCH_UNAVAIL = "搜索 不可用"
+ATLAS_INSTANCE_BUTTON = "Instance";
+ATLAS_ENTRANCE_BUTTON = "Entrance";
+ATLAS_SEARCH_UNAVAIL = "Search Unavailable";
 
 AtlasZoneSubstitutions = {
-	["The Temple of Atal'Hakkar"] = "沉没的神庙"
+	["The Temple of Atal'Hakkar"] = "Sunken Temple";
+	["Ahn'Qiraj"] = "Temple of Ahn'Qiraj";
 };
 
-AL:RegisterTranslations("zhCN", function() return {
-	
-	--************************************************
-	-- Zone Names, Acronyms, and Common Strings
-	--************************************************
-	
+AtlasLocale = {
+
+--************************************************
+-- Zone Names, Acronyms, and Common Strings
+--************************************************
+
 	--Common strings
-	["Atlas Options"] = "Atlas 设置",
-	--Colors
-	["Blue"] = "蓝色",
-	["Purple"] = "紫色",
-	["Red"] = "红色",
-	["Orange"] = "橙色",
-	["White"] = "白色",
-	--Mobs types
-	["Boss"] = "Boss",
-	["Rare"] = "稀有",
-	["Bat"] = "蝙蝠",
-	["Snake"] = "蛇",
-	["Raptor"] = "猛禽",
-	["Spider"] = "蜘蛛",
-	["Tiger"] = "老虎",
-	["Panther"] = "猎豹",
-	["Pet"] = "宠物",
-	["Engineer"] = "工程",
-	--Magic types
-	["Fire"] = "火焰",
-	["Nature"] = "自然",
-	["Frost"] = "冰霜",
-	["Shadow"] = "暗影",
-	["Arcane"] = "奥术",
-	--Events
-	["Hallow's End"] = "万圣节",
-	["Scourge Invasion"] = "天灾入侵",		
-	["Lunar Festival"] = "农历节日",
-	--Other
-	["East"] = "东",
-	["North"] = "北",
-	["South"] = "南",
-	["West"] = "西",		
-	["Battlegrounds"] = "战场",		
-	["Lower"] = "下层",	
-	["Upper"] = "上层",		
-	["Entrance"] = "入口",
-	["Exit"] = "出口",		
-	["Chase Begins"] = "追逐开始",
-	["Chase Ends"] = "追逐结束",		
-	["AKA"] = "另一个名称",	
-	["Attunement Required"] = "需求",
-	["Back"] = "回退",
-	["Back1"] = "背部",
-	["Blacksmithing Plans"] = "锻造图纸",	
-	["Brazier of Invocation"] = "符咒火盆",
-	["Connection"] = "连接点",
-	["Connections"] = "连接点",
-	["Damage: "] = "伤害: ",
-	["Тier 0.5 Summon"] = "T0.5召唤boss",
-	["Dungeon Locations"] = "副本的位置",
-	["Elevator"] = "电梯",
-	["Front"] = "前门",
-	["Front1"] = "前门1",
-	["Ghost"] = "幽灵",		
-	["Heroic"] = "英雄模式",
-	["Instances"] = "副本",
-	["Key"] = "钥匙",
-	["Meeting Stone"] = "集合石",
-	["Moonwell"] = "月亮井",
-	["Neutral"] = "中立", -- NPC reaction
-	["Optional"] = "可跳过",
-	["Outside"] = "室外",
-	["Portal"] = "传送",
-	["Random"] = "随机",
-	["Reputation"] = "声望",
-	["Rescued"] = "解救",
-	["Side"] = "旁门",
-	["Summon"] = "召唤",
-	["Teleport"] = "传送",
-	["through "] = "通道 ",
-	["Trash Mobs"] = "小怪",
-	["Unknown"] = "未知",
-	["Varies"] = "多个位置",
-	["Various"] = "多个",
-	["Wanders"] = "游荡",
+	["Adult"] = "Adult";
+	["AKA"] = "AKA";
+	["Alliance"] = "Alliance";
+	["Arcane"] = "Arcane";
+	["Arcane Container"] = "Arcane Container";
+	["Argent Dawn"] = "Argent Dawn";
+	["Arms Warrior"] = "Arms Warrior";
+	["Attunement Required"] = "Attunement Required";
+	["Back"] = "Back";
+	["Basement"] = "Basement";
+	["Bat"] = "Bat";
+	["Battleground Maps"] = "Battleground Maps";
+	["Battlegrounds"] = "Battlegrounds";
+	["Blacksmithing Plans"] = "Blacksmithing Plans";
+	["Blue"] = "Blue";
+	["Boss"] = "Boss";
+	["Brazier of Invocation"] = "Brazier of Invocation";
+	["Chase Begins"] = "Chase Begins";
+	["Chase Ends"] = "Chase Ends";
+	["Child"] = "Child";
+	["Connection"] = "Connection";
+	["Connections"] = "Connections";
+	["Damage: "] = "Damage: ";
+	["D2 Summon"] = "D2 Summon";
+	["Dungeon Locations"] = "Dungeon Locations";
+	["East"] = "East";
+	["Elevator"] = "Elevator";
+	["End"] = "End";
+	["Entrance"] = "Entrance";
+	["Event"] = "Event";
+	["Exalted"] = "Exalted";
+	["Exit"] = "Exit";
+	["Fire"] = "Fire";
+	["Fourth Stop"] = "Fourth Stop";
+	["Front"] = "Front";
+	["Frost"] = "Frost";
+	["Ghost"] = "Ghost";
+	["Hallow's End"] = "Hallow's End";
+	["Heroic"] = "Heroic";
+	["Horde Leveling Guide"] = "Horde Leveling Guide";
+	["Alliance Leveling Guide"] = "Alliance Leveling Guide";
+	["Holy Paladin"] = "Holy Paladin";
+	["Holy Priest"] = "Holy Priest";
+	["Horde"] = "Horde";
+	["Hunter"] = "Hunter";
+	["Imp"] = "Imp";
+	["Instances"] = "Instances";
+	["Key"] = "Key";
+	["Lower"] = "Lower";
+	["Lunar"] = "Lunar";
+	["Lunar Festival"] = "Lunar Festival";
+	["Mage"] = "Mage";
+	["Meeting Stone"] = "Meeting Stone";
+	["Moonwell"] = "Moonwell";
+	["Nature"] = "Nature";
+	["Neutral"] = "Neutral";
+	["North"] = "North";
+	["Optional"] = "Optional";
+	["Orange"] = "Orange";
+	["Outside"] = "Outside";
+	["Paladin"] = "Paladin";
+	["Panther"] = "Panther";
+	["Portal"] = "Portal";
+	["Priest"] = "Priest";
+	["Protection Warrior"] = "Protection Warrior";
+	["Purple"] = "Purple";
+	["Random"] = "Random";
+	["Raptor"] = "Raptor";
+	["Rare"] = "Rare";
+	["Red"] = "Red";
+	["Rep"] = "Rep";
+	["Repair"] = "Repair";
+	["Rescued"] = "Rescued";
+	["Retribution Paladin"] = "Retribution Paladin";
+	["Rewards"] = "Rewards";
+	["Rogue"] = "Rogue";
+	["Scourge Invasion"] = "Scourge Invasion";
+	["Second Stop"] = "Second Stop";
+	["Shadow"] = "Shadow";
+	["Shadow Priest"] = "Shadow Priest";
+	["Shaman"] = "Shaman";
+	["Side"] = "Side";
+	["Snake"] = "Snake";
+	["South"] = "South";
+	["Spawn Point"] = "Spawn Point";
+	["Spider"] = "Spider";
+	["Start"] = "Start";
+	["Summon"] = "Summon";
+	["Teleport"] = "Teleport";
+	["Third Stop"] = "Third Stop";
+	["through "] = "through ";
+	["Tiger"] = "Tiger";
+	["Top"] = "Top";
+	["Trash Mobs"] = "Trash Mobs";
+	["Undead"] = "Undead";
+	["Underwater"] = "Underwater";
+	["Unknown"] = "Unknown";
+	["Upper"] = "Upper";
+	["Varies"] = "Varies";
+	["Various"] = "Various";
+	["Wanders"] = "Wanders";
+	["Warlock"] = "Warlock";
+	["Warrior"] = "Warrior";
+	["West"] = "West";
+	["White"] = "White";
 	
 	--Instance names and acronyms
-	["Armory"] = "军械库",
-	["Cathedral"] = "大教堂",
-	["Graveyard"] = "墓地",
-	["Library"] = "图书馆",
-	["Sunken Temple"] = "沉没的神庙",
+	["Armory"] = "Armory";
+	["Blackfathom Deeps"] = "Blackfathom Deeps"; ["BFD"] = "BFD";
+	["Blackrock Depths"] = "Blackrock Depths"; ["BRD"] = "BRD";
+	["Blackrock Spire"] = "Blackrock Spire"; ["LBRS"] = "LBRS"; ["UBRS"] = "UBRS";
+	["Blackwing Lair"] = "Blackwing Lair"; ["BWL"] = "BWL";
+	["Cathedral"] = "Cathedral"; ["Cath"] = "Cath";
+	["Dire Maul"] = "Dire Maul"; ["DME"] = "DME"; ["DMN"] = "DMN"; ["DMW"] = "DMW";
+	["Gnomeregan"] = "Gnomeregan"; ["Gnome"] = "Gnome";
+	["Graveyard"] = "Graveyard"; ["GY"] = "GY";
+	["Library"] = "Library"; ["Lib"] = "Lib";
+	["Lower Blackrock Spire"] = "Lower Blackrock Spire";
+	["Maraudon"] = "Maraudon"; ["Mara"] = "Mara";
+	["Molten Core"] = "Molten Core"; ["MC"] = "MC";
+	["Naxxramas"] = "Naxxramas"; ["Nax"] = "Nax";
+	["Onyxia's Lair"] = "Onyxia's Lair"; ["Ony"] = "Ony";
+	["Ragefire Chasm"] = "Ragefire Chasm"; ["RFC"] = "RFC";
+	["Razorfen Downs"] = "Razorfen Downs"; ["RFD"] = "RFD";
+	["Razorfen Kraul"] = "Razorfen Kraul"; ["RFK"] = "RFK";
+	["Ruins of Ahn'Qiraj"] = "Ruins of Ahn'Qiraj"; ["AQ20"] = "AQ20";
+	["Scarlet Monastery"] = "Scarlet Monastery"; ["SM"] = "SM"; ["SM Lib"] = "SM Lib"; ["SM Arm"] = "SM Arm"; ["SM Cath"] = "SM Cath"; ["SM GY"] = "SM GY";
+	["Scholomance"] = "Scholomance"; ["Scholo"] = "Scholo";
+	["Shadowfang Keep"] = "Shadowfang Keep"; ["SFK"] = "SFK";
+	["Stratholme"] = "Stratholme"; ["Strat"] = "Strat";
+	["Sunken Temple"] = "Sunken Temple"; ["ST"] = "ST";
+	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj"; ["AQ40"] = "AQ40";
+	["The Deadmines"] = "The Deadmines"; ["DM"] = "DM";
+	["The Stockade"] = "The Stockade"; ["Stocks"] = "Stocks";
+	["Uldaman"] = "Uldaman"; ["Uld"] = "Uld";
+	["Upper Blackrock Spire"] = "Upper Blackrock Spire";
+	["Wailing Caverns"] = "Wailing Caverns"; ["WC"] = "WC";
+	["Zul'Farrak"] = "Zul'Farrak"; ["ZF"] = "ZF";
+	["Zul'Gurub"] = "Zul'Gurub"; ["ZG"] = "ZG";
+	
+	--Continents
+	["Eastern Kingdoms"] = "Eastern Kingdoms";
+	["Kalimdor"] = "Kalimdor";
+	
+	--Outdoor zones, Locations
+	["Ashenvale"] = "Ashenvale";
+	["Badlands"] = "Badlands";
+	["Blackrock Mountain"] = "Blackrock Mountain"; ["BRM"] = "BRM";
+	["Burning Steppes"] = "Burning Steppes";
+	["Deadwind Pass"] = "Deadwind Pass";
+	["Desolace"] = "Desolace";
+	["Dun Morogh"] = "Dun Morogh";
+	["Dustwallow Marsh"] = "Dustwallow Marsh";
+	["Eastern Plaguelands"] = "Eastern Plaguelands";
+	["Feralas"] = "Feralas";
+	["Orgrimmar"] = "Orgrimmar";
+	["Searing Gorge"] = "Searing Gorge";
+	["Silithus"] = "Silithus";
+	["Silverpine Forest"] = "Silverpine Forest";
+	["Stormwind City"] = "Stormwind City";
+	["Stranglethorn Vale"] = "Stranglethorn Vale";
+	["Swamp of Sorrows"] = "Swamp of Sorrows";
+	["Tanaris"] = "Tanaris";
+	["The Barrens"] = "The Barrens";
+	["Tirisfal Glades"] = "Tirisfal Glades";
+	["Western Plaguelands"] = "Western Plaguelands";
+	["Westfall"] = "Westfall";
 	
 	--Set names
-	["Set: "] = "套装：",
-	["Tier 0/0.5 Sets"] = "T0/0.5 套装",
-	["Zul'Gurub Sets"] = "祖尔格拉布套装",
-	["Zul'Gurub Ring Sets"] = "祖尔格拉布饰品套装",
-	["Ruins of Ahn'Qiraj Sets"] = "安其拉废墟套装",
-	["Temple of Ahn'Qiraj Sets"] = "安其拉神殿套装",
-	["Tier 1 Sets"] = "T1 套装",
-	["Tier 2 Sets"] = "T2 套装",
-	["Tier 3 Sets"] = "T3 套装",
-	
-	--************************************************
-	-- Kalimdor Instance Data
-	--************************************************
-	
+	["Set: "] = "Set: ";
+	["Embrace of the Viper"] = "Embrace of the Viper";
+	["Ironweave Battlesuit"] = "Ironweave Battlesuit";
+	["The Gladiator"] = "The Gladiator";
+	["Spider's Kiss"] = "Spider's Kiss";
+	["Chain of the Scarlet Crusade"] = "Chain of the Scarlet Crusade";
+	["Necropile Raiment"] = "Necropile Raiment";
+	["Cadaverous Garb"] = "Cadaverous Garb";
+	["Bloodmail Regalia"] = "Bloodmail Regalia";
+	["Deathbone Guardian"] = "Deathbone Guardian";
+	["The Postmaster"] = "The Postmaster";
+	["Defias Leather"] = "Defias Leather";
+	["Primal Blessing"] = "Primal Blessing";
+	["The Twin Blades of Hakkari"] = "The Twin Blades of Hakkari";
+	["D1/D2 Sets"] = "D1/D2 Sets";
+	["ZG Sets"] = "ZG Sets";
+	["ZG Ring Sets"] = "ZG Ring Sets";
+	["AQ20 Sets"] = "AQ20 Sets";
+	["AQ40 Sets"] = "AQ40 Sets";
+	["T1 Sets"] = "T1 Sets";
+	["T2 Sets"] = "T2 Sets";
+	["T3 Sets"] = "T3 Sets";
+
+--************************************************
+-- Kalimdor Instance Data
+--************************************************
+
 	--Ragefire Chasm
-	["Oggleflint"] = "奥格弗林特",
+	["Maur Grimtotem"] = "Maur Grimtotem";
+	["Oggleflint <Ragefire Chieftain>"] = "Oggleflint <Ragefire Chieftain>";
+	["Taragaman the Hungerer"] = "Taragaman the Hungerer";
+	["Jergosh the Invoker"] = "Jergosh the Invoker";
+	["Zelemar the Wrathful"] = "Zelemar the Wrathful";
+	["Bazzalan"] = "Bazzalan";
 	
 	--Wailing Caverns
-	["Disciple of Naralex"] = "穆约",
-	["Mysterious Wailing Caverns Chest"] = "神秘的哀嚎洞穴箱子",
+	["Disciple of Naralex"] = "Disciple of Naralex";
+	["Mysterious Wailing Caverns Chest"] = "Mysterious Wailing Caverns Chest";
+	["Lord Cobrahn <Fanglord>"] = "Lord Cobrahn <Fanglord>";
+	["Lady Anacondra <Fanglord>"] = "Lady Anacondra <Fanglord>";
+	["Kresh"] = "Kresh";
+	["Lord Pythas <Fanglord>"] = "Lord Pythas <Fanglord>";
+	["Skum"] = "Skum";
+	["Lord Serpentis <Fanglord>"] = "Lord Serpentis <Fanglord>";
+	["Verdan the Everliving"] = "Verdan the Everliving";
+	["Mutanus the Devourer"] = "Mutanus the Devourer";
+	["Naralex"] = "Naralex";
+	["Deviate Faerie Dragon"] = "Deviate Faerie Dragon";
 	
 	--Blackfathom Deeps
-	["Lorgalis Manuscript"] = "洛迦里斯手稿",
-	["Argent Guard Thaelrid"] = "斥候塞尔瑞德",
-	["Shrine of Gelihast"] = "格里哈斯特神殿",
-	["Fathom Stone"] = "深渊之石",
-	["Morridune"] = "莫瑞杜恩",
-	["Altar of the Deeps"] = "玛塞斯特拉祭坛",
+	["Ghamoo-ra"] = "Ghamoo-ra";
+	["Lorgalis Manuscript"] = "Lorgalis Manuscript";
+	["Lady Sarevess"] = "Lady Sarevess";
+	["Argent Guard Thaelrid <The Argent Dawn>"] = "Argent Guard Thaelrid <The Argent Dawn>";
+	["Gelihast"] = "Gelihast";
+	["Shrine of Gelihast"] = "Shrine of Gelihast";
+	["Lorgus Jett"] = "Lorgus Jett";
+	["Fathom Stone"] = "Fathom Stone";
+	["Baron Aquanis"] = "Baron Aquanis";
+	["Twilight Lord Kelris"] = "Twilight Lord Kelris";
+	["Old Serra'kis"] = "Old Serra'kis";
+	["Aku'mai"] = "Aku'mai";
+	["Morridune"] = "Morridune";
+	["Altar of the Deeps"] = "Altar of the Deeps";
 	
 	--Razorfen Kraul
-	["Razorfen Spearhide"] = "剃刀沼泽刺鬃守卫",
-	["Willix the Importer"] = "进口商威利克斯",
-	["Heralath Fallowbrook"] = "赫尔拉斯·静水",
-	
+	["Roogug"] = "Roogug";
+	["Aggem Thorncurse <Death's Head Prophet>"] = "Aggem Thorncurse <Death's Head Prophet>";
+	["Death Speaker Jargba <Death's Head Captain>"] = "Death Speaker Jargba <Death's Head Captain>";
+	["Overlord Ramtusk"] = "Overlord Ramtusk";
+	["Razorfen Spearhide"] = "Razorfen Spearhide";
+	["Agathelos the Raging"] = "Agathelos the Raging";
+	["Blind Hunter"] = "Blind Hunter";
+	["Charlga Razorflank <The Crone>"] = "Charlga Razorflank <The Crone>";
+	["Willix the Importer"] = "Willix the Importer";
+	["Heralath Fallowbrook"] = "Heralath Fallowbrook";
+	["Earthcaller Halmgar"] = "Earthcaller Halmgar";
+
 	--Razorfen Downs
-	["Henry Stern"] = "亨利·斯特恩",
-	["Belnistrasz"] = "奔尼斯特拉兹",
-	["Sah'rhee"] = "萨哈斯",
+	["Tuten'kash"] = "Tuten'kash";
+	["Henry Stern"] = "Henry Stern";
+	["Belnistrasz"] = "Belnistrasz";
+	["Sah'rhee"] = "Sah'rhee";
+	["Lady Falther'ess"] = "Lady Falther'ess";
+	["Mordresh Fire Eye"] = "Mordresh Fire Eye";
+	["Glutton"] = "Glutton";
+	["Ragglesnout"] = "Ragglesnout";
+	["Amnennar the Coldbringer"] = "Amnennar the Coldbringer";
+	["Plaguemaw the Rotting"] = "Plaguemaw the Rotting";
 	
 	--Zul'Farrak
-	["Mallet of Zul'Farrak"] = "祖尔法拉克之槌",
-	["Theka the Martyr"] = "殉教者塞卡",
-	["Zul'Farrak Dead Hero"] = "祖尔法拉克阵亡英雄",
-	["Nekrum Gutchewer"] = "耐克鲁姆",
-	["Dustwraith"] = "灰尘怨灵",
-	["Sergeant Bly"] = "布莱中士",
-	["Weegli Blastfuse"] = "维格利",
-	["Murta Grimgut"] = "穆尔塔",
-	["Raven"] = "拉文",
-	["Oro Eyegouge"] = "欧罗·血眼",
-	["Sandfury Executioner"] = "沙怒刽子手",
-	["Hydromancer Velratha"] = "水占师维蕾萨",
-	["Elder Wildmane"] = "蛮鬃长者",
-	["Zerillis"] = "泽雷利斯",
-	["Sandarr Dunereaver"] = "杉达尔·沙掠者",
+	["Mallet of Zul'Farrak"] = "Mallet of Zul'Farrak";
+	["Antu'sul <Overseer of Sul>"] = "Antu'sul <Overseer of Sul>";
+	["Theka the Martyr"] = "Theka the Martyr";
+	["Witch Doctor Zum'rah"] = "Witch Doctor Zum'rah";
+	["Zul'Farrak Dead Hero"] = "Zul'Farrak Dead Hero";
+	["Nekrum Gutchewer"] = "Nekrum Gutchewer";
+	["Shadowpriest Sezz'ziz"] = "Shadowpriest Sezz'ziz";
+	["Dustwraith"] = "Dustwraith";
+	["Sergeant Bly"] = "Sergeant Bly";
+	["Weegli Blastfuse"] = "Weegli Blastfuse";
+	["Murta Grimgut"] = "Murta Grimgut";
+	["Raven"] = "Raven";
+	["Oro Eyegouge"] = "Oro Eyegouge";
+	["Sandfury Executioner"] = "Sandfury Executioner";
+	["Hydromancer Velratha"] = "Hydromancer Velratha";
+	["Gahz'rilla"] = "Gahz'rilla";
+	["Elder Wildmane"] = "Elder Wildmane";
+	["Chief Ukorz Sandscalp"] = "Chief Ukorz Sandscalp";
+	["Ruuzlu"] = "Ruuzlu";
+	["Zerillis"] = "Zerillis";
+	["Sandarr Dunereaver"] = "Sandarr Dunereaver";
 	
 	--Maraudon	
-	["Scepter of Celebras"] = "塞雷布拉斯节杖",
-	["Veng"] = "温格(第五可汗)",
-	["Maraudos"] = "玛拉多斯(第四可汗)",
-	["Elder Splitrock"] = "碎石长者",
+	["Scepter of Celebras"] = "Scepter of Celebras";
+	["Veng <The Fifth Khan>"] = "Veng <The Fifth Khan>";
+	["Noxxion"] = "Noxxion";
+	["Razorlash"] = "Razorlash";
+	["Maraudos <The Fourth Khan>"] = "Maraudos <The Fourth Khan>";
+	["Lord Vyletongue"] = "Lord Vyletongue";
+	["Meshlok the Harvester"] = "Meshlok the Harvester";
+	["Celebras the Cursed"] = "Celebras the Cursed";
+	["Landslide"] = "Landslide";
+	["Tinkerer Gizlock"] = "Tinkerer Gizlock";
+	["Rotgrip"] = "Rotgrip";
+	["Princess Theradras"] = "Princess Theradras";
+	["Elder Splitrock"] = "Elder Splitrock";
 	
 	--Dire Maul (East)
-	["Old Ironbark"] = "埃隆巴克",
-	["A Dusty Tome"] = "布满灰尘的书籍",
-	["Felvine Shard"] = "魔藤碎片",
-	["Dire Maul Books"] = "厄运之槌职业书籍",
+	["Pusillin"] = "Pusillin";
+	["Zevrim Thornhoof"] = "Zevrim Thornhoof";
+	["Hydrospawn"] = "Hydrospawn";
+	["Lethtendris"] = "Lethtendris";
+	["Pimgib"] = "Pimgib";
+	["Old Ironbark"] = "Old Ironbark";
+	["Alzzin the Wildshaper"] = "Alzzin the Wildshaper";
+	["Isalien"] = "Isalien";
+	["A Dusty Tome"] = "A Dusty Tome";
+	["Felvine Shard"] = "Felvine Shard";
+	["Dire Maul Books"] = "Dire Maul Books";
 	
 	--Dire Maul (North)
-	["Crescent Key"] = "月牙钥匙",--omitted from Dire Maul (West)
-	["Gordok Courtyard Key"] = "戈多克庭院钥匙",
-	["Gordok Inner Door Key"] = "戈多克内门钥匙",
+	["Crescent Key"] = "Crescent Key";--omitted from Dire Maul (West)
+	["Gordok Courtyard Key"] = "Gordok Courtyard Key";
+	["Gordok Inner Door Key"] = "Gordok Inner Door Key";
 	--"Library" omitted from here and DM West because of SM: "Library" duplicate
-	["Stomper Kreeg"] = "践踏者克雷格",
-	["Knot Thimblejack"] = "诺特·希姆加克",
-	["Tribute Run"] = "贡品",
-	
+	["Guard Mol'dar"] = "Guard Mol'dar";
+	["Stomper Kreeg <The Drunk>"] = "Stomper Kreeg <The Drunk>";
+	["Guard Fengus"] = "Guard Fengus";
+	["Knot Thimblejack"] = "Knot Thimblejack";
+	["Guard Slip'kik"] = "Guard Slip'kik";
+	["Captain Kromcrush"] = "Captain Kromcrush";
+	["King Gordok"] = "King Gordok";
+	["Cho'Rush the Observer"] = "Cho'Rush the Observer";
+	["Falrin Treeshaper"] = "Falrin Treeshaper";
+	["Lorekeeper Lydros"] = "Lorekeeper Lydros";
+	["Lorekeeper Javon"] = "Lorekeeper Javon";
+	["Lorekeeper Kildrath"] = "Lorekeeper Kildrath";
+	["Lorekeeper Mykos"] = "Lorekeeper Mykos";
+	["Shen'dralar Provisioner"] = "Shen'dralar Provisioner";
+	["Skeletal Remains of Kariel Winthalus"] = "Skeletal Remains of Kariel Winthalus";
+	["Tribute Run"] = "Tribute Run";
+
 	--Dire Maul (West)
-	["J'eevee's Jar"] = "耶维尔的瓶子",
-	["Pylons"] = "能量塔",
-	["Shen'dralar Ancient"] = "辛德拉古灵",
-	["Ancient Equine Spirit"] = "上古圣马之魂",
-	["Ferra"] = "费拉",
-	["Falrin Treeshaper"] = "法尔林·树影",
-	["Lorekeeper Lydros"] = "博学者莱德罗斯",
-	["Lorekeeper Javon"] = "博学者亚沃",
-	["Lorekeeper Kildrath"] = "博学者基尔达斯",
-	["Lorekeeper Mykos"] = "博学者麦库斯",
-	["Shen'dralar Provisioner"] = "辛德拉圣职者",
-	["Skeletal Remains of Kariel Winthalus"] = "卡里尔·温萨鲁斯的骸骨",
-	["The Prince's Chest"] = "王子的箱子",
+	["J'eevee's Jar"] = "J'eevee's Jar";
+	["Pylons"] = "Pylons";
+	["Shen'dralar Ancient"] = "Shen'dralar Ancient";
+	["Tendris Warpwood"] = "Tendris Warpwood";
+	["Ancient Equine Spirit"] = "Ancient Equine Spirit";
+	["Illyanna Ravenoak"] = "Illyanna Ravenoak";
+	["Ferra"] = "Ferra";
+	["Magister Kalendris"] = "Magister Kalendris";
+	["Tsu'zee"] = "Tsu'zee";
+	["Immol'thar"] = "Immol'thar";
+	["Lord Hel'nurath"] = "Lord Hel'nurath";
+	["Prince Tortheldrin"] = "Prince Tortheldrin";
+	["Falrin Treeshaper"] = "Falrin Treeshaper";
+	["Lorekeeper Lydros"] = "Lorekeeper Lydros";
+	["Lorekeeper Javon"] = "Lorekeeper Javon";
+	["Lorekeeper Kildrath"] = "Lorekeeper Kildrath";
+	["Lorekeeper Mykos"] = "Lorekeeper Mykos";
+	["Shen'dralar Provisioner"] = "Shen'dralar Provisioner";
+	["Skeletal Remains of Kariel Winthalus"] = "Skeletal Remains of Kariel Winthalus";
+	["The Prince's Chest"] = "The Prince's Chest";
+	["Revanchion"] = "Revanchion";
 	
 	--Onyxia's Lair
-	["Drakefire Amulet"] = "龙火护符",
-	["Onyxian Warders"] = "奥妮克希亚守卫",
-	["Whelp Eggs"] = "幼龙的蛋",
-	
+	["Drakefire Amulet"] = "Drakefire Amulet";
+	["Onyxian Warders"] = "Onyxian Warders";
+	["Whelp Eggs"] = "Whelp Eggs";
+	["Onyxia"] = "Onyxia";
+
 	--Temple of Ahn'Qiraj
-	["Bug Trio"] = "三人组",
-	["Andorgos"] = "安多葛斯",
-	["Vethsera"] = "温瑟拉",
-	["Kandrostrasz"] = "坎多斯特拉兹",
-	["Arygos"] = "阿瑞苟斯",
-	["Caelestrasz"] = "凯雷斯特拉兹",
-	["Merithra of the Dream"] = "梦境之龙麦琳瑟拉",
-	["AQ Enchants"] = "TAQ附魔",
-	["AQ Opening Quest Chain"] = "TAQ开放的任务链",
+	["Brood of Nozdormu"] = "Brood of Nozdormu";
+	["The Prophet Skeram"] = "The Prophet Skeram";
+	["Bug Trio"] = "Bug Trio";
+	["Vem"] = "Vem";
+	["Lord Kri"] = "Lord Kri";
+	["Princess Yauj"] = "Princess Yauj";
+	["Battleguard Sartura"] = "Battleguard Sartura";
+	["Fankriss the Unyielding"] = "Fankriss the Unyielding";
+	["Viscidus"] = "Viscidus";
+	["Princess Huhuran"] = "Princess Huhuran";
+	["Twin Emperors"] = "Twin Emperors";
+	["Emperor Vek'lor"] = "Emperor Vek'lor";
+	["Emperor Vek'nilash"] = "Emperor Vek'nilash";
+	["Ouro"] = "Ouro";
+	["C'Thun"] = "C'Thun";
+	["Andorgos <Brood of Malygos>"] = "Andorgos <Brood of Malygos>";
+	["Vethsera <Brood of Ysera>"] = "Vethsera <Brood of Ysera>";
+	["Kandrostrasz <Brood of Alexstrasza>"] = "Kandrostrasz <Brood of Alexstrasza>";
+	["Arygos"] = "Arygos";
+	["Caelestrasz"] = "Caelestrasz";
+	["Merithra of the Dream"] = "Merithra of the Dream";
+	["AQ Enchants"] = "AQ Enchants";
+	["AQ Opening Quest Chain"] = "AQ Opening Quest Chain";
 	
 	--Ruins of Ahn'Qiraj
-	["Four Kaldorei Elites"] = "卡多雷四精英",
-	["Captain Qeez"] = "奎兹上尉",
-	["Captain Tuubid"] = "图比德上尉",
-	["Captain Drenn"] = "德雷恩上尉",
-	["Captain Xurrem"] = "库雷姆上尉",
-	["Major Yeggeth"] = "耶吉斯少校",
-	["Major Pakkon"] = "帕库少校",
-	["Colonel Zerran"] = "泽兰上校",
-	["Safe Room"] = "安全房间",
-	["Class Books"] = "职业书籍",
+	["Cenarion Circle"] = "Cenarion Circle";
+	["Kurinnaxx"] = "Kurinnaxx";
+	["Lieutenant General Andorov"] = "Lieutenant General Andorov";
+	["Four Kaldorei Elites"] = "Four Kaldorei Elites";
+	["General Rajaxx"] = "General Rajaxx";
+	["Captain Qeez"] = "Captain Qeez";
+	["Captain Tuubid"] = "Captain Tuubid";
+	["Captain Drenn"] = "Captain Drenn";
+	["Captain Xurrem"] = "Captain Xurrem";
+	["Major Yeggeth"] = "Major Yeggeth";
+	["Major Pakkon"] = "Major Pakkon";
+	["Colonel Zerran"] = "Colonel Zerran";
+	["Moam"] = "Moam";
+	["Buru the Gorger"] = "Buru the Gorger";
+	["Ayamiss the Hunter"] = "Ayamiss the Hunter";
+	["Ossirian the Unscarred"] = "Ossirian the Unscarred";
+	["Safe Room"] = "Safe Room";
+	["Class Books"] = "Class Books";
+	["AQ20 Class Sets"] = "AQ20 Class Sets";
 	
-	--****************************
-	-- Eastern Kingdoms Instances
-	--****************************
+--****************************
+-- Eastern Kingdoms Instances
+--****************************
 	
 	--Blackrock Depths
-	["Shadowforge Key"] = "暗炉钥匙",
-	["Prison Cell Key"] = "监狱牢房钥匙",
-	["Jail Break!"] = "冲破牢笼",
-	["Banner of Provocation"] = "挑衅之旗",
-	["Kharan Mighthammer"] = "卡兰·巨锤",
-	["Commander Gor'shak"] = "指挥官哥沙克 <卡加斯远征军>",
-	["Marshal Windsor"] = "温德索尔元帅",
-	["Ring of Law"] = "法律之环",
-	["Theldren"] = "塞尔德林",
-	["Lefty"] = "莱弗提",
-	["Malgen Longspear"] = "玛尔根·长矛",
-	["Gnashjaw"] = "碎腭 <玛尔根·长矛的宠物>",
-	["Korv"] = "考尔夫",
-	["Rezznik"] = "雷兹尼克",
-	["Rotfang"] = "烂牙",
-	["Snokh Blackspine"] = "斯诺恩·黑骨",
-	["Va'jashni"] = "瓦亚辛",
-	["Volida"] = "沃莉达",
-	["Elder Morndeep"] = "黎明长者",
-	["High Justice Grimstone"] = "裁决者格里斯通",
-	["Monument of Franclorn Forgewright"] = "弗兰克罗恩·铸铁的雕像",
-	["The Vault"] = "黑色宝库",
-	["The Black Anvil"] = "黑铁砧",
-	["Shadowforge Lock"] = "暗炉之锁",
-	["Field Repair Bot 74A"] = "修理机器人74A型",
-	["The Grim Guzzler"] = "黑铁酒吧",
-	["Lokhtos Darkbargainer"] = "罗克图斯·暗契 <瑟银兄弟会>",
-	["Mistress Nagmara"] = "娜玛拉小姐",
-	["Plugger Spazzring"] = "普拉格",
-	["Private Rocknot"] = "罗克诺特下士",
-	["Summoner's Tomb"] = "召唤者之墓",
-	["Chest of The Seven"] = "七贤箱子",
-	["The Lyceum"] = "讲学厅",
-	["High Priestess of Thaurissan"] = "索瑞森高阶女祭司",
-	["The Black Forge"] = "黑熔炉",
-	["Core Fragment"] = "熔火碎片",
-	["Overmaster Pyron"] = "征服者派隆",
-	
+	["Shadowforge Key"] = "Shadowforge Key";
+	["Prison Cell Key"] = "Prison Cell Key";
+	["Jail Break!"] = "Jail Break!";
+	["Banner of Provocation"] = "Banner of Provocation";
+	["Lord Roccor"] = "Lord Roccor";
+	["Kharan Mighthammer"] = "Kharan Mighthammer";
+	["Commander Gor'shak <Kargath Expeditionary Force>"] = "Commander Gor'shak <Kargath Expeditionary Force>";
+	["Marshal Windsor"] = "Marshal Windsor";
+	["High Interrogator Gerstahn <Twilight's Hammer Interrogator>"] = "High Interrogator Gerstahn <Twilight's Hammer Interrogator>";
+	["Ring of Law"] = "Ring of Law";
+	["Anub'shiah"] = "Anub'shiah";
+	["Eviscerator"] = "Eviscerator";
+	["Gorosh the Dervish"] = "Gorosh the Dervish";
+	["Grizzle"] = "Grizzle";
+	["Hedrum the Creeper"] = "Hedrum the Creeper";
+	["Ok'thor the Breaker"] = "Ok'thor the Breaker";
+	["Theldren"] = "Theldren";
+	["Lefty"] = "Lefty";
+	["Malgen Longspear"] = "Malgen Longspear";
+	["Gnashjaw <Malgen Longspear's Pet>"] = "Gnashjaw <Malgen Longspear's Pet>";
+	["Korv"] = "Korv";
+	["Rezznik"] = "Rezznik";
+	["Rotfang"] = "Rotfang";
+	["Snokh Blackspine"] = "Snokh Blackspine";
+	["Va'jashni"] = "Va'jashni";
+	["Volida"] = "Volida";
+	["Houndmaster Grebmar"] = "Houndmaster Grebmar";
+	["Elder Morndeep"] = "Elder Morndeep";
+	["High Justice Grimstone"] = "High Justice Grimstone";
+	["Monument of Franclorn Forgewright"] = "Monument of Franclorn Forgewright";
+	["Pyromancer Loregrain"] = "Pyromancer Loregrain";
+	["The Vault"] = "The Vault";
+	["Warder Stilgiss"] = "Warder Stilgiss";
+	["Verek"] = "Verek";
+	["Watchman Doomgrip"] = "Watchman Doomgrip";
+	["Fineous Darkvire <Chief Architect>"] = "Fineous Darkvire <Chief Architect>";
+	["The Black Anvil"] = "The Black Anvil";
+	["Lord Incendius"] = "Lord Incendius";
+	["Bael'Gar"] = "Bael'Gar";
+	["Shadowforge Lock"] = "Shadowforge Lock";
+	["General Angerforge"] = "General Angerforge";
+	["Golem Lord Argelmach"] = "Golem Lord Argelmach";
+	["Field Repair Bot 74A"] = "Field Repair Bot 74A";
+	["The Grim Guzzler"] = "The Grim Guzzler";
+	["Hurley Blackbreath"] = "Hurley Blackbreath";
+	["Lokhtos Darkbargainer <The Thorium Brotherhood>"] = "Lokhtos Darkbargainer <The Thorium Brotherhood>";
+	["Mistress Nagmara"] = "Mistress Nagmara";
+	["Phalanx"] = "Phalanx";
+	["Plugger Spazzring"] = "Plugger Spazzring";
+	["Private Rocknot"] = "Private Rocknot";
+	["Ribbly Screwspigot"] = "Ribbly Screwspigot";
+	["Ambassador Flamelash"] = "Ambassador Flamelash";
+	["Panzor the Invincible"] = "Panzor the Invincible";
+	["Summoner's Tomb"] = "Summoner's Tomb";
+	["Chest of The Seven"] = "Chest of The Seven";
+	["The Lyceum"] = "The Lyceum";
+	["Magmus"] = "Magmus";
+	["Emperor Dagran Thaurissan"] = "Emperor Dagran Thaurissan";
+	["Princess Moira Bronzebeard <Princess of Ironforge>"] = "Princess Moira Bronzebeard <Princess of Ironforge>";
+	["High Priestess of Thaurissan"] = "High Priestess of Thaurissan";
+	["The Black Forge"] = "The Black Forge";
+	["Core Fragment"] = "Core Fragment";
+	["Overmaster Pyron"] = "Overmaster Pyron";
+	["BRDRogue"] = "|cfffff468Rogue";
+	["BRDHunter"] = "|cffaad372Hunter";
+	["BRDMage"] = "|cff68ccefMage";
+	["BRDPet"] = "|cffaad372Pet";
+	["BRDPriest"] = "|cffffffffPriest";
+	["BRDShaman"] = "|cff2773ffShaman";
+	["BRDEngineer"] = "|cffc69b6dEngineer";
+
 	--Blackrock Spire (Lower)
-	["Vaelan"] = "维埃兰",
-	["Warosh"] = "瓦罗什 <被诅咒者>",
-	["Elder Stonefort"] = "石墙长者",
-	["Roughshod Pike"] = "尖锐长矛",
-	["Spirestone Butcher"] = "尖石屠夫",
-	["Spirestone Battle Lord"] = "尖石统帅",
-	["Spirestone Lord Magus"] = "尖石首席法师",
-	["Fifth Mosh'aru Tablet"] = "第五块摩沙鲁石板",
-	["Bijou"] = "比修",
-	["Sixth Mosh'aru Tablet"] = "第六块摩沙鲁石板",
-	["Bijou's Belongings"] = "比修的装置",
-	["Human Remains"] = "人类遗骸",
-	["Unfired Plate Gauntlets"] = "未淬火的板甲护手",
-	["Urok's Tribute Pile"] = "乌洛克的贡品堆",
-	["Burning Felguard"] = "燃烧地狱卫士",
-	
+	["Vaelan"] = "Vaelan";
+	["Warosh <The Cursed>"] = "Warosh <The Cursed>";
+	["Elder Stonefort"] = "Elder Stonefort";
+	["Roughshod Pike"] = "Roughshod Pike";
+	["Spirestone Butcher"] = "Spirestone Butcher";
+	["Highlord Omokk"] = "Highlord Omokk";
+	["Spirestone Battle Lord"] = "Spirestone Battle Lord";
+	["Spirestone Lord Magus"] = "Spirestone Lord Magus";
+	["Shadow Hunter Vosh'gajin"] = "Shadow Hunter Vosh'gajin";
+	["Fifth Mosh'aru Tablet"] = "Fifth Mosh'aru Tablet";
+	["Bijou"] = "Bijou";
+	["War Master Voone"] = "War Master Voone";
+	["Mor Grayhoof"] = "Mor Grayhoof";
+	["Sixth Mosh'aru Tablet"] = "Sixth Mosh'aru Tablet";
+	["Bijou's Belongings"] = "Bijou's Belongings";
+	["Human Remains"] = "Human Remains";
+	["Unfired Plate Gauntlets"] = "Unfired Plate Gauntlets";
+	["Bannok Grimaxe <Firebrand Legion Champion>"] = "Bannok Grimaxe <Firebrand Legion Champion>";
+	["Mother Smolderweb"] = "Mother Smolderweb";
+	["Crystal Fang"] = "Crystal Fang";
+	["Urok's Tribute Pile"] = "Urok's Tribute Pile";
+	["Urok Doomhowl"] = "Urok Doomhowl";
+	["Quartermaster Zigris <Bloodaxe Legion>"] = "Quartermaster Zigris <Bloodaxe Legion>";
+	["Halycon"] = "Halycon";
+	["Gizrul the Slavener"] = "Gizrul the Slavener";
+	["Ghok Bashguud <Bloodaxe Champion>"] = "Ghok Bashguud <Bloodaxe Champion>";
+	["Overlord Wyrmthalak"] = "Overlord Wyrmthalak";
+	["Burning Felguard"] = "Burning Felguard";
+
 	--Blackrock Spire (Upper)
-	["Seal of Ascension"] = "晋升印章",
-	["Father Flame"] = "烈焰之父",
-	["Darkstone Tablet"] = "黑暗石板",
-	["Doomrigger's Coffer"] = "末日扣环",
-	["Awbee"] = "奥比",
-	["Finkle Einhorn"] = "芬克·恩霍尔",
-	["Drakkisath's Brand"] = "达基萨斯的烙印",
+	["Seal of Ascension"] = "Seal of Ascension";
+	["Pyroguard Emberseer"] = "Pyroguard Emberseer";
+	["Solakar Flamewreath"] = "Solakar Flamewreath";
+	["Father Flame"] = "Father Flame";
+	["Darkstone Tablet"] = "Darkstone Tablet";
+	["Doomrigger's Coffer"] = "Doomrigger's Coffer";
+	["Jed Runewatcher <Blackhand Legion>"] = "Jed Runewatcher <Blackhand Legion>";
+	["Goraluk Anvilcrack <Blackhand Legion Armorsmith>"] = "Goraluk Anvilcrack <Blackhand Legion Armorsmith>";
+	["Warchief Rend Blackhand"] = "Warchief Rend Blackhand";
+	["Gyth <Rend Blackhand's Mount>"] = "Gyth <Rend Blackhand's Mount>";
+	["Awbee"] = "Awbee";
+	["The Beast"] = "The Beast";
+	["Lord Valthalak"] = "Lord Valthalak";
+	["Finkle Einhorn"] = "Finkle Einhorn";
+	["General Drakkisath"] = "General Drakkisath";
+	["Drakkisath's Brand"] = "Drakkisath's Brand";
 	
 	--Blackwing Lair
-	["Draconic for Dummies"] = "龙语傻瓜教程 (第七章)",
-	["Master Elemental Shaper Krixix"] = "大元素师克里希克",
-	["Alchemy Lab"] = "炼金实验室",
+	["Razorgore the Untamed"] = "Razorgore the Untamed";
+	["Vaelastrasz the Corrupt"] = "Vaelastrasz the Corrupt";
+	["Broodlord Lashlayer"] = "Broodlord Lashlayer";
+	["Firemaw"] = "Firemaw";
+	["Draconic for Dummies"] = "Draconic for Dummies";
+	["Master Elemental Shaper Krixix"] = "Master Elemental Shaper Krixix";
+	["Ebonroc"] = "Ebonroc";
+	["Flamegor"] = "Flamegor";
+	["Chromaggus"] = "Chromaggus";
+	["Nefarian"] = "Nefarian";
+	["Alchemy Lab"] = "Alchemy Lab";
 	
 	--Gnomeregan
-	["Workshop Key"] = "车间钥匙",
-	["Blastmaster Emi Shortfuse"] = "爆破专家艾米·短线",
-	["Clean Room"] = "清洗区",
-	["Tink Sprocketwhistle"] = "丁克·铁哨 <工程学供应商>",
-	["The Sparklematic 5200"] = "超级清洁器5200型",
-	["Mail Box"] = "邮箱",
-	["Kernobee"] = "克努比",
-	["Alarm-a-bomb 2600"] = "警报炸弹2600型",
-	["Matrix Punchograph 3005-B"] = "矩阵式打孔计算机 3005-B",
-	["Matrix Punchograph 3005-C"] = "矩阵式打孔计算机 3005-C",
-	["Matrix Punchograph 3005-D"] = "矩阵式打孔计算机 3005-D",
+	["Workshop Key"] = "Workshop Key";
+	["Blastmaster Emi Shortfuse"] = "Blastmaster Emi Shortfuse";
+	["Grubbis"] = "Grubbis";
+	["Chomper"] = "Chomper";
+	["Clean Room"] = "Clean Room";
+	["Tink Sprocketwhistle <Engineering Supplies>"] = "Tink Sprocketwhistle <Engineering Supplies>";
+	["The Sparklematic 5200"] = "The Sparklematic 5200";
+	["Mail Box"] = "Mail Box";
+	["Kernobee"] = "Kernobee";
+	["Alarm-a-bomb 2600"] = "Alarm-a-bomb 2600";
+	["Matrix Punchograph 3005-B"] = "Matrix Punchograph 3005-B";
+	["Viscous Fallout"] = "Viscous Fallout";
+	["Electrocutioner 6000"] = "Electrocutioner 6000";
+	["Matrix Punchograph 3005-C"] = "Matrix Punchograph 3005-C";
+	["Crowd Pummeler 9-60"] = "Crowd Pummeler 9-60";
+	["Matrix Punchograph 3005-D"] = "Matrix Punchograph 3005-D";
+	["Dark Iron Ambassador"] = "Dark Iron Ambassador";
+	["Mekgineer Thermaplugg"] = "Mekgineer Thermaplugg";
 	
 	--Molten Core
-	["Aqual Quintessence"] = "水之精萃",
-	["Eternal Quintessence"] = "永恒精萃",
-	["Random Boss Loot"] = "随机BOSS战利品",
-	
-	--Naxxramas
-	["Archmage Tarsis Kir-Moldir"] = "大法师塔希斯·基莫迪尔",
-	["Mr. Bigglesworth"] = "比格沃斯",
-	["Abomination Wing"] = "憎恶区",
-	["Spider Wing"] = "蜘蛛区",
-	["Deathknight Wing"] = "死亡骑士区",
-	["Four Horsemen Chest"] = "四骑士之箱",
-	["Plague Wing"] = "瘟疫区",
-	["Frostwyrm Lair"] = "冰霜巨龙巢穴",
-	
+	["Hydraxian Waterlords"] = "Hydraxian Waterlords";
+	["Aqual Quintessence"] = "Aqual Quintessence";
+	["Eternal Quintessence"] = "Eternal Quintessence";
+	["Lucifron"] = "Lucifron";
+	["Magmadar"] = "Magmadar";
+	["Gehennas"] = "Gehennas";
+	["Garr"] = "Garr";
+	["Shazzrah"] = "Shazzrah";
+	["Baron Geddon"] = "Baron Geddon";
+	["Golemagg the Incinerator"] = "Golemagg the Incinerator";
+	["Sulfuron Harbinger"] = "Sulfuron Harbinger";
+	["Majordomo Executus"] = "Majordomo Executus";
+	["Ragnaros"] = "Ragnaros";
+	["Random Boss Loot"] = "Random Boss Loot";
+
 	--SM: Library
-	["Doan's Strongbox"] = "杜安的保险箱",
-	
+	["Houndmaster Loksey"] = "Houndmaster Loksey";
+	["Arcanist Doan"] = "Arcanist Doan";
+	["Doan's Strongbox"] = "Doan's Strongbox";
+
 	--SM: Armory
-	["The Scarlet Key"] = "血色十字军钥匙",--omitted from SM: Cathedral
-	
+	["The Scarlet Key"] = "The Scarlet Key";--omitted from SM: Cathedral
+	["Herod <The Scarlet Champion>"] = "Herod <The Scarlet Champion>";
+
+	--SM: Cathedral
+	["High Inquisitor Fairbanks"] = "High Inquisitor Fairbanks";
+	["Scarlet Commander Mograine"] = "Scarlet Commander Mograine";
+	["High Inquisitor Whitemane"] = "High Inquisitor Whitemane";
+
 	--SM: Graveyard
-	["Vorrel Sengutz"] = "沃瑞尔·森加斯",
+	["Interrogator Vishas"] = "Interrogator Vishas";
+	["Vorrel Sengutz"] = "Vorrel Sengutz";
+	["Bloodmage Thalnos"] = "Bloodmage Thalnos";
+	["Ironspine"] = "Ironspine";
+	["Azshir the Sleepless"] = "Azshir the Sleepless";
+	["Fallen Champion"] = "Fallen Champion";
+	["Scorn"] = "Scorn";
 	
 	--Scholomance
-	["Skeleton Key"] = "骷髅钥匙",
-	["Viewing Room Key"] = "观察室钥匙",
-	["Viewing Room"] = "观察室",
-	["Blood of Innocents"] = "无辜者的血",
-	["Divination Scryer"] = "预言水晶球",
-	["Blood Steward of Kirtonos"] = "基尔图诺斯的卫士",
-	["The Deed to Southshore"] = "南海镇地契",
-	["Journal of Jandice Barov"] = "詹迪斯·巴罗夫的日记",
-	["The Deed to Tarren Mill"] = "塔伦米尔地契",
-	["The Deed to Brill"] = "布瑞尔地契",
-	["The Deed to Caer Darrow"] = "凯尔达隆地契",
-	["Torch Lever"] = "火炬",
-	["Old Treasure Chest"] = "旧宝藏箱",
+	["Skeleton Key"] = "Skeleton Key";
+	["Viewing Room Key"] = "Viewing Room Key";
+	["Viewing Room"] = "Viewing Room";
+	["Blood of Innocents"] = "Blood of Innocents";
+	["Divination Scryer"] = "Divination Scryer";
+	["Blood Steward of Kirtonos"] = "Blood Steward of Kirtonos";
+	["The Deed to Southshore"] = "The Deed to Southshore";
+	["Kirtonos the Herald"] = "Kirtonos the Herald";
+	["Jandice Barov"] = "Jandice Barov";
+	["Journal of Jandice Barov"] = "Journal of Jandice Barov";
+	["The Deed to Tarren Mill"] = "The Deed to Tarren Mill";
+	["Lord Blackwood"] = "Lord Blackwood";
+	["Rattlegore"] = "Rattlegore";
+	["Death Knight Darkreaver"] = "Death Knight Darkreaver";
+	["Marduk Blackpool"] = "Marduk Blackpool";
+	["Vectus"] = "Vectus";
+	["Ras Frostwhisper"] = "Ras Frostwhisper";
+	["The Deed to Brill"] = "The Deed to Brill";
+	["Kormok"] = "Kormok";
+	["Instructor Malicia"] = "Instructor Malicia";
+	["Doctor Theolen Krastinov <The Butcher>"] = "Doctor Theolen Krastinov <The Butcher>";
+	["Lorekeeper Polkelt"] = "Lorekeeper Polkelt";
+	["The Ravenian"] = "The Ravenian";
+	["Lord Alexei Barov"] = "Lord Alexei Barov";
+	["The Deed to Caer Darrow"] = "The Deed to Caer Darrow";
+	["Lady Illucia Barov"] = "Lady Illucia Barov";
+	["Darkmaster Gandling"] = "Darkmaster Gandling";
+	["Torch Lever"] = "Torch Lever";
+	["Secret Chest"] = "Secret Chest";
+	["Alchemy Lab"] = "Alchemy Lab";
+	["Old Treasure Chest"] = "Old Treasure Chest";
 	
 	--Shadowfang Keep
-	["Sorcerer Ashcrombe"] = "巫师阿克鲁比",
-	["Deathstalker Adamant"] = "亡灵哨兵阿达曼特",
-	["Landen Stilwell"] = "兰登·斯蒂维尔",
-	["Deathstalker Vincent"] = "亡灵哨兵文森特",
-	["Fel Steed"] = "地狱战马",
-	["Jordan's Hammer"] = "乔丹的铁锤",
-	["Crate of Ingots"] = "铁锭箱",
-	["Arugal's Voidwalker"] = "阿鲁高的虚空行者",
-	["The Book of Ur"] = "乌尔之书",
-	
+	["Deathsworn Captain"] = "Deathsworn Captain";
+	["Rethilgore <The Cell Keeper>"] = "Rethilgore <The Cell Keeper>";
+	["Sorcerer Ashcrombe"] = "Sorcerer Ashcrombe";
+	["Deathstalker Adamant"] = "Deathstalker Adamant";
+	["Landen Stilwell"] = "Landen Stilwell";
+	["Deathstalker Vincent"] = "Deathstalker Vincent";
+	["Fel Steed"] = "Fel Steed";
+	["Jordan's Hammer"] = "Jordan's Hammer";
+	["Crate of Ingots"] = "Crate of Ingots";
+	["Razorclaw the Butcher"] = "Razorclaw the Butcher";
+	["Baron Silverlaine"] = "Baron Silverlaine";
+	["Commander Springvale"] = "Commander Springvale";
+	["Odo the Blindwatcher"] = "Odo the Blindwatcher";
+	["Fenrus the Devourer"] = "Fenrus the Devourer";
+	["Arugal's Voidwalker"] = "Arugal's Voidwalker";
+	["The Book of Ur"] = "The Book of Ur";
+	["Wolf Master Nandos"] = "Wolf Master Nandos";
+	["Archmage Arugal"] = "Archmage Arugal";
+	["Sever"] = "Sever";
+
 	--Stratholme
-	["Key to the City"] = "城市大门钥匙",
-	["Various Postbox Keys"] = "邮箱钥匙",
-	["Living Side"] = "血色区",
-	["Undead Side"] = "亡灵区",
-	["Stratholme Courier"] = "斯坦索姆信使",
-	["Fras Siabi"] = "弗拉斯·希亚比",
-	["Atiesh"] = "埃提耶什 <萨格拉斯之手>",
-	["Elder Farwhisper"] = "远风长者",
-	["Malor's Strongbox"] = "玛洛尔的保险箱",
-	["Crimson Hammersmith"] = "红衣铸锤师",
-	["Grand Crusader Dathrohan"] = "大十字军战士达索汉",
-	["Aurius"] = "奥里克斯",
-	["Black Guard Swordsmith"] = "黑衣守卫铸剑师",
-	["Ysida Harmon"] = "伊思达·哈尔蒙",
-	["Crusaders' Square Postbox"] = "十字军广场邮箱",
-	["Market Row Postbox"] = "市场邮箱",
-	["Festival Lane Postbox"] = "节日小道邮箱",
-	["Elders' Square Postbox"] = "长者广场邮箱",
-	["King's Square Postbox"] = "国王广场邮箱",
-	["Fras Siabi's Postbox"] = "弗拉斯·希亚比的邮箱",
-	["Third Postbox Opened"] = "三个打开的邮箱",
-	
+	["The Scarlet Key"] = "The Scarlet Key";
+	["Key to the City"] = "Key to the City";
+	["Various Postbox Keys"] = "Various Postbox Keys";
+	["Living Side"] = "Living Side";
+	["Undead Side"] = "Undead Side";
+	["Skul"] = "Skul";
+	["Stratholme Courier"] = "Stratholme Courier";
+	["Fras Siabi"] = "Fras Siabi";
+	["Atiesh <Hand of Sargeras>"] = "Atiesh <Hand of Sargeras>";
+	["Balzaphon"] = "Balzaphon";
+	["Hearthsinger Forresten"] = "Hearthsinger Forresten";
+	["The Unforgiven"] = "The Unforgiven";
+	["Elder Farwhisper"] = "Elder Farwhisper";
+	["Timmy the Cruel"] = "Timmy the Cruel";
+	["Malor the Zealous"] = "Malor the Zealous";
+	["Malor's Strongbox"] = "Malor's Strongbox";
+	["Crimson Hammersmith"] = "Crimson Hammersmith";
+	["Cannon Master Willey"] = "Cannon Master Willey";
+	["Archivist Galford"] = "Archivist Galford";
+	["Grand Crusader Dathrohan"] = "Grand Crusader Dathrohan";
+	["Balnazzar"] = "Balnazzar";
+	["Sothos"] = "Sothos";
+	["Jarien"] = "Jarien";
+	["Magistrate Barthilas"] = "Magistrate Barthilas";
+	["Aurius"] = "Aurius";
+	["Stonespine"] = "Stonespine";
+	["Baroness Anastari"] = "Baroness Anastari";
+	["Black Guard Swordsmith"] = "Black Guard Swordsmith";
+	["Nerub'enkan"] = "Nerub'enkan";
+	["Maleki the Pallid"] = "Maleki the Pallid";
+	["Ramstein the Gorger"] = "Ramstein the Gorger";
+	["Baron Rivendare"] = "Baron Rivendare";
+	["Ysida Harmon"] = "Ysida Harmon";
+	["Crusaders' Square Postbox"] = "Crusaders' Square Postbox";
+	["Market Row Postbox"] = "Market Row Postbox";
+	["Festival Lane Postbox"] = "Festival Lane Postbox";
+	["Elders' Square Postbox"] = "Elders' Square Postbox";
+	["King's Square Postbox"] = "King's Square Postbox";
+	["Fras Siabi's Postbox"] = "Fras Siabi's Postbox";
+	["Third Postbox Opened"] = "Third Postbox Opened";
+	["Postmaster Malown"] = "Postmaster Malown";
+
 	--The Deadmines
-	["Sneed's Shredder"] = "斯尼德的伐木机 <伐木工头>",
-	["Defias Gunpowder"] = "迪菲亚火药",
+	["Rhahk'Zor <The Foreman>"] = "Rhahk'Zor <The Foreman>";
+	["Miner Johnson"] = "Miner Johnson";
+	["Sneed <Lumbermaster>"] = "Sneed <Lumbermaster>";
+	["Sneed's Shredder <Lumbermaster>"] = "Sneed's Shredder <Lumbermaster>";
+	["Gilnid <The Smelter>"] = "Gilnid <The Smelter>";
+	["Defias Gunpowder"] = "Defias Gunpowder";
+	["Captain Greenskin"] = "Captain Greenskin";
+	["Edwin VanCleef <Defias Kingpin>"] = "Edwin VanCleef <Defias Kingpin>";
+	["Mr. Smite <The Ship's First Mate>"] = "Mr. Smite <The Ship's First Mate>";
+	["Cookie <The Ship's Cook>"] = "Cookie <The Ship's Cook>";
 	
+	--The Stockade
+	["Targorr the Dread"] = "Targorr the Dread";
+	["Kam Deepfury"] = "Kam Deepfury";
+	["Hamhock"] = "Hamhock";
+	["Bazil Thredd"] = "Bazil Thredd";
+	["Dextren Ward"] = "Dextren Ward";
+	["Bruegal Ironknuckle"] = "Bruegal Ironknuckle";
+
 	--The Sunken Temple
-	["Yeh'kinya's Scroll"] = "叶基亚的卷轴",
-	["Balcony Minibosses"] = "阳台小boss",
-	["Altar of Hakkar"] = "哈卡祭坛",
-	["Essence Font"] = "精华之泉",
-	["Spawn of Hakkar"] = "哈卡的后代",
-	["Elder Starsong"] = "星歌长者",
-	["Statue Activation Order"] = "雕像激活顺序",
-	["Malfurion Stormrage"] = "玛法里奥·怒风",
+	["The Temple of Atal'Hakkar"] = "The Temple of Atal'Hakkar";
+	["Yeh'kinya's Scroll"] = "Yeh'kinya's Scroll";
+	["Balcony Minibosses"] = "Balcony Minibosses";
+	["Gasher"] = "Gasher";
+	["Loro"] = "Loro";
+	["Hukku"] = "Hukku";
+	["Zolo"] = "Zolo";
+	["Mijan"] = "Mijan";
+	["Zul'Lor"] = "Zul'Lor";
+	["Altar of Hakkar"] = "Altar of Hakkar";
+	["Atal'alarion <Guardian of the Idol>"] = "Atal'alarion <Guardian of the Idol>";
+	["Dreamscythe"] = "Dreamscythe";
+	["Weaver"] = "Weaver";
+	["Avatar of Hakkar"] = "Avatar of Hakkar";
+	["Jammal'an the Prophet"] = "Jammal'an the Prophet";
+	["Ogom the Wretched"] = "Ogom the Wretched";
+	["Morphaz"] = "Morphaz";
+	["Hazzas"] = "Hazzas";
+	["Shade of Eranikus"] = "Shade of Eranikus";
+	["Essence Font"] = "Essence Font";
+	["Spawn of Hakkar"] = "Spawn of Hakkar";
+	["Elder Starsong"] = "Elder Starsong";
+	["Statue Activation Order"] = "Statue Activation Order";
+	["Malfurion Stormrage"] = "Malfurion Stormrage";
 	
 	--Uldaman
-	["Staff of Prehistoria"] = "史前法杖",
-	["Baelog's Chest"] = "巴尔洛戈的箱子",
-	["Conspicuous Urn"] = "显眼的石罐",
-	["Remains of a Paladin"] = "圣骑士的遗体",
-	["Annora"] = "安诺拉 <大师级附魔师>",
-	["Tablet of Will"] = "意志石板",
-	["Shadowforge Cache"] = "暗影熔炉地窖",
-	["The Discs of Norgannon"] = "诺甘农圆盘",
-	["Ancient Treasure"] = "古代宝藏",
+	["Staff of Prehistoria"] = "Staff of Prehistoria";
+	["Baelog"] = "Baelog";
+	["Eric \"The Swift\""] = "Eric \"The Swift\"";
+	["Olaf"] = "Olaf";
+	["Baelog's Chest"] = "Baelog's Chest";
+	["Conspicuous Urn"] = "Conspicuous Urn";
+	["Remains of a Paladin"] = "Remains of a Paladin";
+	["Revelosh"] = "Revelosh";
+	["Ironaya"] = "Ironaya";
+	["Obsidian Sentinel"] = "Obsidian Sentinel";
+	["Annora <Enchanting Trainer>"] = "Annora <Enchanting Trainer>";
+	["Ancient Stone Keeper"] = "Ancient Stone Keeper";
+	["Galgann Firehammer"] = "Galgann Firehammer";
+	["Tablet of Will"] = "Tablet of Will";
+	["Shadowforge Cache"] = "Shadowforge Cache";
+	["Grimlok <Stonevault Chieftain>"] = "Grimlok <Stonevault Chieftain>";
+	["Archaedas <Ancient Stone Watcher>"] = "Archaedas <Ancient Stone Watcher>";
+	["The Discs of Norgannon"] = "The Discs of Norgannon";
+	["Ancient Treasure"] = "Ancient Treasure";
 	
 	--Zul'Gurub
-	["Mudskunk Lure"] = "臭泥鱼诱饵",
-	["Gurubashi Mojo Madness"] = "古拉巴什疯狂魔精",
-	["Zanza the Restless"] = "无眠者赞扎",
-	["Ohgan"] = "奥根",
-	["Edge of Madness"] = "疯狂之源",
-	["Zealot Zath"] = "狂热者扎斯",
-	["Zealot Lor'Khan"] = "狂热者洛卡恩",
-	["Muddy Churning Waters"] = "混浊的水",
-	["Jinxed Hoodoo Pile"] = "厄运巫毒堆",
-	["ZG Enchants"] = "ZG 附魔",		
+	["Zandalar Tribe"] = "Zandalar Tribe";
+	["Mudskunk Lure"] = "Mudskunk Lure";
+	["Gurubashi Mojo Madness"] = "Gurubashi Mojo Madness";
+	["High Priestess Jeklik"] = "High Priestess Jeklik";
+	["High Priest Venoxis"] = "High Priest Venoxis";
+	["Zanza the Restless"] = "Zanza the Restless";
+	["High Priestess Mar'li"] = "High Priestess Mar'li";
+	["Bloodlord Mandokir"] = "Bloodlord Mandokir";
+	["Ohgan"] = "Ohgan";
+	["Edge of Madness"] = "Edge of Madness";
+	["Gri'lek"] = "Gri'lek";
+	["Hazza'rah"] = "Hazza'rah";
+	["Renataki"] = "Renataki";
+	["Wushoolay"] = "Wushoolay";
+	["Gahz'ranka"] = "Gahz'ranka";
+	["High Priest Thekal"] = "High Priest Thekal";
+	["Zealot Zath"] = "Zealot Zath";
+	["Zealot Lor'Khan"] = "Zealot Lor'Khan";
+	["High Priestess Arlokk"] = "High Priestess Arlokk";
+	["Jin'do the Hexxer"] = "Jin'do the Hexxer";
+	["Hakkar"] = "Hakkar";
+	["Muddy Churning Waters"] = "Muddy Churning Waters";
+	["Jinxed Hoodoo Pile"] = "Jinxed Hoodoo Pile";
+	["ZG Enchants"] = "ZG Enchants";
 	
-	--************************************************
-	-- Instance Entrance Maps
-	--************************************************
+	--Naxxramas
+	["Archmage Tarsis Kir-Moldir"] = "Archmage Tarsis Kir-Moldir";
+	["Mr. Bigglesworth"] = "Mr. Bigglesworth";
+	["Abomination Wing"] = "Abomination Wing";
+	["Patchwerk"] = "Patchwerk";
+	["Grobbulus"] = "Grobbulus";
+	["Gluth"] = "Gluth";
+	["Thaddius"] = "Thaddius";
+	["Stalagg"] = "Stalagg";
+	["Feugen"] = "Feugen";
+	["Spider Wing"] = "Spider Wing";
+	["Anub'Rekhan"] = "Anub'Rekhan";
+	["Grand Widow Faerlina"] = "Grand Widow Faerlina";
+	["Maexxna"] = "Maexxna";
+	["Deathknight Wing"] = "Deathknight Wing";
+	["Instructor Razuvious"] = "Instructor Razuvious";
+	["Gothik the Harvester"] = "Gothik the Harvester";
+	["The Four Horsemen"] = "The Four Horsemen";
+	["Thane Korth'azz"] = "Thane Korth'azz";
+	["Lady Blaumeux"] = "Lady Blaumeux";
+	["Highlord Mograine <The Ashbringer>"] = "Highlord Mograine <The Ashbringer>";
+	["Sir Zeliek"] = "Sir Zeliek";
+	["Four Horsemen Chest"] = "Four Horsemen Chest";
+	["Plague Wing"] = "Plague Wing";
+	["Noth the Plaguebringer"] = "Noth the Plaguebringer";
+	["Heigan the Unclean"] = "Heigan the Unclean";
+	["Loatheb"] = "Loatheb";
+	["Frostwyrm Lair"] = "Frostwyrm Lair";
+	["Sapphiron"] = "Sapphiron";
+	["Kel'Thuzad"] = "Kel'Thuzad";
 	
+
+--************************************************
+-- Instance Entrance Maps
+--************************************************
+
 	--Blackrock Mountain (Entrance)
-	["Bodley"] = "伯德雷",
-	["Overmaster Pyron"] = "征服者派隆";
-	["Lothos Riftwaker"] = "洛索斯·天痕";
-	["Franclorn Forgewright"] = "弗兰克罗恩·铸铁";
-	["Orb of Command"] = "命令宝珠";
-	["Scarshield Quartermaster"] = "裂盾军需官 <裂盾军团>";
-	
+	["Bodley"] = "Bodley";
+	["Overmaster Pyron"] = "Overmaster Pyron";
+	["Lothos Riftwaker"] = "Lothos Riftwaker";
+	["Franclorn Forgewright"] = "Franclorn Forgewright";
+	["Orb of Command"] = "Orb of Command";
+	["Scarshield Quartermaster <Scarshield Legion>"] = "Scarshield Quartermaster <Scarshield Legion>";
+
 	--Gnomeregan (Entrance)
-	["Transpolyporter"] = "传送器",
-	["Sprok"] = "斯普洛克 <客队>",
-	["Matrix Punchograph 3005-A"] = "矩阵式打孔计算机3005-A",
-	["Namdo Bizzfizzle"] = "纳姆杜 <工程学供应商>",
-	["Techbot"] = "尖端机器人",
-	
+	["Transpolyporter"] = "Transpolyporter";
+	["Sprok <Away Team>"] = "Sprok <Away Team>";
+	["Matrix Punchograph 3005-A"] = "Matrix Punchograph 3005-A";
+	["Namdo Bizzfizzle <Engineering Supplies>"] = "Namdo Bizzfizzle <Engineering Supplies>";
+	["Techbot"] = "Techbot";
+
 	--Maraudon (Entrance)
-	["The Nameless Prophet"] = "无名预言者",
-	["Kolk"] = "考尔克 <第一可汗>",
-	["Gelk"] = "格尔克 <第二可汗>",
-	["Magra"] = "玛格拉 <第三可汗>",
-	["Cavindra"] = "凯雯德拉",
-	["Cursed Centaur"] = "被诅咒的半人马",
-	
+	["The Nameless Prophet"] = "The Nameless Prophet";
+	["Kolk <The First Kahn>"] = "Kolk <The First Kahn>";
+	["Gelk <The Second Kahn>"] = "Gelk <The Second Kahn>";
+	["Magra <The Third Kahn>"] = "Magra <The Third Kahn>";
+	["Cavindra"] = "Cavindra";
+	["Cursed Centaur"] = "Cursed Centaur";
+
 	--The Deadmines (Entrance)
-	["Marisa du'Paige"] = "玛里莎·杜派格";
-	["Brainwashed Noble"] = "被洗脑的贵族";
-	["Foreman Thistlenettle"] = "工头希斯耐特";
-	
+	["Marisa du'Paige"] = "Marisa du'Paige";
+	["Brainwashed Noble"] = "Brainwashed Noble";
+	["Foreman Thistlenettle"] = "Foreman Thistlenettle";
+
 	--Sunken Temple (Entrance)
-	["Jade"] = "玉龙";
-	["Kazkaz the Unholy"] = "邪恶的卡萨卡兹";
-	["Zekkis"] = "泽基斯";
-	["Veyzhak the Cannibal"] = "食尸者维萨克";
-	
+	["Jade"] = "Jade";
+	["Kazkaz the Unholy"] = "Kazkaz the Unholy";
+	["Zekkis"] = "Zekkis";
+	["Veyzhak the Cannibal"] = "Veyzhak the Cannibal";
+
 	--Uldaman (Entrance)
-	["Hammertoe Grez"] = "铁趾格雷兹";
-	["Magregan Deepshadow"] = "马格雷甘·深影";
-	["Tablet of Ryun'Eh"] = "雷乌纳石板";
-	["Krom Stoutarm's Chest"] = "克罗姆·粗臂的箱子";
-	["Garrett Family Chest"] = "加勒特的宝箱";
-	["Digmaster Shovelphlange"] = "挖掘专家舒尔弗拉格";
-	
+	["Hammertoe Grez"] = "Hammertoe Grez";
+	["Magregan Deepshadow"] = "Magregan Deepshadow";
+	["Tablet of Ryun'Eh"] = "Tablet of Ryun'Eh";
+	["Krom Stoutarm's Chest"] = "Krom Stoutarm's Chest";
+	["Garrett Family Chest"] = "Garrett Family Chest";
+	["Digmaster Shovelphlange"] = "Digmaster Shovelphlange";
+
 	--Wailing Caverns (Entrance)
-	["Mad Magglish"] = "疯狂的马格利什",
-	["Trigore the Lasher"] = "鞭笞者特里高雷",
-	["Boahn"] = "博艾恩 <尖牙德鲁伊>",
-	["Above the Entrance:"] = "入口上方: ",
-	["Ebru"] = "厄布鲁 <纳拉雷克斯的信徒>",
-	["Nalpak"] = "纳尔帕克 <纳拉雷克斯的信徒>",
-	["Kalldan Felmoon"] = "卡尔丹·暗月 <特殊制皮物资>",
-	["Waldor"] = "瓦多尔 <制皮训练师>",
-	
+	["Mad Magglish"] = "Mad Magglish";
+	["Trigore the Lasher"] = "Trigore the Lasher";
+	["Boahn <Druid of the Fang>"] = "Boahn <Druid of the Fang>";
+	["Above the Entrance:"] = "Above the Entrance:";
+	["Ebru <Disciple of Naralex>"] = "Ebru <Disciple of Naralex>";
+	["Nalpak <Disciple of Naralex>"] = "Nalpak <Disciple of Naralex>";
+	["Kalldan Felmoon <Specialist Leatherworking Supplies>"] = "Kalldan Felmoon <Specialist Leatherworking Supplies>";
+	["Waldor <Leatherworking Trainer>"] = "Waldor <Leatherworking Trainer>";
+
 	--Dire Maul (Entrance)
-	["Dire Pool"] = "厄运之池";
-	["Dire Maul Arena"] = "厄运之槌竞技场";
-	["Mushgog"] = "姆斯高格";
-	["Skarr the Unbreakable"] = "无敌的斯卡尔";
-	["The Razza"] = "拉扎尔";
-	["Elder Mistwalker"] = "迷雾长者";
-	["Griniblix the Spectator"] = "目击者格林比克斯",
-	
+	["Dire Pool"] = "Dire Pool";
+	["Dire Maul Arena"] = "Dire Maul Arena";
+	["Mushgog"] = "Mushgog";
+	["Skarr the Unbreakable"] = "Skarr the Unbreakable";
+	["The Razza"] = "The Razza";
+	["Elder Mistwalker"] = "Elder Mistwalker";
+	["Griniblix the Spectator"] = "Griniblix the Spectator";
+
 	--World Bosses
-	["Emerald Dragons"] = "翡翠雏龙",
-	["Spirit of Azuregos"] = "艾索雷葛斯之魂",
-	["Emerald Dragons Trash"] = "翡翠龙小怪",
-	["Nethergarde Keep"] = "守望堡",
+	["Azshara"] = "Azshara";
+	["Azuregos"] = "Azuregos";
+	["Emerald Dragons"] = "Emerald Dragons";
+	["Spirit of Azuregos"] = "Spirit of Azuregos";
+	["Lethon"] = "Lethon";
+	["Emeriss"] = "Emeriss";
+	["Taerar"] = "Taerar";
+	["Ysondre"] = "Ysondre";
+	["Duskwood"] = "Duskwood";
+	["The Hinterlands"] = "The Hinterlands";
+	["Feralas"] = "Feralas";
+	["Ashenvale"] = "Ashenvale";
+	["Emerald Dragons Trash"] = "Emerald Dragons Trash";
+	["Lord Kazzak"] = "Lord Kazzak";
+	["Nethergarde Keep"] = "Nethergarde Keep";
 	
 	--Battlegrounds
 	
 	--Places
-	["Friendly Reputation Rewards"] = "友善声望奖励",
-	["Honored Reputation Rewards"] = "尊敬声望奖励",
-	["Revered Reputation Rewards"] = "崇敬声望奖励",
-	["Exalted Reputation Rewards"] = "崇拜声望奖励",
+	["Alterac Mountains"] = "Alterac Mountains";
+	["Alterac Valley"] = "Alterac Valley"; ["AV"] = "AV";
+	["Arathi Basin"] = "Arathi Basin"; ["AB"] = "AB";
+	["Arathi Highlands"] = "Arathi Highlands";
+	["Ashenvale"] = "Ashenvale";
+	["Eastern Kingdoms"] = "Eastern Kingdoms";
+	["Eye of the Storm"] = "Eye of the Storm"; ["EotS"] = "EotS";
+	["Hillsbrad Foothills"] = "Hillsbrad Foothills";
+	["Kalimdor"] = "Kalimdor";
+	["Netherstorm"] = "Netherstorm";
+	["Outland"] = "Outland";
+	["The Barrens"] = "The Barrens";
+	["Warsong Gulch"] = "Warsong Gulch"; ["WSG"] = "WSG";
+	["Friendly Reputation Rewards"] = "Friendly Reputation Rewards";
+	["Honored Reputation Rewards"] = "Honored Reputation Rewards";
+	["Revered Reputation Rewards"] = "Revered Reputation Rewards";
+	["Exalted Reputation Rewards"] = "Exalted Reputation Rewards";
 	
 	--Alterac Valley (North)
-	["Stormpike Guard"] = "洛泰姆中尉",
-	["Dun Baldar"] = "丹巴达尔",
-	["Vanndar Stormpike"] = "范达尔·雷矛",
-	["Dun Baldar North Marshal"] = "丹巴达尔北部统帅",
-	["Dun Baldar South Marshal"] = "丹巴达尔南部统帅",
-	["Icewing Marshal"] = "冰翼统帅",
-	["Iceblood Marshal"] = "冰血统帅",
-	["Stonehearth Marshal"] = "石炉统帅",
-	["East Frostwolf Marshal"] = "霜狼东部统帅",
-	["West Frostwolf Marshal"] = "霜狼西部统帅",
-	["Tower Point Marshal"] = "哨塔高地统帅",
-	["Prospector Stonehewer"] = "勘查员塔雷·石镐",
-	["Irondeep Mine"] = "深铁矿洞",
-	["Morloch"] = "莫洛克",
-	["Umi Thorson"] = "乌米·索尔森",
-	["Keetar"] = "基塔尔",
-	["Arch Druid Renferal"] = "大德鲁伊雷弗拉尔",
-	["Dun Baldar North Bunker"] = "丹巴达尔北部碉堡",
-	["Wing Commander Mulverick"] = "空军指挥官穆维里克",--omitted from AVS
-	["Murgot Deepforge"] = "莫高特·深炉",
-	["Dirk Swindle"] = "德尔克",
-	["Athramanis"] = "亚斯拉玛尼斯",
-	["Lana Thunderbrew"] = "兰纳·雷酒",
-	["Stormpike Aid Station"] = "雷矛急救站",
-	["Stormpike Stable Master"] = "雷矛兽栏管理员",
-	["Stormpike Ram Rider Commander"] = "雷矛山羊骑兵指挥官",
-	["Svalbrad Farmountain"] = "斯瓦尔布莱德·远山",
-	["Kurdrum Barleybeard"] = "库德拉姆·麦须",
-	["Stormpike Quartermaster"] = "雷矛军需官",
-	["Jonivera Farmountain"] = "约尼维拉·远山",
-	["Brogus Thunderbrew"] = "布罗古斯·雷酒",
-	["Wing Commander Ichman"] = "空军指挥官艾克曼",--omitted from AVS
-	["Wing Commander Slidore"] = "空军指挥官斯里多尔",--omitted from AVS
-	["Wing Commander Vipore"] = "空军指挥官维波里",--omitted from AVS
-	["Dun Baldar South Bunker"] = "丹巴达尔南部碉堡",
-	["Corporal Noreg Stormpike"] = "诺雷格·雷矛中尉",
-	["Gaelden Hammersmith"] = "盖尔丁",
-	["Stormpike Graveyard"] = "雷矛墓地",
-	["Icewing Cavern"] = "冰翼洞穴",
-	["Stormpike Banner"] = "雷矛军旗",
-	["Stormpike Lumber Yard"] = "雷矛木材场",
-	["Wing Commander Jeztor"] = "空军指挥官杰斯托",--omitted from AVS
-	["Icewing Bunker"] = "冰翼碉堡",
-	["Wing Commander Guse"] = "空军指挥官古斯",--omitted from AVS
-	["Stonehearth Graveyard"] = "石炉墓地",
-	["Stonehearth Outpost"] = "石炉哨站",
-	["Captain Balinda Stonehearth"] = "巴琳达·斯通赫尔斯",
-	["Snowfall Graveyard"] = "落雪墓地",
-	["Korrak the Bloodrager"] = "血怒者科尔拉克",
-	["Ichman's Beacon"] = "艾克曼的信号灯",
-	["Mulverick's Beacon"] = "穆维里克的信号灯",
-	["Stonehearth Bunker"] = "石炉碉堡",
-	["Ivus the Forest Lord"] = "森林之王伊弗斯",
-	["Western Crater"] = "西部火山口",
-	["Vipore's Beacon"] = "维波里的信号灯",
-	["Jeztor's Beacon"] = "杰斯托的信号灯",
-	["Eastern Crater"] = "东部火山口",
-	["Slidore's Beacon"] = "斯里多尔的信号灯",
-	["Guse's Beacon"] = "古斯的信号灯",
-	["Graveyards, Capturable Areas"] = "墓地,可占领",--omitted from AVS
-	["Bunkers, Towers, Destroyable Areas"] = "碉堡,塔,摧毁地区",--omitted from AVS
-	["Assault NPCs, Quest Areas"] = "攻击NPC,任务地区",--omitted from AVS
-	["Steamsaw"] = "蒸汽锯",--omitted from AVS
-	
+	["Stormpike Guard"] = "Stormpike Guard";
+	["Dun Baldar"] = "Dun Baldar";
+	["Vanndar Stormpike <Stormpike General>"] = "Vanndar Stormpike <Stormpike General>";
+	["Dun Baldar North Marshal"] = "Dun Baldar North Marshal";
+	["Dun Baldar South Marshal"] = "Dun Baldar South Marshal";
+	["Icewing Marshal"] = "Icewing Marshal";
+	["Iceblood Marshal"] = "Iceblood Marshal";
+	["Stonehearth Marshal"] = "Stonehearth Marshal";
+	["East Frostwolf Marshal"] = "East Frostwolf Marshal";
+	["West Frostwolf Marshal"] = "West Frostwolf Marshal";
+	["Tower Point Marshal"] = "Tower Point Marshal";
+	["Prospector Stonehewer"] = "Prospector Stonehewer";
+	["Irondeep Mine"] = "Irondeep Mine";
+	["Morloch"] = "Morloch";
+	["Umi Thorson"] = "Umi Thorson";
+	["Keetar"] = "Keetar";
+	["Arch Druid Renferal"] = "Arch Druid Renferal";
+	["Dun Baldar North Bunker"] = "Dun Baldar North Bunker";
+	["Wing Commander Mulverick"] = "Wing Commander Mulverick";--omitted from AVS
+	["Murgot Deepforge"] = "Murgot Deepforge";
+	["Dirk Swindle <Bounty Hunter>"] = "Dirk Swindle <Bounty Hunter>";
+	["Athramanis <Bounty Hunter>"] = "Athramanis <Bounty Hunter>";
+	["Lana Thunderbrew <Blacksmithing Supplies>"] = "Lana Thunderbrew <Blacksmithing Supplies>";
+	["Stormpike Aid Station"] = "Stormpike Aid Station";
+	["Stormpike Stable Master <Stable Master>"] = "Stormpike Stable Master <Stable Master>";
+	["Stormpike Ram Rider Commander"] = "Stormpike Ram Rider Commander";
+	["Svalbrad Farmountain <Trade Goods>"] = "Svalbrad Farmountain <Trade Goods>";
+	["Kurdrum Barleybeard <Reagents & Poison Supplies>"] = "Kurdrum Barleybeard <Reagents & Poison Supplies>";
+	["Stormpike Quartermaster"] = "Stormpike Quartermaster";
+	["Jonivera Farmountain <General Goods>"] = "Jonivera Farmountain <General Goods>";
+	["Brogus Thunderbrew <Food & Drink>"] = "Brogus Thunderbrew <Food & Drink>";
+	["Wing Commander Ichman"] = "Wing Commander Ichman";--omitted from AVS
+	["Wing Commander Slidore"] = "Wing Commander Slidore";--omitted from AVS
+	["Wing Commander Vipore"] = "Wing Commander Vipore";--omitted from AVS
+	["Dun Baldar South Bunker"] = "Dun Baldar South Bunker";
+	["Corporal Noreg Stormpike"] = "Corporal Noreg Stormpike";
+	["Gaelden Hammersmith <Stormpike Supply Officer>"] = "Gaelden Hammersmith <Stormpike Supply Officer>";
+	["Stormpike Graveyard"] = "Stormpike Graveyard";
+	["Icewing Cavern"] = "Icewing Cavern";
+	["Stormpike Banner"] = "Stormpike Banner";
+	["Stormpike Lumber Yard"] = "Stormpike Lumber Yard";
+	["Wing Commander Jeztor"] = "Wing Commander Jeztor";--omitted from AVS
+	["Icewing Bunker"] = "Icewing Bunker";
+	["Wing Commander Guse"] = "Wing Commander Guse";--omitted from AVS
+	["Stonehearth Graveyard"] = "Stonehearth Graveyard";
+	["Stonehearth Outpost"] = "Stonehearth Outpost";
+	["Captain Balinda Stonehearth <Stormpike Captain>"] = "Captain Balinda Stonehearth <Stormpike Captain>";
+	["Snowfall Graveyard"] = "Snowfall Graveyard";
+	["Korrak the Bloodrager"] = "Korrak the Bloodrager";
+	["Ichman's Beacon"] = "Ichman's Beacon";
+	["Mulverick's Beacon"] = "Mulverick's Beacon";
+	["Stonehearth Bunker"] = "Stonehearth Bunker";
+	["Ivus the Forest Lord"] = "Ivus the Forest Lord";
+	["Western Crater"] = "Western Crater";
+	["Vipore's Beacon"] = "Vipore's Beacon";
+	["Jeztor's Beacon"] = "Jeztor's Beacon";
+	["Eastern Crater"] = "Eastern Crater";
+	["Slidore's Beacon"] = "Slidore's Beacon";
+	["Guse's Beacon"] = "Guse's Beacon";
+	["Graveyards, Capturable Areas"] = "Graveyards, Capturable Areas";--omitted from AVS
+	["Bunkers, Towers, Destroyable Areas"] = "Bunkers, Towers, Destroyable Areas";--omitted from AVS
+	["Assault NPCs, Quest Areas"] = "Assault NPCs, Quest Areas";--omitted from AVS
+	["Steamsaw"] = "Steamsaw";--omitted from AVS
+
 	--Alterac Valley (South)
-	["Frostwolf Clan"] = "霜狼氏族",
-	["Frostwolf Keep"] = "霜狼要塞",
-	["Drek'Thar"] = "德雷克塔尔",
-	["Duros"] = "杜洛斯",
-	["Drakan"] = "德拉卡",
-	["West Frostwolf Warmaster"] = "西部霜狼将领",
-	["East Frostwolf Warmaster"] = "东部霜狼将领",
-	["Tower Point Warmaster"] = "哨塔高地将领",
-	["Iceblood Warmaster"] = "冰血将领",
-	["Icewing Warmaster"] = "冰翼将领",
-	["Stonehearth Warmaster"] = "石炉将领",
-	["Dun Baldar North Warmaster"] = "丹巴达尔北部将领",
-	["Dun Baldar South Warmaster"] = "丹巴达尔南部将领",
-	["Lokholar the Ice Lord"] = "冰雪之王洛克霍拉",
-	["Iceblood Garrison"] = "冰血要塞",
-	["Captain Galvangar"] = "加尔范上尉",
-	["Iceblood Tower"] = "冰血塔",
-	["Iceblood Graveyard"] = "冰血墓地",
-	["Tower Point"] = "哨塔高地",
-	["Coldtooth Mine"] = "冷齿矿洞",
-	["Taskmaster Snivvle"] = "工头斯尼维尔",
-	["Masha Swiftcut"] = "玛莎",
-	["Aggi Rumblestomp"] = "埃其",
-	["Frostwolf Graveyard"] = "霜狼墓地",
-	["Jotek"] = "乔泰克",
-	["Smith Regzar"] = "铁匠雷格萨",
-	["Primalist Thurloga"] = "指挥官瑟鲁加",
-	["Sergeant Yazra Bloodsnarl"] = "亚斯拉·血矛",
-	["Frostwolf Stable Master"] = "霜狼兽栏管理员",
-	["Frostwolf Wolf Rider Commander"] = "霜狼骑兵指挥官",
-	["Frostwolf Quartermaster"] = "霜狼军需官",
-	["West Frostwolf Tower"] = "西霜狼塔",
-	["East Frostwolf Tower"] = "东霜狼塔",
-	["Frostwolf Relief Hut"] = "霜狼急救站",
-	["Wildpaw Cavern"] = "蛮爪洞穴",
-	["Frostwolf Banner"] = "霜狼军旗",
-	
+	["Frostwolf Clan"] = "Frostwolf Clan";
+	["Frostwolf Keep"] = "Frostwolf Keep";
+	["Drek'Thar <Frostwolf General>"] = "Drek'Thar <Frostwolf General>";
+	["Duros"] = "Duros";
+	["Drakan"] = "Drakan";
+	["West Frostwolf Warmaster"] = "West Frostwolf Warmaster";
+	["East Frostwolf Warmaster"] = "East Frostwolf Warmaster";
+	["Tower Point Warmaster"] = "Tower Point Warmaster";
+	["Iceblood Warmaster"] = "Iceblood Warmaster";
+	["Icewing Warmaster"] = "Icewing Warmaster";
+	["Stonehearth Warmaster"] = "Stonehearth Warmaster";
+	["Dun Baldar North Warmaster"] = "Dun Baldar North Warmaster";
+	["Dun Baldar South Warmaster"] = "Dun Baldar South Warmaster";
+	["Lokholar the Ice Lord"] = "Lokholar the Ice Lord";
+	["Iceblood Garrison"] = "Iceblood Garrison";
+	["Captain Galvangar <Frostwolf Captain>"] = "Captain Galvangar <Frostwolf Captain>";
+	["Iceblood Tower"] = "Iceblood Tower";
+	["Iceblood Graveyard"] = "Iceblood Graveyard";
+	["Tower Point"] = "Tower Point";
+	["Coldtooth Mine"] = "Coldtooth Mine";
+	["Taskmaster Snivvle"] = "Taskmaster Snivvle";
+	["Masha Swiftcut"] = "Masha Swiftcut";
+	["Aggi Rumblestomp"] = "Aggi Rumblestomp";
+	["Frostwolf Graveyard"] = "Frostwolf Graveyard";
+	["Jotek"] = "Jotek";
+	["Smith Regzar"] = "Smith Regzar";
+	["Primalist Thurloga"] = "Primalist Thurloga";
+	["Sergeant Yazra Bloodsnarl"] = "Sergeant Yazra Bloodsnarl";
+	["Frostwolf Stable Master <Stable Master>"] = "Frostwolf Stable Master <Stable Master>";
+	["Frostwolf Wolf Rider Commander"] = "Frostwolf Wolf Rider Commander";
+	["Frostwolf Quartermaster"] = "Frostwolf Quartermaster";
+	["West Frostwolf Tower"] = "West Frostwolf Tower";
+	["East Frostwolf Tower"] = "East Frostwolf Tower";
+	["Frostwolf Relief Hut"] = "Frostwolf Relief Hut";
+	["Wildpaw Cavern"] = "Wildpaw Cavern";
+	["Frostwolf Banner"] = "Frostwolf Banner";
+
 	--Arathi Basin
-	["The Defilers"] = "污染者",
-	["The League of Arathor"] = "阿拉索联军",
-	["Trollbane Hall"] = "托尔贝恩大厅",
-	["Defiler's Den"] = "污染者之穴",
-	["Stables"] = "兽栏",
-	["Gold Mine"] = "矿洞",
-	["Blacksmith"] = "铁匠铺",
-	["Lumber Mill"] = "伐木场",
-	["Farm"] = "农场",
-	
+	["The Defilers"] = "The Defilers";
+	["The League of Arathor"] = "The League of Arathor";
+	["Trollbane Hall"] = "Trollbane Hall";
+	["Defiler's Den"] = "Defiler's Den";
+	["Stables"] = "Stables";
+	["Gold Mine"] = "Gold Mine";
+	["Blacksmith"] = "Blacksmith";
+	["Lumber Mill"] = "Lumber Mill";
+	["Farm"] = "Farm";
+
 	--Warsong Gulch
-	["Warsong Outriders"] = "战歌氏族",
-	["Silverwing Sentinels"] = "银翼要塞",
-	["Silverwing Hold"] = "银翼要塞",
-	["Warsong Lumber Mill"] = "战歌伐木场",
+	["Warsong Outriders"] = "Warsong Outriders";
+	["Silverwing Sentinels"] = "Silverwing Sentinels";
+	["Silverwing Hold"] = "Silverwing Hold";
+	["Warsong Lumber Mill"] = "Warsong Lumber Mill";
+	
+	--Dungeon Locations	
+
+	--Places
+	["Alterac Mountains"] = "Alterac Mountains";
+	["Alterac Valley"] = "Alterac Valley";
+	["Arathi Basin"] = "Arathi Basin";
+	["Arathi Highlands"] = "Arathi Highlands";
+	["Ashenvale"] = "Ashenvale";
+	["Badlands"] = "Badlands";
+	["Blackfathom Deeps"] = "Blackfathom Deeps";
+	["Blackrock Depths"] = "Blackrock Depths";
+	["Blackrock Mountain"] = "Blackrock Mountain";
+	["Blackrock Spire"] = "Blackrock Spire";
+	["Blackwing Lair"] = "Blackwing Lair";
+	["Deadwind Pass"] = "Deadwind Pass";
+	["Desolace"] = "Desolace";
+	["Dire Maul"] = "Dire Maul";
+	["Dun Morogh"] = "Dun Morogh";
+	["Dustwallow Marsh"] = "Dustwallow Marsh";
+	["Eastern Kingdoms"] = "Eastern Kingdoms";
+	["Eastern Plaguelands"] = "Eastern Plaguelands";
+	["Feralas"] = "Feralas";
+	["Gnomeregan"] = "Gnomeregan";
+	["Hillsbrad Foothills"] = "Hillsbrad Foothills";
+	["Kalimdor"] = "Kalimdor";
+	["Maraudon"] = "Maraudon";
+	["Molten Core"] = "Molten Core";
+	["Naxxramas"] = "Naxxramas";
+	["Onyxia's Lair"] = "Onyxia's Lair";
+	["Orgrimmar"] = "Orgrimmar";
+	["Ragefire Chasm"] = "Ragefire Chasm";
+	["Razorfen Downs"] = "Razorfen Downs";
+	["Razorfen Kraul"] = "Razorfen Kraul";
+	["Ruins of Ahn'Qiraj"] = "Ruins of Ahn'Qiraj";
+	["Scarlet Monastery"] = "Scarlet Monastery";
+	["Scholomance"] = "Scholomance";
+	["Shadowfang Keep"] = "Shadowfang Keep";
+	["Silithus"] = "Silithus";
+	["Silverpine Forest"] = "Silverpine Forest";
+	["Stormwind City"] = "Stormwind City";
+	["Stranglethorn Vale"] = "Stranglethorn Vale";
+	["Stratholme"] = "Stratholme";
+	["Sunken Temple"] = "Sunken Temple";
+	["Swamp of Sorrows"] = "Swamp of Sorrows";
+	["Tanaris"] = "Tanaris";
+	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj";
+	["The Barrens"] = "The Barrens";
+	["The Deadmines"] = "The Deadmines";
+	["The Stockade"] = "The Stockade";
+	["Tirisfal Glades"] = "Tirisfal Glades";
+	["Uldaman"] = "Uldaman";
+	["Wailing Caverns"] = "Wailing Caverns";
+	["Warsong Gulch"] = "Warsong Gulch";
+	["Western Plaguelands"] = "Western Plaguelands";
+	["Westfall"] = "Westfall";
+	["Zul'Farrak"] = "Zul'Farrak";
+	["Zul'Gurub"] = "Zul'Gurub";
 	
 	--Flight points
-	["Flight Path Maps"] = "飞行地图",
-	["Druid-only"] = "只能德鲁伊",
-	["Aerie Peak"] = "鹰巢山",
-	["Astranaar"] = "阿斯特兰纳",
-	["Auberdine"] = "奥伯丁",
-	["Bloodvenom Post"] = "血毒岗哨",
-	["Booty Bay"] = "藏宝海湾",
-	["Brackenwall Village"] = "蕨墙村",
-	["Camp Mojache"] = "莫沙彻营地",
-	["Camp Taurajo"] = "陶拉祖营地",
-	["Cenarion Hold"] = "塞纳里奥要塞",
-	["Chillwind Point"] = "冰风岗",
-	["Crossroads"] = "十字路口",
-	["Darkshire"] = "夜色镇",
-	["Everlook"] = "永望镇",
-	["Feathermoon Stronghold"] = "羽月要塞",
-	["Flame Crest"] = "烈焰峰",
-	["Freewind Post"] = "乱风岗",
-	["Gadgetzan"] = "加基森",
-	["Grom'Gol Base Camp"] = "格罗姆高营地",
-	["Hammerfall"] = "落锤镇",
-	["Kargath"] = "卡加斯",
-	["Lakeshire"] = "湖畔镇",
-	["Light's Hope Chapel"] = "圣光之愿礼拜堂",
-	["Marshal's Refuge"] = "马绍尔营地",
-	["Menethil Harbor"] = "米奈希尔港",
-	["Morgan's Vigil"] = "摩根的岗哨",
-	["Nethergarde Keep"] = "守望堡",
-	["Nighthaven"] = "永夜港",
-	["Nijel's Point"] = "尼耶尔前哨站",
-	["Ratchet"] = "棘齿城",
-	["Refuge Pointe"] = "避难谷地",
-	["Revantusk Village"] = "恶齿村",
-	["Rut'Theran Village"] = "鲁瑟兰村",
-	["Sentinel Hill"] = "哨兵岭",
-	["Shadowprey Village"] = "葬影村",
-	["Southshore"] = "南海镇",
-	["Splintertree Post"] = "碎木岗哨",
-	["Stonard"] = "斯通纳德",
-	["Stonetalon Peak"] = "石爪峰",
-	["Sun Rock Retreat"] = "烈日石居",
-	["Talonbranch Glade"] = "刺枝林地",
-	["Talrendis Point"] = "塔伦迪斯营地",
-	["Tarren Mill"] = "塔伦米尔",
-	["Thalanaar"] = "萨兰纳尔",
-	["The Sepulcher"] = "瑟伯切尔",
-	["The Shimmering Flats"] = "闪光平原",
-	["Thelsamar"] = "塞尔萨玛",
-	["Theramore Isle"] = "塞拉摩岛",
-	["Thorium Point"] = "瑟银哨塔",
-	["Valormok"] = "瓦罗莫克",
-	["Zoram'gar Outpost"] = "佐拉姆加前哨站",
-	["South of the path along Lake Elune'ara"] = "沿着湖的南边的路",
-	["West of the path to Timbermaw Hold"] = "木喉要塞路的西向",
-	["Tauren Leveling Guide"] = "牛头人指南",
-	["Undead Leveling Guide"] = "亡灵指南",
-	["Troll/Orc Leveling Guide"] = "巨魔/兽人指南", 
-	["Horde Leveling Guide"] = "部落升级指南",
-	["Human Leveling Guide"] = "人类升级指南",
-	["Night Elf Leveling Guide"] = "暗夜精灵指南",
-	["Gnome/Dwarf Leveling Guide"] = "侏儒/矮人指南", 
-	["Alliance Leveling Guide"] = "联盟升级指南"
-} end)
+	["Aerie Peak"] = "Aerie Peak";
+	["Alliance"] = "Alliance";
+	["Arathi Highlands"] = "Arathi Highlands";
+	["Ashenvale"] = "Ashenvale";
+	["Astranaar"] = "Astranaar";
+	["Auberdine"] = "Auberdine";
+	["Azshara"] = "Azshara";
+	["Badlands"] = "Badlands";
+	["Blasted Lands"] = "Blasted Lands";
+	["Blood Watch"] = "Blood Watch";
+	["Bloodvenom Post"] = "Bloodvenom Post";
+	["Booty Bay"] = "Booty Bay";
+	["Brackenwall Village"] = "Brackenwall Village";
+	["Burning Steppes"] = "Burning Steppes";
+	["Camp Mojache"] = "Camp Mojache";
+	["Camp Taurajo"] = "Camp Taurajo";
+	["Cenarion Hold"] = "Cenarion Hold";
+	["Chillwind Point"] = "Chillwind Point";
+	["Crossroads"] = "Crossroads";
+	["Darkshire"] = "Darkshire";
+	["Darkshore"] = "Darkshore";
+	["Desolace"] = "Desolace";
+	["Druid-only"] = "Druid-only";
+	["Dun Morogh"] = "Dun Morogh";
+	["Durotar"] = "Durotar";
+	["Duskwood"] = "Duskwood";
+	["Dustwallow Marsh"] = "Dustwallow Marsh";
+	["Eastern Kingdoms"] = "Eastern Kingdoms";
+	["Eastern Plaguelands"] = "Eastern Plaguelands";
+	["Elwynn Forest"] = "Elwynn Forest";
+	["Emerald Sanctuary"] = "Emerald Sanctuary";
+	["Everlook"] = "Everlook";
+	["Eversong Woods"] = "Eversong Woods";
+	["Feathermoon Stronghold"] = "Feathermoon Stronghold";
+	["Felwood"] = "Felwood";
+	["Feralas"] = "Feralas";
+	["Flame Crest"] = "Flame Crest";
+	["Flight Path Maps"] = "Flight Path Maps";
+	["Freewind Post"] = "Freewind Post";
+	["Gadgetzan"] = "Gadgetzan";
+	["Grom'Gol Base Camp"] = "Grom'Gol Base Camp";
+	["Hammerfall"] = "Hammerfall";
+	["Hillsbrad Foothills"] = "Hillsbrad Foothills";
+	["Horde"] = "Horde";
+	["Ironforge"] = "Ironforge";
+	["Kalimdor"] = "Kalimdor";
+	["Kargath"] = "Kargath";
+	["Lakeshire"] = "Lakeshire";
+	["Light's Hope Chapel"] = "Light's Hope Chapel";
+	["Loch Modan"] = "Loch Modan";
+	["Marshal's Refuge"] = "Marshall's Refuge";
+	["Menethil Harbor"] = "Menethil Harbor";
+	["Moonglade"] = "Moonglade";
+	["Morgan's Vigil"] = "Morgan's Vigil";
+	["Mulgore"] = "Mulgore";
+	["Nethergarde Keep"] = "Nethergarde Keep";
+	["Nighthaven"] = "Nighthaven";
+	["Nijel's Point"] = "Nijel's Point";
+	["Orgrimmar"] = "Orgrimmar";
+	["Ratchet"] = "Ratchet";
+	["Redridge Mountains"] = "Redridge Mountains";
+	["Refuge Pointe"] = "Refuge Pointe";
+	["Revantusk Village"] = "Revantusk Village";
+	["Rut'Theran Village"] = "Rut'Theran Village";
+	["Searing Gorge"] = "Searing Gorge";
+	["Sentinel Hill"] = "Sentinel Hill";
+	["Shadowprey Village"] = "Shadowprey Village";
+	["Silithus"] = "Silithus";
+	["Silverpine Forest"] = "Silverpine Forest";
+	["South of the path along Lake Elune'ara"] = "South of the path along Lake Elune'ara";
+	["Southshore"] = "Southshore";
+	["Splintertree Post"] = "Splintertree Post";
+	["Stonard"] = "Stonard";
+	["Stonetalon Mountains"] = "Stonetalon Mountains";
+	["Stonetalon Peak"] = "Stonetalon Peak";
+	["Stormwind City"] = "Stormwind City";
+	["Stranglethorn Vale"] = "Stranglethorn Vale";
+	["Sun Rock Retreat"] = "Sun Rock Retreat";
+	["Swamp of Sorrows"] = "Swamp of Sorrows";
+	["Talonbranch Glade"] = "Talonbranch Glade";
+	["Talrendis Point"] = "Talrendis Point";
+	["Tanaris"] = "Tanaris";
+	["Tarren Mill"] = "Tarren Mill";
+	["Teldrassil"] = "Teldrassil";
+	["Thalanaar"] = "Thalanaar";
+	["The Barrens"] = "The Barrens";
+	["The Hinterlands"] = "The Hinterlands";
+	["The Sepulcher"] = "The Sepulcher";
+	["Thelsamar"] = "Thelsamar";
+	["Theramore Isle"] = "Theramore Isle";
+	["Thorium Point"] = "Thorium Point";
+	["Thousand Needles"] = "Thousand Needles";
+	["Thunder Bluff"] = "Thunder Bluff";
+	["Tirisfal Glades"] = "Tirisfal Glades";
+	["Un'Goro Crater"] = "Un'Goro Crater";
+	["Undercity"] = "Undercity";
+	["Valormok"] = "Valormok";
+	["West of the path to Timbermaw Hold"] = "West of the path to Timbermaw Hold";
+	["Western Plaguelands"] = "Western Plaguelands";
+	["Westfall"] = "Westfall";
+	["Wetlands"] = "Wetlands";
+	["Winterspring"] = "Winterspring";
+	["Zoram'gar Outpost"] = "Zoram'gar Outpost";
+	["Tauren Leveling Guide"] = "Tauren Leveling Guide";
+	["Undead Leveling Guide"] = "Undead Leveling Guide";
+	["Troll/Orc Leveling Guide"] = "Troll/Orc Leveling Guide"; 
+	["Horde Leveling Guide"] = "Horde Leveling Guide";
+	["Human Leveling Guide"] = "Human Leveling Guide";
+	["Night Elf Leveling Guide"] = "Night Elf Leveling Guide";
+	["Gnome/Dwarf Leveling Guide"] = "Gnome/Dwarf Leveling Guide"; 
+	["Alliance Leveling Guide"] = "Alliance Leveling Guide";
+	["Icebellow Anvil"] = "Icebellow Anvil";
+	["Master Craftsman Omarion"] = "Master Craftsman Omarion";
+	["The Behemoth"] = "The Behemoth";
+};
+
+end

@@ -1,6 +1,6 @@
 ## Interface: 11200
-## Title: Atlas1.13.0版本 任务
-## Title-zhCN: |CFFCCFFFF界面|r AtlasQuest
+## Title: AtlasQuest
+## Title-zhCN: |CFFCCFFFF界面|r AtlasQuest副本任务
 ## Notes: Shows the Quests for the instance.
 ## Notes-ruRU: Показывает задания для подземелья.
 ## Notes-deDE: Zeigt die Quests, die es f\195\188r die jeweiligen Instanzen gibt.

@@ -31,9 +31,9 @@ function TitanPanelAtlasButton_OnLoad()
 	-- register plugin
 	this.registry = { 
 		id = TITAN_ATLAS_ID,
-		menuText = "Atlas",
+		menuText = ATLAS_TITLE,
 		buttonTextFunction = "TitanPanelAtlasButton_GetButtonText",
-		tooltipTitle = "Atlas",
+		tooltipTitle = ATLAS_TITLE,
 		tooltipTextFunction = "TitanPanelAtlasButton_GetTooltipText",
 		icon = "Interface\\WorldMap\\WorldMap-Icon",
 		iconWidth = 16,
@@ -52,7 +52,7 @@ function TitanPanelAtlasButton_GetButtonText(id)
 	
 	-- supports turning off labels
 	if ( TitanGetVar(TITAN_ATLAS_ID, "ShowLabelText") ) then	
-		retstr = "Atlas";
+		retstr = ATLAS_TITLE;
 		if ( TitanGetVar(TITAN_ATLAS_ID, "ShowMapName") ) then
 			retstr = retstr..": ";
 		end

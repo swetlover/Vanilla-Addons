@@ -1,10 +1,5 @@
 ﻿
 local AL = AceLibrary("AceLocale-2.2"):new("AtlasLoot"); 
-local BC = AceLibrary("Babble-Class-2.2")
-local BS = AceLibrary("Babble-Spell-2.2")
-local BF = AceLibrary("Babble-Faction-2.2")
-local BZ = AceLibrary("Babble-Zone-2.2")
-local BIS = AceLibrary("Babble-ItemSet-2.2")
 
 -- Colours stored for code readability
 local GREY = "|cff999999";
@@ -19,297 +14,327 @@ local ORANGE = "|cffFF8400";
 AtlasLoot_ButtonRegistry = {
 	--WoW Factions
 	["Argent1"] = {
-		Title = BF["Argent Dawn"]..": "..AL["Token Hand-Ins"];
+		Title = AL["Argent Dawn"]..": "..AL["Token Hand-Ins"];
 		Next_Page = "Argent2";
-		Next_Title = BF["Argent Dawn"]..": "..BF["Friendly"].."-"..BF["Exalted"];
+		Next_Title = AL["Argent Dawn"]..": "..AL["Friendly"].."-"..AL["Exalted"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];
 	};
 	["Argent2"] = {
-		Title = BF["Argent Dawn"]..": "..BF["Friendly"].."-"..BF["Honored"];
+		Title = AL["Argent Dawn"]..": "..AL["Friendly"].."-"..AL["Honored"];
 		Prev_Page = "Argent1";
-		Prev_Title = BF["Argent Dawn"]..": "..AL["Token Hand-Ins"];
+		Prev_Title = AL["Argent Dawn"]..": "..AL["Token Hand-Ins"];
 		Next_Page = "Argent3";
-		Next_Title = BF["Argent Dawn"]..": "..BF["Revered"].."-"..BF["Exalted"];
+		Next_Title = AL["Argent Dawn"]..": "..AL["Revered"].."-"..AL["Exalted"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];
 	};
 	["Argent3"] = {
-		Title = BF["Argent Dawn"]..": "..BF["Revered"].."-"..BF["Exalted"];
+		Title = AL["Argent Dawn"]..": "..AL["Revered"].."-"..AL["Exalted"];
 		Prev_Page = "Argent2";
-		Prev_Title = BF["Argent Dawn"]..": "..BF["Friendly"].."-"..BF["Honored"];
+		Prev_Title = AL["Argent Dawn"]..": "..AL["Friendly"].."-"..AL["Honored"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];
 	};
 	["Bloodsail1"] = {
-		Title = BF["Bloodsail Buccaneers"];
+		Title = AL["Bloodsail Buccaneers"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["AQBroodRings"] = {
-		Title = BF["Brood of Nozdormu"];
+		Title = AL["Brood of Nozdormu"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Cenarion1"] = {
-		Title = BF["Cenarion Circle"]..": "..BF["Friendly"];
+		Title = AL["Cenarion Circle"]..": "..AL["Friendly"];
 		Next_Page = "Cenarion2";
-		Next_Title = BF["Cenarion Circle"]..": "..BF["Honored"];
+		Next_Title = AL["Cenarion Circle"]..": "..AL["Honored"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Cenarion2"] = {
-		Title = BF["Cenarion Circle"]..": "..BF["Honored"];
+		Title = AL["Cenarion Circle"]..": "..AL["Honored"];
 		Next_Page = "Cenarion3";
-		Next_Title = BF["Cenarion Circle"]..": "..BF["Revered"];
+		Next_Title = AL["Cenarion Circle"]..": "..AL["Revered"];
 		Prev_Page = "Cenarion1";
-		Prev_Title = BF["Cenarion Circle"]..": "..BF["Friendly"];
+		Prev_Title = AL["Cenarion Circle"]..": "..AL["Friendly"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Cenarion3"] = {
-		Title = BF["Cenarion Circle"]..": "..BF["Revered"];
+		Title = AL["Cenarion Circle"]..": "..AL["Revered"];
 		Next_Page = "Cenarion4";
-		Next_Title = BF["Cenarion Circle"]..": "..BF["Exalted"];
+		Next_Title = AL["Cenarion Circle"]..": "..AL["Exalted"];
 		Prev_Page = "Cenarion2";
-		Prev_Title = BF["Cenarion Circle"]..": "..BF["Honored"];
+		Prev_Title = AL["Cenarion Circle"]..": "..AL["Honored"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Cenarion4"] = {
-		Title = BF["Cenarion Circle"]..": "..BF["Exalted"];
+		Title = AL["Cenarion Circle"]..": "..AL["Exalted"];
 		Prev_Page = "Cenarion3";
-		Prev_Title = BF["Cenarion Circle"]..": "..BF["Revered"];
+		Prev_Title = AL["Cenarion Circle"]..": "..AL["Revered"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Darkmoon"] = {
-		Title = BF["Darkmoon Faire"];
+		Title = AL["Darkmoon Faire"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Defilers"] = {
-		Title = BF["The Defilers"];
+		Title = AL["The Defilers"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Frostwolf1"] = {
-		Title = BF["Frostwolf Clan"];
+		Title = AL["Frostwolf Clan"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["GelkisClan1"] = {
-		Title = BF["Gelkis Clan Centaur"];
+		Title = AL["Gelkis Clan Centaur"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["WaterLords1"] = {
-		Title = BF["Hydraxian Waterlords"];
+		Title = AL["Hydraxian Waterlords"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["LeagueofArathor"] = {
-		Title = BF["The League of Arathor"];
+		Title = AL["The League of Arathor"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["MagramClan1"] = {
-		Title = BF["Magram Clan Centaur"];
+		Title = AL["Magram Clan Centaur"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Stormpike1"] = {
-		Title = BF["Stormpike Guard"];
+		Title = AL["Stormpike Guard"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Thorium1"] = {
-		Title = BF["Thorium Brotherhood"]..": "..BF["Friendly"].."/"..BF["Honored"];
+		Title = AL["Thorium Brotherhood"]..": "..AL["Friendly"].."/"..AL["Honored"];
 		Next_Page = "Thorium2";
-		Next_Title = BF["Thorium Brotherhood"]..": "..BF["Revered"].."/"..BF["Exalted"];
+		Next_Title = AL["Thorium Brotherhood"]..": "..AL["Revered"].."/"..AL["Exalted"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Thorium2"] = {
-		Title = BF["Thorium Brotherhood"]..": "..BF["Revered"].."/"..BF["Exalted"];
+		Title = AL["Thorium Brotherhood"]..": "..AL["Revered"].."/"..AL["Exalted"];
 		Prev_Page = "Thorium1";
-		Prev_Title = BF["Thorium Brotherhood"]..": "..BF["Friendly"].."/"..BF["Honored"];
+		Prev_Title = AL["Thorium Brotherhood"]..": "..AL["Friendly"].."/"..AL["Honored"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Timbermaw"] = {
-		Title = BF["Timbermaw Hold"];
+		Title = AL["Timbermaw Hold"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Wintersaber1"] = {
-		Title = BF["Wintersaber Trainers"];
+		Title = AL["Wintersaber Trainers"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Zandalar1"] = {
-		Title = BF["Zandalar Tribe"]..": "..BF["Friendly"].."/"..BF["Honored"];
+		Title = AL["Zandalar Tribe"]..": "..AL["Friendly"].."/"..AL["Honored"];
 		Next_Page = "Zandalar2";
-		Next_Title = BF["Zandalar Tribe"]..": "..BF["Revered"].."/"..BF["Exalted"];
+		Next_Title = AL["Zandalar Tribe"]..": "..AL["Revered"].."/"..AL["Exalted"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
 	["Zandalar2"] = {
-		Title = BF["Zandalar Tribe"]..": "..BF["Revered"].."/"..BF["Exalted"];
+		Title = AL["Zandalar Tribe"]..": "..AL["Revered"].."/"..AL["Exalted"];
 		Prev_Page = "Zandalar1";
-		Prev_Title = BF["Zandalar Tribe"]..": "..BF["Friendly"].."/"..BF["Honored"];
+		Prev_Title = AL["Zandalar Tribe"]..": "..AL["Friendly"].."/"..AL["Honored"];
 		Back_Page = "REPMENU";
 		Back_Title = AL["Factions"];;
 	};
-	["WSGRepFriendly"] = {
-		Title = AL["Friendly Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-	};
-	["WSGRepHonored1019"] = {
-		Title = "10-19 "..AL["Honored Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepHonored2029";
-	};
-	["WSGRepHonored2029"] = {
-		Title = "20-29 "..AL["Honored Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepHonored3039";
-		Prev_Page = "WSGRepHonored1019";
-	};
-	["WSGRepHonored3039"] = {
-		Title = "30-39 "..AL["Honored Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepHonored4049";
-		Prev_Page = "WSGRepHonored2029";
-	};
-	["WSGRepHonored4049"] = {
-		Title = "40-49 "..AL["Honored Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepHonored5059";
-		Prev_Page = "WSGRepHonored3039";
-	};
-	["WSGRepHonored5059"] = {
-		Title = "50-59 "..AL["Honored Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Prev_Page = "WSGRepHonored4049";
-	};
-	["WSGRepRevered1019"] = {
-		Title = "10-19 "..AL["Revered Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepRevered2029";
-	};
-	["WSGRepRevered2029"] = {
-		Title = "20-29 "..AL["Revered Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepRevered3039";
-		Prev_Page = "WSGRepRevered1019";
-	};
-	["WSGRepRevered3039"] = {
-		Title = "30-39 "..AL["Revered Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepRevered4049";
-		Prev_Page = "WSGRepRevered2029";
-	};
-	["WSGRepRevered4049"] = {
-		Title = "40-49 "..AL["Revered Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepRevered5059";
-		Prev_Page = "WSGRepRevered3039";
-	};
-	["WSGRepRevered5059"] = {
-		Title = "50-59 "..AL["Revered Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Prev_Page = "WSGRepRevered4049";
-	};
-	["WSGRepExalted4049"] = {
-		Title = "40-49 "..AL["Exalted Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepExalted5059";
-	};
-	["WSGRepExalted5059"] = {
-		Title = "50-59 "..AL["Exalted Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Next_Page = "WSGRepExalted60";
-		Prev_Page = "WSGRepExalted4049";
-	};
-	["WSGRepExalted60"] = {
-		Title = "60 "..AL["Exalted Reputation Rewards"];
-		Back_Page = "WSGRepMenu";
-		Prev_Page = "WSGRepExalted5059";
-	};
-	["ABRepFriendly"] = {
-		Title = AL["Friendly Reputation Rewards"];
+	["ABRepFriendly2029"] = {
+		Title = "AB 20-29 Friendly Rewards";
 		Back_Page = "ABRepMenu";
+		Next_Page = "ABRepFriendly3039";
+	};
+	["ABRepFriendly3039"] = {
+		Title = "AB 30-39 Friendly Rewards";
+		Back_Page = "ABRepMenu";
+		Next_Page = "ABRepFriendly4049";
+		Prev_Page = "ABRepFriendly2029";
+	};
+	["ABRepFriendly4049"] = {
+		Title = "AB 40-49 Friendly Rewards";
+		Back_Page = "ABRepMenu";
+		Next_Page = "ABRepFriendly5059";
+		Prev_Page = "ABRepFriendly3039";
+	};
+	["ABRepFriendly5059"] = {
+		Title = "AB 50-59 Friendly Rewards";
+		Back_Page = "ABRepMenu";
+		Prev_Page = "ABRepFriendly4049";
 	};
 	["ABRepHonored2029"] = {
-		Title = "20-29 "..AL["Honored Reputation Rewards"];
+		Title = "AB 20-29 Honored Rewards";
 		Back_Page = "ABRepMenu";
 		Next_Page = "ABRepHonored3039";
 	};
 	["ABRepHonored3039"] = {
-		Title = "30-39 "..AL["Honored Reputation Rewards"];
+		Title = "AB 30-39 Honored Rewards";
 		Back_Page = "ABRepMenu";
 		Next_Page = "ABRepHonored4049";
 		Prev_Page = "ABRepHonored2029";
 	};
 	["ABRepHonored4049"] = {
-		Title = "40-49 "..AL["Honored Reputation Rewards"];
+		Title = "AB 40-49 Honored Rewards";
 		Back_Page = "ABRepMenu";
 		Next_Page = "ABRepHonored5059";
 		Prev_Page = "ABRepHonored3039";
 	};
 	["ABRepHonored5059"] = {
-		Title = "50-59 "..AL["Honored Reputation Rewards"];
+		Title = "AB 50-59 Honored Rewards";
 		Back_Page = "ABRepMenu";
 		Prev_Page = "ABRepHonored4049";
 	};
 	["ABRepRevered2029"] = {
-		Title = "20-29 "..AL["Revered Reputation Rewards"];
+		Title = "AB 20-29 Revered Rewards";
 		Back_Page = "ABRepMenu";
 		Next_Page = "ABRepRevered3039";
 	};
 	["ABRepRevered3039"] = {
-		Title = "30-39 "..AL["Revered Reputation Rewards"];
+		Title = "AB 30-39 Revered Rewards";
 		Back_Page = "ABRepMenu";
 		Next_Page = "ABRepRevered4049";
 		Prev_Page = "ABRepRevered2029";
 	};
 	["ABRepRevered4049"] = {
-		Title = "40-49 "..AL["Revered Reputation Rewards"];
+		Title = "AB 40-49 Revered Rewards";
 		Back_Page = "ABRepMenu";
 		Next_Page = "ABRepRevered5059";
 		Prev_Page = "ABRepRevered3039";
 	};
 	["ABRepRevered5059"] = {
-		Title = "50-59 "..AL["Revered Reputation Rewards"];
+		Title = "AB 50-59 Revered Rewards";
 		Back_Page = "ABRepMenu";
 		Prev_Page = "ABRepRevered4049";
 	};
 	["ABRepExalted"] = {
-		Title = AL["Exalted Reputation Rewards"];
+		Title = "AB Exalted Rewards";
 		Back_Page = "ABRepMenu";
 	};
 	["AVRepFriendly"] = {
-		Title = AL["Friendly Reputation Rewards"];
+		Title = "AV Friendly Rewards";
 		Back_Page = "AVRepMenu";
 		Next_Page = "AVRepHonored";
 	};
 	["AVRepHonored"] = {
-		Title = AL["Honored Reputation Rewards"];
+		Title = "AV Honored Rewards";
 		Back_Page = "AVRepMenu";
 		Next_Page = "AVRepRevered";
 		Prev_Page = "AVRepFriendly";
 	};
 	["AVRepRevered"] = {
-		Title = AL["Revered Reputation Rewards"];
+		Title = "AV Revered Rewards";
 		Back_Page = "AVRepMenu";
 		Next_Page = "AVRepExalted";
 		Prev_Page = "AVRepHonored";
 	};
 	["AVRepExalted"] = {
-		Title = AL["Exalted Reputation Rewards"];
+		Title = "AV Exalted Rewards";
 		Back_Page = "AVRepMenu";
 		Prev_Page = "AVRepRevered";
+	};
+	["WSGRepFriendly2029"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 20-29 Friendly Rewards";
+		Next_Page = "WSGRepFriendly3039";
+	};
+	["WSGRepFriendly3039"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 30-39 Friendly Rewards";
+		Next_Page = "WSGRepFriendly4049";
+		Prev_Page = "WSGRepFriendly2029";
+	};
+	["WSGRepFriendly4049"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 40-49 Friendly Rewards";
+		Prev_Page = "WSGRepFriendly3039";
+	};
+	["WSGRepHonored1019"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 10-19 Honored Rewards";
+		Next_Page = "WSGRepHonored2029";
+	};
+	["WSGRepHonored2029"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 20-29 Honored Rewards";
+		Next_Page = "WSGRepHonored3039";
+		Prev_Page = "WSGRepHonored1019";
+	};
+	["WSGRepHonored3039"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 30-39 Honored Rewards";
+		Next_Page = "WSGRepHonored4049";
+		Prev_Page = "WSGRepHonored2029";
+	};
+	["WSGRepHonored4049"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 40-49 Honored Rewards";
+		Next_Page = "WSGRepHonored5059";
+		Prev_Page = "WSGRepHonored3039";
+	};
+	["WSGRepHonored5059"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 50-59 Honored Rewards";
+		Prev_Page = "WSGRepHonored4049";
+	};
+	["WSGRepRevered1019"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 10-19 Revered Rewards";
+		Next_Page = "WSGRepRevered2029";
+	};
+	["WSGRepRevered2029"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 20-29 Revered Rewards";
+		Next_Page = "WSGRepRevered3039";
+		Prev_Page = "WSGRepRevered1019";
+	};
+	["WSGRepRevered3039"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 30-39 Revered Rewards";
+		Next_Page = "WSGRepRevered4049";
+		Prev_Page = "WSGRepRevered2029";
+	};
+	["WSGRepRevered4049"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 40-49 Revered Rewards";
+		Next_Page = "WSGRepRevered5059";
+		Prev_Page = "WSGRepRevered3039";
+	};
+	["WSGRepRevered5059"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 50-59 Revered Rewards";
+		Prev_Page = "WSGRepRevered4049";
+	};
+	["WSGRepExalted4049"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 40-49 Exalted Rewards";
+		Next_Page = "WSGRepExalted5059";
+	};
+	["WSGRepExalted5059"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 50-59 Exalted Rewards";
+		Next_Page = "WSGRepExalted60";
+		Prev_Page = "WSGRepExalted4049";
+	};
+	["WSGRepExalted60"] = {
+		Back_Page = "WSGRepMenu";
+		Title = "WSG 60 Exalted Rewards";
+		Prev_Page = "WSGRepExalted5059";
 	};
 	["PvP60Accessories1"] = {
 		Title = AL["PvP Trinkets"];
@@ -349,412 +374,412 @@ AtlasLoot_ButtonRegistry = {
 		Back_Title = AL["PvP Rewards"];
 	};
 	["PVPDruid"] = {
-		Title = BC["Druid"];
+		Title = AL["Druid"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["PVPHunter"] = {
-		Title = BC["Hunter"];
+		Title = AL["Hunter"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["PVPMage"] = {
-		Title = BC["Mage"];
+		Title = AL["Mage"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["PVPPaladin"] = {
-		Title = BC["Paladin"];
+		Title = AL["Paladin"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["PVPPriest"] = {
-		Title = BC["Priest"];
+		Title = AL["Priest"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["PVPRogue"] = {
-		Title = BC["Rogue"];
+		Title = AL["Rogue"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["PVPShaman"] = {
-		Title = BC["Shaman"];
+		Title = AL["Shaman"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["PVPWarlock"] = {
-		Title = BC["Warlock"];
+		Title = AL["Warlock"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["PVPWarrior"] = {
-		Title = BC["Warrior"];
+		Title = AL["Warrior"];
 		Back_Page = "PVPSET";
 		Back_Title = AL["PvP Armor Sets"];
 	};
 	["T0Druid"] = {
-		Title = BC["Druid"];
+		Title = AL["Druid"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T0Hunter"] = {
-		Title = BC["Hunter"];
+		Title = AL["Hunter"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T0Mage"] = {
-		Title = BC["Mage"];
+		Title = AL["Mage"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T0Paladin"] = {
-		Title = BC["Paladin"];
+		Title = AL["Paladin"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T0Priest"] = {
-		Title = BC["Priest"];
+		Title = AL["Priest"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T0Rogue"] = {
-		Title = BC["Rogue"];
+		Title = AL["Rogue"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T0Shaman"] = {
-		Title = BC["Shaman"];
+		Title = AL["Shaman"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T0Warlock"] = {
-		Title = BC["Warlock"];
+		Title = AL["Warlock"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T0Warrior"] = {
-		Title = BC["Warrior"];
+		Title = AL["Warrior"];
 		Back_Page = "T0SET";
-		Back_Title = AL["Tier 0/0.5 Sets"];
+		Back_Title = AL["Dungeon 1/2 Sets"];
 	};
 	["T1Druid"] = {
-		Title = BC["Druid"];
+		Title = AL["Druid"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T1Hunter"] = {
-		Title = BC["Hunter"];
+		Title = AL["Hunter"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T1Mage"] = {
-		Title = BC["Mage"];
+		Title = AL["Mage"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T1Paladin"] = {
-		Title = BC["Paladin"];
+		Title = AL["Paladin"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T1Priest"] = {
-		Title = BC["Priest"];
+		Title = AL["Priest"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T1Rogue"] = {
-		Title = BC["Rogue"];
+		Title = AL["Rogue"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T1Shaman"] = {
-		Title = BC["Shaman"];
+		Title = AL["Shaman"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T1Warlock"] = {
-		Title = BC["Warlock"];
+		Title = AL["Warlock"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T1Warrior"] = {
-		Title = BC["Warrior"];
+		Title = AL["Warrior"];
 		Back_Page = "T1SET";
 		Back_Title = AL["Tier 1 Sets"];
 	};
 	["T2Druid"] = {
-		Title = BC["Druid"];
+		Title = AL["Druid"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T2Hunter"] = {
-		Title = BC["Hunter"];
+		Title = AL["Hunter"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T2Mage"] = {
-		Title = BC["Mage"];
+		Title = AL["Mage"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T2Paladin"] = {
-		Title = BC["Paladin"];
+		Title = AL["Paladin"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T2Priest"] = {
-		Title = BC["Priest"];
+		Title = AL["Priest"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T2Rogue"] = {
-		Title = BC["Rogue"];
+		Title = AL["Rogue"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T2Shaman"] = {
-		Title = BC["Shaman"];
+		Title = AL["Shaman"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T2Warlock"] = {
-		Title = BC["Warlock"];
+		Title = AL["Warlock"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T2Warrior"] = {
-		Title = BC["Warrior"];
+		Title = AL["Warrior"];
 		Back_Page = "T2SET";
 		Back_Title = AL["Tier 2 Sets"];
 	};
 	["T3Druid"] = {
-		Title = BC["Druid"];
+		Title = AL["Druid"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["T3Hunter"] = {
-		Title = BC["Hunter"];
+		Title = AL["Hunter"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["T3Mage"] = {
-		Title = BC["Mage"];
+		Title = AL["Mage"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["T3Paladin"] = {
-		Title = BC["Paladin"];
+		Title = AL["Paladin"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["T3Priest"] = {
-		Title = BC["Priest"];
+		Title = AL["Priest"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["T3Rogue"] = {
-		Title = BC["Rogue"];
+		Title = AL["Rogue"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["T3Shaman"] = {
-		Title = BC["Shaman"];
+		Title = AL["Shaman"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["T3Warlock"] = {
-		Title = BC["Warlock"];
+		Title = AL["Warlock"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["T3Warrior"] = {
-		Title = BC["Warrior"];
+		Title = AL["Warrior"];
 		Back_Page = "T3SET";
 		Back_Title = AL["Tier 3 Sets"];
 	};
 	["AQ40Druid"] = {
-		Title = BC["Druid"];
+		Title = AL["Druid"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ40Hunter"] = {
-		Title = BC["Hunter"];
+		Title = AL["Hunter"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ40Mage"] = {
-		Title = BC["Mage"];
+		Title = AL["Mage"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ40Paladin"] = {
-		Title = BC["Paladin"];
+		Title = AL["Paladin"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ40Priest"] = {
-		Title = BC["Priest"];
+		Title = AL["Priest"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ40Rogue"] = {
-		Title = BC["Rogue"];
+		Title = AL["Rogue"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ40Shaman"] = {
-		Title = BC["Shaman"];
+		Title = AL["Shaman"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ40Warlock"] = {
-		Title = BC["Warlock"];
+		Title = AL["Warlock"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ40Warrior"] = {
-		Title = BC["Warrior"];
+		Title = AL["Warrior"];
 		Back_Page = "AQ40SET";
 		Back_Title = AL["Temple of Ahn'Qiraj Sets"];
 	};
 	["AQ20Druid"] = {
-		Title = BC["Druid"];
+		Title = AL["Druid"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["AQ20Hunter"] = {
-		Title = BC["Hunter"];
+		Title = AL["Hunter"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["AQ20Mage"] = {
-		Title = BC["Mage"];
+		Title = AL["Mage"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["AQ20Paladin"] = {
-		Title = BC["Paladin"];
+		Title = AL["Paladin"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["AQ20Priest"] = {
-		Title = BC["Priest"];
+		Title = AL["Priest"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["AQ20Rogue"] = {
-		Title = BC["Rogue"];
+		Title = AL["Rogue"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["AQ20Shaman"] = {
-		Title = BC["Shaman"];
+		Title = AL["Shaman"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["AQ20Warlock"] = {
-		Title = BC["Warlock"];
+		Title = AL["Warlock"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["AQ20Warrior"] = {
-		Title = BC["Warrior"];
+		Title = AL["Warrior"];
 		Back_Page = "AQ20SET";
 		Back_Title = AL["Ruins of Ahn'Qiraj Sets"];
 	};
 	["ZGDruid"] = {
-		Title = BC["Druid"];
+		Title = AL["Druid"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["ZGHunter"] = {
-		Title = BC["Hunter"];
+		Title = AL["Hunter"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["ZGMage"] = {
-		Title = BC["Mage"];
+		Title = AL["Mage"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["ZGPaladin"] = {
-		Title = BC["Paladin"];
+		Title = AL["Paladin"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["ZGPriest"] = {
-		Title = BC["Priest"];
+		Title = AL["Priest"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["ZGRogue"] = {
-		Title = BC["Rogue"];
+		Title = AL["Rogue"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["ZGShaman"] = {
-		Title = BC["Shaman"];
+		Title = AL["Shaman"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["ZGWarlock"] = {
-		Title = BC["Warlock"];
+		Title = AL["Warlock"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["ZGWarrior"] = {
-		Title = BC["Warrior"];
+		Title = AL["Warrior"];
 		Back_Page = "ZGSET";
 		Back_Title = AL["Zul'Gurub Sets"];
 	};
 	["DEADMINES"] = {
-		Title = BIS["Defias Leather"];
+		Title = AL["Defias Leather"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["WAILING"] = {
-		Title = BIS["Embrace of the Viper"];
+		Title = AL["Embrace of the Viper"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["SCARLET"] = {
-		Title = BIS["Chain of the Scarlet Crusade"];
+		Title = AL["Chain of the Scarlet Crusade"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["BLACKROCKD"] = {
-		Title = BIS["The Gladiator"];
+		Title = AL["The Gladiator"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["IRONWEAVE"] = {
-		Title = BIS["Ironweave Battlesuit"];
+		Title = AL["Ironweave Battlesuit"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["ScholoCloth"] = {
-		Title = BZ["Scholomance"];
+		Title = AL["Scholomance"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["ScholoLeather"] = {
-		Title = BZ["Scholomance"];
+		Title = AL["Scholomance"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["ScholoMail"] = {
-		Title = BZ["Scholomance"];
+		Title = AL["Scholomance"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["ScholoPlate"] = {
-		Title = BZ["Scholomance"];
+		Title = AL["Scholomance"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["STRAT"] = {
-		Title = BIS["The Postmaster"];
+		Title = AL["The Postmaster"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
@@ -764,102 +789,102 @@ AtlasLoot_ButtonRegistry = {
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["ShardOfGods"] = {
-		Title = BIS["Shard of the Gods"];
+		Title = AL["Shard of the Gods"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["ZGRings"] = {
-		Title = BZ["Zul'Gurub"];
+		Title = AL["Zul'Gurub"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["HakkariBlades"] = {
-		Title = BZ["Zul'Gurub"];
+		Title = AL["Zul'Gurub"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["PrimalBlessing"] = {
-		Title = BZ["Zul'Gurub"];
+		Title = AL["Zul'Gurub"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["SpiritofEskhandar"] = {
-		Title = BIS["Spirit of Eskhandar"];
+		Title = AL["Spirit of Eskhandar"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["DalRend"] = {
-		Title = BIS["Dal'Rend's Arms"];
+		Title = AL["Dal'Rend's Arms"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["SpiderKiss"] = {
-		Title = BIS["Spider's Kiss"];
+		Title = AL["Spider's Kiss"];
 		Back_Page = "PRE60SET";
 		Back_Title = AL["Pre 60 Sets"];
 	};
 	["ImperialPlate"] = {
-		Title = BIS["Imperial Plate"];
+		Title = AL["Imperial Plate"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["TheDarksoul"] = {
-		Title = BIS["The Darksoul"];
+		Title = AL["The Darksoul"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["BloodsoulEmbrace"] = {
-		Title = BIS["Bloodsoul Embrace"];
+		Title = AL["Bloodsoul Embrace"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["BloodvineG"] = {
-		Title = BIS["Bloodvine Garb"];
+		Title = AL["Bloodvine Garb"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["VolcanicArmor"] = {
-		Title = BIS["Volcanic Armor"];
+		Title = AL["Volcanic Armor"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["IronfeatherArmor"] = {
-		Title = BIS["Ironfeather Armor"];
+		Title = AL["Ironfeather Armor"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["StormshroudArmor"] = {
-		Title = BIS["Stormshroud Armor"];
+		Title = AL["Stormshroud Armor"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["DevilsaurArmor"] = {
-		Title = BIS["Devilsaur Armor"];
+		Title = AL["Devilsaur Armor"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["BloodTigerH"] = {
-		Title = BIS["Blood Tiger Harness"];
+		Title = AL["Blood Tiger Harness"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["PrimalBatskin"] = {
-		Title = BIS["Primal Batskin"];
+		Title = AL["Primal Batskin"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["GreenDragonM"] = {
-		Title = BIS["Green Dragon Mail"];
+		Title = AL["Green Dragon Mail"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["BlueDragonM"] = {
-		Title = BIS["Blue Dragon Mail"];
+		Title = AL["Blue Dragon Mail"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
 	["BlackDragonM"] = {
-		Title = BIS["Black Dragon Mail"];
+		Title = AL["Black Dragon Mail"];
 		Back_Page = "CRAFTSET";
 		Back_Title = AL["Crafted Sets"];
 	};
@@ -939,6 +964,254 @@ AtlasLoot_ButtonRegistry = {
 		Prev_Title = AtlasLoot_TableNames["WorldEpics2"][1];
 		Back_Page = "WORLDEPICS";
 		Back_Title = AL["World Epics"];
+	};
+	["WorldBluesHead"] = {
+		Title = AtlasLoot_TableNames["WorldBluesHead"][1];
+		Next_Page = "WorldBluesNeck";
+		Next_Title = AtlasLoot_TableNames["WorldBluesNeck"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesNeck"] = {
+		Title = AtlasLoot_TableNames["WorldBluesNeck"][1];
+		Next_Page = "WorldBluesShoulder";
+		Next_Title = AtlasLoot_TableNames["WorldBluesShoulder"][1];
+		Prev_Page = "WorldBluesHead";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesHead"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesShoulder"] = {
+		Title = AtlasLoot_TableNames["WorldBluesShoulder"][1];
+		Next_Page = "WorldBluesBack";
+		Next_Title = AtlasLoot_TableNames["WorldBluesBack"][1];
+		Prev_Page = "WorldBluesNeck";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesNeck"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesBack"] = {
+		Title = AtlasLoot_TableNames["WorldBluesBack"][1];
+		Next_Page = "WorldBluesChest";
+		Next_Title = AtlasLoot_TableNames["WorldBluesChest"][1];
+		Prev_Page = "WorldBluesShoulder";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesShoulder"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesChest"] = {
+		Title = AtlasLoot_TableNames["WorldBluesChest"][1];
+		Next_Page = "WorldBluesWrist";
+		Next_Title = AtlasLoot_TableNames["WorldBluesWrist"][1];
+		Prev_Page = "WorldBluesBack";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesBack"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesWrist"] = {
+		Title = AtlasLoot_TableNames["WorldBluesWrist"][1];
+		Next_Page = "WorldBluesHands";
+		Next_Title = AtlasLoot_TableNames["WorldBluesHands"][1];
+		Prev_Page = "WorldBluesChest";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesChest"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesHands"] = {
+		Title = AtlasLoot_TableNames["WorldBluesHands"][1];
+		Next_Page = "WorldBluesWaist";
+		Next_Title = AtlasLoot_TableNames["WorldBluesWaist"][1];
+		Prev_Page = "WorldBluesWrist";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesWrist"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesWaist"] = {
+		Title = AtlasLoot_TableNames["WorldBluesWaist"][1];
+		Next_Page = "WorldBluesLegs";
+		Next_Title = AtlasLoot_TableNames["WorldBluesLegs"][1];
+		Prev_Page = "WorldBluesHands";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesHands"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesLegs"] = {
+		Title = AtlasLoot_TableNames["WorldBluesLegs"][1];
+		Next_Page = "WorldBluesFeet";
+		Next_Title = AtlasLoot_TableNames["WorldBluesFeet"][1];
+		Prev_Page = "WorldBluesWaist";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesWaist"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesFeet"] = {
+		Title = AtlasLoot_TableNames["WorldBluesFeet"][1];
+		Next_Page = "WorldBluesRing";
+		Next_Title = AtlasLoot_TableNames["WorldBluesRing"][1];
+		Prev_Page = "WorldBluesLegs";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesLegs"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesRing"] = {
+		Title = AtlasLoot_TableNames["WorldBluesRing"][1];
+		Next_Page = "WorldBluesTrinket";
+		Next_Title = AtlasLoot_TableNames["WorldBluesTrinket"][1];
+		Prev_Page = "WorldBluesFeet";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesFeet"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesTrinket"] = {
+		Title = AtlasLoot_TableNames["WorldBluesTrinket"][1];
+		Next_Page = "WorldBluesWand";
+		Next_Title = AtlasLoot_TableNames["WorldBluesWand"][1];
+		Prev_Page = "WorldBluesRing";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesRing"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesWand"] = {
+		Title = AtlasLoot_TableNames["WorldBluesWand"][1];
+		Next_Page = "WorldBluesHeldInOffhand";
+		Next_Title = AtlasLoot_TableNames["WorldBluesHeldInOffhand"][1];
+		Prev_Page = "WorldBluesTrinket";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesTrinket"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesHeldInOffhand"] = {
+		Title = AtlasLoot_TableNames["WorldBluesHeldInOffhand"][1];
+		Next_Page = "WorldBlues1HAxes";
+		Next_Title = AtlasLoot_TableNames["WorldBlues1HAxes"][1];
+		Prev_Page = "WorldBluesWand";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesWand"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBlues1HAxes"] = {
+		Title = AtlasLoot_TableNames["WorldBlues1HAxes"][1];
+		Next_Page = "WorldBlues1HMaces";
+		Next_Title = AtlasLoot_TableNames["WorldBlues1HMaces"][1];
+		Prev_Page = "WorldBluesHeldInOffhand";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesHeldInOffhand"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBlues1HMaces"] = {
+		Title = AtlasLoot_TableNames["WorldBlues1HMaces"][1];
+		Next_Page = "WorldBlues1HSwords";
+		Next_Title = AtlasLoot_TableNames["WorldBlues1HSwords"][1];
+		Prev_Page = "WorldBlues1HAxes";
+		Prev_Title = AtlasLoot_TableNames["WorldBlues1HAxes"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBlues1HSwords"] = {
+		Title = AtlasLoot_TableNames["WorldBlues1HSwords"][1];
+		Next_Page = "WorldBlues2HAxes";
+		Next_Title = AtlasLoot_TableNames["WorldBlues2HAxes"][1];
+		Prev_Page = "WorldBlues1HMaces";
+		Prev_Title = AtlasLoot_TableNames["WorldBlues1HMaces"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBlues2HAxes"] = {
+		Title = AtlasLoot_TableNames["WorldBlues2HAxes"][1];
+		Next_Page = "WorldBlues2HMaces";
+		Next_Title = AtlasLoot_TableNames["WorldBlues2HMaces"][1];
+		Prev_Page = "WorldBlues1HSwords";
+		Prev_Title = AtlasLoot_TableNames["WorldBlues1HSwords"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBlues2HMaces"] = {
+		Title = AtlasLoot_TableNames["WorldBlues2HMaces"][1];
+		Next_Page = "WorldBlues2HSwords";
+		Next_Title = AtlasLoot_TableNames["WorldBlues2HSwords"][1];
+		Prev_Page = "WorldBlues2HAxes";
+		Prev_Title = AtlasLoot_TableNames["WorldBlues2HAxes"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBlues2HSwords"] = {
+		Title = AtlasLoot_TableNames["WorldBlues2HSwords"][1];
+		Next_Page = "WorldBluesDaggers";
+		Next_Title = AtlasLoot_TableNames["WorldBluesDaggers"][1];
+		Prev_Page = "WorldBlues2HMaces";
+		Prev_Title = AtlasLoot_TableNames["WorldBlues2HMaces"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesDaggers"] = {
+		Title = AtlasLoot_TableNames["WorldBluesDaggers"][1];
+		Next_Page = "WorldBluesFistWeapons";
+		Next_Title = AtlasLoot_TableNames["WorldBluesFistWeapons"][1];
+		Prev_Page = "WorldBlues2HSwords";
+		Prev_Title = AtlasLoot_TableNames["WorldBlues2HSwords"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesFistWeapons"] = {
+		Title = AtlasLoot_TableNames["WorldBluesFistWeapons"][1];
+		Next_Page = "WorldBluesPolearms";
+		Next_Title = AtlasLoot_TableNames["WorldBluesPolearms"][1];
+		Prev_Page = "WorldBluesDaggers";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesDaggers"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesPolearms"] = {
+		Title = AtlasLoot_TableNames["WorldBluesPolearms"][1];
+		Next_Page = "WorldBluesStaves";
+		Next_Title = AtlasLoot_TableNames["WorldBluesStaves"][1];
+		Prev_Page = "WorldBluesFistWeapons";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesFistWeapons"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesStaves"] = {
+		Title = AtlasLoot_TableNames["WorldBluesStaves"][1];
+		Next_Page = "WorldBluesBows";
+		Next_Title = AtlasLoot_TableNames["WorldBluesBows"][1];
+		Prev_Page = "WorldBluesPolearms";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesPolearms"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesBows"] = {
+		Title = AtlasLoot_TableNames["WorldBluesBows"][1];
+		Next_Page = "WorldBluesCrossbows";
+		Next_Title = AtlasLoot_TableNames["WorldBluesCrossbows"][1];
+		Prev_Page = "WorldBluesStaves";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesStaves"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesCrossbows"] = {
+		Title = AtlasLoot_TableNames["WorldBluesCrossbows"][1];
+		Next_Page = "WorldBluesGuns";
+		Next_Title = AtlasLoot_TableNames["WorldBluesGuns"][1];
+		Prev_Page = "WorldBluesBows";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesBows"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesGuns"] = {
+		Title = AtlasLoot_TableNames["WorldBluesGuns"][1];
+		Next_Page = "WorldBluesShields";
+		Next_Title = AtlasLoot_TableNames["WorldBluesShields"][1];
+		Prev_Page = "WorldBluesCrossbows";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesCrossbows"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
+	};
+	["WorldBluesShields"] = {
+		Title = AtlasLoot_TableNames["WorldBluesShields"][1];
+		Prev_Page = "WorldBluesGuns";
+		Prev_Title = AtlasLoot_TableNames["WorldBluesGuns"][1];
+		Back_Page = "WORLDBLUES";
+		Back_Title = AL["World Blues"];
 	};
 	["ZGTrash1"] = {
 		Title = AtlasLoot_TableNames["ZGTrash1"][1];
@@ -1072,552 +1345,552 @@ AtlasLoot_ButtonRegistry = {
 		Back_Title = AL["Abyssal Council"];
 	};
 	["AlchemyApprentice1"] = {
-		Title = BS["Alchemy"]..": "..AL["Apprentice"];
+		Title = AL["Alchemy"]..": "..AL["Apprentice"];
 		Back_Page = "ALCHEMYMENU";
-		Back_Title = BS["Alchemy"];
+		Back_Title = AL["Alchemy"];
 		Next_Page = "AlchemyJourneyman1";
-		Next_Title = BS["Alchemy"]..": "..AL["Journeyman"];
+		Next_Title = AL["Alchemy"]..": "..AL["Journeyman"];
 	};
 	["AlchemyJourneyman1"] = {
-		Title = BS["Alchemy"]..": "..AL["Journeyman"];
+		Title = AL["Alchemy"]..": "..AL["Journeyman"];
 		Back_Page = "ALCHEMYMENU";
-		Back_Title = BS["Alchemy"];
+		Back_Title = AL["Alchemy"];
 		Next_Page = "AlchemyExpert1";
-		Next_Title = BS["Alchemy"]..": "..AL["Expert"];
+		Next_Title = AL["Alchemy"]..": "..AL["Expert"];
 		Prev_Page = "AlchemyApprentice1";
-		Prev_Title = BS["Alchemy"]..": "..AL["Apprentice"];
+		Prev_Title = AL["Alchemy"]..": "..AL["Apprentice"];
 	};
 	["AlchemyExpert1"] = {
-		Title = BS["Alchemy"]..": "..AL["Expert"];
+		Title = AL["Alchemy"]..": "..AL["Expert"];
 		Back_Page = "ALCHEMYMENU";
-		Back_Title = BS["Alchemy"];
+		Back_Title = AL["Alchemy"];
 		Next_Page = "AlchemyArtisan1";
-		Next_Title = BS["Alchemy"]..": "..AL["Artisan"];
+		Next_Title = AL["Alchemy"]..": "..AL["Artisan"];
 		Prev_Page = "AlchemyJourneyman1";
-		Prev_Title = BS["Alchemy"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Alchemy"]..": "..AL["Journeyman"];
 	};
 	["AlchemyArtisan1"] = {
-		Title = BS["Alchemy"]..": "..AL["Artisan"];
+		Title = AL["Alchemy"]..": "..AL["Artisan"];
 		Back_Page = "ALCHEMYMENU";
-		Back_Title = BS["Alchemy"];
+		Back_Title = AL["Alchemy"];
 		Next_Page = "AlchemyArtisan2";
-		Next_Title = BS["Alchemy"]..": "..AL["Artisan"];
+		Next_Title = AL["Alchemy"]..": "..AL["Artisan"];
 		Prev_Page = "AlchemyExpert1";
-		Prev_Title = BS["Alchemy"]..": "..AL["Expert"];
+		Prev_Title = AL["Alchemy"]..": "..AL["Expert"];
 	};
 	["AlchemyArtisan2"] = {
-		Title = BS["Alchemy"]..": "..AL["Artisan"];
+		Title = AL["Alchemy"]..": "..AL["Artisan"];
 		Back_Page = "ALCHEMYMENU";
-		Back_Title = BS["Alchemy"];
+		Back_Title = AL["Alchemy"];
 		Prev_Page = "AlchemyArtisan1";
-		Prev_Title = BS["Alchemy"]..": "..AL["Artisan"];
+		Prev_Title = AL["Alchemy"]..": "..AL["Artisan"];
 	};
 	["SmithingApprentice1"] = {
-		Title = BS["Blacksmithing"]..": "..AL["Apprentice"];
+		Title = AL["Blacksmithing"]..": "..AL["Apprentice"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Next_Page = "SmithingJourneyman1";
-		Next_Title = BS["Blacksmithing"]..": "..AL["Journeyman"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Journeyman"];
 	};
 	["SmithingJourneyman1"] = {
-		Title = BS["Blacksmithing"]..": "..AL["Journeyman"];
+		Title = AL["Blacksmithing"]..": "..AL["Journeyman"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "SmithingApprentice1";
-		Prev_Title = BS["Blacksmithing"]..": "..AL["Apprentice"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Apprentice"];
 		Next_Page = "SmithingJourneyman2";
-		Next_Title = BS["Blacksmithing"]..": "..AL["Journeyman"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Journeyman"];
 	};
 	["SmithingJourneyman2"] = {
-		Title = BS["Blacksmithing"]..": "..AL["Journeyman"];
+		Title = AL["Blacksmithing"]..": "..AL["Journeyman"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "SmithingJourneyman1";
-		Prev_Title = BS["Blacksmithing"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Journeyman"];
 		Next_Page = "SmithingExpert1";
-		Next_Title = BS["Blacksmithing"]..": "..AL["Expert"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Expert"];
 	};
 	["SmithingExpert1"] = {
-		Title = BS["Blacksmithing"]..": "..AL["Expert"];
+		Title = AL["Blacksmithing"]..": "..AL["Expert"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "SmithingJourneyman2";
-		Prev_Title = BS["Blacksmithing"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Journeyman"];
 		Next_Page = "SmithingExpert2";
-		Next_Title = BS["Blacksmithing"]..": "..AL["Expert"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Expert"];
 	};
 	["SmithingExpert2"] = {
-		Title = BS["Blacksmithing"]..": "..AL["Expert"];
+		Title = AL["Blacksmithing"]..": "..AL["Expert"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "SmithingExpert1";
-		Prev_Title = BS["Blacksmithing"]..": "..AL["Expert"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Expert"];
 		Next_Page = "SmithingArtisan1";
-		Next_Title = BS["Blacksmithing"]..": "..AL["Artisan"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Artisan"];
 	};
 	["SmithingArtisan1"] = {
-		Title = BS["Blacksmithing"]..": "..AL["Artisan"];
+		Title = AL["Blacksmithing"]..": "..AL["Artisan"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "SmithingExpert2";
-		Prev_Title = BS["Blacksmithing"]..": "..AL["Expert"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Expert"];
 		Next_Page = "SmithingArtisan2";
-		Next_Title = BS["Blacksmithing"]..": "..AL["Artisan"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Artisan"];
 	};
 	["SmithingArtisan2"] = {
-		Title = BS["Blacksmithing"]..": "..AL["Artisan"];
+		Title = AL["Blacksmithing"]..": "..AL["Artisan"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "SmithingArtisan1";
-		Prev_Title = BS["Blacksmithing"]..": "..AL["Artisan"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Artisan"];
 		Next_Page = "SmithingArtisan3";
-		Next_Title = BS["Blacksmithing"];
+		Next_Title = AL["Blacksmithing"];
 	};
 	["SmithingArtisan3"] = {
-		Title = BS["Blacksmithing"]..": "..AL["Artisan"];
+		Title = AL["Blacksmithing"]..": "..AL["Artisan"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "SmithingArtisan2";
-		Prev_Title = BS["Blacksmithing"]..": "..AL["Artisan"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Artisan"];
 		Next_Page = "Armorsmith1";
-		Next_Title = BS["Armorsmith"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Armorsmith"];
 	};
 	["Armorsmith1"] = {
-		Title = BS["Armorsmith"];
+		Title = AL["Blacksmithing"]..": "..AL["Armorsmith"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "SmithingArtisan3";
-		Prev_Title = BS["Blacksmithing"]..": "..AL["Artisan"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Artisan"];
 		Next_Page = "Weaponsmith1";
-		Next_Title = BS["Weaponsmith"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Weaponsmith"];
 	};
 	["Weaponsmith1"] = {
-		Title = BS["Weaponsmith"];
+		Title = AL["Blacksmithing"]..": "..AL["Weaponsmith"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "Armorsmith1";
-		Prev_Title = BS["Armorsmith"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Armorsmith"];
 		Next_Page = "Axesmith1";
-		Next_Title = AL["Master Axesmith"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Master Axesmith"];
 	};
 	["Axesmith1"] = {
-		Title = AL["Master Axesmith"];
+		Title = AL["Blacksmithing"]..": "..AL["Master Axesmith"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "Weaponsmith1";
-		Prev_Title = BS["Weaponsmith"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Weaponsmith"];
 		Next_Page = "Hammersmith1";
-		Next_Title = AL["Master Hammersmith"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Master Hammersmith"];
 	};
 	["Hammersmith1"] = {
-		Title = AL["Master Hammersmith"];
+		Title = AL["Blacksmithing"]..": "..AL["Master Hammersmith"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "Axesmith1";
-		Prev_Title = AL["Master Axesmith"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Master Axesmith"];
 		Next_Page = "Swordsmith1";
-		Next_Title = AL["Master Swordsmith"];
+		Next_Title = AL["Blacksmithing"]..": "..AL["Master Swordsmith"];
 	};
 	["Swordsmith1"] = {
-		Title = AL["Master Swordsmith"];
+		Title = AL["Blacksmithing"]..": "..AL["Master Swordsmith"];
 		Back_Page = "SMITHINGMENU";
-		Back_Title = BS["Blacksmithing"];
+		Back_Title = AL["Blacksmithing"];
 		Prev_Page = "Hammersmith1";
-		Prev_Title = AL["Master Hammersmith"];
+		Prev_Title = AL["Blacksmithing"]..": "..AL["Master Hammersmith"];
 	};
 	["EnchantingApprentice1"] = {
-		Title = BS["Enchanting"]..": "..AL["Apprentice"];
+		Title = AL["Enchanting"]..": "..AL["Apprentice"];
 		Back_Page = "ENCHANTINGMENU";
-		Back_Title = BS["Enchanting"];
+		Back_Title = AL["Enchanting"];
 		Next_Page = "EnchantingJourneyman1";
-		Next_Title = BS["Enchanting"]..": "..AL["Journeyman"];
+		Next_Title = AL["Enchanting"]..": "..AL["Journeyman"];
 	};
 	["EnchantingJourneyman1"] = {
-		Title = BS["Enchanting"]..": "..AL["Journeyman"];
+		Title = AL["Enchanting"]..": "..AL["Journeyman"];
 		Back_Page = "ENCHANTINGMENU";
-		Back_Title = BS["Enchanting"];
+		Back_Title = AL["Enchanting"];
 		Prev_Page = "EnchantingApprentice1";
-		Prev_Title = BS["Enchanting"]..": "..AL["Apprentice"];
+		Prev_Title = AL["Enchanting"]..": "..AL["Apprentice"];
 		Next_Page = "EnchantingJourneyman2";
-		Next_Title = BS["Enchanting"]..": "..AL["Journeyman"];
+		Next_Title = AL["Enchanting"]..": "..AL["Journeyman"];
 	};
 	["EnchantingJourneyman2"] = {
-		Title = BS["Enchanting"]..": "..AL["Journeyman"];
+		Title = AL["Enchanting"]..": "..AL["Journeyman"];
 		Back_Page = "ENCHANTINGMENU";
-		Back_Title = BS["Enchanting"];
+		Back_Title = AL["Enchanting"];
 		Prev_Page = "EnchantingJourneyman1";
-		Prev_Title = BS["Enchanting"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Enchanting"]..": "..AL["Journeyman"];
 		Next_Page = "EnchantingExpert1";
-		Next_Title = BS["Enchanting"]..": "..AL["Expert"];
+		Next_Title = AL["Enchanting"]..": "..AL["Expert"];
 	};
 	["EnchantingExpert1"] = {
-		Title = BS["Enchanting"]..": "..AL["Expert"];
+		Title = AL["Enchanting"]..": "..AL["Expert"];
 		Back_Page = "ENCHANTINGMENU";
-		Back_Title = BS["Enchanting"];
+		Back_Title = AL["Enchanting"];
 		Prev_Page = "EnchantingJourneyman2";
-		Prev_Title = BS["Enchanting"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Enchanting"]..": "..AL["Journeyman"];
 		Next_Page = "EnchantingExpert2";
-		Next_Title = BS["Enchanting"]..": "..AL["Expert"];
+		Next_Title = AL["Enchanting"]..": "..AL["Expert"];
 	};
 	["EnchantingExpert2"] = {
-		Title = BS["Enchanting"]..": "..AL["Expert"];
+		Title = AL["Enchanting"]..": "..AL["Expert"];
 		Back_Page = "ENCHANTINGMENU";
-		Back_Title = BS["Enchanting"];
+		Back_Title = AL["Enchanting"];
 		Prev_Page = "EnchantingExpert1";
-		Prev_Title = BS["Enchanting"]..": "..AL["Expert"];
+		Prev_Title = AL["Enchanting"]..": "..AL["Expert"];
 		Next_Page = "EnchantingArtisan1";
-		Next_Title = BS["Enchanting"]..": "..AL["Artisan"];
+		Next_Title = AL["Enchanting"]..": "..AL["Artisan"];
 	};
 	["EnchantingArtisan1"] = {
-		Title = BS["Enchanting"]..": "..AL["Artisan"];
+		Title = AL["Enchanting"]..": "..AL["Artisan"];
 		Back_Page = "ENCHANTINGMENU";
-		Back_Title = BS["Enchanting"];
+		Back_Title = AL["Enchanting"];
 		Prev_Page = "EnchantingExpert2";
-		Prev_Title = BS["Enchanting"]..": "..AL["Expert"];
+		Prev_Title = AL["Enchanting"]..": "..AL["Expert"];
 		Next_Page = "EnchantingArtisan2";
-		Next_Title = BS["Enchanting"]..": "..AL["Artisan"];
+		Next_Title = AL["Enchanting"]..": "..AL["Artisan"];
 	};
 	["EnchantingArtisan2"] = {
-		Title = BS["Enchanting"]..": "..AL["Artisan"];
+		Title = AL["Enchanting"]..": "..AL["Artisan"];
 		Back_Page = "ENCHANTINGMENU";
-		Back_Title = BS["Enchanting"];
+		Back_Title = AL["Enchanting"];
 		Prev_Page = "EnchantingArtisan1";
-		Prev_Title = BS["Enchanting"]..": "..AL["Artisan"];
+		Prev_Title = AL["Enchanting"]..": "..AL["Artisan"];
 		Next_Page = "EnchantingArtisan3";
-		Next_Title = BS["Enchanting"]..": "..AL["Artisan"];
+		Next_Title = AL["Enchanting"]..": "..AL["Artisan"];
 	};
 	["EnchantingArtisan3"] = {
-		Title = BS["Enchanting"]..": "..AL["Artisan"];
+		Title = AL["Enchanting"]..": "..AL["Artisan"];
 		Back_Page = "ENCHANTINGMENU";
-		Back_Title = BS["Enchanting"];
+		Back_Title = AL["Enchanting"];
 		Prev_Page = "EnchantingArtisan2";
-		Prev_Title = BS["Enchanting"]..": "..AL["Artisan"];
+		Prev_Title = AL["Enchanting"]..": "..AL["Artisan"];
 	};
 	["EngineeringApprentice1"] = {
-		Title = BS["Engineering"]..": "..AL["Apprentice"];
+		Title = AL["Engineering"]..": "..AL["Apprentice"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Next_Page = "EngineeringJourneyman1";
-		Next_Title = BS["Engineering"]..": "..AL["Journeyman"];
+		Next_Title = AL["Engineering"]..": "..AL["Journeyman"];
 	};
 	["EngineeringJourneyman1"] = {
-		Title = BS["Engineering"]..": "..AL["Journeyman"];
+		Title = AL["Engineering"]..": "..AL["Journeyman"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Prev_Page = "EngineeringApprentice1";
-		Prev_Title = BS["Engineering"]..": "..AL["Apprentice"];
+		Prev_Title = AL["Engineering"]..": "..AL["Apprentice"];
 		Next_Page = "EngineeringJourneyman2";
-		Next_Title = BS["Engineering"]..": "..AL["Journeyman"];
+		Next_Title = AL["Engineering"]..": "..AL["Journeyman"];
 	};
 	["EngineeringJourneyman2"] = {
-		Title = BS["Engineering"]..": "..AL["Journeyman"];
+		Title = AL["Engineering"]..": "..AL["Journeyman"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Prev_Page = "EngineeringJourneyman1";
-		Prev_Title = BS["Engineering"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Engineering"]..": "..AL["Journeyman"];
 		Next_Page = "EngineeringExpert1";
-		Next_Title = BS["Engineering"]..": "..AL["Expert"];
+		Next_Title = AL["Engineering"]..": "..AL["Expert"];
 	};
 	["EngineeringExpert1"] = {
-		Title = BS["Engineering"]..": "..AL["Expert"];
+		Title = AL["Engineering"]..": "..AL["Expert"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Prev_Page = "EngineeringJourneyman2";
-		Prev_Title = BS["Engineering"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Engineering"]..": "..AL["Journeyman"];
 		Next_Page = "EngineeringExpert2";
-		Next_Title = BS["Engineering"]..": "..AL["Expert"];
+		Next_Title = AL["Engineering"]..": "..AL["Expert"];
 	};
 	["EngineeringExpert2"] = {
-		Title = BS["Engineering"]..": "..AL["Expert"];
+		Title = AL["Engineering"]..": "..AL["Expert"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Prev_Page = "EngineeringExpert1";
-		Prev_Title = BS["Engineering"]..": "..AL["Expert"];
+		Prev_Title = AL["Engineering"]..": "..AL["Expert"];
 		Next_Page = "EngineeringArtisan1";
-		Next_Title = BS["Engineering"]..": "..AL["Artisan"];
+		Next_Title = AL["Engineering"]..": "..AL["Artisan"];
 	};
 	["EngineeringArtisan1"] = {
-		Title = BS["Engineering"]..": "..AL["Artisan"];
+		Title = AL["Engineering"]..": "..AL["Artisan"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Prev_Page = "EngineeringExpert2";
-		Prev_Title = BS["Engineering"]..": "..AL["Expert"];
+		Prev_Title = AL["Engineering"]..": "..AL["Expert"];
 		Next_Page = "EngineeringArtisan2";
-		Next_Title = BS["Engineering"]..": "..AL["Artisan"];
+		Next_Title = AL["Engineering"]..": "..AL["Artisan"];
 	};
 	["EngineeringArtisan2"] = {
-		Title = BS["Engineering"]..": "..AL["Artisan"];
+		Title = AL["Engineering"]..": "..AL["Artisan"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Prev_Page = "EngineeringArtisan1";
-		Prev_Title = BS["Engineering"]..": "..AL["Artisan"];
+		Prev_Title = AL["Engineering"]..": "..AL["Artisan"];
 		Next_Page = "Gnomish1";
-		Next_Title = AL["Gnomish Engineering"];
+		Next_Title = AL["Engineering"]..": "..AL["Gnomish Engineering"];
 	};
 	["Gnomish1"] = {
-		Title = AL["Gnomish Engineering"];
+		Title = AL["Engineering"]..": "..AL["Gnomish Engineering"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Prev_Page = "EngineeringArtisan2";
-		Prev_Title = BS["Engineering"]..": "..AL["Artisan"];
+		Prev_Title = AL["Engineering"]..": "..AL["Artisan"];
 		Next_Page = "Goblin1";
-		Next_Title = AL["Goblin Engineering"];
+		Next_Title = AL["Engineering"]..": "..AL["Goblin Engineering"];
 	};
 	["Goblin1"] = {
-		Title = AL["Goblin Engineering"];
+		Title = AL["Engineering"]..": "..AL["Goblin Engineering"];
 		Back_Page = "ENGINEERINGMENU";
-		Back_Title = BS["Engineering"];
+		Back_Title = AL["Engineering"];
 		Prev_Page = "Gnomish1";
-		Prev_Title = AL["Gnomish Engineering"];
+		Prev_Title = AL["Engineering"]..": "..AL["Gnomish Engineering"];
 	};
 	["LeatherApprentice1"] = {
-		Title = BS["Leatherworking"]..": "..AL["Apprentice"];
+		Title = AL["Leatherworking"]..": "..AL["Apprentice"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Next_Page = "LeatherJourneyman1";
-		Next_Title = BS["Leatherworking"]..": "..AL["Journeyman"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Journeyman"];
 	};
 	["LeatherJourneyman1"] = {
-		Title = BS["Leatherworking"]..": "..AL["Journeyman"];
+		Title = AL["Leatherworking"]..": "..AL["Journeyman"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "LeatherApprentice1";
-		Prev_Title = BS["Leatherworking"]..": "..AL["Apprentice"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Apprentice"];
 		Next_Page = "LeatherJourneyman2";
-		Next_Title = BS["Leatherworking"]..": "..AL["Journeyman"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Journeyman"];
 	};
 	["LeatherJourneyman2"] = {
-		Title = BS["Leatherworking"]..": "..AL["Journeyman"];
+		Title = AL["Leatherworking"]..": "..AL["Journeyman"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "LeatherJourneyman1";
-		Prev_Title = BS["Leatherworking"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Journeyman"];
 		Next_Page = "LeatherExpert1";
-		Next_Title = BS["Leatherworking"]..": "..AL["Expert"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Expert"];
 	};
 	["LeatherExpert1"] = {
-		Title = BS["Leatherworking"]..": "..AL["Expert"];
+		Title = AL["Leatherworking"]..": "..AL["Expert"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "LeatherJourneyman2";
-		Prev_Title = BS["Leatherworking"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Journeyman"];
 		Next_Page = "LeatherExpert2";
-		Next_Title = BS["Leatherworking"]..": "..AL["Expert"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Expert"];
 	};
 	["LeatherExpert2"] = {
-		Title = BS["Leatherworking"]..": "..AL["Expert"];
+		Title = AL["Leatherworking"]..": "..AL["Expert"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "LeatherExpert1";
-		Prev_Title = BS["Leatherworking"]..": "..AL["Expert"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Expert"];
 		Next_Page = "LeatherArtisan1";
-		Next_Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Artisan"];
 	};
 	["LeatherArtisan1"] = {
-		Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Title = AL["Leatherworking"]..": "..AL["Artisan"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "LeatherExpert2";
-		Prev_Title = BS["Leatherworking"]..": "..AL["Expert"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Expert"];
 		Next_Page = "LeatherArtisan2";
-		Next_Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Artisan"];
 	};
 	["LeatherArtisan2"] = {
-		Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Title = AL["Leatherworking"]..": "..AL["Artisan"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "LeatherArtisan1";
-		Prev_Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Artisan"];
 		Next_Page = "LeatherArtisan3";
-		Next_Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Artisan"];
 	};
 	["LeatherArtisan3"] = {
-		Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Title = AL["Leatherworking"]..": "..AL["Artisan"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "LeatherArtisan2";
-		Prev_Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Artisan"];
 		Next_Page = "Dragonscale1";
-		Next_Title = BS["Dragonscale Leatherworking"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Dragonscale Leatherworking"];
 	};
 	["Dragonscale1"] = {
-		Title = BS["Dragonscale Leatherworking"];
+		Title = AL["Leatherworking"]..": "..AL["Dragonscale Leatherworking"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "LeatherArtisan3";
-		Prev_Title = BS["Leatherworking"]..": "..AL["Artisan"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Artisan"];
 		Next_Page = "Elemental1";
-		Next_Title = BS["Elemental Leatherworking"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Elemental Leatherworking"];
 	};
 	["Elemental1"] = {
-		Title = BS["Elemental Leatherworking"];
+		Title = AL["Leatherworking"]..": "..AL["Elemental Leatherworking"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "Dragonscale1";
-		Prev_Title = BS["Dragonscale Leatherworking"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Dragonscale Leatherworking"];
 		Next_Page = "Tribal1";
-		Next_Title = BS["Tribal Leatherworking"];
+		Next_Title = AL["Leatherworking"]..": "..AL["Tribal Leatherworking"];
 	};
 	["Tribal1"] = {
-		Title = BS["Tribal Leatherworking"];
+		Title = AL["Leatherworking"]..": "..AL["Tribal Leatherworking"];
 		Back_Page = "LEATHERWORKINGMENU";
-		Back_Title = BS["Leatherworking"];
+		Back_Title = AL["Leatherworking"];
 		Prev_Page = "Elemental1";
-		Prev_Title = BS["Elemental Leatherworking"];
+		Prev_Title = AL["Leatherworking"]..": "..AL["Elemental Leatherworking"];
 	};
 	["Herbalism1"] = {
-		Title = BS["Herbalism"];
+		Title = AL["Herbalism"];
 		Back_Page = "CRAFTINGMENU";
 		Back_Title = AL["Crafting"];
 		Next_Page = "Herbalism2";
-		Next_Title = BS["Herbalism"];
+		Next_Title = AL["Herbalism"];
 	};
 	["Herbalism2"] = {
-		Title = BS["Herbalism"];
+		Title = AL["Herbalism"];
 		Back_Page = "CRAFTINGMENU";
 		Back_Title = AL["Crafting"];
 		Prev_Page = "Herbalism1";
-		Prev_Title = BS["Herbalism"];
+		Prev_Title = AL["Herbalism"];
 	};
 	["Mining1"] = {
-		Title = BS["Mining"];
+		Title = AL["Mining"];
 		Back_Page = "MININGMENU";
 		Back_Title = AL["Crafting"];
 		Next_Page = "Mining2";
-		Next_Title = BS["Mining"];
+		Next_Title = AL["Mining"];
 	};
 	["Mining2"] = {
-		Title = BS["Mining"];
+		Title = AL["Mining"];
 		Back_Page = "MININGMENU";
 		Back_Title = AL["Crafting"];
 		Next_Page = "Smelting1";
-		Next_Title = BS["Smelting"];
+		Next_Title = AL["Smelting"];
 		Prev_Page = "Mining1";
-		Prev_Title = BS["Mining"];
+		Prev_Title = AL["Mining"];
 	};
 	["Smelting1"] = {
-		Title = BS["Smelting"];
+		Title = AL["Smelting"];
 		Back_Page = "MININGMENU";
 		Back_Title = AL["Crafting"];
 		Prev_Page = "Mining2";
-		Prev_Title = BS["Mining"];
+		Prev_Title = AL["Mining"];
 	};
 	["TailoringApprentice1"] = {
-		Title = BS["Tailoring"]..": "..AL["Apprentice"];
+		Title = AL["Tailoring"]..": "..AL["Apprentice"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Next_Page = "TailoringJourneyman1";
-		Next_Title = BS["Tailoring"]..": "..AL["Journeyman"];
+		Next_Title = AL["Tailoring"]..": "..AL["Journeyman"];
 	};
 	["TailoringJourneyman1"] = {
-		Title = BS["Tailoring"]..": "..AL["Journeyman"];
+		Title = AL["Tailoring"]..": "..AL["Journeyman"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Prev_Page = "TailoringApprentice1";
-		Prev_Title = BS["Tailoring"]..": "..AL["Apprentice"];
+		Prev_Title = AL["Tailoring"]..": "..AL["Apprentice"];
 		Next_Page = "TailoringJourneyman2";
-		Next_Title = BS["Tailoring"]..": "..AL["Journeyman"];
+		Next_Title = AL["Tailoring"]..": "..AL["Journeyman"];
 	};
 	["TailoringJourneyman2"] = {
-		Title = BS["Tailoring"]..": "..AL["Journeyman"];
+		Title = AL["Tailoring"]..": "..AL["Journeyman"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Prev_Page = "TailoringJourneyman1";
-		Prev_Title = BS["Tailoring"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Tailoring"]..": "..AL["Journeyman"];
 		Next_Page = "TailoringExpert1";
-		Next_Title = BS["Tailoring"]..": "..AL["Expert"];
+		Next_Title = AL["Tailoring"]..": "..AL["Expert"];
 	};
 	["TailoringExpert1"] = {
-		Title = BS["Tailoring"]..": "..AL["Expert"];
+		Title = AL["Tailoring"]..": "..AL["Expert"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Prev_Page = "TailoringJourneyman2";
-		Prev_Title = BS["Tailoring"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Tailoring"]..": "..AL["Journeyman"];
 		Next_Page = "TailoringExpert2";
-		Next_Title = BS["Tailoring"]..": "..AL["Expert"];
+		Next_Title = AL["Tailoring"]..": "..AL["Expert"];
 	};
 	["TailoringExpert2"] = {
-		Title = BS["Tailoring"]..": "..AL["Expert"];
+		Title = AL["Tailoring"]..": "..AL["Expert"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Prev_Page = "TailoringExpert1";
-		Prev_Title = BS["Tailoring"]..": "..AL["Expert"];
+		Prev_Title = AL["Tailoring"]..": "..AL["Expert"];
 		Next_Page = "TailoringArtisan1";
-		Next_Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Next_Title = AL["Tailoring"]..": "..AL["Artisan"];
 	};
 	["TailoringArtisan1"] = {
-		Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Title = AL["Tailoring"]..": "..AL["Artisan"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Prev_Page = "TailoringExpert2";
-		Prev_Title = BS["Tailoring"]..": "..AL["Expert"];
+		Prev_Title = AL["Tailoring"]..": "..AL["Expert"];
 		Next_Page = "TailoringArtisan2";
-		Next_Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Next_Title = AL["Tailoring"]..": "..AL["Artisan"];
 	};
 	["TailoringArtisan2"] = {
-		Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Title = AL["Tailoring"]..": "..AL["Artisan"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Prev_Page = "TailoringArtisan1";
-		Prev_Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Prev_Title = AL["Tailoring"]..": "..AL["Artisan"];
 		Next_Page = "TailoringArtisan3";
-		Next_Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Next_Title = AL["Tailoring"]..": "..AL["Artisan"];
 	};
 	["TailoringArtisan3"] = {
-		Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Title = AL["Tailoring"]..": "..AL["Artisan"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Prev_Page = "TailoringArtisan2";
-		Prev_Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Prev_Title = AL["Tailoring"]..": "..AL["Artisan"];
 		Next_Page = "TailoringArtisan4";
-		Next_Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Next_Title = AL["Tailoring"]..": "..AL["Artisan"];
 	};
 	["TailoringArtisan4"] = {
-		Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Title = AL["Tailoring"]..": "..AL["Artisan"];
 		Back_Page = "TAILORINGMENU";
-		Back_Title = BS["Tailoring"];
+		Back_Title = AL["Tailoring"];
 		Prev_Page = "TailoringArtisan3";
-		Prev_Title = BS["Tailoring"]..": "..AL["Artisan"];
+		Prev_Title = AL["Tailoring"]..": "..AL["Artisan"];
 	};
 	["CookingApprentice1"] = {
-		Title = BS["Cooking"]..": "..AL["Apprentice"];
+		Title = AL["Cooking"]..": "..AL["Apprentice"];
 		Back_Page = "COOKINGMENU";
-		Back_Title = BS["Cooking"];
+		Back_Title = AL["Cooking"];
 		Next_Page = "CookingJourneyman1";
-		Next_Title = BS["Cooking"]..": "..AL["Journeyman"];
+		Next_Title = AL["Cooking"]..": "..AL["Journeyman"];
 	};
 	["CookingJourneyman1"] = {
-		Title = BS["Cooking"]..": "..AL["Journeyman"];
+		Title = AL["Cooking"]..": "..AL["Journeyman"];
 		Back_Page = "COOKINGMENU";
-		Back_Title = BS["Cooking"];
+		Back_Title = AL["Cooking"];
 		Prev_Page = "CookingApprentice1";
-		Prev_Title = BS["Cooking"]..": "..AL["Apprentice"];
+		Prev_Title = AL["Cooking"]..": "..AL["Apprentice"];
 		Next_Page = "CookingExpert1";
-		Next_Title = BS["Cooking"]..": "..AL["Journeyman"];
+		Next_Title = AL["Cooking"]..": "..AL["Journeyman"];
 	};
 	["CookingExpert1"] = {
-		Title = BS["Cooking"]..": "..AL["Expert"];
+		Title = AL["Cooking"]..": "..AL["Expert"];
 		Back_Page = "COOKINGMENU";
-		Back_Title = BS["Cooking"];
+		Back_Title = AL["Cooking"];
 		Prev_Page = "CookingJourneyman1";
-		Prev_Title = BS["Cooking"]..": "..AL["Journeyman"];
+		Prev_Title = AL["Cooking"]..": "..AL["Journeyman"];
 		Next_Page = "CookingArtisan1";
-		Next_Title = BS["Cooking"]..": "..AL["Artisan"];
+		Next_Title = AL["Cooking"]..": "..AL["Artisan"];
 	};
 	["CookingArtisan1"] = {
-		Title = BS["Cooking"]..": "..AL["Artisan"];
+		Title = AL["Cooking"]..": "..AL["Artisan"];
 		Back_Page = "COOKINGMENU";
-		Back_Title = BS["Cooking"];
+		Back_Title = AL["Cooking"];
 		Prev_Page = "CookingExpert1";
-		Prev_Title = BS["Cooking"]..": "..AL["Expert"];
+		Prev_Title = AL["Cooking"]..": "..AL["Expert"];
 	};
 	["FirstAid1"] = {
-		Title = BS["First Aid"];
+		Title = AL["First Aid"];
 		Back_Page = "CRAFTINGMENU";
 		Back_Title = AL["Crafting"];
 	};
 	["Poisons1"] = {
-		Title = BS["Poisons"];
+		Title = AL["Poisons"];
 		Back_Page = "CRAFTINGMENU";
 		Back_Title = AL["Crafting"];
 	};

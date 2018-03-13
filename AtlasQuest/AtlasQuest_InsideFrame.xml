@@ -669,7 +669,7 @@ These fonts are useless atm -->
  			</Anchor>
  		</Anchors>
 	  <Frames>
-	  <Button name="CLOSEbutton3" inherits="OptionsButtonTemplate" text="AtlasQuest">
+	  <Button name="CLOSEbutton3" inherits="OptionsButtonTemplate" text="副本任务">
           <Size>
             <AbsDimension x="90" y="20"/>
           </Size>

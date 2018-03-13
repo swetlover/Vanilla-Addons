@@ -1292,7 +1292,7 @@
 		<Scripts>
 			<OnLoad>
 				AQ_OnLoad();
-				getglobal("AtlasQuestFrame_Title"):SetText("AtlasQuest");
+				getglobal("AtlasQuestFrame_Title"):SetText("副本任务");
 			</OnLoad>
 			<OnUpdate>
 				AQ_OnUpdate(arg1);

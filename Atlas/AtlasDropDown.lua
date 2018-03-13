@@ -21,22 +21,20 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 --]]
-local GREN = "|cff66cc33"
 
 Atlas_DropDownLayouts_Order = {
 	[1] = ATLAS_DDL_CONTINENT;
 	[2] = ATLAS_DDL_PARTYSIZE;
 	[3] = ATLAS_DDL_TYPE;
 	[4] = ATLAS_DDL_ALL;
-	[5] = ATLAS_DDL_LEVELING_GUIDE;
 	[ATLAS_DDL_CONTINENT] = {
 		[1] = ATLAS_DDL_CONTINENT_EASTERN;
 		[2] = ATLAS_DDL_CONTINENT_KALIMDOR;
 		[3] = ATLAS_DDL_WORLDBOSSES;
-		[4] = GREN..ATLAS_DDL_TYPE_ENTRANCE;
-		[5] = GREN..ATLAS_DDL_BGS;
-		[6] = GREN..ATLAS_DDL_DUNGEON_LOCATIONS;
-		[7] = GREN..ATLAS_DDL_FLIGHT_PATHS;
+		[4] = ATLAS_DDL_TYPE_ENTRANCE;
+		[5] = ATLAS_DDL_BGS;
+		[6] = ATLAS_DDL_DUNGEON_LOCATIONS;
+		[7] = ATLAS_DDL_FLIGHT_PATHS;
 	};
 	[ATLAS_DDL_PARTYSIZE] = {
 		[1] = ATLAS_DDL_PARTYSIZE_5;
@@ -44,40 +42,27 @@ Atlas_DropDownLayouts_Order = {
 		[3] = ATLAS_DDL_PARTYSIZE_20;
 		[4] = ATLAS_DDL_PARTYSIZE_40;
 		[5] = ATLAS_DDL_WORLDBOSSES;
-		[6] = GREN..ATLAS_DDL_TYPE_ENTRANCE;
-		[7] = GREN..ATLAS_DDL_BGS;
-		[8] = GREN..ATLAS_DDL_DUNGEON_LOCATIONS;
-		[9] = GREN..ATLAS_DDL_FLIGHT_PATHS;
+		[6] = ATLAS_DDL_TYPE_ENTRANCE;
+		[7] = ATLAS_DDL_BGS;
+		[8] = ATLAS_DDL_DUNGEON_LOCATIONS;
+		[9] = ATLAS_DDL_FLIGHT_PATHS;
 	};
 	[ATLAS_DDL_TYPE] = {
 		[1] = ATLAS_DDL_TYPE_DUNGEONS;
 		[2] = ATLAS_DDL_TYPE_RAIDS;
 		[3] = ATLAS_DDL_WORLDBOSSES;
-		[4] = GREN..ATLAS_DDL_TYPE_ENTRANCE;
-		[5] = GREN..ATLAS_DDL_BGS;
-		[6] = GREN..ATLAS_DDL_DUNGEON_LOCATIONS;
-		[7] = GREN..ATLAS_DDL_FLIGHT_PATHS;
+		[4] = ATLAS_DDL_TYPE_ENTRANCE;
+		[5] = ATLAS_DDL_BGS;
+		[6] = ATLAS_DDL_DUNGEON_LOCATIONS;
+		[7] = ATLAS_DDL_FLIGHT_PATHS;
 	};
 	[ATLAS_DDL_ALL] = {
 		[1] = ATLAS_DDL_ALL_MENU;
 		[2] = ATLAS_DDL_WORLDBOSSES;
-		[3] = GREN..ATLAS_DDL_TYPE_ENTRANCE;
-		[4] = GREN..ATLAS_DDL_BGS;
-		[5] = GREN..ATLAS_DDL_DUNGEON_LOCATIONS;
-		[6] = GREN..ATLAS_DDL_FLIGHT_PATHS;
-	};
-	[ATLAS_DDL_LEVELING_GUIDE] = {
-		[1] = ATLAS_DDL_LEVELING_GUIDE_ALLIANCE1;
-		[2] = ATLAS_DDL_LEVELING_GUIDE_ALLIANCE2;
-		[3] = ATLAS_DDL_LEVELING_GUIDE_HORDE1;
-		[4] = ATLAS_DDL_LEVELING_GUIDE_HORDE2;
-		[5] = ATLAS_DDL_TYPE_DUNGEONS;
-		[6] = ATLAS_DDL_TYPE_RAIDS;
-		[7] = ATLAS_DDL_WORLDBOSSES;
-		[8] = GREN..ATLAS_DDL_TYPE_ENTRANCE;
-		[9] = GREN..ATLAS_DDL_BGS;
-		[10] = GREN..ATLAS_DDL_DUNGEON_LOCATIONS;
-		[11] = GREN..ATLAS_DDL_FLIGHT_PATHS;
+		[3] = ATLAS_DDL_TYPE_ENTRANCE;
+		[4] = ATLAS_DDL_BGS;
+		[5] = ATLAS_DDL_DUNGEON_LOCATIONS;
+		[6] = ATLAS_DDL_FLIGHT_PATHS;
 	};
 };
 
@@ -124,7 +109,7 @@ Atlas_DropDownLayouts = {
 			"FourDragons",
 			"LordKazzak",
 		},
-		[GREN..ATLAS_DDL_TYPE_ENTRANCE] = {
+		[ATLAS_DDL_TYPE_ENTRANCE] = {
 			"BlackfathomDeepsEnt",
 			"BlackrockMountainEnt",
 			"DireMaulEnt",
@@ -136,17 +121,17 @@ Atlas_DropDownLayouts = {
 			"UldamanEnt",
 			"WailingCavernsEnt",
 		},
-		[GREN..ATLAS_DDL_BGS] = {
+		[ATLAS_DDL_BGS] = {
 			"AlteracValleyNorth",
 			"AlteracValleySouth",
 			"ArathiBasin",
 			"WarsongGulch",
 		},
-		[GREN..ATLAS_DDL_DUNGEON_LOCATIONS] = {
+		[ATLAS_DDL_DUNGEON_LOCATIONS] = {
 			"DLEast",
 			"DLWest",
 		},
-		[GREN..ATLAS_DDL_FLIGHT_PATHS] = {
+		[ATLAS_DDL_FLIGHT_PATHS] = {
 			"FPAllianceEast",
 			"FPAllianceWest",
 			"FPHordeEast",
@@ -200,7 +185,7 @@ Atlas_DropDownLayouts = {
 			"FourDragons",
 			"LordKazzak",
 		},
-		[GREN..ATLAS_DDL_TYPE_ENTRANCE] = {
+		[ATLAS_DDL_TYPE_ENTRANCE] = {
 			"BlackfathomDeepsEnt",
 			"BlackrockMountainEnt",
 			"DireMaulEnt",
@@ -212,17 +197,17 @@ Atlas_DropDownLayouts = {
 			"UldamanEnt",
 			"WailingCavernsEnt",
 		},
-		[GREN..ATLAS_DDL_BGS] = {
+		[ATLAS_DDL_BGS] = {
 			"AlteracValleyNorth",
 			"AlteracValleySouth",
 			"ArathiBasin",
 			"WarsongGulch",
 		},
-		[GREN..ATLAS_DDL_DUNGEON_LOCATIONS] = {
+		[ATLAS_DDL_DUNGEON_LOCATIONS] = {
 			"DLEast",
 			"DLWest",
 		},
-		[GREN..ATLAS_DDL_FLIGHT_PATHS] = {
+		[ATLAS_DDL_FLIGHT_PATHS] = {
 			"FPAllianceEast",
 			"FPAllianceWest",
 			"FPHordeEast",
@@ -272,7 +257,7 @@ Atlas_DropDownLayouts = {
 			"FourDragons",
 			"LordKazzak",
 		},
-		[GREN..ATLAS_DDL_TYPE_ENTRANCE] = {
+		[ATLAS_DDL_TYPE_ENTRANCE] = {
 			"BlackfathomDeepsEnt",
 			"BlackrockMountainEnt",
 			"DireMaulEnt",
@@ -284,161 +269,17 @@ Atlas_DropDownLayouts = {
 			"UldamanEnt",
 			"WailingCavernsEnt",
 		},
-		[GREN..ATLAS_DDL_BGS] = {
+		[ATLAS_DDL_BGS] = {
 			"AlteracValleyNorth",
 			"AlteracValleySouth",
 			"ArathiBasin",
 			"WarsongGulch",
 		},
-		[GREN..ATLAS_DDL_DUNGEON_LOCATIONS] = {
+		[ATLAS_DDL_DUNGEON_LOCATIONS] = {
 			"DLEast",
 			"DLWest",
 		},
-		[GREN..ATLAS_DDL_FLIGHT_PATHS] = {
-			"FPAllianceEast",
-			"FPAllianceWest",
-			"FPHordeEast",
-			"FPHordeWest",
-		},
-	},
-	[ATLAS_DDL_LEVELING_GUIDE] = {
-		[ATLAS_DDL_TYPE_DUNGEONS] = {
-			"BlackfathomDeeps",
-			"BlackrockDepths",
-			"BlackrockSpireLower",
-			"DireMaulEast",
-			"DireMaulNorth",
-			"DireMaulWest",
-			"Gnomeregan",
-			"Maraudon",
-			"TheDeadmines",
-			"RagefireChasm",
-			"RazorfenDowns",
-			"RazorfenKraul",
-			"Scholomance",
-			"ShadowfangKeep",
-			"SMArmory",
-			"SMCathedral",
-			"SMGraveyard",
-			"SMLibrary",
-			"Stratholme",
-			"TheStockade",
-			"TheSunkenTemple",
-			"Uldaman",
-			"WailingCaverns",
-			"ZulFarrak",
-		},
-		[ATLAS_DDL_TYPE_RAIDS] = {
-			"BlackwingLair",
-			"BlackrockSpireLower",
-			"BlackrockSpireUpper",
-			"MoltenCore",
-			"Naxxramas",
-			"OnyxiasLair",
-			"TheRuinsofAhnQiraj",
-			"TheTempleofAhnQiraj",
-			"ZulGurub",
-		},
-		[ATLAS_DDL_WORLDBOSSES] = {
-			"Azuregos",
-			"FourDragons",
-			"LordKazzak",
-		},
-		[GREN..ATLAS_DDL_TYPE_ENTRANCE] = {
-			"BlackfathomDeepsEnt",
-			"BlackrockMountainEnt",
-			"DireMaulEnt",
-			"GnomereganEnt",
-			"MaraudonEnt",
-			"SMEnt",
-			"TheDeadminesEnt",
-			"TheSunkenTempleEnt",
-			"UldamanEnt",
-			"WailingCavernsEnt",
-		},
-		[GREN..ATLAS_DDL_BGS] = {
-			"AlteracValleyNorth",
-			"AlteracValleySouth",
-			"ArathiBasin",
-			"WarsongGulch",
-		},
-		[ATLAS_DDL_LEVELING_GUIDE_ALLIANCE1] = {
-			"AlteracValleyNorth",
-			"AlteracValleySouth",
-		},
-		[ATLAS_DDL_LEVELING_GUIDE_ALLIANCE2] = {
-			"AlteracValleyNorth",
-			"AlteracValleySouth",
-		},
-		[ATLAS_DDL_LEVELING_GUIDE_HORDE1] = {
-			"TaurenLeveling1",
-			"TaurenLeveling2",
-			"TaurenLeveling3",
-			"UndeadLeveling1",
-			"UndeadLeveling2",
-			"UndeadLeveling3",
-			"TrollOrcLeveling1",
-			"TrollOrcLeveling2",
-			"TrollOrcLeveling3",
-			"HordeLeveling1",	
-			"HordeLeveling2",	
-			"HordeLeveling3",	
-			"HordeLeveling4",	
-			"HordeLeveling5",	
-			"HordeLeveling6",	
-			"HordeLeveling7",	
-			"HordeLeveling8",
-			"HordeLeveling9",
-			"HordeLeveling10",
-			"HordeLeveling11",
-			"HordeLeveling12",
-			"HordeLeveling13",
-			"HordeLeveling14",
-			"HordeLeveling15",
-			"HordeLeveling16",
-			"HordeLeveling17",
-			"HordeLeveling18",
-			"HordeLeveling19",
-			"HordeLeveling20",	
-			"HordeLeveling21",	
-		},
-		[ATLAS_DDL_LEVELING_GUIDE_HORDE2] = {
-			"HordeLeveling22",	
-			"HordeLeveling23",	
-			"HordeLeveling24",	
-			"HordeLeveling25",	
-			"HordeLeveling26",	
-			"HordeLeveling27",	
-			"HordeLeveling28",	
-			"HordeLeveling29",	
-			"HordeLeveling30",	
-			"HordeLeveling31",	
-			"HordeLeveling32",	
-			"HordeLeveling33",	
-			"HordeLeveling34",	
-			"HordeLeveling35",	
-			"HordeLeveling36",	
-			"HordeLeveling37",	
-			"HordeLeveling38",	
-			"HordeLeveling39",	
-			"HordeLeveling40",	
-			"HordeLeveling41",	
-			"HordeLeveling42",	
-			"HordeLeveling43",	
-			"HordeLeveling44",	
-			"HordeLeveling45",	
-			"HordeLeveling46",	
-			"HordeLeveling47",	
-			"HordeLeveling48",	
-			"HordeLeveling49",	
-			"HordeLeveling50",
-			"HordeLeveling51",
-		},
-		[GREN..ATLAS_DDL_DUNGEON_LOCATIONS] = {
-			"DLEast",
-			"DLWest",
-		},
-		[GREN..ATLAS_DDL_FLIGHT_PATHS] = {
+		[ATLAS_DDL_FLIGHT_PATHS] = {
 			"FPAllianceEast",
 			"FPAllianceWest",
 			"FPHordeEast",
@@ -461,8 +302,8 @@ Atlas_DropDownLayouts = {
 			"SMCathedral",
 			"RazorfenDowns",
 			"Uldaman",
-			"Maraudon",
 			"ZulFarrak",
+			"Maraudon",
 			"TheSunkenTemple",
 			"BlackrockDepths",
 			"DireMaulEast",
@@ -485,7 +326,7 @@ Atlas_DropDownLayouts = {
 			"FourDragons",
 			"LordKazzak",
 		},
-		[GREN..ATLAS_DDL_TYPE_ENTRANCE] = {
+		[ATLAS_DDL_TYPE_ENTRANCE] = {
 			"BlackfathomDeepsEnt",
 			"BlackrockMountainEnt",
 			"DireMaulEnt",
@@ -497,17 +338,17 @@ Atlas_DropDownLayouts = {
 			"UldamanEnt",
 			"WailingCavernsEnt",
 		},
-		[GREN..ATLAS_DDL_BGS] = {
+		[ATLAS_DDL_BGS] = {
 			"AlteracValleyNorth",
 			"AlteracValleySouth",
 			"ArathiBasin",
 			"WarsongGulch",
 		},
-		[GREN..ATLAS_DDL_DUNGEON_LOCATIONS] = {
+		[ATLAS_DDL_DUNGEON_LOCATIONS] = {
 			"DLEast",
 			"DLWest",
 		},
-		[GREN..ATLAS_DDL_FLIGHT_PATHS] = {
+		[ATLAS_DDL_FLIGHT_PATHS] = {
 			"FPAllianceEast",
 			"FPAllianceWest",
 			"FPHordeEast",

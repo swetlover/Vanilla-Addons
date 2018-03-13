@@ -6,7 +6,6 @@ assert(BigWigs, "BigWigs not found!")
 
 local L = AceLibrary("AceLocale-2.2"):new("BigWigsRaidIcon")
 local lastplayer = nil
-local lasticon = nil
 
 ----------------------------
 --      Localization      --
@@ -22,11 +21,11 @@ L:RegisterTranslations("enUS", function() return {
 	["Place"] = true,
 	["Place Raid Icons"] = true,
 	["Toggle placing of Raid Icons on players."] = true,
-	
+
 	["Icon"] = true,
 	["Set Icon"] = true,
 	["Set which icon to place on players."] = true,
-	
+
 	["Options for Raid Icons."] = true,
 
 	["star"] = true,
@@ -45,11 +44,11 @@ L:RegisterTranslations("koKR", function() return {
 	["Place"] = "지정",
 	["Place Raid Icons"] = "공격대 아이콘 지정",
 	["Toggle placing of Raid Icons on players."] = "플레이어에 공격대 아이콘 지정 토글",
-	
+
 	["Icon"] = "아이콘",
 	["Set Icon"] = "아이콘 설정",
 	["Set which icon to place on players."] = "플레이어에 아이콘 지정을 위한 설정",
-	
+
 	["Options for Raid Icons."] = "공격대 아이콘에 대한 설정",
 
 	["star"] = "별",
@@ -69,16 +68,16 @@ L:RegisterTranslations("zhCN", function() return {
 	["Place"] = "标记",
 	["Place Raid Icons"] = "标记团队图标",
 	["Toggle placing of Raid Icons on players."] = "切换是否在玩家身上标记团队图标",
-	
+
 	["Icon"] = "图标",
 	["Set Icon"] = "设置图标",
 	["Set which icon to place on players."] = "设置玩家身上标记的图标。",
-	
+
 	["Options for Raid Icons."] = "团队图标设置",
-	
-	["star"] = "星星",
+
+	["star"] = "星形",
 	["circle"] = "圆圈",
-	["diamond"] = "钻石",
+	["diamond"] = "棱形",
 	["triangle"] = "三角",
 	["moon"] = "月亮",
 	["square"] = "方形",
@@ -92,13 +91,13 @@ L:RegisterTranslations("zhTW", function() return {
 	["Place"] = "標記",
 	["Place Raid Icons"] = "標記團隊圖示",
 	["Toggle placing of Raid Icons on players."] = "切換是否在玩家身上標記團隊圖示",
-	
+
 	["Icon"] = "圖標",
 	["Set Icon"] = "設置圖示",
 	["Set which icon to place on players."] = "設置玩家身上標記的圖示。",
-	
+
 	["Options for Raid Icons."] = "團隊圖示設置",
-	
+
 	["star"] = "星星",
 	["circle"] = "圓圈",
 	["diamond"] = "方塊",
@@ -119,11 +118,11 @@ L:RegisterTranslations("deDE", function() return {
 	["Place"] = "Platzierung",
 	["Place Raid Icons"] = "Schlachtzug-Symbole platzieren",
 	["Toggle placing of Raid Icons on players."] = "Schlachtzug-Symbole auf Spieler setzen.",
-	
+
 	["Icon"] = "Symbol",
 	["Set Icon"] = "Symbol platzieren",
 	["Set which icon to place on players."] = "W\195\164hle, welches Symbol auf Spieler gesetzt wird.",
-	
+
 	["Options for Raid Icons."] = "Optionen f\195\188r Schlachtzug-Symbole.",
 
 	["star"] = "Stern",
@@ -142,11 +141,11 @@ L:RegisterTranslations("frFR", function() return {
 	["Place"] = "Placement",
 	["Place Raid Icons"] = "Placer les icônes de raid",
 	["Toggle placing of Raid Icons on players."] = "Place ou non les icônes de raid sur les joueurs.",
-	
+
 	["Icon"] = "Icône",
 	["Set Icon"] = "Déterminer l'icône",
 	["Set which icon to place on players."] = "Détermine quelle icône sera placée sur les joueurs.",
-	
+
 	["Options for Raid Icons."] = "Options concernant les icônes de raid.",
 
 	["star"] = "étoile",
@@ -189,7 +188,7 @@ BigWigsRaidIcon.consoleOptions = {
 			name = L["Place Raid Icons"],
 			desc = L["Toggle placing of Raid Icons on players."],
 			get = function() return BigWigsRaidIcon.db.profile.place end,
-			set = function(v) BigWigsRaidIcon.db.profile.place = v end,		
+			set = function(v) BigWigsRaidIcon.db.profile.place = v end,
 		},
 		[L["icon"]] = {
 			type = "text",
@@ -211,68 +210,34 @@ function BigWigsRaidIcon:OnEnable()
 	self:RegisterEvent("BigWigs_RemoveRaidIcon")
 end
 
-function BigWigsRaidIcon:BigWigs_SetRaidIcon(player, iconnumber, restoreTime)
-	-- check input and config
-	if not self.db.profile.place or not player then 
-		return 
+function BigWigsRaidIcon:BigWigs_SetRaidIcon(player, iconnumber)
+	if not self.db.profile.place or not player then return end
+	local icon = self.db.profile.icon
+	if not self.icontonumber[icon] then
+		icon = L["skull"]
 	end
-	
-	if not restoreTime then
-		restoreTime = 3
-	end
-	
-	-- define icon
-	local icon = self.icontonumber[L["skull"]]
-	if iconnumber and 'number' == type(iconnumber) and iconnumber >= 1 and iconnumber <= 8 then
-		icon = iconnumber
-	elseif self.icontonumber[self.db.profile.icon] then
-		icon = self.icontonumber[self.db.profile.icon]
-	end
-	
-	-- set raid icon
-	for i=1, GetNumRaidMembers() do
-		local unitId = "raid" .. i
-		if UnitName(unitId) == player then
-			local currentIcon = GetRaidTargetIndex(unitId)
-            if currentIcon == nil then
-                currentIcon = 0
-            end
-            
-			if restoreTime > 0 and currentIcon ~= icon then
-				SetRaidTargetIcon(unitId, icon)
-				self:ScheduleEvent("BigWigsRaidIconRestore" .. unitId, self.RestoreRaidIcon, restoreTime, self, unitId, currentIcon)
-			end
+	icon = self.icontonumber[icon]
 
-			--[[if not GetRaidTargetIndex(unitId) then
-				if not iconnumber then
-					SetRaidTargetIcon("raid" .. i, icon)
-					lastplayer = player
-				else
-					SetRaidTargetIcon("raid" .. i, iconnumber)
-					lastplayer = player
-				end
-			end]]
+	for i=1,GetNumRaidMembers() do
+		if UnitName("raid"..i) == player then
+			if not iconnumber then
+				SetRaidTargetIcon("raid"..i, icon)
+				lastplayer = player
+			else
+				SetRaidTargetIcon("raid"..i, iconnumber)
+				lastplayer = player
+			end
 		end
 	end
+
 end
 
--- deprecated
 function BigWigsRaidIcon:BigWigs_RemoveRaidIcon()
-	if not self.db.profile.place or not lastplayer then 
-		return 
-	end
-	
-	for i=1, GetNumRaidMembers() do
+	if not self.db.profile.place or not lastplayer then return end
+	for i=1,GetNumRaidMembers() do
 		if UnitName("raid"..i) == lastplayer then
 			SetRaidTargetIcon("raid"..i, 0)
 		end
 	end
 	lastplayer = nil
-end
-
-function BigWigsRaidIcon:RestoreRaidIcon(unitId, icon)
-    if unitId and icon then
-        --BigWigs:Print("RestoreRaidIcon unitId: " .. unitId .. " icon: " .. icon)
-        SetRaidTargetIcon(unitId, icon)
-    end
 end

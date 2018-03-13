@@ -43,7 +43,7 @@
     </Backdrop>
     <Layers>
       <Layer level="ARTWORK">
-        <FontString name="$parentTitle" font="Fonts\ARIALN.TTF" text="">
+        <FontString name="$parentTitle" font="Fonts\FZXHLJW.TTF" text="">
           <Anchors>
             <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
               <Offset>
@@ -366,7 +366,7 @@
           </Anchors>
           <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
         </Texture>
-        <FontString name="$parentTitleString" font="Fonts\ARIALN.TTF" text="WIM 设置 By60addons">
+        <FontString name="$parentTitleString" font="Fonts\FZXHLJW.TTF" text="WIM 设置 By60addons">
           <Size>
             <AbsDimension x="140" y="0" />
           </Size>
@@ -408,7 +408,7 @@
         <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
         <Layers>
           <Layer level="OVERLAY">
-            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="启用 WIM">
+            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="启用 WIM">
               <Anchors>
                 <Anchor point="LEFT">
                   <Offset>
@@ -472,7 +472,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示设置">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示设置">
                   <Anchors>
                     <Anchor point="TOP">
                       <Offset>
@@ -506,7 +506,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="收到的私聊">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="收到的私聊">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -538,7 +538,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="发出的私聊">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="发出的私聊">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -570,7 +570,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="系统消息">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="系统消息">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -602,7 +602,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="错误消息">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="错误消息">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -634,7 +634,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="网址链接">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="网址链接">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -674,7 +674,7 @@
             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示快捷栏">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示快捷栏">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -730,7 +730,7 @@
             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示时间戳">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示时间戳">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -779,7 +779,7 @@
             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示人物字符信息：">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示人物字符信息：">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -836,7 +836,7 @@
             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="职业图标">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="职业图标">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -893,7 +893,7 @@
             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="职业颜色">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="职业颜色">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -950,7 +950,7 @@
             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="人物的细节">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="人物的细节">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -1090,7 +1090,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="小地图图标">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="小地图图标">
                   <Anchors>
                     <Anchor point="TOP">
                       <Offset>
@@ -1131,7 +1131,7 @@
             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示小地图图标">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示小地图图标">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -1180,7 +1180,7 @@
             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="自由移动">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="自由移动">
                   <Anchors>
                     <Anchor point="LEFT">
                       <Offset>
@@ -1387,7 +1387,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="弹出窗口自动对焦">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="弹出窗口自动对焦">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1436,7 +1436,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="发送消息后保持关注">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="发送消息后保持关注">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1486,7 +1486,7 @@
                             <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="只有在城市时">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="只有在城市时">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1535,7 +1535,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示工具提示">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示工具提示">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1584,7 +1584,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="发送私聊时弹出窗口">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="发送私聊时弹出窗口">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1633,7 +1633,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="当收到新的私聊时弹出窗口">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="当收到新的私聊时弹出窗口">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1683,7 +1683,7 @@
                             <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="收到回复时弹出窗口">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="收到回复时弹出窗口">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1733,7 +1733,7 @@
                             <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="战斗中禁用弹出窗口">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="战斗中禁用弹出窗口">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1782,7 +1782,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="默认的聊天框屏蔽私聊">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="默认的聊天框屏蔽私聊">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1831,7 +1831,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="收到消息时播放声音">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="收到消息时播放声音">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1880,7 +1880,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="会话列表按字母顺序排序">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="会话列表按字母顺序排序">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1929,7 +1929,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示AFK和DND的消息">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示AFK和DND的消息">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -1978,7 +1978,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="使用“退出键”关闭窗口">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="使用“退出键”关闭窗口">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -2034,7 +2034,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="拦截私聊命令">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="拦截私聊命令">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -2090,7 +2090,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="阻挡低于10级玩家的私聊">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="阻挡低于10级玩家的私聊">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -2166,7 +2166,7 @@
                         <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="启用级联。方向：">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="启用级联。方向：">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -2320,7 +2320,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="启用混肴">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="启用混肴">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -2369,7 +2369,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示说明">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示说明">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -2618,7 +2618,7 @@
                             <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                             <Layers>
                               <Layer level="OVERLAY">
-                                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="启用过滤">
+                                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="启用过滤">
                                   <Anchors>
                                     <Anchor point="LEFT">
                                       <Offset>
@@ -2875,7 +2875,7 @@
                         <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="启用历史">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="启用历史">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -2924,7 +2924,7 @@
                         <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="记录每个人">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="记录每个人">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -2974,7 +2974,7 @@
                         <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="记录好友">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="记录好友">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -3024,7 +3024,7 @@
                         <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="记录公会成员">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="记录公会成员">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -3066,7 +3066,7 @@
                         </Anchors>
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="收到的消息">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="收到的消息">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -3098,7 +3098,7 @@
                         </Anchors>
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="发出的消息">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="发出的消息">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -3138,7 +3138,7 @@
                         <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="显示历史消息在信息">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="显示历史消息在信息">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -3188,7 +3188,7 @@
                         <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="设置每个用户的最大消息数：">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="设置每个用户的最大消息数：">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -3238,7 +3238,7 @@
                         <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
                         <Layers>
                           <Layer level="OVERLAY">
-                            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="删除大于的消息：">
+                            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="删除大于的消息：">
                               <Anchors>
                                 <Anchor point="LEFT">
                                   <Offset>
@@ -3614,7 +3614,7 @@
                   </Anchors>
                   <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
                 </Texture>
-                <FontString name="$parentTitleString" font="Fonts\ARIALN.TTF" text="添加新的别名">
+                <FontString name="$parentTitleString" font="Fonts\FZXHLJW.TTF" text="添加新的别名">
                   <Size>
                     <AbsDimension x="140" y="0" />
                   </Size>
@@ -3652,7 +3652,7 @@
                 </Anchors>
                 <Layers>
                   <Layer level="OVERLAY">
-                    <FontString font="Fonts\ARIALN.TTF" text="Character Name">
+                    <FontString font="Fonts\FZXHLJW.TTF" text="Character Name">
                       <Anchors>
                         <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
                           <Offset>
@@ -3685,7 +3685,7 @@
                         </Offset>
                       </Anchor>
                     </Anchors>
-                    <FontString font="Fonts\ARIALN.TTF">
+                    <FontString font="Fonts\FZXHLJW.TTF">
                       <FontHeight>
                         <AbsValue val="16" />
                       </FontHeight>
@@ -3719,7 +3719,7 @@
                 </Anchors>
                 <Layers>
                   <Layer level="OVERLAY">
-                    <FontString font="Fonts\ARIALN.TTF" text="Character Alias">
+                    <FontString font="Fonts\FZXHLJW.TTF" text="Character Alias">
                       <Anchors>
                         <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
                           <Offset>
@@ -3738,7 +3738,7 @@
                         </Offset>
                       </Shadow>
                     </FontString>
-                    <FontString name="WIM_Options_AliasWindow_Error" font="Fonts\ARIALN.TTF" text="">
+                    <FontString name="WIM_Options_AliasWindow_Error" font="Fonts\FZXHLJW.TTF" text="">
                       <Anchors>
                         <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
                           <Offset>
@@ -3771,7 +3771,7 @@
                         </Offset>
                       </Anchor>
                     </Anchors>
-                    <FontString font="Fonts\ARIALN.TTF">
+                    <FontString font="Fonts\FZXHLJW.TTF">
                       <FontHeight>
                         <AbsValue val="16" />
                       </FontHeight>
@@ -3883,7 +3883,7 @@
                   </Anchors>
                   <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
                 </Texture>
-                <FontString name="$parentTitleString" font="Fonts\ARIALN.TTF" text="添加新的过滤">
+                <FontString name="$parentTitleString" font="Fonts\FZXHLJW.TTF" text="添加新的过滤">
                   <Size>
                     <AbsDimension x="140" y="0" />
                   </Size>
@@ -3905,7 +3905,7 @@
                     </Offset>
                   </Shadow>
                 </FontString>
-                <FontString name="$parentActionString" font="Fonts\ARIALN.TTF" text="执行以下操作：">
+                <FontString name="$parentActionString" font="Fonts\FZXHLJW.TTF" text="执行以下操作：">
                   <Size>
                     <AbsDimension x="200" y="0" />
                   </Size>
@@ -3927,7 +3927,7 @@
                     </Offset>
                   </Shadow>
                 </FontString>
-                <FontString name="WIM_Options_FilterWindow_Error" font="Fonts\ARIALN.TTF" text="ERROR: Example Error Message" justifyH="LEFT">
+                <FontString name="WIM_Options_FilterWindow_Error" font="Fonts\FZXHLJW.TTF" text="ERROR: Example Error Message" justifyH="LEFT">
                   <Size>
                     <AbsDimension x="300" y="0" />
                   </Size>
@@ -3965,7 +3965,7 @@
                 </Anchors>
                 <Layers>
                   <Layer level="OVERLAY">
-                    <FontString font="Fonts\ARIALN.TTF" text="关键词/短语到过滤">
+                    <FontString font="Fonts\FZXHLJW.TTF" text="关键词/短语到过滤">
                       <Anchors>
                         <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
                           <Offset>
@@ -3998,7 +3998,7 @@
                         </Offset>
                       </Anchor>
                     </Anchors>
-                    <FontString font="Fonts\ARIALN.TTF">
+                    <FontString font="Fonts\FZXHLJW.TTF">
                       <FontHeight>
                         <AbsValue val="16" />
                       </FontHeight>
@@ -4036,7 +4036,7 @@
                 <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                 <Layers>
                   <Layer level="OVERLAY">
-                    <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="屏蔽">
+                    <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="屏蔽">
                       <Anchors>
                         <Anchor point="LEFT">
                           <Offset>
@@ -4085,7 +4085,7 @@
                 <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
                 <Layers>
                   <Layer level="OVERLAY">
-                    <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="阻挡">
+                    <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="阻挡">
                       <Anchors>
                         <Anchor point="LEFT">
                           <Offset>
@@ -4281,7 +4281,7 @@
                     </Anchor>
                   </Anchors>
                 </Texture>
-                <FontString name="$parentUser" font="Fonts\ARIALN.TTF" text="Pazza">
+                <FontString name="$parentUser" font="Fonts\FZXHLJW.TTF" text="Pazza">
                   <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentIconNew" relativePoint="TOPRIGHT">
                       <Offset>
@@ -4300,7 +4300,7 @@
                     </Offset>
                   </Shadow>
                 </FontString>
-                <FontString name="$parentStatus" font="Fonts\ARIALN.TTF" text="No new messages.">
+                <FontString name="$parentStatus" font="Fonts\FZXHLJW.TTF" text="No new messages.">
                   <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="$parentIconNew" relativePoint="TOPRIGHT">
                       <Offset>
@@ -4319,7 +4319,7 @@
                     </Offset>
                   </Shadow>
                 </FontString>
-                <FontString name="$parentCount" font="Fonts\ARIALN.TTF" text="Recent Conversation 1 or 20">
+                <FontString name="$parentCount" font="Fonts\FZXHLJW.TTF" text="Recent Conversation 1 or 20">
                   <Anchors>
                     <Anchor point="BOTTOM">
                       <Offset>
@@ -4391,7 +4391,7 @@
                   </Anchors>
                   <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
                 </Texture>
-                <FontString name="$parentTitleString" font="Fonts\ARIALN.TTF" text="WIM Documentation">
+                <FontString name="$parentTitleString" font="Fonts\FZXHLJW.TTF" text="WIM Documentation">
                   <Size>
                     <AbsDimension x="140" y="0" />
                   </Size>
@@ -4568,7 +4568,7 @@
                                     </Offset>
                                   </Anchor>
                                 </Anchors>
-                                <FontString font="Fonts\ARIALN.TTF" justifyH="LEFT">
+                                <FontString font="Fonts\FZXHLJW.TTF" justifyH="LEFT">
                                   <FontHeight>
                                     <AbsValue val="12" />
                                   </FontHeight>

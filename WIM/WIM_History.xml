@@ -123,7 +123,7 @@
         </Anchors>
         <Layers>
           <Layer level="OVERLAY">
-            <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="WIM History Viewer">
+            <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="WIM History Viewer">
               <Anchors>
                 <Anchor point="CENTER">
                   <Offset>
@@ -200,7 +200,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="Users">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="Users">
                   <Anchors>
                     <Anchor point="CENTER">
                       <Offset>
@@ -411,7 +411,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="Filters">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="Filters">
                   <Anchors>
                     <Anchor point="CENTER">
                       <Offset>
@@ -555,7 +555,7 @@
             </Anchors>
             <Layers>
               <Layer level="OVERLAY">
-                <FontString name="$parentText" font="Fonts\ARIALN.TTF" text="Messages">
+                <FontString name="$parentText" font="Fonts\FZXHLJW.TTF" text="Messages">
                   <Anchors>
                     <Anchor point="CENTER">
                       <Offset>
@@ -590,7 +590,7 @@
                 </Offset>
               </Anchor>
             </Anchors>
-            <FontString font="Fonts\ARIALN.TTF" justifyH="LEFT">
+            <FontString font="Fonts\FZXHLJW.TTF" justifyH="LEFT">
               <FontHeight>
                 <AbsValue val="12" />
               </FontHeight>
@@ -713,7 +713,7 @@
 			</OnDragStop>
       <OnShow>
 				PlaySound("igMainMenuOpen");
-				WIM_HistoryFrameMessageListScrollingMessageFrame:SetFont("Fonts\\FRIZQT__.TTF",WIM_Data.fontSize);
+				WIM_HistoryFrameMessageListScrollingMessageFrame:SetFont("Fonts\\FZXHLJW.TTF",WIM_Data.fontSize);
 				WIM_HistoryViewNameScrollBar_Update();
 				WIM_HistoryViewFiltersScrollBar_Update();
 			</OnShow>

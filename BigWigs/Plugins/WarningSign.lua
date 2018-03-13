@@ -1,14 +1,12 @@
 --[[
-    by LYQ(Virose / MOUZU)
-    https://github.com/MOUZU/BigWigs
-    
-    modified by Dorann
+by LYQ(Virose / MOUZU)
+https://github.com/MOUZU/BigWigs
 
-    This is a small plugin which is inspried by ThaddiusArrows and how Sulfuras of Mesmerize (Warsong/Feenix) used it.
-    I wanted to convert his idea in a more dynamic, flexible and easy to use plugin.
+This is a small plugin which is inspried by ThaddiusArrows and how Sulfuras of Mesmerize (Warsong/Feenix) used it.
+I wanted to convert his idea in a more dynamic, flexible and easy to use plugin.
 
-    At the current state it is built to only display one Icon at a time, at the moment I can not think of
-    a situation where it would be needed to display more than one.
+At the current state it is built to only display one Icon at a time, at the moment I can not think of
+a situation where it would be needed to display more than one.
 --]]
 
 ------------------------------
@@ -18,38 +16,16 @@ local name = "WarningSign"
 local L = AceLibrary("AceLocale-2.2"):new("BigWigs"..name)
 
 local c = {
-    -- currently displayed icon
-    texture = "",       -- contains the texturePath
-    endTime = 0,        -- to hide it appropriately
-    force   = false,    -- will prevent it from being overwritten
-	onClick = {
-		func = nil
-	},
+	-- currently displayed icon
+	texture = "",       -- contains the texturePath
+	endTime = 0,        -- to hide it appropriately
+	force   = false,    -- will prevent it from being overwritten
 }
 
 
 ----------------------------
 --      Localization      --
 ----------------------------
-
-L:RegisterTranslations("enUS", function() return {
-    ["WarningSign"] = true, -- console cmd
-	["Warning Sign"] = true, -- module name
-	["Options for the Warning Sign."] = true, 
-	["Show anchor"] = true,
-	["Show the anchor frame."] = true,
-	["Reset"] = true,
-	["Reset the frame."] = true,
-    ["Test"] = true,
-    ["Close"] = true,
-            
-	["Disabled"] = true,
-	["Disable the warning signs for all modules that use it."] = true,
-    ["Scale"] = true,
-    ["Set the warning sign scale."] = true,
-    ["Transparency"] = true,
-    ["Set the warning sign alpha value (0.1 to 1.0: transparent to opaque)."] = true,
-} end)
 
 L:RegisterTranslations("zhCN", function() return {
     ["WarningSign"] = "WarningSign", -- console cmd
@@ -70,18 +46,37 @@ L:RegisterTranslations("zhCN", function() return {
     ["Set the warning sign alpha value (0.1 to 1.0: transparent to opaque)."] = "设置警告标志透明度 (0.1 到 1.0: 透明至不透明).",
 } end)
 
+L:RegisterTranslations("deDE", function() return {
+	["WarningSign"] = "warnzeichen", -- console cmd
+	["Warning Sign"] = "Warnzeichen", -- module name
+	["Options for the Warning Sign."] = "Optionen für das Warnzeichen.",
+	["Show anchor"] = "Verankerung anzeigen",
+	["Show the anchor frame."] = "Zeige das Verankerungsfenster des Warnzeichens um dessen Position zu verändern.",
+	["Reset"] = "Zurücksetzen",
+	["Reset the frame."] = "Die Einstellungen des Warnzeichens zurücksetzen.",
+	["Test"] = "Test",
+	["Close"] = "Schlie\195\159en",
+
+	["Disabled"] = "Deaktivieren",
+	["Disable the warning signs for all modules that use it."] = "Deaktiviert die Anzeige der Warnzeichen für alle Module die sie benutzen.",
+	["Scale"] = "Skalierung",
+	["Set the warning sign scale."] = "Skalierung des Warnzeichen",
+	["Transparency"] = "Transparenz",
+	["Set the warning sign alpha value (0.1 to 1.0: transparent to opaque)."] = "Den Alphawert des Warnzeichen definieren (0.1 bis 1.0: transparent bis deckend).",
+} end)
+
 ----------------------------------
 --      Module Declaration      --
 ----------------------------------
 
 BigWigsWarningSign = BigWigs:NewModule(name)
 BigWigsWarningSign.defaultDB = {
-    posx = nil,
+	posx = nil,
 	posy = nil,
-    isVisible = nil,
-    disabled = false,
-    scale = 1.0,
-    alpha = 0.8,
+	isVisible = nil,
+	disabled = false,
+	scale = 1.0,
+	alpha = 0.8,
 }
 BigWigsWarningSign.consoleCmd = L["WarningSign"]
 BigWigsWarningSign.consoleOptions = {
@@ -97,84 +92,84 @@ BigWigsWarningSign.consoleOptions = {
 		BigWigsWarningSign.db.profile[key] = value
 	end,
 	args = {
-        show = {
-            type = "toggle",
-            name = L["Show anchor"],
-            desc = L["Show the anchor frame."],
-            order = 100,
-            get = function() return BigWigsWarningSign.db.profile.isVisible end,
-            set = function(v) 
-                BigWigsWarningSign:ShowAnchor()
-            end,
-        },
-        scale = {
-            type = "range",
+		show = {
+			type = "toggle",
+			name = L["Show anchor"],
+			desc = L["Show the anchor frame."],
+			order = 100,
+			get = function() return BigWigsWarningSign.db.profile.isVisible end,
+			set = function(v)
+				BigWigsWarningSign:ShowAnchor()
+			end,
+		},
+		scale = {
+			type = "range",
 			name = L["Scale"],
 			desc = L["Set the warning sign scale."],
-            order = 101,
+			order = 101,
 			min = 0.2,
 			max = 2.0,
 			step = 0.1,
 			get = function() return BigWigsWarningSign.db.profile.scale end,
-			set = function(v) 
-                BigWigsWarningSign.db.profile.scale = v
-                if BigWigsWarningSign.frames then
-                    BigWigsWarningSign.frames.sign:SetScale(v)
-                end
-            end,
-        },
-        alpha = {
-            type = "range",
+			set = function(v)
+				BigWigsWarningSign.db.profile.scale = v
+				if BigWigsWarningSign.frames then
+					BigWigsWarningSign.frames.sign:SetScale(v)
+				end
+			end,
+		},
+		alpha = {
+			type = "range",
 			name = L["Transparency"],
 			desc = L["Set the warning sign alpha value (0.1 to 1.0: transparent to opaque)."],
-            order = 102,
+			order = 102,
 			min = 0.1,
 			max = 1.0,
 			step = 0.05,
 			get = function() return BigWigsWarningSign.db.profile.alpha end,
-			set = function(v) 
-                BigWigsWarningSign.db.profile.alpha = v
-                if BigWigsWarningSign.frames then
-                    BigWigsWarningSign.frames.sign:SetAlpha(v)
-                end
-            end,
-        },
-        reset = {
-            type = "execute",
+			set = function(v)
+				BigWigsWarningSign.db.profile.alpha = v
+				if BigWigsWarningSign.frames then
+					BigWigsWarningSign.frames.sign:SetAlpha(v)
+				end
+			end,
+		},
+		reset = {
+			type = "execute",
 			name = L["Reset"],
 			desc = L["Reset the frame."],
 			order = 103,
-			func = function() 
-                BigWigsWarningSign:ResetPosition() 
-                BigWigsWarningSign.db.profile.scale = 1.0
-                if BigWigsWarningSign.frames then
-                    BigWigsWarningSign.frames.sign:SetScale(1.0)
-                end
-                BigWigsWarningSign.db.profile.alpha = 0.8
-                if BigWigsWarningSign.frames then
-                    BigWigsWarningSign.frames.sign:SetAlpha(0.8)
-                end
-            end,
-        },
-        disabled = {
-            type = "toggle",
-            name = L["Disabled"],
-            desc = L["Disable the warning signs for all modules that use it."],
-            order = 104,
-            get = function() return BigWigsWarningSign.db.profile.disabled end,
-            set = function(v) 
-                BigWigsWarningSign.db.profile.disabled = v
-                if v then
-                    BigWigsWarningSign:BigWigs_HideWarningSign("", true)
-                    BigWigsWarningSign:HideAnchor()
-                end
-            end,
-        },
-		--[[spacer = {
-			type = "header",
-			name = " ",
-			order = 103,
-		},]]
+			func = function()
+				BigWigsWarningSign:ResetPosition()
+				BigWigsWarningSign.db.profile.scale = 1.0
+				if BigWigsWarningSign.frames then
+					BigWigsWarningSign.frames.sign:SetScale(1.0)
+				end
+				BigWigsWarningSign.db.profile.alpha = 0.8
+				if BigWigsWarningSign.frames then
+					BigWigsWarningSign.frames.sign:SetAlpha(0.8)
+				end
+			end,
+		},
+		disabled = {
+			type = "toggle",
+			name = L["Disabled"],
+			desc = L["Disable the warning signs for all modules that use it."],
+			order = 104,
+			get = function() return BigWigsWarningSign.db.profile.disabled end,
+			set = function(v)
+				BigWigsWarningSign.db.profile.disabled = v
+				if v then
+					BigWigsWarningSign:BigWigs_HideWarningSign("", true)
+					BigWigsWarningSign:HideAnchor()
+				end
+			end,
+		},
+	--[[spacer = {
+	type = "header",
+	name = " ",
+	order = 103,
+	},]]
 	}
 }
 
@@ -184,10 +179,10 @@ BigWigsWarningSign.consoleOptions = {
 
 function BigWigsWarningSign:OnEnable()
 	self.db.profile.isVisible = false
-	
-    self:RegisterEvent("BigWigs_ShowWarningSign")
-    self:RegisterEvent("BigWigs_HideWarningSign")
-    self:RegisterEvent("PLAYER_DEAD")
+
+	self:RegisterEvent("BigWigs_ShowWarningSign")
+	self:RegisterEvent("BigWigs_HideWarningSign")
+	self:RegisterEvent("PLAYER_DEAD")
 end
 
 
@@ -198,30 +193,30 @@ end
 
 function BigWigsWarningSign:BigWigs_ShowWarningSign(texturePath, duration, force)
 	if self.db.profile.disabled then
-        return
-    end
-    if not self.frames or not self.frames.anchor then
-        self:SetupFrames()
-    end
-
-    -- force will overwrite the current icon shown, else it will do nothing
-    if not type(texturePath) == "string" or not type(duration) == "number" then 
-		return 
+		return
 	end
-    
-    -- check if there is currently an icon displayed or if the force flags allow to overwrite
-    -- addition: if texturePath is the same as currently displayed then reset the timer to duration
-    if c.texture == "" or (force and not c.force) or c.texture == texturePath then
-        c.texture   = texturePath;
-        c.endTime   = GetTime() + duration;
-        c.force     = force;
-        
-        self.texture:SetTexture(texturePath)
-        self.frames.sign:Show()
+	if not self.frames or not self.frames.anchor then
+		self:SetupFrames()
+	end
+
+	-- force will overwrite the current icon shown, else it will do nothing
+	if not type(texturePath) == "string" or not type(duration) == "number" then
+		return
+	end
+
+	-- check if there is currently an icon displayed or if the force flags allow to overwrite
+	-- addition: if texturePath is the same as currently displayed then reset the timer to duration
+	if c.texture == "" or (force and not c.force) or c.texture == texturePath then
+		c.texture   = texturePath;
+		c.endTime   = GetTime() + duration;
+		c.force     = force;
+
+		self.texture:SetTexture(texturePath)
+		self.frames.sign:Show()
 		self.db.profile.isVisible = true
-        
-        -- initialize the OnUpdate
-        self.frames.sign:SetScript('OnUpdate', function()
+
+		-- initialize the OnUpdate
+		self.frames.sign:SetScript('OnUpdate', function()
 			if GetTime() > c.endTime then
 				c.texture   = "";
 				self.frames.sign:Hide()
@@ -229,63 +224,40 @@ function BigWigsWarningSign:BigWigs_ShowWarningSign(texturePath, duration, force
 				self.frames.sign:SetScript('OnUpdate', nil)
 			end
 		end)
-    end
+	end
 end
 
 function BigWigsWarningSign:BigWigs_HideWarningSign(texturePath, forceHide)
-    -- will only work if texturePath is still the icon displayed, this might not be the case when an icon gets forced
-    -- forceHide is used upon BossDeath to hide no matter what is being displayed
-    if forceHide or c.texture == texturePath then
-        c.texture   = "";
-		
-        if self.frames and self.frames.sign then
+	-- will only work if texturePath is still the icon displayed, this might not be the case when an icon gets forced
+	-- forceHide is used upon BossDeath to hide no matter what is being displayed
+	if forceHide or c.texture == texturePath then
+		c.texture   = "";
+
+		if self.frames and self.frames.sign then
 			self.frames.sign:Hide()
 			self.db.profile.isVisible = false
 			self.frames.sign:SetScript('OnUpdate', nil)
-			BigWigsWarningSign:OffClick()
 		end
-    end
-end
-
-function BigWigsWarningSign:ExecuteClick()
-	if c.onClick.func then
-		--c.onClick.func(c.onClick.a1, c.onClick.a2, c.onClick.a3, c.onClick.a4, c.onClick.a5, c.onClick.a6, c.onClick.a7, c.onClick.a8, c.onClick.a9, c.onClick.a10)
-        c.onClick.func()
 	end
-end
-function BigWigsWarningSign:OnClick(func)
-    if func then
-		c.onClick.func = func
-		
-		self.frames.sign:EnableMouse(true)
-		self.frames.sign:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp", "Button4Up", "Button5Up")
-		self.frames.sign:SetScript("OnClick", function() BigWigsWarningSign:ExecuteClick() end)
-	end
-end
-function BigWigsWarningSign:OffClick()
-	self.frames.sign:EnableMouse(false)
-	self.frames.sign:RegisterForClicks()
-	self.frames.sign:SetScript("OnClick", nil)
-    c.onClick.func = nil
 end
 
 function BigWigsWarningSign:PLAYER_DEAD()
-    -- this should hide all Icons upon your own death
-     self:BigWigs_HideWarningSign("", true)
+	-- this should hide all Icons upon your own death
+	self:BigWigs_HideWarningSign("", true)
 end
 
 function BigWigsWarningSign:ShowAnchor()
 	if not self.frames or not self.frames.anchor then
-		self:SetupFrames() 
+		self:SetupFrames()
 	end
-    self.frames.anchor:Show()
+	self.frames.anchor:Show()
 end
 
 function BigWigsWarningSign:HideAnchor()
 	if not self.frames or not self.frames.anchor then
-		self:SetupFrames() 
+		self:SetupFrames()
 	end
-    self.frames.anchor:Hide()
+	self.frames.anchor:Hide()
 end
 
 ------------------------------
@@ -313,7 +285,7 @@ function BigWigsWarningSign:CreateAnchor()
 		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", tile = true, tileSize = 16,
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 16,
 		insets = {left = 4, right = 4, top = 4, bottom = 4},
-        })
+	})
 	self.frames.anchor:SetBackdropBorderColor(.5, .5, .5)
 	self.frames.anchor:SetBackdropColor(0,0,0)
 	self.frames.anchor:ClearAllPoints()
@@ -396,7 +368,7 @@ function BigWigsWarningSign:CreateAnchor()
 	t:SetTexCoord(0, 0.625, 0, 0.6875)
 	t:SetAllPoints(self.frames.rightbutton)
 	self.frames.rightbutton:SetPushedTexture(t)
-	
+
 	t = self.frames.rightbutton:CreateTexture()
 	t:SetTexture("Interface\\Buttons\\UI-Panel-Button-Highlight")
 	t:SetTexCoord(0, 0.625, 0, 0.6875)
@@ -408,7 +380,15 @@ function BigWigsWarningSign:CreateAnchor()
 	self.frames.rightbuttontext:SetText(L["Close"])
 	self.frames.rightbuttontext:SetAllPoints(self.frames.rightbutton)
 
-	self:ResetPosition()
+	local x = self.db.profile.posx
+	local y = self.db.profile.posy
+	if x and y then
+		local s = self.frames.anchor:GetEffectiveScale()
+		self.frames.anchor:ClearAllPoints()
+		self.frames.anchor:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x / s, y / s)
+	else
+		self:ResetPosition()
+	end
 end
 
 function BigWigsWarningSign:CreateWarningSignFrame()
@@ -425,16 +405,16 @@ function BigWigsWarningSign:CreateWarningSignFrame()
 	self.msgframe:SetFontObject(GameFontNormalLarge)
 	self.msgframe:Show()
 	]]
-	
 
-	self.frames.sign = CreateFrame("Button", "BigWigsWarningSignFrame", UIParent)
+
+	self.frames.sign = CreateFrame("Frame", "BigWigsWarningSignFrame", UIParent)
 	self.frames.sign:Hide()
 	self.db.profile.isVisible = false
-	
-	self.frames.sign:SetWidth(100) 
+
+	self.frames.sign:SetWidth(100)
 	self.frames.sign:SetHeight(100)
-	self.frames.sign:SetAlpha(self.db.profile.alpha)
-	
+	self.frames.sign:SetAlpha(self.db.profile.alpha or 0.8)
+
 	self.frames.sign:SetPoint("BOTTOM", self.frames.anchor, "TOP", 0, 0)
 	self.frames.sign:SetScale(self.db.profile.scale or 1)
 	--self.frames.sign:SetInsertMode("TOP")
@@ -447,58 +427,58 @@ function BigWigsWarningSign:CreateWarningSignFrame()
 	--self.frames.sign:SetMovable(true)
 	--self.frames.sign:SetScript("OnDragStart", function() this:StartMoving() end)
 	--[[self.frames.sign:SetScript("OnDragStop", function()
-		this:StopMovingOrSizing()
-		self:SavePosition()
+	this:StopMovingOrSizing()
+	self:SavePosition()
 	end)]]
 
 	self.texture = self.frames.sign:CreateTexture(nil, "BACKGROUND")
 	self.texture:SetAllPoints(self.frames.sign)
 	self.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92) -- zoom in to hide border
-	
+
 	--[[local x = self.db.profile.posx
 	local y = self.db.profile.posy
 	if x and y then
-		local s = self.frames.sign:GetEffectiveScale()
-		self.frames.sign:ClearAllPoints()
-		self.frames.sign:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x / s, y / s)
+	local s = self.frames.sign:GetEffectiveScale()
+	self.frames.sign:ClearAllPoints()
+	self.frames.sign:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x / s, y / s)
 	else
-		self:ResetPosition()
+	self:ResetPosition()
 	end]]
 end
 
 function BigWigsWarningSign:ResetPosition()
-	--[[if not BigWigsWarningSign.frame then 
-		self:SetupFrames() 
+	--[[if not BigWigsWarningSign.frame then
+	self:SetupFrames()
 	end
 	BigWigsWarningSign.frame:ClearAllPoints()
 	--frame:SetPoint("CENTER", UIParent, "CENTER")
 	--BigWigsWarningSign.frame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", 1000, 500)
-    BigWigsWarningSign.frame:SetPoint("CENTER", 0, 150)
+	BigWigsWarningSign.frame:SetPoint("CENTER", 0, 150)
 	self.db.profile.posx = nil
 	self.db.profile.posy = nil]]
-	
+
 	if not self.frames or not self.frames.anchor then
-		self:SetupFrames() 
+		self:SetupFrames()
 	end
 	self.frames.anchor:ClearAllPoints()
 	--frame:SetPoint("CENTER", UIParent, "CENTER")
 	--BigWigsWarningSign.frame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", 1000, 500)
-    self.frames.anchor:SetPoint("CENTER", UIParent, "CENTER", 0, 100) --self.frames.anchor:SetPoint("CENTER", 0, 150)
+	self.frames.anchor:SetPoint("CENTER", UIParent, "CENTER", 0, 100) --self.frames.anchor:SetPoint("CENTER", 0, 150)
 	self.db.profile.posx = nil
 	self.db.profile.posy = nil
 end
 
 function BigWigsWarningSign:SavePosition()
-	--[[if not BigWigsWarningSign.frame then 
-		self:SetupFrames() 
+	--[[if not BigWigsWarningSign.frame then
+	self:SetupFrames()
 	end
 
 	local s = BigWigsWarningSign.frame:GetEffectiveScale()
 	self.db.profile.posx = BigWigsWarningSign.frame:GetLeft() * s
 	self.db.profile.posy = BigWigsWarningSign.frame:GetTop() * s]]
-	
-	if not BigWigsWarningSign.frames.anchor then 
-		self:SetupFrames() 
+
+	if not BigWigsWarningSign.frames.anchor then
+		self:SetupFrames()
 	end
 
 	local s = BigWigsWarningSign.frames.anchor:GetEffectiveScale()

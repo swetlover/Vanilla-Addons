@@ -1,14 +1,3 @@
---[[
-
-	BuffTimers: Mini timers for the top right buff icons
-		copyright 2004 by Telo
-	
-	- Displays small timer text below each of the top right buff and debuff icons
-	- Now simplified substantially by using the Blizzard interface elements to present the
-	  timer information in the original BuffTimers format
-	
-]]
-
 --------------------------------------------------------------------------------------------------
 -- Local variables
 --------------------------------------------------------------------------------------------------
@@ -44,6 +33,22 @@ local function lSetTimeText(button, time)
 	button:SetText(text);
 end
 
+function BuffButton_OnUpdate()
+	local buffDuration = getglobal(this:GetName().."Duration");
+	
+	if ( this.untilCancelled == 1 ) then
+		buffDuration:SetTextColor(0.0, 1.0, 0.0); 
+	  	buffDuration:SetText("N/A");
+		buffDuration:Show();
+		return;
+	end
+	local buffIndex = this.buffIndex;
+	local timeLeft = GetPlayerBuffTimeLeft(this.buffIndex);
+	BuffFrame_UpdateDuration(this, timeLeft);
+	if ( GameTooltip:IsOwned(this) ) then
+		GameTooltip:SetPlayerBuff(this.buffIndex);
+	end
+end
 
 --------------------------------------------------------------------------------------------------
 -- OnFoo functions
