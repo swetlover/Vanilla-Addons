@@ -1,18 +1,18 @@
 --[[
-Name: AceDB-2.0
-Revision: $Rev: 17797 $
-Developed by: The Ace Development Team (http://www.wowace.com/index.php/The_Ace_Development_Team)
-Inspired By: Ace 1.x by Turan (turan@gryphon.com)
-Website: http://www.wowace.com/
-Documentation: http://www.wowace.com/index.php/AceDB-2.0
-SVN: http://svn.wowace.com/root/trunk/Ace2/AceDB-2.0
-Description: Mixin to allow for fast, clean, and featureful saved variable
-             access.
-Dependencies: AceLibrary, AceOO-2.0, AceEvent-2.0
+	Name: AceDB-2.0
+	Revision: $Rev: 17800 $
+	Developed by: The Ace Development Team (http://www.wowace.com/index.php/The_Ace_Development_Team)
+	Inspired By: Ace 1.x by Turan (turan@gryphon.com)
+	Website: http://www.wowace.com/
+	Documentation: http://www.wowace.com/index.php/AceDB-2.0
+	SVN: http://svn.wowace.com/root/trunk/Ace2/AceDB-2.0
+	Description: Mixin to allow for fast, clean, and featureful saved variable
+	access.
+	Dependencies: AceLibrary, AceOO-2.0, AceEvent-2.0
 ]]
 
 local MAJOR_VERSION = "AceDB-2.0"
-local MINOR_VERSION = "$Revision: 17797 $"
+local MINOR_VERSION = "$Revision: 17800 $"
 
 if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary") end
 if not AceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
@@ -112,26 +112,26 @@ elseif GetLocale() == "zhTW" then
 	REALM = "伺服器："
 	CLASS = "聯業："
 elseif GetLocale() == "zhCN" then
-	ACTIVE = "\230\156\137\230\149\136"
-	ENABLED = "\229\144\175\231\148\168"
-	STATE = "\231\138\182\230\128\129"
-	TOGGLE_ACTIVE = "\230\154\130\229\129\156/\230\129\162\229\164\141 \230\173\164\230\143\146\228\187\182."
-	MAP_ACTIVESUSPENDED = { [true] = "|cff00ff00\230\156\137\230\149\136|r", [false] = "|cffff0000\230\154\130\229\129\156|r" }
-	SET_PROFILE = "\232\174\190\231\189\174\233\133\141\231\189\174\230\150\135\228\187\182\228\184\186\232\191\153\230\143\146\228\187\182."
-	SET_PROFILE_USAGE = "{\229\173\151\231\172\166 || \233\128\137\228\187\182\231\177\187 || \229\159\159 || <\233\133\141\231\189\174\230\150\135\228\187\182\229\144\141\229\173\151>}"
-	PROFILE = "\233\133\141\231\189\174\230\150\135\228\187\182"
-	PLAYER_OF_REALM = "%s \231\154\132 %s"
-	CHOOSE_PROFILE_DESC = "\233\128\137\230\139\169\233\133\141\231\189\174\230\150\135\228\187\182."
-	CHOOSE_PROFILE_GUI = "\233\128\137\230\139\169"
-	COPY_PROFILE_DESC = "\229\164\141\229\136\182\232\174\190\231\189\174\228\187\142\229\143\166\228\184\128\228\184\170\233\133\141\231\189\174\230\150\135\228\187\182."
-	COPY_PROFILE_GUI = "\229\164\141\229\136\182\228\187\142"
-	OTHER_PROFILE_DESC = "\233\128\137\230\139\169\229\143\166\228\184\128\228\184\170\233\133\141\231\189\174\230\150\135\228\187\182."
-	OTHER_PROFILE_GUI = "\229\133\182\228\187\150"
-	OTHER_PROFILE_USAGE = "<\233\133\141\231\189\174\230\150\135\228\187\182\229\144\141\229\173\151>"
-
-	CHARACTER = "\229\173\151\231\172\166: "
-	REALM = "\229\159\159: "
-	CLASS = "\233\128\137\228\187\182\231\177\187: "
+	ACTIVE = "启动"
+	ENABLED = "启用"
+	STATE = "状态"
+	TOGGLE_ACTIVE = "暂停/重启这个插件。"
+	MAP_ACTIVESUSPENDED = { [true] = "|cff00ff00启动|r", [false] = "|cffff0000已暂停|r" }
+	SET_PROFILE = "设定这个插件的存档。"
+	SET_PROFILE_USAGE = "{角色 || 职业 || 服务器 || <存档名称>}"
+	PROFILE = "存档"
+	PLAYER_OF_REALM = "%s 于 %s"
+	CHOOSE_PROFILE_DESC = "选择一个存档"
+	CHOOSE_PROFILE_GUI = "选择"
+	COPY_PROFILE_DESC = "由其他存档复制设定。"
+	COPY_PROFILE_GUI = "复制由"
+	OTHER_PROFILE_DESC = "选择其他存档。"
+	OTHER_PROFILE_GUI = "其他"
+	OTHER_PROFILE_USAGE = "<存档名称>"
+	
+	CHARACTER = "角色："
+	REALM = "服务器："
+	CLASS = "职业："
 elseif GetLocale() == "ruRU" then
 	ACTIVE = "Активный"
 	ENABLED = "Включён"
@@ -180,15 +180,15 @@ local AceOO = AceLibrary("AceOO-2.0")
 local AceEvent
 local Mixin = AceOO.Mixin
 local AceDB = Mixin {
-						"RegisterDB",
-						"RegisterDefaults",
-						"ResetDB",
-						"SetProfile",
-						"GetProfile",
-						"ToggleActive",
-						"IsActive",
-						"AcquireDBNamespace",
-					}
+	"RegisterDB",
+	"RegisterDefaults",
+	"ResetDB",
+	"SetProfile",
+	"GetProfile",
+	"ToggleActive",
+	"IsActive",
+	"AcquireDBNamespace",
+}
 local Dewdrop = AceLibrary:HasInstance("Dewdrop-2.0") and AceLibrary("Dewdrop-2.0")
 
 local _G = getfenv(0)

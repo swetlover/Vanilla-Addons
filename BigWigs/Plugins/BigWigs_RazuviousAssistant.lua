@@ -9,22 +9,16 @@
 --
 --]]
 
-----------------------------------
---      Module Declaration      --
-----------------------------------
+------------------------------
+--      Are you local?      --
+------------------------------
 
-local myname = "拉苏维奥斯助手"
-local bossName = "Instructor Razuvious"
+local myname = "教官拉苏维奥斯助手"
 local L = AceLibrary("AceLocale-2.2"):new("BigWigs"..myname)
-local module = BigWigs:NewModule(myname)
-local boss = AceLibrary("Babble-Boss-2.2")[bossName]
+local boss = AceLibrary("Babble-Boss-2.2")["Instructor Razuvious"]
 local understudy = AceLibrary("Babble-Boss-2.2")["Deathknight Understudy"]
-module.bossSync = myname
-module.synctoken = myname
-module.zonename = AceLibrary("Babble-Zone-2.2")["Naxxramas"]
-module.translatedName = boss
-module.external = true
-module.trashMod = true
+
+local times = nil
 
 ----------------------------
 --      Localization      --
@@ -45,7 +39,7 @@ L:RegisterTranslations("zhCN", function() return {
 	broadcast_name = "广播debuff状态",
 	broadcast_desc = "向团队警报频道广播debuff将在五秒后消失",
 
-	taunt_bar = "嘲讽",
+	taunt_bar = "教官被嘲讽",
 	taunt_trigger = "教官拉苏维奥斯受到了嘲讽效果的影响。",
 
 	mindexhaustion_bar = "%s - 疲惫",
@@ -208,55 +202,49 @@ L:RegisterTranslations("deDE", function() return {
 } end)
 
 
----------------------------------
---      	Variables 		   --
----------------------------------
+----------------------------------
+--      Module Declaration      --
+----------------------------------
 
-module.enabletrigger = { boss }
-module.toggleoptions = { "broadcast", "debuff", "taunt" }
-module.revision = 20001
-
---locals
-local times = nil
+BigWigsRazuviousAssistant = BigWigs:NewModule(myname)
+BigWigsRazuviousAssistant.synctoken = myname
+BigWigsRazuviousAssistant.zonename = AceLibrary("Babble-Zone-2.2")["Naxxramas"]
+BigWigsRazuviousAssistant.enabletrigger = { boss }
+BigWigsRazuviousAssistant.toggleoptions = { "broadcast", "debuff", "taunt" }
+BigWigsRazuviousAssistant.revision = tonumber(string.sub("$Revision: 17256 $", 12, -3))
+BigWigsRazuviousAssistant.external = true
 
 ------------------------------
 --      Initialization      --
 ------------------------------
 
-function module:OnEnable()
-	self:RegisterEvent("SpecialEvents_UnitDebuffGained")
-	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE")
-end
-
-function module:OnSetup()
-	self:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH")
+function BigWigsRazuviousAssistant:OnEnable()
 	times = {}
-end
 
-function module:OnEngage()
-end
+	self:RegisterEvent("SpecialEvents_UnitDebuffGained")
 
-function module:OnDisengage()
+	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE")
+	self:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH")
 end
 
 ------------------------------
 --      Utility             --
 ------------------------------
 
-function module:GetRaidIconName(unitid)
+function BigWigsRazuviousAssistant:GetRaidIconName(unitid)
 	local iconIndex = GetRaidTargetIndex(unitid)
 	if not iconIndex or not UnitExists(unitid) then return L["raidIcon0"], 0 end
 	return L["raidIcon"..iconIndex], iconIndex
 end
 
-function module:GetRaidIconColor(raidIconIndex)
+function BigWigsRazuviousAssistant:GetRaidIconColor(raidIconIndex)
 	if L:HasTranslation("raidColor"..raidIconIndex) then
 		return L["raidColor"..raidIconIndex]
 	end
 	return "Red"
 end
 
-function module:GetRaidIconPath(raidIconIndex)
+function BigWigsRazuviousAssistant:GetRaidIconPath(raidIconIndex)
 	if L:HasTranslation("rtPath"..raidIconIndex) then
 		return L["rtPath"..raidIconIndex]
 	end
@@ -267,20 +255,20 @@ end
 --      Event Handlers      --
 ------------------------------
 
-function module:CHAT_MSG_COMBAT_HOSTILE_DEATH(msg)
+function BigWigsRazuviousAssistant:CHAT_MSG_COMBAT_HOSTILE_DEATH(msg)
 	if msg == string.format(UNITDIESOTHER, boss) then
-		self:SendBossDeathSync()
+		self.core:ToggleModuleActive(self, false)
 	end
 end
 
-function module:CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE(msg)
+function BigWigsRazuviousAssistant:CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE(msg)
 	if not self.db.profile.taunt then return end
 	if string.find(msg, L["taunt_trigger"]) then
 		self:TriggerEvent("BigWigs_StartBar", self, L["taunt_bar"], 20, "Interface\\Icons\\Spell_Nature_Reincarnation", "Green", "Yellow", "Orange")
 	end
 end
 
-function module:SpecialEvents_UnitDebuffGained(unitid, debuffName, applications, debuffType, texture)
+function BigWigsRazuviousAssistant:SpecialEvents_UnitDebuffGained(unitid, debuffName, applications, debuffType, texture)
 	if self.db.profile.debuff and debuffName == L["mindexhaustion"] and UnitName(unitid) == understudy then
 		local iconName, iconIndex = self:GetRaidIconName(unitid)
 
@@ -292,4 +280,3 @@ function module:SpecialEvents_UnitDebuffGained(unitid, debuffName, applications,
 		end
 	end
 end
-

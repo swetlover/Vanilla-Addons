@@ -17,9 +17,9 @@ module.toggleoptions = {"panic", "frenzy", "bosskill"}
 local timer = {
 	earliestPanic = 30,
 	latestPanic = 35,
-	firstPanicDelay = 7 - 30,
+	firstPanicDelay = 10 - 30,
 	frenzy = 8,
-	firstFrenzy = 30,
+	firstFrenzy = 15,
  	nextFrenzy = 15,
 }
 local icon = {

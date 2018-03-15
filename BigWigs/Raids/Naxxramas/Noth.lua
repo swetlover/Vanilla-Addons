@@ -42,8 +42,8 @@ L:RegisterTranslations("zhCN", function() return {
 	blinkwarn10 = "闪现术大约 10 秒!",
 	blinkbar = "可能闪现术",
 
-	--teleportToBalconyTrigger = "Noth the Plaguebringer teleports to the balcony above!",
-	--teleportToRoomTrigger = "Noth the Plaguebringer teleports back into the battle!",
+	teleportToBalconyTrigger = "Noth the Plaguebringer teleports to the balcony above!",
+	teleportToRoomTrigger = "Noth the Plaguebringer teleports back into the battle!",
 	teleportwarn = "传送! 他在阳台上!",
 	teleportwarn10 = "传送 10 秒!",
 	teleportwarn30 = "传送 30 秒!",
@@ -65,7 +65,6 @@ L:RegisterTranslations("zhCN", function() return {
 	wave2bar = "第 2 波",
 	wave2_message = "第二波10秒后",
 	wave2s_message = "第二波刷新!",
-	roomaddsbar = "小怪 "
 } end )
 
 
@@ -74,7 +73,7 @@ L:RegisterTranslations("zhCN", function() return {
 ---------------------------------
 
 -- module variables
-module.revision = 20012 -- To be overridden by the module!
+module.revision = 20011 -- To be overridden by the module!
 module.enabletrigger = module.translatedName -- string or table {boss, add1, add2}
 --module.wipemobs = { L["add_name"] } -- adds which will be considered in CheckForEngage
 module.toggleoptions = {"blink", "teleport", "curse", "wave", "bosskill"}
@@ -83,7 +82,7 @@ module.toggleoptions = {"blink", "teleport", "curse", "wave", "bosskill"}
 -- locals
 local timer = {
 	firstBlink = {30,40},
- 	regularBlink = {30,40},
+	regularBlink = {30,40},
 
 	blinkAfterTeleport = {2,10},
 
@@ -98,44 +97,20 @@ local timer = {
 	balcony = 0, -- will be changed during the encounter
 
 	firstCurse = {8,12},
- 	curseAfterTeleport = {2,10},
+	curseAfterTeleport = {2,10},
 	curse = {50,60},
 
-	balcony1wave1 = {11, 12},
- 	balcony1wave2 = {41, 42},
- 	
- 	balcony2wave1 = {10,16},
- 	balcony2wave2 = {55,59},
- 	
- 	balcony3wave1 = {6, 10}, --need info
- 	balcony3wave2 = {66, 70}, --need info
- 	
- 	balconywave1 = {0, 0},
- 	balconywave2 = {0, 0},
- 	
- 	room1wave1 = {16, 17},
- 	room1wave2 = {50, 51},
- 	room1wave3 = {82, 83},
- 	
- 	room2wave1 = {12,15},
- 	room2wave2 = {42,48},
- 	room2wave3 = {75,83},
- 	room2wave4 = {108,116},
- 	
- 	room3wave1 = {12,13},
- 	room3wave2 = {43,47},
- 	room3wave3 = {76, 80}, --need info
- 	room3wave4 = {107, 110}, --need info
- 	room3wave5 = {141, 145}, --need info
- 	room3wave6 = {172, 175}, --need info
- 
+	wave1 = {5,7},
+	wave2_1 = {30,37},
+	wave2_2 = {49,56},
+	wave2_3 = {62,69},
+	wave2 = 0,
 }
 local icon = {
 	balcony = "Spell_Magic_LesserInvisibilty",
 	blink = "Spell_Arcane_Blink",
 	wave = "Spell_ChargePositive",
 	curse = "Spell_Shadow_AnimateDead",
-	roomadds = "Spell_Shadow_RaiseDead",
 }
 local syncName = {
 	blink = "NothBlink"..module.revision,
@@ -145,7 +120,6 @@ local syncName = {
 }
 
 local berserkannounced = nil
-local roomPhase = 1
 
 ------------------------------
 --      Initialization      --
@@ -163,17 +137,17 @@ function module:OnEnable()
 	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_FRIENDLYPLAYER_DAMAGE", "CheckForCurse")
 	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_PARTY_DAMAGE", "CheckForCurse")
 
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE", "Teleport")
+
 	self:ThrottleSync(5, syncName.blink)
 	self:ThrottleSync(5, syncName.curse)
 end
 
 -- called after module is enabled and after each wipe
 function module:OnSetup()
-	roomPhase = 1
 	timer.room = timer.firstRoom
 	timer.balcony = timer.firstBalcony
-	timer.balconywave1 = timer.balcony1wave1
- 	timer.balconywave2 = timer.balcony1wave2
+	timer.wave2 = timer.wave2_1
 end
 
 -- called after boss is engaged
@@ -192,9 +166,6 @@ function module:OnEngage()
 	if self.db.profile.curse then
 		self:IntervalBar(L["cursebar"], timer.firstCurse[1], timer.firstCurse[2], icon.curse)
 	end
-	if self.db.profile.wave then
- 		self:RoomAdds(roomPhase)
- 	end
 
 	self:ScheduleEvent("bwnothtobalcony", self.TeleportToBalcony, timer.room, self)
 end
@@ -216,6 +187,14 @@ end
 function module:CheckForBlink(msg)
 	if msg == L["blinktrigger"] then
 		self:Sync(syncName.blink)
+	end
+end
+
+function module:Teleport(msg)
+	if msg == L["teleportToBalconyTrigger"] then
+		self:Sync(syncName.teleportToBalcony)
+	elseif msg == L["teleportToRoomTrigger"] then
+		self:Sync(syncName.teleportToRoom)
 	end
 end
 
@@ -241,8 +220,10 @@ function module:TeleportToBalcony()
 		--self:DelayedMessage(timer.balcony - 10, L["backwarn10"], "Urgent")
 	end
 	if self.db.profile.wave then
-		self:IntervalBar(L["wave1bar"], timer.balconywave1[1], timer.balconywave1[2], icon.wave)
- 		self:IntervalBar(L["wave2bar"], timer.balconywave2[1], timer.balconywave2[2], icon.wave)
+		self:IntervalBar(L["wave1bar"], timer.wave1[1], timer.wave1[2], icon.wave)
+		self:IntervalBar(L["wave2bar"], timer.wave2[1], timer.wave2[2], icon.wave)
+		--self:DelayedMessage(timer.wave2 - 10, L["wave2_message"], "Urgent")
+		--self:DelayedMessage(timer.wave2, L["wave2s_message"], "Urgent")
 	end
 	self:ScheduleEvent("bwnothtoroom", self.TeleportToRoom, timer.balcony, self)
 end
@@ -251,16 +232,10 @@ function module:TeleportToRoom()
 	self:CancelScheduledEvent("bwnothtoroom")
 	if timer.balcony == timer.firstBalcony then
 		timer.balcony = timer.secondBalcony
-		timer.balconywave1 = timer.balcony2wave1
- 		timer.balconywave2 = timer.balcony2wave2
+		timer.wave2 = timer.wave2_2
 	elseif timer.balcony == timer.secondBalcony then
 		timer.balcony = timer.thirdBalcony
-		timer.balconywave1 = timer.balcony3wave1
- 		timer.balconywave2 = timer.balcony3wave2
- 	end
- 	if self.db.profile.wave then
- 		roomPhase = roomPhase + 1
- 		self:RoomAdds(roomPhase)
+		timer.wave2 = timer.wave2_3
 	end
 
 	if self.db.profile.teleport then
@@ -292,6 +267,10 @@ function module:BigWigs_RecvSync(sync, rest, nick)
 		self:Curse()
 	elseif sync == syncName.blink then
 		self:Blink()
+	elseif sync == syncName.teleportToBalcony then
+		self:TeleportToBalcony()
+	elseif sync == syncName.teleportToRoom then
+		self:TeleportToRoom()
 	end
 end
 
@@ -318,36 +297,3 @@ function module:Blink()
 	-- aggro reset?
 	self:KTM_Reset()
 end
-
-function module:RoomAdds(phase)
- 	if phase == 1 then
- 		local wavecount = 1
- 		self:IntervalBar(L["roomaddsbar"]..wavecount, timer.room1wave1[1], timer.room1wave1[2], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room1wave1[1], L["roomaddsbar"]..wavecount, timer.room1wave2[1]-timer.room1wave1[1], timer.room1wave2[2]-timer.room1wave1[1], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room1wave2[1], L["roomaddsbar"]..wavecount, timer.room1wave3[1]-timer.room1wave2[1], timer.room1wave3[2]-timer.room1wave2[1], icon.roomadds)
- 	elseif phase == 2 then
- 		local wavecount = 1
- 		self:IntervalBar(L["roomaddsbar"]..wavecount, timer.room2wave1[1], timer.room2wave1[2], icon.roomadds)
-		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room2wave1[1], L["roomaddsbar"]..wavecount, timer.room2wave2[1]-timer.room2wave1[1], timer.room2wave2[2]-timer.room2wave1[1], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room2wave2[1], L["roomaddsbar"]..wavecount, timer.room2wave3[1]-timer.room2wave2[1], timer.room2wave3[2]-timer.room2wave2[1], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room2wave3[1], L["roomaddsbar"]..wavecount, timer.room2wave4[1]-timer.room2wave3[1], timer.room2wave4[2]-timer.room2wave3[1], icon.roomadds)
- 	elseif phase == 3 then
- 		local wavecount = 1
- 		self:IntervalBar(L["roomaddsbar"]..wavecount, timer.room3wave1[1], timer.room3wave1[2], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room3wave1[1], L["roomaddsbar"]..wavecount, timer.room3wave2[1]-timer.room3wave1[1], timer.room3wave2[2]-timer.room3wave1[1], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room3wave2[1], L["roomaddsbar"]..wavecount, timer.room3wave3[1]-timer.room3wave2[1], timer.room3wave3[2]-timer.room3wave2[1], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room3wave3[1], L["roomaddsbar"]..wavecount, timer.room3wave4[1]-timer.room3wave3[1], timer.room3wave4[2]-timer.room3wave3[1], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room3wave4[1], L["roomaddsbar"]..wavecount, timer.room3wave5[1]-timer.room3wave4[1], timer.room3wave5[2]-timer.room3wave4[1], icon.roomadds)
- 		wavecount = wavecount + 1
- 		self:DelayedIntervalBar(timer.room3wave5[1], L["roomaddsbar"]..wavecount, timer.room3wave6[1]-timer.room3wave5[1], timer.room3wave6[2]-timer.room3wave5[1], icon.roomadds)
- 	end
-end 

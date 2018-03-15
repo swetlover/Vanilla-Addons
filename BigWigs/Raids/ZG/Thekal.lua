@@ -40,15 +40,15 @@ L:RegisterTranslations("zhCN", function() return {
 	mortalcleave_bar = "致死顺劈: %s",
 	silence_bar = "沉默: %s",
 	disarm_bar = "缴械: %s",
-	bloodlustgain = "(.+)获得了嗜血术的效果。",
-	bloodlustend = "嗜血术效果从(.+)身上消失。",
-	bloodlust_bar = "嗜血术: %s",
+	bloodlustgain = "(.+)获得了嗜血的效果。",
+	bloodlustend = "嗜血效果从(.+)身上消失。",
+	bloodlust_bar = "嗜血: %s",
 	bloodlustannounce = "驱散嗜血术 %s!",
 	frenzybegin_trigger = "High Priest Thekal获得了狂乱效果。",
 	frenzyend_trigger = "狂乱效果从High Priest Thekal身上消失。",
 	frenzyann = "狂乱! 立刻宁神!",
 	frenzy_bar = "狂乱",
-	death_trigger = "dies.",
+	death_trigger = "死亡了。",
 	zath_trigger = "狂热者扎斯",
 	lorkhan_trigger = "狂热者洛卡恩",
 	thekal_trigger = "High Priest Thekal",
@@ -99,7 +99,7 @@ L:RegisterTranslations("zhCN", function() return {
     ["You have slain %s!"] = "你杀死了%s！",
     ["Knockback"] = "击退",
     ["New Adds"] = "新的小怪",
-    ["Next Bloodlust"] = "下次嗜血术",
+    ["Next Bloodlust"] = "下次嗜血",
 } end )
 
 L:RegisterTranslations("deDE", function() return {
@@ -199,7 +199,7 @@ L:RegisterTranslations("deDE", function() return {
 ---------------------------------
 
 -- module variables
-module.revision = 20008 -- To be overridden by the module!
+module.revision = 20007 -- To be overridden by the module!
 module.enabletrigger = module.translatedName -- string or table {boss, add1, add2}
 module.wipemobs = {L["roguename"], L["shamanname"]} -- adds which will be considered in CheckForEngage
 module.toggleoptions = {"bloodlust", "silence", "cleave", "heal", "disarm", -1, "phase", "punch", "tigers", "frenzy", "enraged", "bosskill"}
@@ -209,7 +209,7 @@ module.toggleoptions = {"bloodlust", "silence", "cleave", "heal", "disarm", -1, 
 local timer = {
 	forcePunch = 1,
 	phase2 = 9,
-	nextForcePunch = 20,
+	knockback = 4,
 	adds = 25,
 	bloodlust = 30,
 }
@@ -285,7 +285,7 @@ end
 -- called after boss is engaged
 function module:OnEngage()
 	self.phase = 1
-	--self:ScheduleRepeatingEvent("checkphasechange", self.PhaseChangeCheck, 0.5, self)
+	self:ScheduleRepeatingEvent("checkphasechange", self.PhaseChangeCheck, 0.5, self)
 end
 
 -- called after boss is disengaged (wipe(retreat) or victory)
@@ -381,7 +381,6 @@ end
 function module:CHAT_MSG_SPELL_CREATURE_VS_CREATURE_DAMAGE(msg)
 	if msg == L["forcepunch_trigger"] then
 		self:Bar(L["forcepunch_bar"], timer.forcePunch, icon.forcePunch)
-		self:DelayedBar(timer.forcePunch, L["forcepunchCD_bar"], timer.nextForcePunch-timer.forcePunch, icon.forcePunch)
 	end
 end
 
@@ -418,13 +417,12 @@ end
 function module:BigWigs_RecvSync(sync, rest, nick)
 	if sync == syncName.phase2 and self.phase < 2 then
 		self.phase = 2
-		--self:RemoveBar(L["phasetwo_bar"])
+		self:RemoveBar(L["phasetwo_bar"])
 		self:TigerPhase()
-	--[[elseif sync == syncName.phasechange then
+	elseif sync == syncName.phasechange then
 		self:CancelScheduledEvent("checkphasechange")
 		self.phase = 1.5
 		self:Bar(L["phasetwo_bar"], timer.phase2, icon.phase2)
-		--]]
 	elseif sync == syncName.heal and self.db.profile.heal then
 		self:Message(L["heal_message"], "Attention", "Alarm")
 		self:Bar(L["heal_bar"], 4, icon.heal, true, "Black")
@@ -462,4 +460,6 @@ function module:TigerPhase()
 	if self.db.profile.phase then
 		self:Message(L["phasetwo_message"], "Attention")
 	end
+	self:Bar(L["New Adds"], timer.adds, icon.adds)
+	self:Bar(L["Knockback"], timer.knockback, icon.knockback)
 end

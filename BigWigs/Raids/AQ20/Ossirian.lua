@@ -91,7 +91,7 @@ L:RegisterTranslations("deDE", function() return {
 ---------------------------------
 
 -- module variables
-module.revision = 20007 -- To be overridden by the module!
+module.revision = 20006 -- To be overridden by the module!
 module.enabletrigger = module.translatedName -- string or table {boss, add1, add2}
 --module.wipemobs = { L["add_name"] } -- adds which will be considered in CheckForEngage
 module.toggleoptions = {"supreme", "debuff", "bosskill"}
@@ -156,7 +156,7 @@ end
 -- called after boss is engaged
 function module:OnEngage()
 	self:Bar(L["Cyclone"], timer.firstCyclone, icon.cyclone)
-	self:Bar(L["WarStomp"], timer.warstompCD, icon.warstomp)
+	self:Bar(L["WarStomp"], timer.earliestWarstomp, icon.warstomp)
 end
 
 -- called after boss is disengaged (wipe(retreat) or victory)
@@ -171,6 +171,11 @@ end
 function module:CHAT_MSG_COMBAT_HOSTILE_DEATH(msg)
 	BigWigs:CheckForBossDeath(msg, self)
 
+	-- if the same weakness triggers back to back, the normal combat log entry is missing for the weakness
+	-- this event is triggered 2s later
+	if string.find(msg, L["crystaltrigger"]) then
+		self:Sync(syncName.crystal)
+	end
 end
 
 function module:CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE( msg )
@@ -194,14 +199,14 @@ end
 function module:BigWigs_RecvSync(sync, rest, nick)
 	if sync == syncName.weakness and rest then
 		self:Weakness(rest)
-	elseif sync == syncName.crystal and rest then
- 		self:Bar(rest..L["crystal_bar"], timer.crystalCast, L[rest.."Icon"])
+	elseif sync == syncName.crystal then
+		self:Crystal()
 	elseif sync == syncName.supreme then
 		self:Supreme()
 	elseif sync == syncName.cyclone then
 		self:Cyclone()
 	elseif sync == syncName.warstomp then
-        self:Bar(L["WarStomp"], timer.warstompCD, icon.warstomp)
+		self:IntervalBar(L["WarStomp"], timer.earliestWarstomp, timer.latestWarstomp, icon.warstomp)
 	end
 end
 
@@ -244,6 +249,12 @@ function module:Weakness(weakness, delay)
 	end
 end
 
+function module:Crystal()
+	if timeLastWeaken + 3 < GetTime() then -- crystal trigger occurs 2s after weaken trigger
+		self:Weakness(currentWeakness, 2)
+	end
+end
+
 function module:Supreme()
 	if self.db.profile.supreme then
 		self:Message(L["supremewarn"], "Attention", nil, "Beware")
@@ -253,14 +264,8 @@ end
 function module:Debuff(msg)
 	if string.find(msg, L["cyclone_trigger"])then
 		self:Sync(syncName.cyclone)
-		return
 	end
 	if string.find(msg, L["stomp_trigger"])then
 		self:Sync(syncName.warstomp)
-		return
 	end
-	local _, _, debuffName = string.find(msg, L["crystaltrigger"])
- 	if debuffName and L:HasReverseTranslation(debuffName) then
- 		self:Sync(syncName.crystal .. " " .. LGetReverseTranslation(debuffName))
- 	end
 end

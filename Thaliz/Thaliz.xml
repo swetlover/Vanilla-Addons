@@ -1,0 +1,656 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Script file="Thaliz.lua" />
+
+	<!-- template for Message list entries -->
+	<Button name="Thaliz_CellTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="620" y="16"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentMessage" justifyH="LEFT" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="520" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentGroup" justifyH="LEFT" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="60" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="430" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentParam" justifyH="LEFT" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="120" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="490" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				Thaliz_OnMessageClick(this)
+				PlaySound("igMainMenuOptionCheckBoxOn")
+			</OnClick>
+			<OnEnter>
+				getglobal(this:GetName().."BG"):SetVertexColor(1, 1, 1, 1)
+			</OnEnter>
+			<OnLeave>
+				getglobal(this:GetName().."BG"):SetVertexColor(0.7, 0.7, 0.7, 0.7)
+			</OnLeave>
+			<OnLoad>
+				this:GetScript("OnLeave")(this)
+			</OnLoad>
+		</Scripts>
+		<NormalTexture name="$parentBG">
+			<Color r="0.0" g="0.0" b="0.5" a="0.5"/>
+		</NormalTexture>
+	</Button>	
+
+	<!-- Main configuration frame -->
+	<Frame name="ThalizFrame" parent="UIParent" toplevel="true" hidden="true">
+		<Size>
+			<AbsDimension x="690" y="492" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset x="312" y="-118" />
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Frames>
+			<!-- Message list frame -->
+			<ScrollFrame name="$parentTableList" inherits="FauxScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="630" y="330"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Scripts>
+					<OnVerticalScroll>
+						FauxScrollFrame_OnVerticalScroll(20, Thaliz_UpdateMessageList);
+					</OnVerticalScroll>
+					<OnShow>
+						Thaliz_UpdateMessageList()
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>			
+			<!-- Radio buttons for chat destination -->
+			<CheckButton name="$parentCheckbuttonRaid" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="16" y="-354"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("团队聊天")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonSay" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="144" y="-354"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("说")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonYell" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="272" y="-354"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("大喊")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonIncludeDefault" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="428" y="-354"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("包括在过滤的宏")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonPerCharacter" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="16" y="-386"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("存储宏的每个字符")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonWhisper" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="16" y="-418"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("私聊目标 ...")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<!-- Whisper input field -->
+			<EditBox name="$parentWhisper" letters="120">
+				<Size>
+					<AbsDimension x="436" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="200" y="-422"/>
+					</Anchor>
+				</Anchors>
+				<FontString inherits="GameFontNormal"/>
+				<Scripts>
+					<OnLoad>
+						this:RegisterEvent("OnEnterPressed")
+						this:RegisterEvent("OnEscapePressed")
+					</OnLoad>
+					<OnEnterPressed>
+						Thaliz_OKButton_OnClick()
+					</OnEnterPressed>
+					<OnEscapePressed>
+						Thaliz_CloseButton_OnClick()
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<!-- OK button -->
+			<Button name="CloseButton" inherits="UIPanelButtonTemplate" movable="true" text="确定">
+				<Size>
+					<AbsDimension x="100" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="245" y="-456" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Thaliz_OKButton_OnClick();</OnClick>
+				</Scripts>
+			</Button>
+			<!-- Close button -->
+			<Button name="CloseButton" inherits="UIPanelButtonTemplate" movable="true" text="取消">
+				<Size>
+					<AbsDimension x="100" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="350" y="-456" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Thaliz_CloseButton_OnClick();</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentHeaderTexture" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="256" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" text="Thaliz 设置">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentHeaderTexture">
+							<Offset>
+								<AbsDimension x="0" y="-14"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<!-- Whisper EditBox border -->
+				<Texture name="$parentTextureLeft" file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="188" y="-187"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.125" top="0" borrom="1.0"/>
+				</Texture>
+				<Texture name="$parentTextureRight" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="-42" y="-187"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.875" right="1.0" top="0" borrom="1.0"/>
+				</Texture>
+				<Texture name="$parentTextureCenter" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+					<Size>
+						<AbsDimension x="1" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentTextureLeft" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeTo="$parentTextureRight" relativePoint="LEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.9375" top="0" borrom="1.0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:SetMovable(true)
+				this:SetUserPlaced(true)
+				this:RegisterForDrag("LeftButton")
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving()
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing()
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+
+	<!-- Message editor frame -->
+	<Frame name="ThalizMsgEditorFrame" parent="UIParent" toplevel="true" hidden="true">
+		<Size>
+			<AbsDimension x="600" y="250" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset x="0" y="0" />
+			</Anchor>
+		</Anchors>
+		<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Frames>
+			<!-- Message input field -->
+			<EditBox name="$parentMessage" letters="120">
+				<Size>
+					<AbsDimension x="536" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="32" y="-32"/>
+					</Anchor>
+				</Anchors>
+				<FontString inherits="GameFontNormal"/>
+				<Scripts>
+					<OnLoad>
+						this:RegisterEvent("OnEnterPressed")
+						this:RegisterEvent("OnEscapePressed")
+					</OnLoad>
+					<OnEnterPressed>
+						Thaliz_SaveMessageButton_OnClick()
+					</OnEnterPressed>
+					<OnEscapePressed>
+						Thaliz_CloseMsgEditorButton_OnClick()
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<!-- Parameter value input field  -->
+			<EditBox name="$parentGroupValue" letters="20">
+				<Size>
+					<AbsDimension x="120" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="450" y="-123"/>
+					</Anchor>
+				</Anchors>
+				<FontString inherits="GameFontNormal"/>
+				<Scripts>
+					<OnLoad>
+						this:RegisterEvent("OnEnterPressed")
+						this:RegisterEvent("OnEscapePressed")
+					</OnLoad>
+					<OnEnterPressed>
+						Thaliz_SaveMessageButton_OnClick()
+					</OnEnterPressed>
+					<OnEscapePressed>
+						Thaliz_CloseMsgEditorButton_OnClick()
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<!-- OK button -->
+			<Button name="OkButton" inherits="UIPanelButtonTemplate" text="OK">
+				<Size>
+					<AbsDimension x="100" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="130" y="-216" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Thaliz_SaveMessageButton_OnClick();</OnClick>
+				</Scripts>
+			</Button>
+			<!-- Cancel button -->
+			<Button name="CancelButton" inherits="UIPanelButtonTemplate" text="Cancel">
+				<Size>
+					<AbsDimension x="100" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="250" y="-216" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>Thaliz_CloseMsgEditorButton_OnClick();</OnClick>
+				</Scripts>
+			</Button>
+			<!-- Reset button -->
+			<Button name="ResetButton" inherits="UIPanelButtonTemplate" text="Reset">
+				<Size>
+					<AbsDimension x="100" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="370" y="-216" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						getglobal("ThalizMsgEditorFrameMessage"):SetText("")
+						getglobal("ThalizMsgEditorFrameGroupValue"):SetText("")
+						getglobal("ThalizMsgEditorFrameCheckbuttonAlways"):SetChecked(1)
+						getglobal("ThalizMsgEditorFrameCheckbuttonGuild"):SetChecked(0)
+						getglobal("ThalizMsgEditorFrameCheckbuttonCharacter"):SetChecked(0)
+						getglobal("ThalizMsgEditorFrameCheckbuttonClass"):SetChecked(0)
+						getglobal("ThalizMsgEditorFrameCheckbuttonRace"):SetChecked(0)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- Options for showing -->
+			<CheckButton name="$parentCheckbuttonAlways" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="32" y="-60"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("默认: 对不匹配下面规则的任何人使用此宏")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonGuild" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="32" y="-90"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("公会: 使用公会名称宏 = &lt;?&gt;")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonCharacter" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="32" y="-120"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("字符: 使用字符名字宏 = &lt;?&gt;")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonClass" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="32" y="-150"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("职业: 使用职业名字宏 = &lt;?&gt;")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheckbuttonRace" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="32" y="-180"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("种族: 使用种族名字宏 = &lt;?&gt;")
+					</OnLoad>
+					<OnClick>
+						Thaliz_HandleCheckbox(this);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<Layers>			
+			<Layer level="BORDER">			
+				<!-- Message EditBox border -->
+				<Texture name="$parentTextureLeft" file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="20" y="82"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.125" top="0" borrom="1.0"/>
+				</Texture>
+				<Texture name="$parentTextureRight" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="-16" y="82"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.875" right="1.0" top="0" borrom="1.0"/>
+				</Texture>
+				<Texture name="$parentTextureCenter" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+					<Size>
+						<AbsDimension x="1" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentTextureLeft" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeTo="$parentTextureRight" relativePoint="LEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.9375" top="0" borrom="1.0"/>
+				</Texture>
+				<!-- Value EditBox border -->
+				<Texture name="$parentValTextureLeft" file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="440" y="-8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.125" top="0" borrom="1.0"/>
+				</Texture>
+				<Texture name="$parentValTextureRight" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="-16" y="-8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.875" right="1.0" top="0" borrom="1.0"/>
+				</Texture>
+				<Texture name="$parentValTextureCenter" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+					<Size>
+						<AbsDimension x="1" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentValTextureLeft" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeTo="$parentValTextureRight" relativePoint="LEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.9375" top="0" borrom="1.0"/>
+				</Texture>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture setAllPoints="true">
+					<Color r="0.0" g="0.0" b="0.0" a="0.9"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:SetMovable(true)
+				this:SetUserPlaced(true)
+				this:RegisterForDrag("LeftButton")
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving()
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing()
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+
+	<!-- Dummy event frame -->
+	<Frame name="ThalizEventFrame">
+		<Scripts>
+			<OnLoad>
+				if (Thaliz_OnLoad) then
+				Thaliz_OnLoad();
+				end
+			</OnLoad>
+			<OnEvent>
+				if (Thaliz_OnEvent) then
+				Thaliz_OnEvent(event);
+				end
+			</OnEvent>
+			<OnUpdate>
+				if (Thaliz_OnTimer) then
+				Thaliz_OnTimer(arg1);
+				end
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

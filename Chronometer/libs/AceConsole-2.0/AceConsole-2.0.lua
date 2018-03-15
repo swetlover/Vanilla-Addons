@@ -1,19 +1,19 @@
 --[[
-Name: AceConsole-2.0
-Revision: $Rev: 17638 $
-Developed by: The Ace Development Team (http://www.wowace.com/index.php/The_Ace_Development_Team)
-Inspired By: Ace 1.x by Turan (turan@gryphon.com)
-Website: http://www.wowace.com/
-Documentation: http://www.wowace.com/index.php/AceConsole-2.0
-SVN: http://svn.wowace.com/root/trunk/Ace2/AceConsole-2.0
-Description: Mixin to allow for input/output capabilities. This uses the
-             AceOptions data table format to determine input.
-             http://wiki.wowace.com/index.php/AceOptions_data_table
-Dependencies: AceLibrary, AceOO-2.0
+	Name: AceConsole-2.0
+	Revision: $Rev: 17640 $
+	Developed by: The Ace Development Team (http://www.wowace.com/index.php/The_Ace_Development_Team)
+	Inspired By: Ace 1.x by Turan (turan@gryphon.com)
+	Website: http://www.wowace.com/
+	Documentation: http://www.wowace.com/index.php/AceConsole-2.0
+	SVN: http://svn.wowace.com/root/trunk/Ace2/AceConsole-2.0
+	Description: Mixin to allow for input/output capabilities. This uses the
+	AceOptions data table format to determine input.
+	http://wiki.wowace.com/index.php/AceOptions_data_table
+	Dependencies: AceLibrary, AceOO-2.0
 ]]
 
 local MAJOR_VERSION = "AceConsole-2.0"
-local MINOR_VERSION = "$Revision: 17638 $"
+local MINOR_VERSION = "$Revision: 17640 $"
 
 if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary.") end
 if not AceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
@@ -56,16 +56,16 @@ elseif GetLocale() == "koKR" then
 	OPTION_HANDLER_NOT_VALID = "설정 조정값이 올바르지 않습니다."
 	OPTION_IS_DISABLED = "|cffffff7f%s|r 설정은 사용할 수 없습니다."
 elseif GetLocale() == "zhCN" then
-	MAP_ONOFF = { [false] = "|cffff0000\229\133\179\233\151\173|r", [true] = "|cff00ff00\229\188\128\229\144\175|r" }
-	USAGE = "\231\148\168\230\179\149"
-	IS_CURRENTLY_SET_TO = "|cffffff7f%s|r \229\189\147\229\137\141\232\162\171\232\174\190\231\189\174 |cffffff7f[|r%s|cffffff7f]|r"
-	IS_NOW_SET_TO = "|cffffff7f%s|r \231\142\176\229\156\168\232\162\171\232\174\190\231\189\174\228\184\186 |cffffff7f[|r%s|cffffff7f]|r"
-	IS_NOT_A_VALID_OPTION_FOR = "[|cffffff7f%s|r] \228\184\141\230\152\175\228\184\128\228\184\170\230\156\137\230\149\136\231\154\132\233\128\137\233\161\185 \228\184\186 |cffffff7f%s|r"
-	IS_NOT_A_VALID_VALUE_FOR = "[|cffffff7f%s|r] \228\184\141\230\152\175\228\184\128\228\184\170\230\156\137\230\149\136\229\128\188 \228\184\186 |cffffff7f%s|r"
-	NO_OPTIONS_AVAILABLE = "\230\178\161\230\156\137\233\128\137\233\161\185\229\143\175\231\148\168"
-	OPTION_HANDLER_NOT_FOUND = "\233\128\137\233\161\185\229\164\132\231\144\134\231\168\139\229\186\143 |cffffff7f%q|r \230\178\161\230\159\165\230\137\190."
-	OPTION_HANDLER_NOT_VALID = "\233\128\137\233\161\185\229\164\132\231\144\134\231\168\139\229\186\143 \230\151\160\230\149\136."
-	OPTION_IS_DISABLED = "\233\128\137\233\161\185 |cffffff7f%s|r \228\184\141\229\174\140\230\149\180."
+	MAP_ONOFF = { [false] = "|cffff0000关闭|r", [true] = "|cff00ff00开启|r" }
+	USAGE = "用法"
+	IS_CURRENTLY_SET_TO = "|cffffff7f%s|r 目前的设定为 |cffffff7f[|r%s|cffffff7f]|r"
+	IS_NOW_SET_TO = "|cffffff7f%s|r 现在被设定为 |cffffff7f[|r%s|cffffff7f]|r"
+	IS_NOT_A_VALID_OPTION_FOR = "[|cffffff7f%s|r] 是一个不符合规定的选项，对 |cffffff7f%s|r"
+	IS_NOT_A_VALID_VALUE_FOR = "[|cffffff7f%s|r] 是一个不符合规定的数值，对 |cffffff7f%s|r"
+	NO_OPTIONS_AVAILABLE = "没有可用的选项处理器。"
+	OPTION_HANDLER_NOT_FOUND = "找不到 |cffffff7f%q|r 选项处理器。"
+	OPTION_HANDLER_NOT_VALID = "选项处理器不符合规定。"
+	OPTION_IS_DISABLED = "|cffffff7f%s|r 已被停用。"
 elseif GetLocale() == "zhTW" then
 	MAP_ONOFF = { [false] = "|cffff0000關閉|r", [true] = "|cff00ff00開啟|r" }
 	USAGE = "用法"

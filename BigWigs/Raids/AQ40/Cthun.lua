@@ -525,8 +525,8 @@ function module:CThunWeakened()
 	self:DelayedSync(timer.weakened, syncName.weakenOver)
 	
 	-- next giant claw after weaken
-	self:DelayedBar(timer.weakened - 7, L["barGiantC"], 7, icon.giantClaw)
-	self:DelayedSync(timer.weakened, syncName.giantClawSpawn)
+	self:Bar(L["barGiantC"], timer.p2FirstGiantClawAfterWeaken, icon.giantClaw)
+	self:DelayedSync(timer.p2FirstGiantClawAfterWeaken, syncName.giantClawSpawn)
 end
 
 function module:CThunWeakenedOver()

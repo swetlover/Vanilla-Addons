@@ -1,128 +1,220 @@
-assert( BigWigs, "BigWigs not found!")
+--[[
+--
+-- BigWigs Strategy Module for Loatheb in Naxxramas.
+--
+-- Creates a list of the healers and sorts them according
+-- to when they should heal.
+--
+--]]
 
-----------------------------------
---      Module Declaration      --
-----------------------------------
+------------------------------
+--      Are you local?      --
+------------------------------
 
 local myname = "洛欧塞布治疗助手"
-local bossName = "Loatheb"
 local L = AceLibrary("AceLocale-2.2"):new("BigWigs"..myname)
-local module = BigWigs:NewModule(myname, "AceConsole-2.0")
-local boss = AceLibrary("Babble-Boss-2.2")[bossName]
-module.bossSync = myname
-module.synctoken = myname
-module.zonename = AceLibrary("Babble-Zone-2.2")["Naxxramas"]
-module.translatedName = boss
-module.external = true
-module.trashMod = true
+local boss = AceLibrary("Babble-Boss-2.2")["Loatheb"]
+local LL = AceLibrary("AceLocale-2.2"):new("BigWigs"..boss)
 
-----------------------------
---      Localization      --
-----------------------------
+local tablet = AceLibrary("Tablet-2.0")
+local roster = nil
+local healerChannel = nil
+local ignoreList = nil
 
-L:RegisterTranslations("zhCN", function() return {
-	cmd = "LoathebHealers",
-	
-	bar_cmd = "bar",
-	bar_name = "堕落心灵条",
-	bar_desc = "显示一个你自己的堕落心灵Debuff条.",
-	
-	healnotify_cmd = "notify",
-	healnotify_name = "不通知治疗职业.",
-	healnotify_desc = "切换发送信息到治疗频道.关于谁治疗，谁是下一个治疗",
-	
-	localhealnotify_cmd = "localnotify",
-	localhealnotify_name = "通知.当轮到你治疗的时候",
-	localhealnotify_desc = "当你需要治疗时，会显示提示你的本地信息.",
-	
-	notwhisper_cmd = "notwhisper",
-	notwhisper_name = "不私聊治疗的循环",
-	notwhisper_desc = "切换私聊下一个和他后面的一个去治疗和准备.",
-	
-	bar_text = "堕落心灵",
-	debuffLost = "堕落心灵效果从你身上消失了。",
-	
-	slash_cmd = "/bwlh",
-	slash_desc = "洛欧塞布治疗助手设置.",
-	
-	tabletshow_cmd = "show",
-	tabletshow_desc = "显示治疗者列表.",
-	
-	tablethide_cmd = "hide",
-	tablethide_desc = "隐藏治疗者列表.",
-	
-	setchannel_cmd = "channel",
-	setchannel_desc = "设置治疗频道.",
-	
-	healerrotation_cmd = "healerrotation",
-	healerrotation_desc = "设置特定的治疗者循环.",
-	["<name1, name2, name3>"] = "<名字1, 名字2, 名字3>",
-	
-	["Loatheb Healers"] = "洛欧塞布治疗助手",
-	["Big Wigs Loatheb Healers"] = "Big Wigs 洛欧塞布治疗助手",
-	["Healer"] = "治疗者",
-	["Timer"] = "计时器",
-	["Ready"] = "准备好了",
-	["Corrupted Mind"] = "堕落心灵",
-	["The leader will automatically whisper the next one in line when to heal."] = "领导者在治疗时会自动私聊下一个。",
-	["Get ready!"] = "准备好！",
-	["Heal now!"] = "现在治疗！",
-	["[BWLH] You are the first healer, heal when ready."] = "你是第一个治疗者, 准备好后就治疗!",
-	["[BWLH] You are the second healer, heal when you get the message."] = "你是第二个治疗者, 当你收到提示时就开始治疗!",
-	["%s healed - %s is next!"] = "%s 治疗结束 - %s 是下一个治疗!",
-	["<channelname>"] = "<频道名字>",
-	["You are NOT in a healer channel. Please set one using /bwlh setchannel <channelname>."] = "你不在一个治疗者频道. 请设置一个,输入 /bwlh setchannel <频道名字>",
-	["Your announce channel is set to %s."] = "你的通告频道设置到 %s",
-	["The channel %s was not found, please set a healer channel with /bwlh setchannel <channelname>."] = "频道 %s 未发现,请设置一个治疗者频道,输入/bwlh setchannel <频道名字>",
-	["Offline"] = "离线",
-	["Dead"] = "死亡",
-	["Healer list not populated yet, please click here to do so now."] = "治疗者名单尚未填充, 现在请点击这里.",
-	["Commands"] = "命令",
-	["Print rotation to raidchat"] = "发送循环到团队聊天",
-	["Re-scan healers"] = "重新扫描治疗者",
-	["Ignore target"] = "忽略目标",
-	["Healer list refreshed."] = "治疗者列表刷新",
-	["%s will be blocked from healing rotation."] = "%s 将被阻止治疗循环",
-	["%s can be in healing rotation."] = "%s 可以治疗循环.",
-	["[BWLH] Healing rotation: %s."] = "治疗循环: %s.",
-	["%[BWLH%] Healing rotation: (.*)."] = "%[BWLH%] 治疗循环: (.*).",
-	["Healing rotation broadcasted by %s."] = "治疗循环由 %s 广播",
-	["Healing rotation not populated yet."] = "治疗循环尚未填充",
-} end )
----------------------------------
---      	Variables 		   --
----------------------------------
-
--- module variables
-module.enabletrigger = { boss }
-module.toggleoptions = { "healnotify", "notwhisper", -1, "localhealnotify", "bar" }
-module.revision = 20001
-
--- locals
 local COLOR_GREEN = "00ff00"
 local COLOR_WHITE = "ffffff"
 local COLOR_RED = "ff0000"
 local COLOR_GREY = "aaaaaa"
 
-local tablet = AceLibrary("Tablet-2.0")
-local roster = nil
-local healerChannel = nil
-local healerList = nil
+----------------------------
+--      Localization      --
+----------------------------
 
-local syncName = {
-	debuffGained = "BWLHDebuffGained"..module.revision,
-	rotation = "BWLHRotation"..module.revision,
-}
+L:RegisterTranslations("enUS", function() return {
+	cmd = "HealbotAssist",
 
-local icon = {
-	debuff = "Spell_Shadow_AuraOfDarkness",
-}
+	bar_cmd = "bar",
+	bar_name = "Corrupted Mind Bar",
+	bar_desc = "Show bar for your own Corrupted Mind debuff.",
+
+	healnotify_cmd = "notify",
+	healnotify_name = "Notify heals",
+	healnotify_desc = "Sends a raid warning about who healed and who is next.",
+	
+	localhealnotify_cmd = "localnotify",
+	localhealnotify_name = "Notify when it's your turn to heal",
+	localhealnotify_desc = "Will show local messages that alerts you when you are suppose to heal",
+
+	notwhisper_cmd = "notwhisper",
+	notwhisper_name = "Do NOT whisper healing rotation",
+	notwhisper_desc = "Toggles whispering the next one and the one after him to heal and get ready.",
+
+	spore_cmd = "spore",
+	spore_name = "Spore rotation",
+	spore_desc = "Whisper spore rotation to the raid members.",
+	
+	sporeskip_cmd = "sporeskip",
+	sporeskip_name = "Spore rotation - Include group 8",
+	sporeskip_desc = "Optionally remove group 8 from the spore rotation",
+	
+	sporeicon_cmd = "sporeicon",
+	sporeicon_name = "Spore rotation icons",
+	sporeicon_desc = "Place raid icons on the group that is suppose to grab a spore",
+
+	bar_text = "Corrupted Mind",
+
+	slash_cmd = "/bwhba",
+	slash_desc = "Options for Big Wigs Healbot Assist.",
+
+	tabletshow_cmd = "show",
+	tabletshow_desc = "Shows the list of healers.",
+	tablethide_cmd = "hide",
+	tablethide_desc = "Hides the list of healers.",
+	setchannel_cmd = "channel",
+	setchannel_desc = "Sets the channel to spam healing messages in.",
+
+	["Big Wigs Healbot Assist"] = true,
+	["Healer"] = true,
+	["Timer"] = true,
+	["You have received a healer list for Loatheb from %s, accept this list?"] = true,
+	["Yes"] = true,
+	["No"] = true,
+	["Ready"] = true,
+	["Next"] = true,
+	["Corrupted Mind"] = true,
+	["The leader will automatically whisper the next one in line when to heal."] = true,
+	["Get ready!"] = true,
+	["Heal now!"] = true,
+	["[BWHBA] You are the first healer, heal when ready."] = true,
+	["[BWHBA] You are the second healer, heal when you get the message."] = true,
+	["%s healed - %s is next!"] = true,
+	["<channelname>"] = true,
+	["You are NOT in a healer channel. Please set one using /bwhba setchannel <channelname>."] = true,
+	["Everyone has debuff!"] = true,
+	["Your announce channel is set to %s."] = true,
+	["Healing rotation is set to: %s - you will get whispers when to heal."] = true,
+	["The channel %s was not found, please set a healer channel with /bwhba setchannel <channelname>."] = true,
+	["Offline"] = true,
+	["Dead"] = true,
+	["Healer list not populated yet, please click here to do so now."] = true,
+	["Commands"] = true,
+	["Print rotation to raidchat"] = true,
+	["Re-scan healers"] = true,
+	["Ignore target"] = true,
+	["Healer list refreshed."] = true,
+	["%s will be blocked from healing rotation."] = true,
+	["%s can be in healing rotation."] = true,
+	["[BWHBA] Healing rotation: %s."] = true,
+	["%[BWHBA%] Healing rotation: (.*)."] = true,
+	["Healing rotation broadcasted by %s."] = true,
+	["Healing rotation not broadcasted yet."] = true,
+	["Group %d is next for spore!"] = true,
+	["Kill spore!"] = true,
+	["Get ready for spore!"] = true,
+	["Get ready to heal!"] = true,
+	["Your turn to heal!"] = true,
+} end )
+
+
+L:RegisterTranslations("zhCN", function() return {
+--	cmd = "HealbotAssist",
+
+--	bar_cmd = "bar",
+	bar_name = "堕落心灵",
+	bar_desc = "显示你中堕落心灵debuff的计时条。",
+
+	sporeskip_name = "孢子循环 - 8组队伍",
+	sporeskip_desc = "有选择地删除8组队伍的孢子循环",
+
+	sporeicon_name = "孢子循环图标",
+	sporeicon_desc = "将RAID图标放在假设想抢孢子的队伍上。",
+
+--	healnotify_cmd = "notify",
+	healnotify_name = "治疗通知",
+	healnotify_desc = "通过团队警报发送谁已治疗及下一个治疗。",
+
+--	notwhisper_cmd = "notwhisper",
+	notwhisper_name = "不要密语治疗链",
+	notwhisper_desc = "选择密语下一个和下下个需要治疗以及准备治疗的玩家。",
+
+	localhealnotify_name = "当轮到你治疗时通报",
+	localhealnotify_desc = "当轮到你治疗时，会显示提示你的本地信息。",
+
+--	spore_cmd = "spore",
+	spore_name = "孢子警报",
+	spore_desc = "密语通知团队成员。",
+
+	bar_text = "堕落心灵",
+
+	slash_cmd = "/bwhba",
+	slash_desc = "设置BigWigs洛欧塞布治疗助手",
+
+--	tabletshow_cmd = "show",
+	tabletshow_desc = "显示治疗者清单",
+--	tablethide_cmd = "hide",
+	tablethide_desc = "隐藏治疗者清单",
+--	setchannel_cmd = "channel",
+	setchannel_desc = "设置一个发送治疗信息的频道。",
+
+	["Big Wigs Healbot Assist"] = "BigWigs洛欧塞布治疗助手",
+	["Healer"] = "治疗者",
+	["Timer"] = "计时器",
+	["You have received a healer list for Loatheb from %s, accept this list?"] = "你是否接受从%S发送的治疗链清单?",
+	["Yes"] = "是",
+	["No"] = "否",
+	["Ready"] = "准备",
+	["Next"] = "下个",
+	["Corrupted Mind"] = "堕落心灵",
+	["The leader will automatically whisper the next one in line when to heal."] = "团长将会自动密语下个需要治疗的在线玩家。",
+	["Get ready!"] = "准备！- 注意！",
+	["Heal now!"] = "立刻治疗！",
+	["[BWHBA] You are the first healer, heal when ready."] = "[BWHBA]你是第一个治疗，做好准备开始治疗。",
+	["[BWHBA] You are the second healer, heal when you get the message."] = "[BWHBA]你是第二个治疗，你收到命令后开始治疗！",
+	["%s healed - %s is next!"] = "%s已治疗 - %s准备！",
+	["<channelname>"] = "<频道名>",
+	["You are NOT in a healer channel. Please set one using /bwhba setchannel <channelname>."] = "你不在治疗频道！请输入/bwhba setchannel设置<频道名>。",
+	["Everyone has debuff!"] = "所有人都无法治疗",
+	["Your announce channel is set to %s."] = "你的通告频道被设置为%s。",
+	["Healing rotation is set to: %s - you will get whispers when to heal."] = "治疗链设置为：%s－当收到密语通知，你开始治疗。",
+	["The channel %s was not found, please set a healer channel with /bwhba setchannel <channelname>."] = "频道%s没有找到，请重新输入/bwhba setchannel设置<频道名>。",
+	["Offline"] = "离线",
+	["Dead"] = "死亡",
+	["Healer list not populated yet, please click here to do so now."] = "治疗清单未被添加，请按这里进行添加。",
+	["Commands"] = "参数",
+	["Print rotation to raidchat"] = "在团队频道中显示治疗链",
+	["Re-scan healers"] = "重新搜索治疗名单",
+	["Ignore target"] = "忽略目标",
+	["Healer list refreshed."] = "刷新治疗清单。",
+	["%s will be blocked from healing rotation."] = "%s将从治疗链中忽视",
+	["%s can be in healing rotation."] = "%s加入治疗链。",
+	["[BWHBA] Healing rotation: %s."] = "[BWHBA]治疗链：%s。",
+	["%[BWHBA%] Healing rotation: (.*)."] = "%[BWHBA%] 治疗链: (.*)。",
+	["Healing rotation broadcasted by %s."] = "治疗链广播通告%s。",
+	["Healing rotation not broadcasted yet."] = "治疗链没用广播通告。",
+	["Group %d is next for spore!"] = "下个%s小队将出现袍子！",
+	["Kill spore!"] = "快杀袍子！",
+	["Get ready for spore!"] = "准备，袍子出现！",
+	["Get ready to heal!"] = "准备治疗！",
+	["Your turn to heal!"] = "轮到你治疗了！",
+} end )
+
+----------------------------------
+--      Module Declaration      --
+----------------------------------
+
+BigWigsHealbotAssist = BigWigs:NewModule(myname, "AceConsole-2.0")
+BigWigsHealbotAssist.synctoken = myname
+BigWigsHealbotAssist.zonename = AceLibrary("Babble-Zone-2.2")["Naxxramas"]
+BigWigsHealbotAssist.enabletrigger = { boss }
+BigWigsHealbotAssist.toggleoptions = { "healnotify", "notwhisper", "spore", "sporeskip", "sporeicon", -1, "localhealnotify", "bar" }
+BigWigsHealbotAssist.revision = tonumber(string.sub("$Revision: 19566 $", 12, -3))
+BigWigsHealbotAssist.external = true
 
 ------------------------------
 --      Initialization      --
 ------------------------------
 
-function module:OnRegister()
+function BigWigsHealbotAssist:OnRegister()
 	self:RegisterChatCommand({ L["slash_cmd"] }, {
 		type = "group",
 		args = {
@@ -143,254 +235,59 @@ function module:OnRegister()
 				get = false,
 				usage = L["<channelname>"],
 			},
-			rotation = {
-				type = "text", name = L["healerrotation_cmd"],
-				desc = L["healerrotation_desc"],
-				set = function(v)
-				if IsRaidOfficer() or IsRaidLeader() then
-					self:Sync(syncName.rotation.." "..v)
-					SendChatMessage(string.format(L["[BWLH] Healing rotation: %s."], v), "RAID", nil, nil)
-				end
-				end,
-				get = false,
-				usage = L["<name1, name2, name3>"],
-			},
+			--[[ignore = {
+				type = "text", name = L["ignore_cmd"],
+				desc = L["ignore_desc"],
+				set = function(v) self:IgnoreCmd(v) end,
+				get = function() self:PrintIgnore() end
+				usage = 
+			}]]
 		},
 	})
 end
 
--- called after module is enabled
-function module:OnEnable()
+function BigWigsHealbotAssist:OnEnable()
+	if not roster then roster = AceLibrary("RosterLib-2.0") end
 	if not healerChannel then healerChannel = self.db.profile.healerChannel end
+
 	if not healerChannel then
-		self:Print(L["You are NOT in a healer channel. Please set one using /bwlh setchannel <channelname>."])
+		self:Print(L["You are NOT in a healer channel. Please set one using /bwhba setchannel <channelname>."])
 	else
 		self:Print(string.format(L["Your announce channel is set to %s."], healerChannel))
 	end
-	healerList = {}
-end
 
--- called after module is enabled and after each wipe
-function module:OnSetup()
-	if not roster then roster = AceLibrary("RosterLib-2.0") end
-	if table.getn(healerList) > 0 then
-		for k, v in pairs(healerList) do
-			v.healbotDebuffTimer = nil
-		end
-	end
+	self.playerName = UnitName("player")
+	self:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH")
+	--[[self:RegisterEvent("SEEAEO_UnitDebuffLost")
+	self:RegisterEvent("SEEAEO_UnitDebuffGained")]]
+	self:RegisterEvent("SpecialEvents_UnitDebuffLost")
+	self:RegisterEvent("SpecialEvents_UnitDebuffGained")
+	self:RegisterEvent("CHAT_MSG_RAID")
+	self:RegisterEvent("CHAT_MSG_RAID_LEADER", "CHAT_MSG_RAID")
+
+	self:RegisterEvent("BigWigs_RecvSync")
+	self:TriggerEvent("BigWigs_ThrottleSync", "HealBotGetReady", 2)
+	self:TriggerEvent("BigWigs_ThrottleSync", "HealBotYourTurn", 2)
+
+	-- XXX self.healerList
+	-- XXX broadcast with
+	-- ["Healing rotation is set to: %s - you will get whispers when to heal."]
+
 	self:ShowTablet()
 end
 
--- called after boss is engaged
-function module:OnEngage()
-	self:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH")
-	self:RegisterEvent("PLAYER_AURAS_CHANGED")
-end
-
--- called after boss is disengaged (wipe(retreat) or victory)
-function module:OnDisgengage()
+function BigWigsHealbotAssist:OnDisable()
 	roster = nil
-end
 
-function module:OnDisable()
 	self:HideTablet()
 end
 
 ------------------------------
---      Event Handlers	    --
-------------------------------
-
-function module:PLAYER_AURAS_CHANGED(msg)
-	local found = false
-	local debuffnumber = 1
-	while UnitDebuff("player", debuffnumber) do
-		local arg1 = UnitDebuff("player", debuffnumber)
-		if arg1 == "Interface\\Icons\\Spell_Shadow_AuraOfDarkness" then
-			found = true
-		end
-		debuffnumber = debuffnumber + 1
-	end
-	if not found then return end
-	self:UnregisterEvent("PLAYER_AURAS_CHANGED")
-	self:Sync(syncName.debuffGained..UnitName("player").." "..UnitName("player"))
-	self:RegisterEvent("CHAT_MSG_SPELL_AURA_GONE_SELF")
-end
-
-function module:CHAT_MSG_SPELL_AURA_GONE_SELF(msg)
-	if string.find(msg, L["debuffLost"]) then
-		self:RegisterEvent("PLAYER_AURAS_CHANGED")
-	end
-end
-
-function module:CHAT_MSG_COMBAT_HOSTILE_DEATH(msg)
-	if msg == string.format(UNITDIESOTHER, boss) then
-		self.core:ToggleModuleActive(self, false)
-	end
-end
-
-------------------------------
---      Synchronization	    --
-------------------------------
-
-function module:BigWigs_RecvSync(sync, rest, nick)
-	if string.find(sync, syncName.debuffGained) and rest then
-		self:UpdateList(rest)
-	elseif sync == syncName.rotation and rest then
-		local healers = self:strsplit(",%s*", rest)
-		self:CreateHealerList(healers)
-		self:Print(string.format(L["Healing rotation broadcasted by %s."], nick))
-	end
-end
-
-------------------------------
---      Sync Handlers	    --
-------------------------------
-
-function module:UpdateList(name)
-	local unit = nil
-	for n, u in pairs(healerList) do
-		if u.name == name then
-		unit = u
-		end
-	end
-	if unit == nil then return end
-	if unit.name == UnitName("player") then
-		self:Bar(L["bar_text"], 60, icon.debuff, true, "Red")
-	end
-	unit.healbotDebuffTimer = 60
-	self:ScheduleRepeatingEvent("bwlhunitdebuff"..unit.name, self.DecrementCounter, 1, self, unit)
-	if IsRaidLeader() or IsRaidOfficer() then
-		self:SendMessages(unit)
-	end
-end
-
-------------------------------
---      Tablet              --
-------------------------------
-
-function module:OnTooltipUpdate()
-	if not tablet:IsRegistered("BigWigsLoathebHealers") then return end
-	
-	local cat = tablet:AddCategory(
-		"columns", 3,
-		"text", "#",
-		"text2", L["Healer"],
-		"text3", L["Timer"],
-		"child_justify1", "LEFT",
-		"child_justify2", "LEFT",
-		"child_justify3", "RIGHT"
-	)
-	
-	for number, healer in pairs(healerList) do
-		local unitName = healer.name
-		local statusLine = nil
-		if unitName == UnitName("player") then unitName = "|cff"..COLOR_RED.."<<<"..unitName..">>>|r" end
-		if UnitIsDeadOrGhost(healer.unitid) then
-			statusLine = "|cff"..COLOR_GREY..L["Dead"].."|r"
-		elseif not UnitIsConnected(healer.unitid) then
-			statusLine = "|cff"..COLOR_GREY..L["Offline"].."|r"
-		elseif healer.healbotDebuffTimer then
-			statusLine = "|cff"..COLOR_RED..healer.healbotDebuffTimer.."|r"
-		else
-			statusLine = "|cff"..COLOR_GREEN..L["Ready"].."|r"
-		end
-		cat:AddLine("text", "|cff"..COLOR_WHITE..tostring(number).."|r",
-					"text2", unitName,
-					"text2R", RAID_CLASS_COLORS[healer.class].r,
-					"text2G", RAID_CLASS_COLORS[healer.class].g,
-					"text2B", RAID_CLASS_COLORS[healer.class].b,
-					"text3", statusLine)
-	end
-	if IsRaidOfficer() or IsRaidLeader() then
-		if table.getn(healerList) ~= 0 then
-			local cat2 = tablet:AddCategory("columns", 1, "text", L["Commands"], "child_justify1", "CENTER")
-			cat2:AddLine(
-				"text", L["Print rotation to raidchat"],
-				"func", function() self:PrintRotation() end)
-		end
-	end
-	if table.getn(healerList) == 0 then
-		local cat = tablet:AddCategory("columns", 1)
-		cat:AddLine("text", L["Healing rotation not populated yet."])
-	end
-end
-
-function module:ShowTablet()
-	if not tablet:IsRegistered("BigWigsLoathebHealers") then
-		tablet:Register("BigWigsLoathebHealers",
-			"children",
-				function()
-					tablet:SetTitle(L["Loatheb Healers"])
-					self:OnTooltipUpdate()
-				end,
-			"clickable", true,
-			"showTitleWhenDetached", true,
-			"showHintWhenDetached", true,
-			"cantAttach", true
-		)
-	end
-	
-	if not self:IsEventScheduled("bwlhupdate") then
-		self:ScheduleRepeatingEvent("bwlhupdate", function() tablet:Refresh("BigWigsLoathebHealers") end, 1)
-	end
-	
-	if tablet:IsAttached("BigWigsLoathebHealers") then
-		tablet:Detach("BigWigsLoathebHealers")
-	end
-end
-
-function module:HideTablet()
-	if not tablet:IsRegistered("BigWigsLoathebHealers") then return end
-	self:CancelScheduledEvent("bwlhupdate")
-	tablet:Attach("BigWigsLoathebHealers")
-end
-
-------------------------------
---      Roster              --
-------------------------------
-
-function module:CreateHealerList(table)
-	healerList = {}
-	for n, u in pairs(table) do
-		if type(u) == "string" then u = roster:GetUnitObjectFromName(u) end
-		if u and u.name and u.class ~= "PET" then
-			tinsert(healerList, u)
-			if not u.healbotDebuffTimer then
-				u.healbotDebuffTimer = nil
-			end
-		end
-	end
-	if tablet:IsRegistered("BigWigsLoathebHealers") then
-		tablet:Refresh("BigWigsLoathebHealers")
-	end
-	self:Print(L["Healer list refreshed."])
-end
-
-------------------------------
---      Messages            --
-------------------------------
-
-function module:PrintRotation()
-	if table.getn(healerList) == 0 then return end
-	local healers = ""
-	for n, u in pairs(healerList) do
-		healers = healers..", "..u.name
-	end
-	self:Sync(syncName.rotation.." "..healers)
-	SendChatMessage(string.format(L["[BWLH] Healing rotation: %s."], healers), "RAID", nil, nil)
-end
-
-function module:SetChannel(channelName)
-	self.db.profile.healerChannel = channelName
-	healerChannel = channelName
-end
-
-------------------------------
---      Utility	Functions   --
+--      Events              --
 ------------------------------
 
 -- Ninjaed from lua-users.org
-function module:strsplit(delimiter, text)
+local function strsplit(delimiter, text)
 	local list = {}
 	local pos = 1
 	if strfind("", delimiter, 1) then -- this would result in endless loops
@@ -409,48 +306,404 @@ function module:strsplit(delimiter, text)
 	return list
 end
 
-function module:DecrementCounter(unit)
-	if unit.healbotDebuffTimer == nil or tonumber(unit.healbotDebuffTimer) == nil then return end
-	unit.healbotDebuffTimer = unit.healbotDebuffTimer - 1
-	if unit.healbotDebuffTimer <= 0 then
-		unit.healbotDebuffTimer = nil
-		self:CancelScheduledEvent("bwhaunitdebuff"..unit.name)
+function BigWigsHealbotAssist:CHAT_MSG_RAID(msg, author)
+	local _,_,rotation = string.find(msg, L["%[BWHBA%] Healing rotation: (.*)."])
+	if rotation then
+		local unit = roster:GetUnitObjectFromName(author)
+		if unit.name ~= self.playerName and unit.rank > 0 then
+			self:Print(string.format(L["Healing rotation broadcasted by %s."], author))
+			local healers = strsplit(",%s*", rotation)
+			self:CreateHealerList(healers)
+		end
 	end
 end
 
-function module:SendMessages(unit)
-	local position = nil
-	local nextHealer = nil
-	local nextNextHealer = nil
-	for k, v in pairs(healerList) do
-		if v == unit then
-			position = k
+
+
+function BigWigsHealbotAssist:BigWigs_RecvSync( sync, rest, nick )
+	if sync == "HealBotGetReady" and rest and self.db.profile.localhealnotify then
+		local player = rest
+		if player == self.playerName then
+			self:TriggerEvent("BigWigs_Message", L["Get ready to heal!"], "Attention", true)
+		end
+	elseif sync == "HealBotYourTurn" and rest and self.db.profile.localhealnotify then
+		local player = rest
+		if player == self.playerName then
+			self:TriggerEvent("BigWigs_Message", L["Your turn to heal!"], "Urgent", true, "Alert")
+		end
+	elseif sync == "LoathebSporeSpawn2" and rest then
+		if not self.db.profile.spore then return end
+		local numGroups = self.db.profile.sporeskip and 8 or 7 -- Optionally pretend we only have 7 groups
+		rest = tonumber(rest)
+		if not rest then return end
+		
+		local currentSpore = rest-1
+
+		local group = mod(currentSpore, numGroups)
+		if group == 0 then group = numGroups end
+		
+		local nextGroup = mod(currentSpore+1, numGroups)
+		if nextGroup == 0 then nextGroup = numGroups end
+
+		self:TriggerEvent("BigWigs_Message", string.format(L["Group %d is next for spore!"], nextGroup), "Attention")
+		
+		-- Whisper all the people in the group to go, and put a raid mark on the group members
+		local raidicon = 1;
+		for k, u in pairs(roster.roster) do
+			if u and u.name and u.class ~= "PET" and u.subgroup ~= nil then
+				if u.subgroup == group then
+					if self.db.profile.sporeicon then
+						SetRaidTarget(u.unitid, raidicon)
+						raidicon = raidicon + 1
+					end
+					self:TriggerEvent("BigWigs_SendTell", u.name, L["Kill spore!"])
+				elseif u.subgroup == nextGroup then
+					self:TriggerEvent("BigWigs_SendTell", u.name, L["Get ready for spore!"])
+				end
+			end
 		end
 	end
-	if table.getn(healerList) < 3 then return end
-	if position < table.getn(healerList) then
-		nextHealer = healerList[position+1]
-		if position + 1 < table.getn(healerList) then
-			nextNextHealer = healerList[position+2]
+end
+
+function BigWigsHealbotAssist:CHAT_MSG_COMBAT_HOSTILE_DEATH(msg)
+	if msg == string.format(UNITDIESOTHER, boss) then
+		self.core:ToggleModuleActive(self, false)
+	end
+end
+
+------------------------------
+--      Tablet              --
+------------------------------
+
+function BigWigsHealbotAssist:OnTooltipUpdate()
+	if not tablet:IsRegistered("BigWigs_HealbotAssist") then return end
+
+	local cat = tablet:AddCategory(
+		"columns", 3,
+		"text", "#",
+		"text2", L["Healer"],
+		"text3", L["Timer"],
+		"child_justify", "LEFT",
+		"child_justify2", "LEFT",
+		"child_justify3", "RIGHT"
+	)
+	local counter = 1
+
+	-- Find the first unit.
+	-- XXX Use self.healerList
+	local unit = nil
+	local firstUnit = nil
+	for n, u in pairs(roster.roster) do
+		if u and u.name and u.class ~= "PET" and u.inHealbotRotation and u.isFirstInRotation then
+			firstUnit = u
+			break
+		end
+	end
+	unit = firstUnit
+
+	local addMore = true
+	while addMore and unit do
+		local unitName = unit.name
+		local statusLine = nil
+		-- This overwrites the rgb values given in addline, and green is not
+		-- used by any healer class.
+		if unitName == self.playerName then unitName = "|cff"..COLOR_RED.."<<<"..unitName..">>>|r" end
+		if UnitIsDeadOrGhost(unit.unitid) then
+			statusLine = "|cff"..COLOR_GREY..L["Dead"].."|r"
+		elseif not UnitIsConnected(unit.unitid) then
+			statusLine = "|cff"..COLOR_GREY..L["Offline"].."|r"
+		elseif unit.healbotDebuffTimer then
+			statusLine = "|cff"..COLOR_RED..unit.healbotDebuffTimer.."|r"
 		else
-			nextNextHealer = healerList[1]
+			statusLine = "|cff"..COLOR_GREEN..L["Ready"].."|r"
 		end
+		cat:AddLine("text", "|cff"..COLOR_WHITE..tostring(counter).."|r",
+					"text2", unitName,
+					"text2R", RAID_CLASS_COLORS[unit.class].r,
+					"text2G", RAID_CLASS_COLORS[unit.class].g,
+					"text2B", RAID_CLASS_COLORS[unit.class].b,
+					"text3", statusLine)
+		counter = counter + 1
+		if firstUnit.name == unit.nextInRotation or counter == 40 then
+			addMore = false
+			break
+		else
+			unit = roster:GetUnitObjectFromName(unit.nextInRotation)
+		end
+	end
+
+	if IsRaidOfficer() or IsRaidLeader() then
+		if counter == 1 then
+			local cat = tablet:AddCategory("columns", 1)
+			cat:AddLine("text", L["Healer list not populated yet, please click here to do so now."],
+						"func", function() self:CreateHealerList() end)
+		end
+		local cat2 = tablet:AddCategory("columns", 1, "text", L["Commands"], "child_justify1", "CENTER")
+
+		cat2:AddLine(
+				"text", L["Print rotation to raidchat"],
+				"func", function() self:PrintRotation() end)
+		cat2:AddLine(
+				"text", L["Re-scan healers"],
+				"func", function() self:CreateHealerList() end)
+		cat2:AddLine(
+				"text", L["Ignore target"],
+				"func", function() self:IgnoreTarget() end)
+	elseif counter == 1 then
+		local cat = tablet:AddCategory("columns", 1)
+		cat:AddLine("text", L["Healing rotation not broadcasted yet."])
+	end
+
+	tablet:SetHint(L["The leader will automatically whisper the next one in line when to heal."])
+end
+
+function BigWigsHealbotAssist:ShowTablet()
+	if not tablet:IsRegistered("BigWigs_HealbotAssist") then
+		tablet:Register("BigWigs_HealbotAssist",
+			"children",
+				function()
+					tablet:SetTitle(L["Big Wigs Healbot Assist"])
+					self:OnTooltipUpdate()
+				end,
+			"clickable", true,
+			"showTitleWhenDetached", true,
+			"showHintWhenDetached", true,
+			"cantAttach", true
+		)
+	end
+
+	if not self:IsEventScheduled("bwhbaupdate") then
+		self:ScheduleRepeatingEvent("bwhbaupdate", function() tablet:Refresh("BigWigs_HealbotAssist") end, 1)
+	end
+
+	if tablet:IsAttached("BigWigs_HealbotAssist") then
+		tablet:Detach("BigWigs_HealbotAssist")
+	end
+end
+
+function BigWigsHealbotAssist:HideTablet()
+	if not tablet:IsRegistered("BigWigs_HealbotAssist") then return end
+
+	self:CancelScheduledEvent("bwhbaupdate")
+
+	tablet:Attach("BigWigs_HealbotAssist")
+end
+
+------------------------------
+--      Roster              --
+------------------------------
+
+function BigWigsHealbotAssist:IgnoreTarget()
+	if not UnitExists("target") then return end
+	if not IsRaidLeader() and not IsRaidOfficer() then return end
+	local unit = roster:GetUnitObjectFromName(UnitName("target"))
+	if not unit then return end
+	if unit.bwhbaIgnore then
+		unit.bwhbaIgnore = nil
+		self:Print(string.format(L["%s can be in healing rotation."], unit.name))
 	else
-		nextHealer = healerList[1]
-		nextNextHealer = healerList[2]
+		unit.bwhbaIgnore = true
+		self:Print(string.format(L["%s will be blocked from healing rotation."], unit.name))
+	end	
+end
+
+function BigWigsHealbotAssist:CreateHealerList(table)
+	local firstunit = nil
+	local lastunit = nil
+
+	for n, u in pairs(roster.roster) do
+		u.healbotDebuffTimer = nil
+		u.nextInRotation = nil
+		u.inHealbotRotation = nil
+	end
+
+	if not table then table = roster.roster end
+
+	for n, u in pairs(table) do
+		if type(u) == "string" then u = roster:GetUnitObjectFromName(u) end
+		if u and u.name and u.class ~= "PET" then
+			if (u.class == "PRIEST" or u.class == "DRUID" or u.class == "SHAMAN" or u.class == "PALADIN") and not u.bwhbaIgnore then
+				u.inHealbotRotation = true
+				if lastunit then
+					lastunit.nextInRotation = u.name
+				else
+					-- this is the first unit.
+					if not self.db.profile.notwhisper then
+						self:TriggerEvent("BigWigs_SendTell", u.name, L["[BWHBA] You are the first healer, heal when ready."])
+					end
+					firstunit = u
+					u.isFirstInRotation = true
+				end
+				lastunit = u
+			else
+				u.inHealbotRotation = nil
+			end
+			u.healbotDebuffTimer = nil
+		end
+	end
+	if firstunit and lastunit then
+		lastunit.nextInRotation = firstunit.name
+		if not self.db.profile.notwhisper then
+			self:TriggerEvent("BigWigs_SendTell", firstunit.nextInRotation, L["[BWHBA] You are the second healer, heal when you get the message."])
+		end
+	end
+
+	if tablet:IsRegistered("BigWigs_HealbotAssist") then
+		tablet:Refresh("BigWigs_HealbotAssist")
+	end
+
+	self:Print(L["Healer list refreshed."])
+	-- XXX Populate self.healerList
+end
+
+------------------------------
+--      Messages            --
+------------------------------
+
+function BigWigsHealbotAssist:PrintRotation()
+	if not IsRaidLeader() and not IsRaidOfficer() then return end
+
+	local healers = nil
+	local counter = 1
+	local unit = nil
+	local firstUnit = nil
+	for n, u in pairs(roster.roster) do
+		if u and u.name and u.class ~= "PET" and u.inHealbotRotation and u.isFirstInRotation then
+			firstUnit = u
+			break
+		end
+	end
+	unit = firstUnit
+
+	local more = true
+	while more and unit do
+		if not healers then
+			healers = unit.name
+		else
+			healers = healers..", "..unit.name
+		end
+		counter = counter + 1
+		if firstUnit.name == unit.nextInRotation or counter == 40 then
+			more = false
+			break
+		else
+			unit = roster:GetUnitObjectFromName(unit.nextInRotation)
+		end
+	end
+
+	if not healers then return end
+	SendChatMessage(string.format(L["[BWHBA] Healing rotation: %s."], healers), "RAID", nil, nil)
+end
+
+function BigWigsHealbotAssist:SetChannel(channelName)
+	self.db.profile.healerChannel = channelName
+	healerChannel = channelName
+end
+
+-- Finds the next healer with the least remaining on his debuff
+-- in case everyone has debuff.
+function BigWigsHealbotAssist:FindLowestDebuffTimer()
+	local readySoon = 60
+	local unit = nil
+	for n, u in pairs(roster.roster) do
+		if u.inHealbotRotation and UnitIsConnected(u.unitid) and not UnitIsDeadOrGhost(u.unitid) then
+			if u.healbotDebuffTimer then
+				if u.healbotDebuffTimer < readySoon then
+					unit = u
+					readySoon = u.healbotDebuffTimer
+				end
+			else
+				unit = u
+				break
+			end
+		end
+	end
+	return unit
+end
+
+function BigWigsHealbotAssist:FindNextUnit(aUnit)
+	-- Traverse the nextInRotation chain until we find someone that is ready to
+	-- heal.
+	local unit = aUnit
+	while not unit.inHealbotRotation or unit.healbotDebuffTimer or UnitIsDeadOrGhost(unit.unitid) or not UnitIsConnected(unit.unitid) do
+		-- the current unit can not be in rotation for some reason, which is
+		-- also true for the first unit object we get in.
+		unit = roster:GetUnitObjectFromName(unit.nextInRotation)
+		if unit and unit.unitid == aUnit.unitid then break end
+	end
+	-- If we're back at the original unit we got in, try to find the one with
+	-- the lowest debuff.
+	if unit.unitid == aUnit.unitid then
+		-- Heh, this is the same unit that we got in at first,
+		-- apparently there's noone left to heal. Get more healers!
+		--self:TriggerEvent("BigWigs_Message", L["Everyone has debuff!"], "Red")
+		unit = self:FindLowestDebuffTimer()
+	end
+	return unit
+end
+
+function BigWigsHealbotAssist:Whisper(unit)
+	if not IsRaidLeader() and not IsRaidOfficer() then return end
+
+	-- unit is the unit that just got the debuff.
+	local firstUnitName = unit.name
+	local nextUnit = self:FindNextUnit(unit)
+	local getReadyUnit = roster:GetUnitObjectFromName(nextUnit.nextInRotation)
+	if UnitIsDeadOrGhost(getReadyUnit.unitid) or not UnitIsConnected(getReadyUnit.unitid) then
+		getReadyUnit = self:FindNextUnit(getReadyUnit)
 	end
 	
+	self:TriggerEvent("BigWigs_SendSync", "HealBotGetReady ".. getReadyUnit.name)
+	self:TriggerEvent("BigWigs_SendSync", "HealBotYourTurn ".. nextUnit.name)
+		
 	if not self.db.profile.notwhisper then
-		self:TriggerEvent("BigWigs_SendTell", nextHealer.name, L["Heal now!"])
-		self:TriggerEvent("BigWigs_SendTell", nextNextHealer.name, L["Get ready!"])
+		-- ZZZ unit here should be someone that can heal.
+		-- ZZZ nextHealer is the one scheduled to go next after that one.
+		self:TriggerEvent("BigWigs_SendTell", nextUnit.name, L["Heal now!"])
+		self:TriggerEvent("BigWigs_SendTell", getReadyUnit.name, L["Get ready!"])
 	end
 	
-	if not self.db.profile.healnotify and healerChannel then
+
+	if self.db.profile.healnotify and healerChannel then
 		local id, name = GetChannelName(healerChannel)
 		if name then
-			SendChatMessage(string.format(L["%s healed - %s is next!"], unit.name, nextHealer.name), "CHANNEL", nil, id)
+			SendChatMessage(string.format(L["%s healed - %s is next!"], firstUnitName, nextUnit.name), "CHANNEL", nil, id)
 		else
-			self:Print(string.format(L["The channel %s was not found, please set a healer channel with /bwlh setchannel <channelname>."], healerChannel))
+			-- yeah this will spam. Good luck without a healer channel.
+			self:Print(string.format(L["The channel %s was not found, please set a healer channel with /bwhba setchannel <channelname>."], healerChannel))
+		end
+	end
+end
+
+------------------------------
+--      Buff handling       --
+------------------------------
+
+function BigWigsHealbotAssist:DecrementCounter(unit)
+	if unit.healbotDebuffTimer == nil or tonumber(unit.healbotDebuffTimer) == nil then return end
+	unit.healbotDebuffTimer = unit.healbotDebuffTimer - 1
+end
+
+function BigWigsHealbotAssist:SpecialEvents_UnitDebuffGained(unitid, debuffName, applications, debuffType, texture)
+	if debuffName == L["Corrupted Mind"] and texture == "Interface\\Icons\\Spell_Shadow_AuraOfDarkness" then
+		local unit = roster:GetUnitObjectFromUnit(unitid)
+		if unit and unit.inHealbotRotation and not unit.healbotDebuffTimer then
+			if UnitIsUnit("player", unitid) and self.db.profile.bar then
+				self:TriggerEvent("BigWigs_StartBar", self, L["bar_text"], 60, texture, "Red")
+			end
+			unit.healbotDebuffTimer = 60
+			self:ScheduleRepeatingEvent("bwhbaunitdebuff"..unit.name, self.DecrementCounter, 1, self, unit)
+			self:Whisper(unit)
+		end
+	end
+end
+
+function BigWigsHealbotAssist:SpecialEvents_UnitDebuffLost(unitid, debuffName)
+	if debuffName == L["Corrupted Mind"] and string.find(unitid, "raid%d+$") then
+		local unit = roster:GetUnitObjectFromUnit(unitid)
+		if unit and unit.inHealbotRotation and unit.healbotDebuffTimer then
+			unit.healbotDebuffTimer = nil
+			self:CancelScheduledEvent("bwhbaunitdebuff"..unit.name)
 		end
 	end
 end

@@ -58,9 +58,9 @@ L:RegisterTranslations("zhCN", function() return {
 
 	testtrigger = "testtrigger";
 
-	frenzygain_trigger = "古鲁斯获得了狂乱的效果。",
-	frenzygain_trigger2 = "Gluth goes into a frenzy!",
-	frenzyend_trigger = "狂乱效果从古鲁斯身上消失。",
+	frenzygain_trigger = "古鲁斯获得了疯狂的效果。",
+	frenzygain_trigger2 = "古鲁斯 goes into a frenzy!",
+	frenzyend_trigger = "疯狂效果从古鲁斯身上消失。",
 	frenzy_message = "疯狂! 现在宁神!",
 	frenzy_bar = "疯狂",
 	frenzy_Nextbar = "下次疯狂",

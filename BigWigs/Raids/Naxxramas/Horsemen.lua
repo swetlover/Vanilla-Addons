@@ -71,7 +71,7 @@ L:RegisterTranslations("zhCN", function() return {
 ---------------------------------
 
 -- module variables
-module.revision = 20006 -- To be overridden by the module!
+module.revision = 20005 -- To be overridden by the module!
 module.enabletrigger = {thane, mograine, zeliek, blaumeux} -- string or table {boss, add1, add2}
 --module.wipemobs = { L["add_name"] } -- adds which will be considered in CheckForEngage
 module.toggleoptions = {"mark", "shieldwall", -1, "meteor", "void", "wrath", "bosskill"}
@@ -82,11 +82,11 @@ local timer = {
 	firstMark = 20,
 	mark = 12,
 	firstMeteor = 30,
-	meteor = {12, 15},
+	meteor = {12,15},
 	firstWrath = 12,
-	wrath = {12, 15},
+	wrath = {12,15},
 	firstVoid = 12,
-	void = {11, 15},
+	void = {12,15},
 	shieldwall = 20,
 }
 local icon = {
@@ -114,7 +114,7 @@ local times = nil
 -- called after module is enabled
 function module:OnEnable()
 	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_CREATURE_BUFFS")
-	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_CREATURE_BUFF")
+	self:RegisterEvent("CHAT_MSG_MONSTER_SAY")
 	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_CREATURE_DAMAGE", "SkillEvent")
 	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_PARTY_DAMAGE", "SkillEvent")
 	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE", "MarkEvent")
@@ -147,13 +147,13 @@ function module:OnEngage()
 		self:DelayedMessage(timer.firstMark - 5, string.format( L["mark_warn_5"], self.marks + 1), "Urgent")
 	end
 	if self.db.profile.meteor then
-		self:Bar(L["meteorbar"], timer.firstMeteor, icon.meteor, true, "Red")
+		self:Bar(L["meteorbar"], timer.firstMeteor, icon.meteor)
 	end
 	if self.db.profile.wrath then
-		self:Bar(L["wrathbar"], timer.firstWrath, icon.wrath, true, "White")
+		self:Bar(L["wrathbar"], timer.firstWrath, icon.wrath)
 	end
 	if self.db.profile.void then
-		self:Bar(L["voidbar"], timer.firstVoid, icon.void, true, "Blue")
+		self:Bar(L["voidbar"], timer.firstVoid, icon.void)
 	end
 end
 
@@ -177,8 +177,6 @@ function module:SkillEvent(msg)
 		self:Sync(syncName.meteor)
 	elseif string.find(msg, L["wrathtrigger"]) then
 		self:Sync(syncName.wrath)
-	elseif msg == L["voidtrigger"] then
-		self:Sync(syncName.void)
 	end
 end
 
@@ -189,9 +187,9 @@ function module:CHAT_MSG_SPELL_PERIODIC_CREATURE_BUFFS( msg )
 	end
 end
 
-function module:CHAT_MSG_SPELL_CREATURE_VS_CREATURE_BUFF(msg)
-	if msg == L["voidtrigger"] then
-		self:Sync(syncName.void )
+function module:CHAT_MSG_MONSTER_SAY(msg)
+	if string.find(msg, L["voidtrigger"]) then
+		self:Sync(syncName.void)
 	end
 end
 
@@ -244,22 +242,21 @@ end
 function module:Meteor()
 	if self.db.profile.meteor then
 		self:Message(L["meteorwarn"], "Important")
-		self:IntervalBar(L["meteorbar"], timer.meteor[1], timer.meteor[2], icon.meteor, true, "Red")
+		self:IntervalBar(L["meteorbar"], timer.meteor[1], timer.meteor[2], icon.meteor)
 	end
 end
 
 function module:Wrath()
 	if self.db.profile.wrath then
 		self:Message(L["wrathwarn"], "Important")
-		self:IntervalBar(L["wrathbar"], timer.wrath[1], timer.wrath[2], icon.wrath, true, "White")
+		self:IntervalBar(L["wrathbar"], timer.wrath[1], timer.wrath[2], icon.wrath)
 	end
 end
 
 function module:Void()
 	if self.db.profile.void then
-		self:WarningSign(icon.void, 2)
 		self:Message(L["voidwarn"], "Important")
-		self:IntervalBar(L["voidbar"], timer.void[1], timer.void[2], icon.void, true, "Blue")
+		self:IntervalBar(L["voidbar"], timer.void[1], timer.void[2], icon.void)
 	end
 end
 

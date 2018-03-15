@@ -1,0 +1,14 @@
+## Title: Thaliz - |cffF58CBA|r
+## Title-zhCN: |CFF00FF00团队|r 智能复活
+## Notes: Smart addon to handle ressing party / raid members
+## Notes-zhCN: |CFFDD66DDThaliz|r 自动选择复活目标。|N使用方法/thalizres 
+## DefaultState: disabled
+## Version: 1.4.2
+## Author: 60addons @ 60addons.com
+## Interface: 11200
+## SavedVariables: Thaliz_Options
+## X-OrgSavedVariables: Thaliz_ResurrectionMessages, Thaliz_Target_Channel, Thaliz_Target_Whisper
+## X-Unused: roadmap.txt
+## Q-CAT-Version: 000100
+
+Thaliz.xml

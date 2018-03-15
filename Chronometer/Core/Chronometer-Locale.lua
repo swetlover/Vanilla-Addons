@@ -413,8 +413,8 @@ L:RegisterTranslations("zhCN", function() return {
 	--["Chronometer"] = true,
 	["Chronometer - an Ace2 Timer Mod"] = "Chronometer - ACE2计时条插件",
 
-	["General"] = "一般",
-	["General options"] = "一般设置",
+	--["General"] = "Основное",
+	--["General options"] = "Основные настройки",
 	
 	["Anchor"] = "锚点",
 	["Shows the dragable anchor."] = "显示可拖动的锚点。",
@@ -459,11 +459,11 @@ L:RegisterTranslations("zhCN", function() return {
 	["Bar Height"] = "计时条高度",
 	["Set the bar height."] = "设定计时条高度。",
 	
-	["Icon Position"] = "图标位置",
-	["Changes icon position."] = "改变小图标的位置",
+--	["Icon Position"] = true,
+--	["Changes icon position."] = true,
 	
-	["Bar Vertical Spacing"] = "条垂直间距",
-	["Set the bar vertical spacing."] = "条的垂直间距",
+--	["Bar Vertical Spacing"] = true,
+--	["Set the bar vertical spacing."] = true,
 	
 	["Text Size"] = "文字尺寸",
 	["Set the bar text size."] = "设定计时条文字尺寸。",

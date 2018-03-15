@@ -158,8 +158,8 @@ end
 
 function module:CheckForUnbalance(msg)
 	if string.find(msg, L["unbalance_trigger"]) then
-		--self:Message(L["unbalancewarn"], "Urgent")
-		--self:DelayedMessage(timer.unbalance - 5, L["unbalancesoonwarn"], "Urgent")
+		self:Message(L["unbalancewarn"], "Urgent")
+		self:DelayedMessage(timer.unbalance - 5, L["unbalancesoonwarn"], "Urgent")
 		self:Bar(L["unbalancebar"], timer.unbalance, icon.unbalance)
 	elseif string.find(msg, L["shouttrigger2"]) then
 		self:Sync(syncName.shout)

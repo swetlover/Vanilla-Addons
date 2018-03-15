@@ -374,6 +374,7 @@ BabbleBoss:RegisterTranslations("enUS", function()
         ["Venom Stalker"] = true;
         ["Living Monstrosity"] = true;
         ["Necro Stalker"] = true;
+        ["Death Talon Wyrmguard"] = true;
 
 
 
@@ -1855,6 +1856,7 @@ BabbleBoss:RegisterTranslations("zhCN", function()
         ["Venom Stalker"] = "毒液捕猎者",
         ["Living Monstrosity"] = "畸形妖";
         ["Necro Stalker"] = "死灵捕猎者";
+        ["Death Talon Wyrmguard"] = "死爪龙人护卫";
 	}
 end)
 

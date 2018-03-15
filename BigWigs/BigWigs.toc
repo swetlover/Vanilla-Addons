@@ -1,5 +1,7 @@
 ## Interface: 11200
+## Title: BigWigs |cff7fff7f60addons|r v1.6.3
 ## Title-zhCN: |CFF00FF00团队|r BigWigs团队报警
+## Notes: Boss Mods with Timer bars.
 ## Notes-zhCN: |CFFDD66DDBigWigs|r 专为LH核心端优化修改整合的首领警报|N设置命令/bw
 ## DefaultState: disabled
 ## Author: Tekkub Stoutwrithe, Ammo, Shyva, Rabbit, LYQ, Dorann, Hosq & Others ,Qcat
@@ -10,7 +12,7 @@
 ## X-RelSite-Curse: 4356
 ## X-AceForum: 1222
 ## X-FlySpray: 1
-## Q-CAT-Version: 000990
+## Q-CAT-Version: 001300
 
 ## OptionalDeps: Ace2, FuBar, FuBarPlugin-2.0, Babble-2.2, CandyBar, CompostLib, DewdropLib, PaintChipsLib, TabletLib, SurfaceLib, Surfaces, MikScrollingBattleText, sct, SpellStatusLib, SpellCacheLib, GratuityLib, Deformat, SpecialEventsEmbed
 ## X-Embeds: Ace2, FuBarPlugin-2.0, Babble-2.2, CandyBar, CompostLib, DewdropLib, PaintChipsLib, TabletLib, SurfaceLib
@@ -86,6 +88,8 @@ Plugins\KtmOptions.lua
 Plugins\BigWigs_LoathebHealers.lua
 Plugins\BigWigs_RazuviousAssistant.lua
 Plugins\CombatLog.lua
+Plugins\BigWigs_ShadowVulne.lua
+Plugins\BigWigs_ThaddiusArrows.lua
 
 Raids\ZG\Arlokk.lua
 Raids\ZG\Jeklik.lua
@@ -142,6 +146,7 @@ Raids\MC\Shazzrah.lua
 Raids\MC\Garr.lua
 Raids\MC\Sulfuron.lua
 Raids\MC\Golemagg.lua
+Raids\MC\CoreHound.lua
 
 Raids\Other\Azuregos.lua
 Raids\Other\Kazzak.lua

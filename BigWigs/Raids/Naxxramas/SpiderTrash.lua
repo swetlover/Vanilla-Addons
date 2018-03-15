@@ -17,8 +17,8 @@ L:RegisterTranslations("zhCN", function() return {
 	charge_name = "毒性充能",
 	charge_desc = "显示一个毒性充能的冷却计时.",
 	
-	charge_trigger = "受到了毒性充能效果的影响",
-	chargeself_trigger = "你受到了毒性充能效果的影响",
+	charge_trigger = "受到了毒性充能效果的影响。",
+	chargeself_trigger = "你受到了毒性充能效果的影响。",
 	chargegone_self = "毒性充能效果从你身上消失了",
 	charge_bar = "毒性充能 CD",
 } end )

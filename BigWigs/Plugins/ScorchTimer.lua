@@ -112,7 +112,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	["Scorch Timer"] = "灼烧计时器",
 
-	firevuln_test = "(.+)受到了痛苦诅咒效果的影响（([%d]*)）。",
+	firevuln_test = "(.+)受到了痛苦诅咒效果的影响。",
 	scorch_test	= "^你的灼烧击中(.+)造成",
 	resist_test = "^你的痛苦诅咒被(.+)抵抗了。",
 } end)
