@@ -1,6 +1,4 @@
-<p align = "center">
 # Vanilla-Addons
-</p>
 建立这个项目只是用来存放自己在60级版本魔兽世界所使用的一些插件，也为了记录插件的更新情况。 
 大部分的插件来自[60addons.com](http://60addons.com/ "60addons.com")，感谢站长Qcat的无私奉献！  
 插件的更新情况及更新说明基本都来自60addons.com。  
