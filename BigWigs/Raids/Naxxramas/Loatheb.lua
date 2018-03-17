@@ -42,7 +42,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	cursewarn = "解除诅咒! 重新诅咒!",
 	cursebar = "解除诅咒",
-	--cursetrigger  = "憎恨者的(.+)诅咒被移除了。",
+	cursetrigger  = "憎恨者的(.+)诅咒被移除了。",
 
 
 	doomtimerbar = "每隔15秒发动必然的厄运",
@@ -78,7 +78,7 @@ L:RegisterTranslations("zhCN", function() return {
 	bandage = "-- 使用你的绷带 ! --",
 	wrtorhs = "-- 吃糖或者鞭根块茎 ! --",
 	shadowpotandbandage = "-- 喝暗影防护药水和绷带 ! --",
-	noconsumable = "-- 此时无任何药水 ! --",
+	noconsumable = "-- 不喝任何药水 ! --",
 	
 	soundshadowpot = "Interface\\Addons\\BigWigs\\Sounds\\potion.wav",
 	soundbandage = "Interface\\Addons\\BigWigs\\Sounds\\bandage.wav",
@@ -100,7 +100,7 @@ LoathebDebuff:SetOwner(WorldFrame, "ANCHOR_NONE")
 module.revision = 20004 -- To be overridden by the module!
 module.enabletrigger = module.translatedName -- string or table {boss, add1, add2}
 --module.wipemobs = { L["add_name"] } -- adds which will be considered in CheckForEngage
-module.toggleoptions = {"doom", "curse", "spore", "debuff", -1, "consumable", "graphic", "sound", "bosskill"}
+module.toggleoptions = {"doom", "curse", "spore", "groups", "debuff", -1, "consumable", "graphic", "sound", "bosskill"}
 
 
 -- locals
@@ -111,7 +111,7 @@ local timer = {
 	doomShort = 15,
 	doom = 0, -- this variable will be changed during the encounter
 	spore = 13,
-	--firstCurse = 10,
+	firstCurse = 5,
 	curse = 30,
 	getNextSpore = 20,
 }
@@ -119,6 +119,7 @@ local icon = {
 	softEnrage = "Spell_Shadow_UnholyFrenzy",
 	doom = "Spell_Shadow_NightOfTheDead",
 	spore = "Ability_TheBlackArrow",
+	sieni = "Interface\\AddOns\\\BigWigs\\Textures\\sieni",
 	curse = "Spell_Holy_RemoveCurse",
 }
 local syncName = {
@@ -129,7 +130,6 @@ local syncName = {
 local consumableslist = {L["shadowpot"],L["noconsumable"],L["bandage"],L["wrtorhs"],L["shadowpotandbandage"],L["noconsumable"],L["bandage"],L["noconsumable"],L["wrtorhs"]}
 local numSpore = 0 -- how many spores have been spawned
 local numDoom = 0 -- how many dooms have been casted
-local timeCurseWarning = 0
 
 
 ------------------------------
@@ -183,7 +183,6 @@ end
 
 -- called after module is enabled and after each wipe
 function module:OnSetup()
-	timeCurseWarning = 0
 	self.consumableseq = 0
 	numSpore = 0 -- how many spores have been spawned
 	numDoom = 0 -- how many dooms have been casted
@@ -204,12 +203,14 @@ function module:OnEngage()
 		self:DelayedMessage(timer.softEnrage, L["doomtimerwarnnow"], "Important")
 
 		-- soft enrage after 5min: Doom every 15s instead of every 30s
+		--self:ScheduleEvent("bwloathebdoomtimerreduce", function() module.doomTime = 15 end, 300)
 		self:ScheduleEvent("bwloathebdoomtimerreduce", self.SoftEnrage, timer.softEnrage)
+		--self:Message(L["startwarn"], "Red")
 		self:Bar(string.format(L["doombar"], numDoom + 1), timer.doom, icon.doom)
 		self:DelayedMessage(timer.doom - 5, string.format(L["doomwarn5sec"], numDoom + 1), "Urgent")
 		timer.doom = timer.doomLong -- reduce doom timer from 120s to 30s
 	end
-	--self:Bar(L["cursebar"], timer.firstCurse, icon.curse)
+	self:Bar(L["cursebar"], timer.firstCurse, icon.curse)
 
 	self:Spore()
 	self:ScheduleRepeatingEvent("bwloathebspore", self.Spore, timer.spore, self)
@@ -280,12 +281,9 @@ end
 
 
 function module:Curse()
-if self.db.profile.curse then
-	if timeCurseWarning + 5 < GetTime() then
-		timeCurseWarning = GetTime()
+	if self.db.profile.curse then
 		self:Message(L["cursewarn"], "Important")
 		self:Bar(L["cursebar"], timer.curse, icon.curse)
-		end
 	end
 end
 
@@ -302,7 +300,15 @@ function module:Spore()
 	numSpore = numSpore + 1
 
 	if self.db.profile.spore then
-		self:Bar(string.format(L["sporebar"], numSpore), timer.spore, icon.spore)
+		--self:Message(string.format(L["sporewarn"], numSpore), "Important")
+		if not self.db.profile.groups then
+			self:Bar(string.format(L["sporebar_group"], numSpore), timer.spore, icon.spore)
+			if numSpore == 7 then
+				numSpore = 0
+			end
+		else
+			self:Bar(string.format(L["sporebar"], numSpore), timer.spore, icon.spore)
+		end
 	end
 end
 
@@ -321,9 +327,9 @@ function module:CheckDebuff()
 			if ( buffName and strfind(strlower(buffName), debuff )) then
 				local timeleft = GetPlayerBuffTimeLeft(id)
 				if timeleft < timer.getNextSpore then
-					self:WarningSign(icon.spore, timer.getNextSpore)
+					self:TriggerEvent("BigWigs_ShowWarningSign", icon.sieni, timer.getNextSpore)
 				elseif timeleft > timer.getNextSpore then
-					self:RemoveWarningSign(icon.spore)
+					self:TriggerEvent("BigWigs_HideWarningSign", icon.sieni)
 				end
 			elseif ( buffName==nil ) then
 				break;

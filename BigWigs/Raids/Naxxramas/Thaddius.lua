@@ -16,7 +16,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	enrage_cmd = "enrage",
 	enrage_name = "激怒警报",
-	enrage_desc = "激怒 警报",
+	enrage_desc = "激怒警报",
 
 	phase_cmd = "phase",
 	phase_name = "阶段警报",
@@ -51,9 +51,6 @@ L:RegisterTranslations("zhCN", function() return {
 
 	adddeath = "No... more... Feugen...",
 	adddeath2 = "Master save me...",
-	adddeath3 = "斯塔拉格死亡了。",
- 	adddeath4 = "伏晨死亡了。",
-
 
 	teslaoverload = "超负荷！",
 
@@ -90,7 +87,7 @@ L:RegisterTranslations("zhCN", function() return {
 	bar1text = "极性转化",
 
 	throwbar = "投掷",
-	throwwarn = "~5秒投掷！MT注意！",
+	throwwarn = "大约5秒投掷！MT注意！",
 
 	phasebar = "阶段 2",
 
@@ -104,7 +101,7 @@ L:RegisterTranslations("zhCN", function() return {
 ---------------------------------
 
 -- module variables
-module.revision = 20005 -- To be overridden by the module!
+module.revision = 20003 -- To be overridden by the module!
 module.enabletrigger = {module.translatedName, feugen, stalagg} -- string or table {boss, add1, add2}
 --module.wipemobs = { L["add_name"] } -- adds which will be considered in CheckForEngage
 module.toggleoptions = {"enrage", "charge", "polarity", -1, "power", "throw", "phase", "bosskill"}
@@ -117,7 +114,7 @@ local timer = {
 	enrage = 300,
 	polarityTick = 6,
 	firstPolarity = 10,
-	polarityShift = {30,35},
+	polarityShift = 30,
 	transition = 14,
 	transition2 = 4,
 }
@@ -126,19 +123,14 @@ local icon = {
 	powerSurge = "Spell_Shadow_UnholyFrenzy",
 	enrage = "Spell_Shadow_UnholyFrenzy",
 	polarityShift = "Spell_Nature_Lightning",
-	positive = "Spell_ChargePositive",
-	negative = "Spell_ChargeNegative",
 }
 local syncName = {
 	powerSurge = "StalaggPower"..module.revision,
-	phase2 = "ThaddiusPhaseTwo"..module.revision,
+	--phase2 = "ThaddiusPhaseTwo"..module.revision,
 	addsdead = "ThaddiusAdsDead"..module.revision,
 	polarity = "ThaddiusPolarity"..module.revision,
 	enrage = "ThaddiusEnrage"..module.revision,
 }
-
-local phase2started = nil
-local addsdead2 = 0
 
 
 ------------------------------
@@ -158,14 +150,10 @@ function module:OnEnable()
 
 	self:ThrottleSync(10, syncName.polarity)
 	self:ThrottleSync(4, syncName.powerSurge)
-	self:ThrottleSync(20, syncName.phase2)
- 	self:ThrottleSync(20, syncName.addsdead)
 end
 
 -- called after module is enabled and after each wipe
 function module:OnSetup()
-	phase2started = nil
- 	addsdead2 = 0
 	self.started = nil
 	self.enrageStarted = nil
 	self.addsdead = 0
@@ -217,19 +205,14 @@ function module:CHAT_MSG_MONSTER_YELL( msg )
 		if self.addsdead == 2 then
 			self:Sync(syncName.addsdead)
 		end
-		elseif string.find(msg, L["trigger_phase2_1"]) or string.find(msg, L["trigger_phase2_2"]) or string.find(msg, L["trigger_phase2_3"]) then
-			self:Sync(syncName.phase2)
+		--elseif string.find(msg, L["trigger_phase2_1"]) or string.find(msg, L["trigger_phase2_2"]) or string.find(msg, L["trigger_phase2_3"]) then
+		--	self:Sync(syncName.phase2)
 	end
 end
 
 function module:CheckForEnrage(msg)
 	if msg == L["enragetrigger"] then
 		self:Sync(syncName.enrage)
-	elseif string.find(msg, L["adddeath3"]) or string.find(msg, L["adddeath4"]) then
- 		addsdead2 = addsdead2 + 1
- 		if addsdead2 == 2 then
- 			self:Sync(syncName.addsdead)
- 		end
 	elseif string.find(msg, L["teslaoverload"]) then
 		self:Transition(timer.transition2)
 	end
@@ -275,13 +258,12 @@ function module:NewPolarity(chargetype)
 			self:Message(L["nochange"], "Urgent", true, "Long")
 		elseif chargetype == L["positivetype"] then
 			self:Message(L["poswarn"], "Positive", true, "RunAway")
-			self:Bar(L["polaritytickbar"], timer.polarityTick, icon.positive, "Important")
-			self:WarningSign(icon.positive, 5)
+			self:WarningSign(chargetype, 5)
 		elseif chargetype == L["negativetype"] then
 			self:Message(L["negwarn"], "Important", true, "RunAway")
-			self:Bar(L["polaritytickbar"], timer.polarityTick, icon.negative, "Important")
-			self:WarningSign(icon.negative, 5)
+			self:WarningSign(chargetype, 5)
 		end
+		self:Bar(L["polaritytickbar"], timer.polarityTick, chargetype, "Important")
 	end
 	self.previousCharge = chargetype
 end
@@ -295,8 +277,8 @@ function module:BigWigs_RecvSync(sync, rest, nick)
 		self:PowerSurge()
 	elseif sync == syncName.addsdead then
 		self:Transition(timer.transition)
-		elseif sync == syncName.phase2 then
-			self:Phase2()
+		--elseif sync == syncName.phase2 then
+		--	self:Phase2()
 	elseif sync == syncName.polarity then
 		self:PolarityShift()
 	elseif sync == syncName.enrage then
@@ -333,8 +315,6 @@ function module:Transition(transitionTime)
 end
 
 function module:Phase2()
-	if phase2started then return end
- 	phase2started = true
 	self:KTM_Reset()
 	if self.db.profile.phase then
 		self:Message(L["startwarn2"], "Important")
@@ -353,8 +333,8 @@ end
 function module:PolarityShift()
 	if self.db.profile.polarity then
 		self:RegisterEvent("PLAYER_AURAS_CHANGED")
-		self:DelayedMessage(timer.polarityShift[1], L["pswarn3"], "Important", nil, "Beware")
- 		self:IntervalBar(L["bar1text"], timer.polarityShift[1], timer.polarityShift[2], icon.polarityShift)
+		self:DelayedMessage(timer.polarityShift - 3, L["pswarn3"], "Important", nil, "Beware")
+		self:Bar(L["bar1text"], timer.polarityShift, icon.polarityShift)
 	end
 end
 
@@ -387,16 +367,16 @@ function module:CheckAddHP()
 	local health1
 	local health2
 	if UnitName("playertarget") == L["add1"] then
-		health1 = math.ceil((UnitHealth("playertarget") / UnitHealthMax("playertarget")) * 100)
+		health1 = UnitHealth("playertarget")
 	elseif UnitName("playertarget") == L["add2"] then
-		health2 = math.ceil((UnitHealth("playertarget") / UnitHealthMax("playertarget")) * 100)
+		health2 = UnitHealth("playertarget")
 	end
 
 	for i = 1, GetNumRaidMembers(), 1 do
 		if UnitName("Raid"..i.."target") == L["add1"] then
-			health1 = math.ceil((UnitHealth("Raid"..i.."target") / UnitHealthMax("Raid"..i.."target")) * 100)
+			health1 = UnitHealth("Raid"..i.."target")
 		elseif UnitName("Raid"..i.."target") == L["add2"] then
-			health1 = math.ceil((UnitHealth("Raid"..i.."target") / UnitHealthMax("Raid"..i.."target")) * 100)
+			health2 = UnitHealth("Raid"..i.."target")
 		end
 		if health1 and health2 then break; end
 	end

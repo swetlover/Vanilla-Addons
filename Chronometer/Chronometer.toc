@@ -9,7 +9,7 @@
 ## Dependencies:
 ## OptionalDeps: Ace2, Babble-2.2, PaintChipsLib, CompostLib, CandyBar, Deformat, GratuityLib, SpellCacheLib, ParserLib, DewdropLib
 ## SavedVariables: ChronometerDB
-## Q-CAT-Version: 000400
+## Q-CAT-Version: 000500
 
 ## X-ReleaseDate: $Date: 2017-03-27 $
 ## X-Email: laytya@gmail.com

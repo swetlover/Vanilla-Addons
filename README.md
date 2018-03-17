@@ -4,6 +4,13 @@
 插件的更新情况及更新说明基本都来自60addons.com。  
 ## 插件更新日志
 ***
+2018年3月17日
+1. 更新了`!Libs`插件，完善了Babble-Spell-2.2模块。
+2. 更新了`Chronometer`插件，对依赖库进行了修正。
+3. 更新了`BigWigs`插件，基于hosq版本，大量调整naxxboss。
+4. 删除了`CustomNameplates`插件，新增了`ShaguPlates`姓名板插件。
+5. 新增了`EavesDrop`插件，可以实时记录你对目标的伤害、技能、减益等。
+***
 2018年3月15日
 1. 更新了`Thaliz`插件，实现智能选择复活目标。
 2. 更新了`!Libs`插件，重新汉化了Babble-Spell-2.2模块，现在能支持更多的法术依赖。

@@ -47,7 +47,7 @@ L:RegisterTranslations("zhCN", function() return {
 	portdelaywarn = "传送 5 秒!",
 	portdelaywarn10 = "传送 10 秒!",
 	bartext = "传送",
-	explodebugtrigger = "获得了爆炸",
+	explodebugtrigger = "获得了爆炸虫",
 	explodebugwarn = "爆炸虫即将出现！",
 	enragetrigger = "becomes enraged.",
 	--trigger = "Blizzard",
@@ -143,7 +143,7 @@ L:RegisterTranslations("deDE", function() return {
 
 
 -- module variables
-module.revision = 20009 -- To be overridden by the module!
+module.revision = 20008 -- To be overridden by the module!
 local veklor = AceLibrary("Babble-Boss-2.2")["Emperor Vek'lor"]
 local veknilash = AceLibrary("Babble-Boss-2.2")["Emperor Vek'nilash"]
 module.enabletrigger = {veklor, veknilash} -- string or table {boss, add1, add2}

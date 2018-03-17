@@ -343,7 +343,7 @@ end
 ------------------------------
 
 function module:EmergeCheck()
-	if UnitExists("target") and UnitName("target") == module.translatedName and UnitExists("targettarget") and UnitName("targettarget") ~= "Majordomo Executus" then
+	if UnitExists("target") and UnitName("target") == module.translatedName and UnitExists("targettarget") and UnitName("targettarget") ~= "管理者埃克索图斯" then
 		self:Sync(syncName.emerge)
 		return
 	end
@@ -351,7 +351,7 @@ function module:EmergeCheck()
 	local num = GetNumRaidMembers()
 	for i = 1, num do
 		local raidUnit = string.format("raid%starget", i)
-		if UnitExists(raidUnit) and UnitName(raidUnit) == module.translatedName and UnitExists(raidUnit .. "target") and UnitName(raidUnit .. "target") ~= "Majordomo Executus" then
+		if UnitExists(raidUnit) and UnitName(raidUnit) == module.translatedName and UnitExists(raidUnit .. "target") and UnitName(raidUnit .. "target") ~= "管理者埃克索图斯" then
 			self:Sync(syncName.emerge)
 			return
 		end

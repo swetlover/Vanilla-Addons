@@ -1,4 +1,6 @@
+
 if GetLocale() == "enUS" then
+
 	if not ParserLibOptimizer then
 		ParserLibOptimizer = {
 			AURAADDEDOTHERHARMFUL = "afflict",
@@ -203,7 +205,11 @@ if GetLocale() == "enUS" then
 			VSENVIRONMENTALDAMAGE_DROWNING_OTHER = "drown",
 			UNITDIESSELF = "die",
 			UNITDIESOTHER = "die",
-			UNITDESTROYEDOTHER = "destroy",			
+			UNITDESTROYEDOTHER = "destroy",
+			
 		}
+
 	end
+
 end
+

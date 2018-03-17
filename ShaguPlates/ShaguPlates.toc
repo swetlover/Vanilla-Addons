@@ -1,0 +1,21 @@
+## Interface: 11200
+## Title: |cff33ffccShagu|cffffffffPlates
+## Title-zhCN: |CFFCCFFFF界面|r 姓名条Debuff
+## Author: Shagu, 2016
+## Notes: Nameplate addon featuring castbars and class colors
+## Notes-zhCN: |CFFDD66DDShaguPlates|r 在姓名条上显示debuff及施法条|N设置命令/sp
+## Version: 2.0
+## SavedVariables: pfNameplates_config
+## Q-CAT-Version:000200
+
+env\locale.lua
+env\locales_deDE.lua
+env\locales_enUS.lua
+env\locales_frFR.lua
+env\locales_ruRU.lua
+env\locales_zhCN.lua
+env\locales_koKR.lua
+
+castbar.lua
+config.lua
+nameplates.lua

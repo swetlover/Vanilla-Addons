@@ -10,7 +10,7 @@
 ## X-Category: Library
 ## X-Credits: Maus & Co. (Updating, localizing libraries)
 ## X-Website: https://vk.com/wowruru
-## Q-CAT-Version: 000640
+## Q-CAT-Version: 000650
 
 Ace\Ace.xml
 Ace\Locale\AceLocals_deDE.lua
