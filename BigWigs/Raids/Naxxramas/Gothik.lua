@@ -49,9 +49,9 @@ L:RegisterTranslations("zhCN", function() return {
 
 	wave = "%d/22: ", -- its only 22 waves not 26
 
-	trawarn = "3秒后学徒出现",
-	dkwarn = "3秒后死亡骑士出现",
-	riderwarn = "3秒后骑兵出现",
+	trawarn = "3秒后学徒出现,准备接怪!",
+	dkwarn = "3秒后死亡骑士出现,准备接怪!",
+	riderwarn = "3秒后骑兵出现,准备接怪!",
 
 	trabar = "学徒 - %d",
 	dkbar = "死亡骑士 - %d",

@@ -47,7 +47,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	voidtrigger = "Your life is mine!",
 	voidwarn = "虚空领域即将来临！",
-	voidbar = "虚空领域",
+	voidbar = "虚空领域(黑水,注意脚下)",
 
 	meteortrigger = "库尔塔兹领主的流星击中",
 	meteorwarn = "流星 - 注意集中",

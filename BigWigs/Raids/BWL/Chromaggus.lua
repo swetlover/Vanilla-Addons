@@ -35,9 +35,9 @@ L:RegisterTranslations("zhCN", function() return {
 	vulnerability_desc = "克洛玛古斯弱点改变时发出警报.",
 
 	breath_trigger = "克洛玛古斯开始施放(.+)。",
-	trigger_vulnerability_direct_crit = "^[^%s]+的([^%s]+)致命一击对克洛玛古斯造成(%d+)点([^%s]+)伤害。[%(]([%d])", -- [Fashu's] [Firebolt] [hits] Battleguard Sartura for [44] [Fire] damage. ([14] resisted)
- 	trigger_vulnerability_direct_hit = "^[^%s]+的([^%s]+)击中克洛玛古斯造成(%d+)点([^%s]+)伤害。[%(]([%d])",
-	vulnerability_dots_test = "^[^%s]+的([^%s]+)使克洛玛古斯受到了(%d+)点([^%s]+)伤害。[%(]([%d])",
+	trigger_vulnerability_direct_crit = "^[^%s]+的([^%s]+)致命一击对克洛玛古斯造成(%d+)点([^%s]+)伤害。", -- [Fashu's] [Firebolt] [hits] Battleguard Sartura for [44] [Fire] damage. ([14] resisted)
+ 	trigger_vulnerability_direct_hit = "^[^%s]+的([^%s]+)击中克洛玛古斯造成(%d+)点([^%s]+)伤害。",
+	vulnerability_dots_test = "^[^%s]+的([^%s]+)使克洛玛古斯受到了(%d+)点([^%s]+)伤害。",
 	frenzy_trigger = "goes into a killing frenzy",
 	frenzyfade_trigger = "疯狂效果从克洛玛古斯身上消失。",
 	vulnerability_trigger = "flinches as its skin shimmers.",
@@ -72,8 +72,8 @@ L:RegisterTranslations("zhCN", function() return {
 	icon5 = "Spell_Frost_ChillingBlast",
 
 	castingbar = "施放%s",
-	frenzy_bar = "狂暴",
-    frenzy_Nextbar = "下次狂暴",
+	frenzy_bar = "狂暴(立刻宁神)",
+    frenzy_Nextbar = "下次狂暴(准备宁神)",
 	first_bar = "第一次吐息",
 	second_bar = "第二次吐息",
     vuln_bar = "%s 弱点",
@@ -554,7 +554,7 @@ end
 
 function module:IdentifyVulnerability(school)
 	if not self.db.profile.vulnerability or not type(school) == "string" then return end
-	if (lastVuln + 5) > GetTime() then return end -- 5 seconds delay
+	if (lastVuln + 3) > GetTime() then return end -- 5 seconds delay
 
 	vulnerability = school
 	self:Message(format(L["vulnerability_message"], school), "Positive")

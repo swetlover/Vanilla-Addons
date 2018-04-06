@@ -49,7 +49,7 @@ L:RegisterTranslations("zhCN", function() return {
 	toxin_warn		= " 在毒云里!快跑出毒云!",
 	toxin_self_warn		= "你在毒云里!",
 
-	volley_bar	= "可能毒箭之雨",
+	volley_bar	= "可能毒箭之雨(群体自然AOE)",
 } end )
 
 L:RegisterTranslations("deDE", function() return {

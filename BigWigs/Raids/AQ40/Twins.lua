@@ -46,7 +46,7 @@ L:RegisterTranslations("zhCN", function() return {
 	portwarn = "传送!",
 	portdelaywarn = "传送 5 秒!",
 	portdelaywarn10 = "传送 10 秒!",
-	bartext = "传送",
+	bartext = "双子传送(近战跑位)",
 	explodebugtrigger = "获得了爆炸虫",
 	explodebugwarn = "爆炸虫即将出现！",
 	enragetrigger = "becomes enraged.",

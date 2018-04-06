@@ -31,14 +31,14 @@ local adds = 0
 
 L:RegisterTranslations("zhCN", function() return {
 	firesworn_name = "火誓者",
-	triggeradddead8 = "加尔获得了激怒(.+)8",
-	triggeradddead7 = "加尔获得了激怒(.+)7",
-	triggeradddead6 = "加尔获得了激怒(.+)6",
-	triggeradddead5 = "加尔获得了激怒(.+)5",
-	triggeradddead4 = "加尔获得了激怒(.+)4",
-	triggeradddead3 = "加尔获得了激怒(.+)3",
-	triggeradddead2 = "加尔获得了激怒(.+)2",
-    triggeradddead1 = "加尔获得了激怒的效果。",
+	triggeradddead8 = "加尔获得了狂怒的效果(.+)8",
+	triggeradddead7 = "加尔获得了狂怒的效果(.+)7",
+	triggeradddead6 = "加尔获得了狂怒的效果(.+)6",
+	triggeradddead5 = "加尔获得了狂怒的效果(.+)5",
+	triggeradddead4 = "加尔获得了狂怒的效果(.+)4",
+	triggeradddead3 = "加尔获得了狂怒的效果(.+)3",
+	triggeradddead2 = "加尔获得了狂怒的效果(.+)2",
+    triggeradddead1 = "加尔获得了狂怒的效果。",
 
     counterbarMsg = "火誓者死亡",
 	addmsg1 = "1/8 火誓者死亡!",

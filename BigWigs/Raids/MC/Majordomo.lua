@@ -61,8 +61,8 @@ L:RegisterTranslations("zhCN", function() return {
 	hdeadmsg = "%d/4 烈焰行者医师死亡!",
 	edeadmsg = "%d/4 烈焰行者精英死亡!",
 
-	magic_bar = "魔法反射",
-	dmg_bar = "伤害反射护盾",
+	magic_bar = "法伤盾(反射法术)",
+	dmg_bar = "物伤盾(近战100点奥伤)",
 	shield_bar = "新的护盾",
 
 	cmd = "Majordomo",

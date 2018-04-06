@@ -14,7 +14,7 @@ L:RegisterTranslations("zhCN", function() return {
 	cmd = "Wushoolay",
 
 	chainlightning_trigger = "乌苏雷开始施放闪电链。",
-	chainlightning_bar = "闪电链",
+	chainlightning_bar = "闪电链(可打断)",
 	chainlightning_message = "闪电链! 打断他!",
 	lightningcloud_trigger = "你受到了落雷之云效果的影响。",
 	lightningcloud_message = "走出落雷之云!",

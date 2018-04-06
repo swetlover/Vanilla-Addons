@@ -15,20 +15,20 @@ L:RegisterTranslations("zhCN", function() return {
 	shadowflame_trigger = "弗莱格尔开始施放暗影烈焰。",
 	frenzygain_trigger = "%s获得了疯狂的效果。",
 	frenzygain_trigger2 = "%s goes into a frenzy!",
-	frenzyend_trigger = "效果从弗莱格尔身上消失。",
+	frenzyend_trigger = "疯狂效果从弗莱格尔身上消失。",
 
 	wingbuffet_message = "龙翼打击! 下次30秒后施放!",
 	wingbuffet_warning = "现在嘲讽! 龙翼打击马上!",
 	shadowflame_warning = "暗影烈焰来临!",
 	frenzy_message = "狂暴! 立刻宁神!",
-	frenzy_bar = "狂暴",
-    frenzy_Nextbar = "下次狂暴",
+	frenzy_bar = "狂暴(立刻宁神)",
+    frenzy_Nextbar = "下次狂暴(准备宁神)",
 
-	wingbuffetcast_bar = "龙翼打击",
-	wingbuffet_bar = "下次龙翼打击",
+	wingbuffetcast_bar = "龙翼打击(锥形击退)",
+	wingbuffet_bar = "下次龙翼打击(锥形击退)",
 	wingbuffet1_bar = "龙翼打击来临",
-	shadowflame_bar = "暗影烈焰",
-	shadowflame_Nextbar = "下次暗影烈焰",
+	shadowflame_bar = "暗影烈焰(锥形火伤)",
+	shadowflame_Nextbar = "下次暗影烈焰(锥形火伤)",
 
 	cmd = "Flamegor",
 

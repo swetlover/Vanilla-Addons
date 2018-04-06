@@ -4,6 +4,7 @@
 ## Notes: Show coordinates on minimap
 ## Notes-ruRU: Показывает координаты на миникарте
 ## Notes-zhCN: |CFFDD66DDCartographer_Minimap_Coords|r 在小地图上显示坐标
+## DefaultState: disabled
 ## Author: Jebus905
 ## Version: 2.40b
 ## Dependencies: Cartographer

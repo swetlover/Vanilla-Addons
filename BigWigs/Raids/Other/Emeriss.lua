@@ -64,8 +64,8 @@ L:RegisterTranslations("zhCN", function() return {
 	isyou = "你",
 	isare = "受到了",
 
-	breath_bar = "毒性吐息",
-	corruption_bar = "大地的堕落",
+	breath_bar = "毒性吐息(自然伤DOT)",
+	corruption_bar = "大地堕落(每2秒损失20%生命)",
 
 } end )
 

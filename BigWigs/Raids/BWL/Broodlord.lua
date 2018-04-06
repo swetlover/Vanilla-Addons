@@ -24,7 +24,7 @@ L:RegisterTranslations("zhCN", function() return {
 	bw_warn = "冲击波马上!",
 	ms_bar = "致死打击: %s",
 	msnext_bar = "下个致死打击",
-	bw_bar = "可能冲击波",
+	bw_bar = "可能冲击波(近战AOE击退)",
 	knock_bar = "击退 (坦克)",
 	knock_trigger = "勒西雷尔的击退",
 

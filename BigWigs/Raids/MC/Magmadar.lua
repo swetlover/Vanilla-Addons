@@ -47,15 +47,15 @@ L:RegisterTranslations("zhCN", function() return {
 	panic_trigger = "受到了恐慌",
 	panic_trigger2 = "恐慌施放失败。(.+)对此免疫。",
 	panic_trigger3 = "玛格曼达的恐慌被抵抗了。",
-	frenzy_bar = "狂乱",
-	frenzynext_bar = "下一个狂乱",
+	frenzy_bar = "狂乱(立刻宁神)",
+	frenzynext_bar = "下一个狂乱(准备宁神)",
 	frenzyfade_trigger = "狂乱效果从玛格曼达身上消失。",
 
 	-- Warnings and bar texts
 	frenzyann = "疯狂! 立刻宁神!",
 	fearsoon = "恐惧来袭!",
 	feartime = "群体恐惧 - 30秒后再次发动",
-	fearbar = "群体恐惧",
+	fearbar = "群体恐惧(AOE恐惧)",
 
 	-- AceConsole strings
 	cmd = "Magmadar",

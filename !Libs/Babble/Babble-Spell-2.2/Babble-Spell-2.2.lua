@@ -6675,7 +6675,7 @@ BabbleSpell:RegisterTranslations("zhCN", function()
 		["Fire Storm"]="火焰风暴",
 		["Kick - Silenced"] = "脚踢 - 沉默",
 		["Fire Strike"]="火焰打击",
-		["Fire Vulnerability"]="痛苦诅咒",
+--		["Fire Vulnerability"]="痛苦诅咒",
 		["Fire Ward"]="防护火焰结界",
 		["Fireball"]="火球术",
 		["Fireball Volley"]="连珠火球",

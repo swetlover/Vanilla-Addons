@@ -18,22 +18,22 @@ L:RegisterTranslations("zhCN", function() return {
 	locust_desc = "虫群风暴的警报",
 
 	enrage_cmd = "enrage",
-	enrage_name = "地穴卫士狂怒警报",
+	enrage_name = "地穴卫士激怒警报",
 	enrage_desc = "激怒警报",
 
 	starttrigger1 = "Just a little taste...",
 	starttrigger2 = "Yes, run! It makes the blood pump faster!",
 	starttrigger3 = "There is no way out.",
 
-	etrigger = "获得了狂怒的效果。",
-	enragewarn = "地穴卫士狂怒 - 眩晕 + 宁神!",
+	etrigger = "获得了激怒的效果。",
+	enragewarn = "地穴卫士激怒 - 眩晕 + 宁神!",
 
 	gaintrigger = "阿努布雷坎获得了虫群风暴的效果。",
 	gainendwarn = "虫群风暴结束!",
 	gainnextwarn = "下一个虫群风暴在大约 90 秒",
 	gainwarn10sec = "大约 10秒后虫群风暴",
-	gainincbar = "可能虫群风暴",
-	gainbar = "虫群风暴",
+	gainincbar = "可能虫群风暴(自然伤DOT,不能攻击,施法)",
+	gainbar = "虫群风暴(自然伤DOT,不能攻击,施法)",
 
 	casttrigger = "阿努布雷坎开始施放虫群风暴。",
 	castwarn = "虫群风暴来临!",
@@ -41,7 +41,7 @@ L:RegisterTranslations("zhCN", function() return {
 	impale_cmd = "impale",
 	impale_name = "穿刺警报",
 	impale_desc = "穿刺的警报",
-	impaletrigger = "阿努布雷坎开始施放穿刺。", -- todo
+	impaletrigger = "阿努布雷坎开始施放穿刺", -- todo
 	impalebar = "下一个穿刺",
 	impalesay = "我被穿刺",
 

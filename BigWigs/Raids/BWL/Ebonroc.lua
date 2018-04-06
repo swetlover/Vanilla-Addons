@@ -20,12 +20,12 @@ L:RegisterTranslations("zhCN", function() return {
 	shadowfcurse_message_you = "你中了埃博诺克之影!",
 	shadowfcurse_message_taunt = "%s有埃博诺克之影! 嘲讽!",
 
-	wingbuffetcast_bar = "龙翼打击",
-	wingbuffet_bar = "下次龙翼打击",
+	wingbuffetcast_bar = "龙翼打击(锥形击退)",
+	wingbuffet_bar = "下个龙翼打击(锥形击退)",
 	wingbuffet1_bar = "龙翼打击来临",
-	shadowflame_bar = "暗影烈焰",
-	shadowflame_Nextbar = "下次暗影烈焰",
-	shadowcurse_bar = "%s - 埃博诺克之影",
+	shadowflame_bar = "暗影烈焰(锥形火伤)",
+	shadowflame_Nextbar = "下个暗影烈焰(锥形火伤)",
+	shadowcurse_bar = "%s - 埃博诺克之影(Boss回血技)",
     shadowcurse_Firstbar = "埃博诺克之影来临",
 
 	cmd = "Ebonroc",

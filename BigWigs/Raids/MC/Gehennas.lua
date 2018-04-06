@@ -57,7 +57,7 @@ L:RegisterTranslations("zhCN", function() return {
 	curse_warn_soon = "5秒后诅咒!",
 	curse_warn_now = "基赫纳斯的诅咒 - 快驱散!",
 
-	curse_bar = "基赫纳斯的诅咒",
+	curse_bar = "诅咒(治疗效果降低75%)",
 	firewarn = "离开火雨!",
 
 	cmd = "Gehennas",

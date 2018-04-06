@@ -38,7 +38,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	lifedrain_message = "生命吸取! 大约24秒后可能下一个!",
 	lifedrain_warn1 = "生命吸取5秒后!",
-	lifedrain_bar = "生命吸取",
+	lifedrain_bar = "生命吸取(驱散,Boss回血技)",
 
 	lifedrain_trigger = "生命吸取效果的影响",
 	lifedrain_trigger2 = "生命吸取被(.*)抵抗了",
@@ -47,10 +47,10 @@ L:RegisterTranslations("zhCN", function() return {
 
     deepbreath_incoming_message = "冰弹施放大约 ~23秒!",
     deepbreath_incoming_soon_message = "冰弹施放大约 ~5秒!",
-	deepbreath_incoming_bar = "冰弹施放",
+	deepbreath_incoming_bar = "冰弹施放!准备躲避!",
 	deepbreath_trigger = "开始施放冰霜吐息",
 	deepbreath_warning = "冰弹来临! 注意躲避!",
-	deepbreath_bar = "冰弹登陆!",
+	deepbreath_bar = "冰弹登陆!赶紧躲避!",
 	icebolt_yell = "我变成了冰块!快躲到我后面!",
 
 	proximity_cmd = "proximity",

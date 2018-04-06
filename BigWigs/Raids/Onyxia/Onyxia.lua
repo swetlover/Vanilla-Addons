@@ -87,11 +87,11 @@ L:RegisterTranslations("zhCN", function() return {
 	phase2text = "阶段 2",
 	phase3text = "阶段 3",
 	feartext = "马上恐惧!",
-	fear_cast = "恐惧",
-    fear_next = "下次恐惧",
-	deepbreath_cast = "深呼吸",
-	flamebreath_cast = "火息术",
-	wingbuffet_cast = "龙翼打击",
+	fear_cast = "恐惧(AOE群恐)",
+    fear_next = "下次恐惧(AOE群恐)",
+	deepbreath_cast = "深呼吸(注意跑位)",
+	flamebreath_cast = "火息术(锥形火伤)",
+	wingbuffet_cast = "龙翼打击(锥形击退)",
 	fireball_cast = "火球术对 %s",
 } end )
 

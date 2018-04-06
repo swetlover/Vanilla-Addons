@@ -5,6 +5,7 @@
 ## Notes-ruRU: Заметки на карте по травничеству для Cartographer (основан на PinPoint)
 ## Notes-koKR: Cartographer용 약초채집 노트 플러그인 - PinPoint(제작자 Ammo) 기반
 ## Notes-zhCN: |CFFDD66DDCartographer_Herbalism|r 草药标记|N/carto_import herbalism
+## DefaultState: disabled
 ## Author: Chris "kergoth" Larson
 ## Version: 1.0
 ## X-Category: Map

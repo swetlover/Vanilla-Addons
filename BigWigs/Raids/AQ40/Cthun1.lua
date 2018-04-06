@@ -28,31 +28,31 @@ L:RegisterTranslations("zhCN", function() return {
 	rape_desc = "有些人喜欢变态笑话.",
 	tentacle	= "触须轮奸队伍 - 5秒",
 	norape		= "5秒后触手!",
-	barTentacle	= "触手轮奸队伍!(打断+击杀)",
-	barNoRape	= "触须攻击队伍!(打断+击杀)",
+	barTentacle	= "触手轮奸队伍!",
+	barNoRape	= "触须攻击队伍!",
 
 	glare_cmd = "glare",
 	glare_name = "黑暗闪耀警报",
 	glare_desc = "黑暗闪耀的警报",
 	glare		= "黑暗闪耀!",
 	msgGlareEnds	= "黑暗闪耀5秒后结束!",
-	barGlare	= "下个黑暗闪耀!(红光)",
-	barGlareEnds = "黑暗闪耀结束(红光)",
-	barGlareCasting = "黑暗闪耀施放中(别中红光)",
+	barGlare	= "下个黑暗闪耀!",
+	barGlareEnds = "黑暗闪耀结束",
+	barGlareCasting = "黑暗闪耀施放中",
 
 	group_cmd = "group",
 	group_name = "黑暗闪耀队伍警报",
 	group_desc = "警报黑暗闪耀队伍 X",
 
-	phase2starting	= "克苏恩之眼死了！进入第二阶段！",
+	phase2starting	= "克苏恩之眼死了！第二阶段进入！",
 
 	playersInStomach = "玩家在腹部里",
 
 	giant_cmd = "giant",
 	giant_name = "巨眼警报",
 	giant_desc = "巨眼触须警报",
-	barGiant	= "巨眼触须!(注意打断+眩晕)",
-	barGiantC	= "巨爪触须!(高物理伤害)",
+	barGiant	= "巨眼触须!",
+	barGiantC	= "巨型利爪触须!",
 	GiantEye = "5秒后巨眼触须!",
 	gedownwarn	= "巨眼出现!",
 
@@ -63,7 +63,7 @@ L:RegisterTranslations("zhCN", function() return {
 	weakened	= "克苏恩虚弱45秒",
 	invulnerable2	= "削弱状态还有5秒结束",
 	invulnerable1	= "削弱状态结束 - 停止攻击克苏恩！",
-	barWeakened	= "克苏恩削弱!全体攻击本体!",
+	barWeakened	= "克苏恩削弱!",
 
 	sound_cmd = "sound",
 	sound_name = "声音",
@@ -75,6 +75,12 @@ L:RegisterTranslations("zhCN", function() return {
 	digestiveAcidTrigger = "你受到了消化酸液效果的影响。（([%d]*）",
 	msgDigestiveAcid = "5层酸液",
 
+	["Second TentacleHP"] = "第二触手 %d%%",
+	["First Tentacle dead"] = "第一触手死亡",
+	["First Tentacle"] = "第一触手",
+	["Second Tentacle"] = "第二触手",
+
+	tentacleName = "血肉触须",
 
 	--[[GNPPtrigger	= "Nature Protection",
 	GSPPtrigger	= "Shadow Protection",
@@ -83,21 +89,16 @@ L:RegisterTranslations("zhCN", function() return {
 	CoStrigger	= "Curse of Shadow",
 	CoRtrigger	= "Curse of Recklessness",]]
 
-	sound_cmd = "sound",
-	sound_name = "声音",
-	sound_desc = "附近模块上播放声音.",
-	
-	tentacleName = "血肉触须",
-	
-	text_tooClose = "|cffcccccc-- 太近了(10码内) --",
-	text_inStomach = "|cffcccccc-- 玩家在腹部里 --",
-	text_stomachTentacles = "|cffcccccc-- 腹部触须血量 --",
+
+	text_tooClose = "|cffcccccc-- 太近了 --",
+	text_inStomach = "|cffcccccc-- 腹部里 --",
+	text_stomachTentacles = "|cffcccccc-- 腹部触须 --",
 	text_dead = "|cffff0000死亡",
 	text_tentacle = "|cffcccccc触须",
 	text_nobody ="|cff777777无人",
-	text_weakened ="|cffff00ff削弱",
-	
-	["Big Wigs Cthun Assist"] = "BigWigs小克助手",
+	text_weakened ="|cffff00ff虚弱",
+
+	["Big Wigs Cthun Assist"] = "克苏恩助手",
 
 } end )
 
@@ -169,6 +170,9 @@ L:RegisterTranslations("deDE", function() return {
 	CoStrigger	= "Curse of Shadow",
 	CoRtrigger	= "Curse of Recklessness",]]
 
+	proximity_cmd = "proximity",
+	proximity_name = "Nähe Warnungsfenster",
+	proximity_desc = "Zeit das Nähe Warnungsfenster",
 } end )
 
 
@@ -188,6 +192,7 @@ module.toggleoptions = {"rape", -1, "tentacle", "glare", "group", -1, "giant", "
 --[[module.proximityCheck = function(unit) return CheckInteractDistance(unit, 2) end
 module.proximitySilent = false
 --]]
+
 
 -- locals
 local timer = {
@@ -238,7 +243,7 @@ local syncName = {
 	fleshTentacleDead = "FleshTentacleDead"..module.revision,
 }
 
-local gianteye = "巨型利爪触须"
+local gianteye = "巨眼触须"
 
 local cthunstarted = nil
 local phase2started = nil
@@ -249,6 +254,7 @@ local tentacletime = timer.p1Tentacle
 local isWeakened = nil
 local doCheckForWipe = false
 local eyeTarget = nil
+
 
 --Tablet (Proximity, Stomach, FleshTentacleHP). Basically CThunAssist baked into this mod.
 local tablet = AceLibrary("Tablet-2.0")
@@ -281,6 +287,7 @@ function module:OnEnable()
 	self:ThrottleSync(25, syncName.giantClawSpawn)
 	self:ThrottleSync(25, syncName.giantEyeSpawn)
 	self:ThrottleSync(25, syncName.tentacleSpawn)
+	
 end
 
 -- called after module is enabled and after each wipe
@@ -304,7 +311,7 @@ function module:OnSetup()
 	playername = UnitName("player")
 	tentacleDead = false
 	tentacleHP = "|cff777777??"
-
+	
 end
 
 -- called after boss is engaged
@@ -422,7 +429,6 @@ function module:CThunStart()
 		doCheckForWipe = true
 
 		self:Message(L["startwarn"], "Attention", false, false)
-		self:Sound("Shakira")
 		self:Bar(L["barStartRandomBeams"], timer.p1RandomEyeBeams, icon.giantEye)
 
 		if self.db.profile.tentacle then
@@ -517,6 +523,10 @@ function module:CThunWeakened()
 	self:RemoveBar(L["barGiantC"])
 
 	self:DelayedSync(timer.weakened, syncName.weakenOver)
+	
+	-- next giant claw after weaken
+	self:Bar(L["barGiantC"], timer.p2FirstGiantClawAfterWeaken, icon.giantClaw)
+	self:DelayedSync(timer.p2FirstGiantClawAfterWeaken, syncName.giantClawSpawn)
 end
 
 function module:CThunWeakenedOver()
@@ -531,11 +541,9 @@ function module:CThunWeakenedOver()
 		self:Message(L["invulnerable1"], "Important")
 	end
 
-	-- next giant claw 10s after weaken
-	self:Bar(L["barGiantC"], timer.p2FirstGiantClawAfterWeaken, icon.giantClaw)
-	self:DelayedSync(timer.p2FirstGiantClawAfterWeaken, syncName.giantClawSpawn)
-
-	-- next giant eye 40s after weaken
+	
+	
+	-- next giant eye 30s after weaken
 	self:Bar(L["barGiant"], timer.p2FirstGiantEyeAfterWeaken, icon.giantEye)
 	self:DelayedSync(timer.p2FirstGiantEyeAfterWeaken, syncName.giantEyeSpawn)
 	self:DelayedMessage(timer.p2FirstGiantEyeAfterWeaken - 5, L["GiantEye"], "Urgent", false, nil, true)
@@ -758,11 +766,11 @@ function module:OnTooltipUpdate()
 			end
 			
 			cat_tentacle:AddLine(
-				'text', L["text_tentacle"].." 1血量:",
+				'text', L["text_tentacle"].." 1:",
 				'text2', (tentacleDead and other) or hp
 			)
 			cat_tentacle:AddLine(
-				'text', L["text_tentacle"].." 2血量:",
+				'text', L["text_tentacle"].." 2:",
 				'text2', (tentacleDead and hp) or other
 			)
 		end

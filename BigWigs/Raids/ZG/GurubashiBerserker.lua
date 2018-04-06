@@ -37,8 +37,8 @@ local syncName = {
 
 L:RegisterTranslations("zhCN", function() return {
 	ThunderClap = "雷霆一击",
-	KnockBack = "击退",
-	Fear = "恐惧",
+	KnockBack = "击退(近战击退)",
+	Fear = "恐惧(AOE群恐)",
 	
 	trigger1 = "破胆咆哮效果的影响",
 	trigger2 = "破胆咆哮施放失败。(.+)对此免疫。",

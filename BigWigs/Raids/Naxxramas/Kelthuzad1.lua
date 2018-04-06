@@ -1,3 +1,4 @@
+
 ----------------------------------
 --      Module Declaration      --
 ----------------------------------
@@ -15,11 +16,11 @@ L:RegisterTranslations("zhCN", function() return {
 	KELTHUZADCHAMBERLOCALIZEDLOLHAX = "克尔苏加德的大厅",
 
 	phase_cmd = "phase",
-	phase_name = "阶段性警报",
+	phase_name = "每阶段警报",
 	phase_desc = "阶段性警报.",
 
 	mc_cmd = "mindcontrol",
-	mc_name = "精神控制",
+	mc_name = "精神控制警报",
 	mc_desc = "当玩家被精神控制时发出警报.",
 
 	fissure_cmd = "fissure",
@@ -31,15 +32,15 @@ L:RegisterTranslations("zhCN", function() return {
 	frostblast_desc = "当玩家受到冰霜冲击时发出警报.",
 
 	frostbolt_cmd = "frostbolt",
-	frostbolt_name = "冰霜箭",
-	frostbolt_desc = "警报当冰霜箭来临时",
+	frostbolt_name = "寒冰箭警报",
+	frostbolt_desc = "警报当寒冰箭来临时",
 
 	frostboltbar_cmd = "frostboltbar",
-	frostboltbar_name = "冰霜箭的施法条",
-	frostboltbar_desc = "显示一个冰霜箭的释放条",
+	frostboltbar_name = "寒冰箭的条",
+	frostboltbar_desc = "显示一个寒冰箭的释放条",
 
 	detonate_cmd = "detonate",
-	detonate_name = "自爆法力",
+	detonate_name = "自爆法力警报",
 	detonate_desc = "自爆法力即将发动时发出警报.",
 
 	detonateicon_cmd = "detonateicon",
@@ -47,12 +48,12 @@ L:RegisterTranslations("zhCN", function() return {
 	detonateicon_desc = "使用团队图标标记将自爆法力的玩家.",
 
 	guardians_cmd = "guardians",
-	guardians_name = "寒冰皇冠卫士小怪",
+	guardians_name = "寒冰皇冠卫士刷新",
 	guardians_desc = "第三阶段召唤寒冰皇冠卫士发出警报.",
 
 	fbvolley_cmd = "fbvolley",
-	fbvolley_name = "可能群体寒冰箭",
-	fbvolley_desc = "群体寒冰箭的计时条",
+	fbvolley_name = "可能乱射",
+	fbvolley_desc = "寒冰箭乱射/多重的计时条",
 
 	addcount_cmd = "addcount",
 	addcount_name = "P1 小怪计数",
@@ -61,12 +62,12 @@ L:RegisterTranslations("zhCN", function() return {
 	mc_trigger1 = "Your soul, is bound to me now!",
 	mc_trigger2 = "There will be no escape!",
 	mc_warning = "精神控制!",
-	mc_bar = "可能精神控制!",
+	mc_bar = "精神控制!",
 
 	start_trigger = "Minions, servants, soldiers of the cold dark, obey the call of Kel'Thuzad!",
 	start_trigger1 = "Minions, servants, soldiers of the cold dark! Obey the call of Kel'Thuzad!",
-	start_warning = "克尔苏加德开始相遇! 他将在大约5分钟后激活!",
-	start_bar = "P1 计时",
+	start_warning = "克尔苏加德开始相遇! 他将在~5分钟后激活!",
+	start_bar = "阶段 1 计时",
 	attack_trigger1 = "克尔苏加德发起攻击",
 	attack_trigger2 = "克尔苏加德没有击中",
 	attack_trigger3 = "克尔苏加德击中",
@@ -83,12 +84,12 @@ L:RegisterTranslations("zhCN", function() return {
 	earthshock_trigger1 = "地震术击中克尔苏加德",
 	earthshock_trigger2 = "地震术对克尔苏加德造成",
 
-	phase1_warn = "20秒后阶段 1结束! 加大火力!",
+	phase1_warn = "20秒后阶段 1结束!",
 
 	phase2_trigger1 = "Pray for mercy!",
 	phase2_trigger2 = "Scream your dying breath!",
 	phase2_trigger3 = "The end is upon you!",
-	phase2_warning = "阶段2来临, 克尔苏加德降临!",
+	phase2_warning = "阶段 2, 克尔苏加德降临!",
 	phase2_bar = "克尔苏加德激活!",
 
 	phase3_soon_warning = "第三阶段 即将来临！",
@@ -97,51 +98,54 @@ L:RegisterTranslations("zhCN", function() return {
 
 	guardians_bar = "寒冰皇冠卫士 %d",
 
-	fissure_trigger = "施放了暗影裂隙。",
-	fissure_trigger2 = "施放了暗影裂隙。",
+	fissure_trigger = "施放了暗影裂隙",
+	fissure_trigger2 = "施放了暗影裂隙",
 	fissure_warning = "暗影裂隙!",
-	fissure_bar = "暗影裂隙CD(注意脚下,躲避)",
+	fissure_bar = "暗影裂隙 CD",
 
-	frostbolt_trigger = "克尔苏加德开始施放冰霜箭。",
-	frostbolt_warning = "冰霜箭! 打断他!",
-	frostbolt_bar = "单体冰霜箭!快打断!",
+	frostbolt_trigger = "克尔苏加德开始施放寒冰箭。",
+	frostbolt_warning = "寒冰箭! 打断他!",
+	frostbolt_bar = "寒冰箭",
 
 
-	frostbolt_volley = "可能群体寒冰箭",
-	frostbolt_volley_trigger = "冰霜箭效果的影响",
+	frostbolt_volley = "可能乱射",
+	frostbolt_volley_trigger = "寒冰箭效果的影响",
 
 	add_dead_trigger = "(.*)死亡",
 	add_bar = "%d/14 %s",
+	add_bar2 = "%d/10 %s",
 
-	frostblast_bar = "可能冰霜冲击!注意分散!",
+	frostblast_bar = "可能冰霜冲击",
 	frostblast_trigger1 = "I will freeze the blood in your veins!",
-	frostblast_trigger2 = "^([^%s]+)受([^%s]+)了冰霜冲击效果的影响。",
-	frostblast_warning = "冰霜冲击!!",
-	frostblast_soon_message = "可能冰霜冲击 大约5秒!",
+	frostblast_trigger2 = "^([^%s]+)([^%s]+)冰霜冲击效果的影响。",
+	frostblast_warning = "冰霜冲击!",
+	frostblast_soon_message = "可能冰霜冲击 ~5秒!",
 
-	phase2_frostblast_warning = "可能冰霜冲击 大约5秒!",
-	phase2_mc_warning = "可能精神控制 大约5秒!!",
-	phase2_detonate_warning = "自爆法力大约5秒!",
+	phase2_frostblast_warning = "可能冰霜冲击 ~5秒!",
+	phase2_mc_warning = "可能精神控制 ~5秒!",
+	phase2_detonate_warning = "自爆法力大约 ~5秒!",
 
-	detonate_trigger = "^([^%s]+)受([^%s]+)了自爆法力效果的影响",
+	detonate_trigger = "^([^%s]+)([^%s]+)了自爆法力效果的影响。",
 	detonate_bar = "自爆法力 - %s",
-	detonate_possible_bar = "可能自爆法力",
-	detonate_warning = "%s 受到了自暴法力!",
+	detonate_possible_bar = "自爆法力",
+	detonate_warning = "%s 中了自爆法力!",
+	detonate_onme = "对+.施放了自爆法力",
 
 	you = "你",
-	are = "到",
+	are = "受到了",
 
 	proximity_cmd = "proximity",
 	proximity_name = "附近警报",
 	proximity_desc = "显示附近玩家警报框架",
 } end )
 
+
 ---------------------------------
 --      	Variables 		   --
 ---------------------------------
 
 -- module variables
-module.revision = 20008 -- To be overridden by the module!
+module.revision = 20009 -- To be overridden by the module!
 module.enabletrigger = module.translatedName -- string or table {boss, add1, add2}
 --module.wipemobs = { L["add_name"] } -- adds which will be considered in CheckForEngage
 module.toggleoptions = {"frostbolt", "frostboltbar", -1, "frostblast", "proximity", "fissure", "mc", -1, "fbvolley", -1, "detonate", "detonateicon", -1 ,"guardians", -1, "addcount", "phase", "bosskill"}
@@ -155,7 +159,7 @@ module.proximitySilent = true
 local timer = {
 	phase1 = 320,
 	firstFrostboltVolley = 30,
-	frostboltVolley = {18,30},
+	frostboltVolley = {15,30},
 	frostbolt = 2,
 	phase2 = 15,
 	firstDetonate = 20,
@@ -163,7 +167,7 @@ local timer = {
 	nextDetonate = {20,25},
 	firstFrostblast = 50,
 	frostblast = {30,60},
-	firstMindcontrol = 60,
+	firstMindcontrol = {30,60},
 	mindcontrol = {60,90},
 	firstGuardians = 5,
 	guardians = 7,
@@ -229,7 +233,6 @@ function module:OnEnable()
 	self:RegisterEvent("CHAT_MSG_COMBAT_CREATURE_VS_PARTY_MISSES", "Event")
 	self:RegisterEvent("CHAT_MSG_COMBAT_CREATURE_VS_CREATURE_HITS", "Event")
 	self:RegisterEvent("CHAT_MSG_COMBAT_CREATURE_VS_CREATURE_MISSES", "Event")
-
 	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_CREATURE_BUFF", "FissureEvent")
 	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE", "Affliction")
 	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_FRIENDLYPLAYER_DAMAGE", "Affliction")
@@ -249,7 +252,6 @@ end
 -- called after module is enabled and after each wipe
 function module:OnSetup()
 	self:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH")
-
 	self.warnedAboutPhase3Soon = nil
 	frostbolttime = 0
 	self.lastFrostBlast=0
@@ -267,7 +269,7 @@ function module:OnEngage()
 		numAbominations = 0
 		numWeavers = 0
 		self:Bar(string.format(L["add_bar"], numAbominations, "无法阻止的憎恶"), timer.phase1, icon.abomination)
-		self:Bar(string.format(L["add_bar"], numWeavers, "织魂者"), timer.phase1, icon.soulWeaver)
+		self:Bar(string.format(L["add_bar2"], numWeavers, "织魂者"), timer.phase1, icon.soulWeaver)
 	end
 end
 
@@ -393,7 +395,6 @@ function module:Affliction(msg)
 end
 
 function module:Event(msg)
-
 	-- frost bolt
 	if GetTime() < frostbolttime + timer.frostbolt then
 		if string.find(msg, L["attack_trigger1"]) or string.find(msg, L["attack_trigger2"]) or string.find(msg, L["attack_trigger3"]) or string.find(msg, L["attack_trigger4"]) then
@@ -433,7 +434,7 @@ function module:BigWigs_RecvSync(sync, rest, nick)
 	elseif sync == syncName.frostblast then
 		self:FrostBlast(rest)
 	elseif sync == syncName.detonate and rest then
-		self:Detonate()
+		self:Detonate(rest)
 	elseif sync == syncName.frostbolt then       -- changed from only frostbolt (thats only alert, if someone still wants to see the bar, it wouldnt work then)
 		self:Frostbolt()
 	elseif sync == syncName.frostboltOver then
@@ -456,8 +457,8 @@ function module:Phase2()
 	self:Bar(L["phase2_bar"], timer.phase2, icon.phase2)
 	self:DelayedMessage(timer.phase2, L["phase2_warning"], "Important")
 	if self.db.profile.mc then
-		self:DelayedBar(timer.phase2, L["mc_bar"], timer.firstMindcontrol, icon.mindcontrol, true, "Black")
-		self:DelayedMessage(timer.firstMindcontrol  + timer.phase2 - 5, L["phase2_mc_warning"], "Important")
+		self:DelayedIntervalBar(timer.phase2, L["mc_bar"], timer.firstMindcontrol[1], timer.firstMindcontrol[2], icon.mindcontrol, true, "Black")
+		self:DelayedMessage(timer.firstMindcontrol[1]  + timer.phase2 - 5, L["phase2_mc_warning"], "Important")
 	end
 	if self.db.profile.detonate then
 		self:DelayedBar(timer.phase2, L["detonate_possible_bar"], timer.firstDetonate, icon.detonate, true, "Gray")
@@ -473,7 +474,6 @@ function module:Phase2()
 	end
 
 	-- master target should be automatically set, as soon as a raid assistant targets kel'thuzad
-	--self:KTM_SetTarget(self:ToString())
 	self:KTM_Reset()
 
 	-- proximity silent
@@ -484,7 +484,7 @@ function module:Phase2()
 
 	local function removeP1Bars()
 		self:RemoveBar(L["start_bar"])
-		self:RemoveBar(string.format(L["add_bar"], numWeavers, "织魂者"))
+		self:RemoveBar(string.format(L["add_bar2"], numWeavers, "织魂者"))
 		self:RemoveBar(string.format(L["add_bar"], numAbominations, "无法阻止的憎恶"))
 	end
 	self:ScheduleEvent("bwKTremoveP1Bars", removeP1Bars, 1, self)
@@ -521,6 +521,7 @@ function module:FrostBlast(name)
 	if self.db.profile.frostblast then
 		if GetTime()-self.lastFrostBlast>5 then
 			self:RemoveWarningSign(icon.guardians, true)
+			self:WarningSign(icon.frostblast, 5)
 			self.lastFrostBlast=GetTime()
 			self:Message(L["frostblast_warning"], "Attention")
 			self:DelayedMessage(timer.frostblast[1] - 5, L["frostblast_soon_message"])
@@ -537,6 +538,11 @@ function module:Detonate(name)
 		self:Message(string.format(L["detonate_warning"], name), "Attention")
 		if self.db.profile.detonateicon then
 			self:Icon(name)
+		end
+		if UnitName("player") == name then
+			self:SendSay(L["detonate_onme"] .. UnitName("player") .. "!")
+			self:WarningSign(icon.detonate, timer.detonate)
+			self:Sound("Beware")
 		end
 		self:Bar(string.format(L["detonate_bar"], name), timer.detonate, icon.detonate)
 		self:IntervalBar(L["detonate_possible_bar"], timer.nextDetonate[1], timer.nextDetonate[2], icon.detonate, true, "Gray")
@@ -582,10 +588,10 @@ end
 
 function module:WeaverDies(name)
 	if name and self.db.profile.addcount then
-		self:RemoveBar(string.format(L["add_bar"], numWeavers, name))
+		self:RemoveBar(string.format(L["add_bar2"], numWeavers, name))
 		numWeavers = numWeavers + 1
-		if numWeavers < 14 then
-			self:Bar(string.format(L["add_bar"], numWeavers, name), (timePhase1Start + timer.phase1 - GetTime()), icon.soulWeaver)
+		if numWeavers < 10 then
+			self:Bar(string.format(L["add_bar2"], numWeavers, name), (timePhase1Start + timer.phase1 - GetTime()), icon.soulWeaver)
 		end
 	end
 end

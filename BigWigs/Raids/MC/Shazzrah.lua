@@ -66,9 +66,9 @@ L:RegisterTranslations("zhCN", function() return {
 	cs_soon_warn = "3秒后施放法术反制 !",
 
 	blink_bar = "可能闪现",
-	deaden_bar = "衰减魔法",
-	curse_bar = "沙斯拉尔的诅咒",
-	cs_bar = "可能法术反制",
+	deaden_bar = "衰减魔法(受到法伤降低50%)",
+	curse_bar = "诅咒(蓝耗提高100%)",
+	cs_bar = "可能法术反制(沉默)",
 
 	cmd = "Shazzrah",
 	

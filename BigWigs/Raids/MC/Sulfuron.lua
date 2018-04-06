@@ -46,7 +46,7 @@ L:RegisterTranslations("zhCN", function() return {
 	triggeradddead = "烈焰行者祭司死亡了。",
 	triggercast = "开始施放黑暗治疗",
     spear_cast = "开始施展烈焰之矛",
-	healbar = "黑暗治疗",
+	healbar = "黑暗治疗(治疗友方)",
 	knockbacktimer = "近战AoE击退",
 	knockbackannounce = "3 秒后击退!",
 	healwarn = "加大治疗!",
@@ -60,7 +60,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	addmsg = "%d/4 烈焰行者祭司死亡!",
 
-    flame_spear_bar = "烈焰之矛",
+    flame_spear_bar = "烈焰之矛(1000火伤)",
             
 	cmd = "Sulfuron",
 	

@@ -69,8 +69,8 @@ L:RegisterTranslations("zhCN", function() return {
 	mindcontrol_bar = "被控制: %s",
 	addmsg = "%d/2 烈焰行者死亡!",
 
-	curse_bar = "鲁西弗隆的诅咒",
-	doom_bar = "末日降临",
+	curse_bar = "诅咒(耗蓝提高一倍)",
+	doom_bar = "末日降临(10秒后2000暗伤)",
 	shock_bar = "暗影震击",
 
 	cmd = "Lucifron",

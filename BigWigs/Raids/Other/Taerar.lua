@@ -61,7 +61,7 @@ L:RegisterTranslations("zhCN", function() return {
 	breath_warn = "毒性吐息!",
 	fear_warn = "AoE 恐惧马上!",
 
-	breath_bar = "毒性吐息",
+	breath_bar = "毒性吐息(自然伤DOT)",
 	banish_bar = "放逐",
 	fear_bar = "AoE 恐惧",
 

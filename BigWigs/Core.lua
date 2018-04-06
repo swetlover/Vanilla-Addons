@@ -24,7 +24,7 @@ L:RegisterTranslations("zhCN", function() return {
 	["%s mod enabled"] = "%s 模块开启",
 	["Target monitoring enabled"] = "启用目标监视",
 	["Target monitoring disabled"] = "禁用目标监视",
-	["%s engaged!"] = "%s 触发战斗!大吉大利!晚上吃鸡!",
+	["%s engaged!"] = "%s 触发战斗!大吉大利!今晚吃鸡!",
 	["%s has been defeated"] = "%s 已被击败",     -- "<boss> has been defeated"
 	["%s have been defeated"] = "%s 已被击败",    -- "<bosses> have been defeated"
 
@@ -168,7 +168,7 @@ BigWigs.cmdtable = {type = "group", handler = BigWigs, args = {
 }}
 BigWigs:RegisterChatCommand({"/bw", "/BigWigs"}, BigWigs.cmdtable)
 BigWigs.debugFrame = ChatFrame1
-BigWigs.revision = 20028
+BigWigs.revision = 20030
 
 
 function BigWigs:DebugMessage(msg, module)

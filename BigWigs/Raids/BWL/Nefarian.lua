@@ -57,9 +57,9 @@ L:RegisterTranslations("zhCN", function() return {
 	warnmage	= "法师 - 变形术发动，注意解除！",
 
 	classcall_bar = "职业点名",
-	fear_bar = "可能恐惧",
+	fear_bar = "可能恐惧(群体恐惧)",
 	
-	curse_bar = "暗影迷雾",
+	curse_bar = "暗影迷雾(治疗效果降低75%)",
 
 	cmd = "Nefarian",
 
@@ -203,7 +203,7 @@ module.toggleoptions = {"curse", "mc", "shadowflame", "fear", "classcall", "othe
 local timer = {
 	mobspawn = 10,
 	earliestClasscall = 25,
-	classcallInterval = 35,
+	classcallInterval = 28,
 	mc = 15,
 	landingShadowflame = 10,
  	firstShadowflame = 15,

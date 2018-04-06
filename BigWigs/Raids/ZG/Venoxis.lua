@@ -34,9 +34,9 @@ L:RegisterTranslations("zhCN", function() return {
     deadaddtrigger                  = "拉扎什眼镜蛇死亡了",
     deadbosstrigger                 = "高阶祭司温诺希斯死亡了",
 
-    holyfirebar         = "神圣之火",
-    holyfirecd_bar		= "神圣之火 CD",
-    renewbar            = "恢复",
+    holyfirebar         = "神圣之火(DOT火伤)",
+    holyfirecd_bar		= "神圣之火CD (DOT火伤)",
+    renewbar            = "恢复(治疗HOT)",
     renew_message       = "恢复! 驱散他!",
     phase1_message      = "巨魔阶段",
     phase2_message      = "蛇阶段",

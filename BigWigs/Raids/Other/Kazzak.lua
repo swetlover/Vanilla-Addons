@@ -60,7 +60,7 @@ L:RegisterTranslations("zhCN", function() return {
 	attack_trigger2 = "卡扎克没有击中",
 	attack_trigger3 = "卡扎克击中",
 	attack_trigger4 = "卡扎克的致命一击",
-	enrage_trigger = "Lord Kazzak gains Berserk.",
+	enrage_trigger = "卡扎克获得了狂暴的效果。",
 	enrageyell_trigger = "Kazzak is supreme!",
 	bosskill_trigger = "The Legion... will never... fall.",
 
@@ -79,8 +79,8 @@ L:RegisterTranslations("zhCN", function() return {
 
 	enrage_bar = "无敌模式",
 	voidbolt_bar = "虚空箭",
-	mark_bar = "%s: 卡扎克印记",
-	twisted_bar = "%s: 扭曲反射",
+	mark_bar = "%s: 卡扎克印记(吸蓝,爆炸)",
+	twisted_bar = "%s: 扭曲反射(Boss回血技)",
 
 	supreme_cmd = "supreme",
 	supreme_name = "无敌警报",

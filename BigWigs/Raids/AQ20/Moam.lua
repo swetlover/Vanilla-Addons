@@ -23,11 +23,11 @@ L:RegisterTranslations("zhCN", function() return {
 
 	starttrigger = "%s senses your fear.",
 	startwarn = "莫阿姆已激活 - 90秒后召唤元素恶魔",
-	addsbar = "召唤",
+	addsbar = "召唤(招出小怪)",
 	addsincoming = "元素恶魔将%s秒后被召唤！",
 	addstrigger = "drains your mana and turns to stone.",
 	addswarn = "元素恶魔被召唤！术士放逐！莫阿姆石化90秒！",
-	paralyzebar = "石化",
+	paralyzebar = "石化(无法移动)",
 	returnincoming = "莫阿姆将在%s秒后解除石化！",
 	returntrigger = "充能效果从莫阿姆身上消失。",
     returntrigger2 = "充满能量",

@@ -22,12 +22,12 @@ L:RegisterTranslations("zhCN", function() return {
 	wingbuffet_warning = "现在嘲讽! 龙翼打击马上!",
 	shadowflame_warning = "暗影烈焰来临!",
 
-	wingbuffetcast_bar = "龙翼打击",
-	wingbuffet_bar = "下次龙翼打击",
+	wingbuffetcast_bar = "龙翼打击(锥形击退)",
+	wingbuffet_bar = "下次龙翼打击(锥形击退)",
 	wingbuffet1_bar = "龙翼打击来临",
-	shadowflame_bar = "暗影烈焰",
-	shadowflame_Nextbar = "下次暗影烈焰",
-	flamebuffet_bar = "烈焰打击",
+	shadowflame_bar = "暗影烈焰(锥形火伤)",
+	shadowflame_Nextbar = "下次暗影烈焰(锥形火伤)",
+	flamebuffet_bar = "烈焰打击(叠得越高受伤越高)",
 
 	cmd = "Firemaw",
 

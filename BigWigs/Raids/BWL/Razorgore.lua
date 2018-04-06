@@ -16,7 +16,7 @@ L:RegisterTranslations("zhCN", function() return {
 	start_trigger = "Intruders have breached",
 	start_message = "阶段 1",
 	mobs_soon = "第一波 5秒!",
-	mobs_bar = "第一波",
+	mobs_bar = "小怪出现",
 	orbcontrolother_trigger = "(.+)受到了心灵疲惫效果的影响。",
 	orbcontrolyou_trigger = "你受到了心灵疲惫效果的影响。",
 	mindcontrolother_trigger = "(.+)受到了统御意志效果的影响。",
@@ -30,7 +30,7 @@ L:RegisterTranslations("zhCN", function() return {
 	polymorphyou_trigger = "你受到了强效变形术效果的影响。",
 	polymorph_message = "%s 变形! 驱散!",
 	polymorph_message_you = "你被变形!",
-	polymorph_bar = "变形: %s",
+	polymorph_bar = "变形: %s (驱散他)",
 	polymorphyouend_trigger = "强效变形术效果从你身上消失了。",
 	polymorphotherend_trigger = "强效变形术效果从(.+)身上消失。",
 	deathyou_trigger = "你死了。",
@@ -42,11 +42,11 @@ L:RegisterTranslations("zhCN", function() return {
 	phase2_trigger = "I'm free! That device shall never torment me again!", --"You'll pay for forcing me to do this.", 
 	phase2_message = "阶段 2",
 	volley_trigger = "狂野的拉佐格尔开始施放连珠火球。",
-	volley_bar = "连珠火球",
+	volley_bar = "连珠火球(注意躲避)",
 	volley_message = "躲起来!",
 	conflagration_trigger = "受到了燃烧效果",
-	conflagration_bar = "燃烧",
-	warstomp_bar = "战争践踏",
+	conflagration_bar = "燃烧(点燃当前T)",
+	warstomp_bar = "战争践踏(AOE)",
 	orb_bar = "宝珠控制: %s",
 	destroyegg_yell1 = "You'll pay for forcing me to do this!",
 	destroyegg_yell2 = "Fools! These eggs are more precious than you know!",
@@ -174,7 +174,7 @@ L:RegisterTranslations("deDE", function() return {
 
 -- module variables
 local controller = AceLibrary("Babble-Boss-2.2")["Grethok the Controller"]
-module.revision = 20006 -- To be overridden by the module!
+module.revision = 20007 -- To be overridden by the module!
 module.enabletrigger = {module.translatedName, controller} -- string or table {boss, add1, add2}
 --module.wipemobs = { L["add_name"] } -- adds which will be considered in CheckForEngage
 module.toggleoptions = {"phase", "mobs", "eggs", "polymorph", "mc", "icon", "orb", "fireballvolley", "conflagration", "bosskill"}
@@ -266,8 +266,8 @@ function module:OnEngage()
 		self:Bar(L["mobs_bar"], timer.mobspawn, icon.mobspawn)
 		self:Message(timer.mobspawn - 5, L["mobs_soon"], "Important")
 	end
-	self:TriggerEvent("BigWigs_StartCounterBar", self, "Eggs destroyed", 30, "Interface\\Icons\\inv_egg_01")
-	self:TriggerEvent("BigWigs_SetCounterBar", self, "Eggs destroyed", (30 - 0.1))
+	self:TriggerEvent("BigWigs_StartCounterBar", self, "捣毁蛋数量", 30, "Interface\\Icons\\inv_egg_01")
+	self:TriggerEvent("BigWigs_SetCounterBar", self, "捣毁蛋数量", (30 - 0.1))
 end
 
 -- called after boss is disengaged (wipe(retreat) or victory)
@@ -430,7 +430,7 @@ function module:BigWigs_RecvSync(sync, rest, nick)
 			if self.db.profile.eggs then
 				self:Message(string.format(L["egg_message"], self.eggs), "Positive")
 			end
-			self:TriggerEvent("BigWigs_SetCounterBar", self, "Eggs destroyed", (30 - self.eggs))
+			self:TriggerEvent("BigWigs_SetCounterBar", self, "捣毁蛋数量", (30 - self.eggs))
 		elseif rest == (self.eggs + 1) and rest == 30 and self.phase ~= 2 then
 			self:Sync(syncName.phase2)
 		end
@@ -487,7 +487,7 @@ function module:BigWigs_RecvSync(sync, rest, nick)
 		if self.db.profile.phase then
 			self:Message(L["phase2_message"], "Attention")
 		end
-		self:TriggerEvent("BigWigs_StopCounterBar", self, "Eggs destroyed")
+		self:TriggerEvent("BigWigs_StopCounterBar", self, "捣毁蛋数量")
 		self:Bar(L["conflagration_bar"], timer.firstConflagrate-self.freetime, "Spell_Fire_Incinerate", true, "red")
 		self:Bar(L["volley_bar"], timer.firstVolley-self.freetime, icon.volley, true, "blue")
 		self:Bar(L["warstomp_bar"], timer.firstWarStomp-self.freetime, "Ability_BullRush")
@@ -510,7 +510,7 @@ function module:OrbControlCheck()
 	end
 	if bosscontrol then
 		self:ScheduleEvent("orbcontrol_check", self.OrbControlCheck, 0.5, self)
-	elseif GetRealZoneText() == "Blackwing Lair" then
+	elseif GetRealZoneText() == "黑翼之巢" then
 		self:Sync(syncName.orbOver)
 	end
 end

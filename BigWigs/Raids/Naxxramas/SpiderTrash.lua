@@ -20,7 +20,7 @@ L:RegisterTranslations("zhCN", function() return {
 	charge_trigger = "受到了毒性充能效果的影响。",
 	chargeself_trigger = "你受到了毒性充能效果的影响。",
 	chargegone_self = "毒性充能效果从你身上消失了",
-	charge_bar = "毒性充能 CD",
+	charge_bar = "毒性充能(冲锋) CD",
 } end )
 
 ---------------------------------

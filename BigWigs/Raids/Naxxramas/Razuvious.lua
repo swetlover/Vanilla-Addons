@@ -40,7 +40,7 @@ L:RegisterTranslations("zhCN", function() return {
 	shout3secwarn = "3 秒后瓦解怒吼!",
 	shoutwarn = "瓦解怒吼! 下一个 25秒",
 	noshoutwarn = "没有怒吼! 下一个 20秒",
-	shoutbar = "瓦解怒吼",
+	shoutbar = "瓦解怒吼(远程注意躲避)",
 
 	unbalance_trigger = "重压打击效果的影响",
 	unbalancesoonwarn = "重压打击马上来临!",
@@ -48,7 +48,7 @@ L:RegisterTranslations("zhCN", function() return {
 	unbalancebar = "重压打击",
 
 	shieldwalltrigger   = "死亡骑士实习者获得了盾墙的效果。",
-	shieldwallbar       = "盾墙",
+	shieldwallbar       = "小怪的盾墙",
 } end )
 
 

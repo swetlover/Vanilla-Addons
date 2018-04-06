@@ -49,7 +49,7 @@ L:RegisterTranslations("zhCN", function() return {
 	breath_warn = "毒性吐息!",
 
 
-	breath_bar = "毒性吐息",
+	breath_bar = "毒性吐息(自然伤DOT)",
 
 } end )
 

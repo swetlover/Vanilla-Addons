@@ -74,7 +74,7 @@ L:RegisterTranslations("zhCN", function() return {
 	submerge_10sec_message = "10秒下潜!",
 	submerge_5sec_message = "5秒下潜!",
 
-	knockback_bar = "AoE 击退",
+	knockback_bar = "击退!(近战后退)",
 	emerge_bar = "拉格纳罗斯出现",
 	submerge_bar = "拉格纳罗斯下潜",
 

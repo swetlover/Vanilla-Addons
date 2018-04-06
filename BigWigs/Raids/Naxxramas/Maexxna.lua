@@ -36,7 +36,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	cocoonwarn = "%s 蛛网裹体!",
 	poisonwarn = "死灵之毒!",
-	enragetrigger = "%s 被激怒了.",
+	enragetrigger = "%s becomes enraged.",
 
 	webspraywarn30sec = "10 秒后发动墙茧",
 	webspraywarn20sec = "发动墙茧! 15 秒后蜘蛛刷新!",
@@ -44,13 +44,13 @@ L:RegisterTranslations("zhCN", function() return {
 	webspraywarn5sec = "AOE - 蜘蛛刷新 - AOE! 蛛网喷射5秒后!",
 	webspraywarn = "蛛网喷射! 40 秒后下一个!",
 
-	enragewarn = "激怒 - 挤压挤压挤压!",
+	enragewarn = "激怒 - 赶紧rush!",
 	enragesoonwarn = "马上激怒 !",
 
-	webspraybar = "蛛网喷射",
-	cocoonbar = "墙茧",
+	webspraybar = "蛛网喷射(群体束缚)",
+	cocoonbar = "墙茧(上墙)",
 	spiderbar = "小蜘蛛出现",
-	poisonbar = "死灵之毒",
+	poisonbar = "死灵之毒(治疗效果降低90%)",
 
 	you = "你",
 	are = "受到了",

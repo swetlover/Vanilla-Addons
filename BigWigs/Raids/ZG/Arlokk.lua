@@ -19,7 +19,7 @@ L:RegisterTranslations("zhCN", function() return {
 	mark_warning_other = "%s 是标记!",
 	mark_fade = "娅尔罗的印记效果从(.+)身上消失。",
 	ww_trigger = "获得了旋风斩的效果",
-	ww_bar = "旋风斩",
+	ww_bar = "旋风斩(近战AOE)",
 	trollphase_message = "巨魔阶段",
 	pantherphase_message = "豹的阶段",
 	vanishphase_message = "消失!",

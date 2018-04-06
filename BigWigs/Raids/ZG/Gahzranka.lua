@@ -14,10 +14,10 @@ L:RegisterTranslations("zhCN", function() return {
 	cmd = "Gahzranka",
 
 	frostbreath_trigger = "加兹兰卡开始施展冰息术。",
-	frostbreath_bar = "冰息术 CD",
- 	frostbreathcast_bar = "冰息术施放",
+	frostbreath_bar = "冰息术 CD (锥形冰伤)",
+ 	frostbreathcast_bar = "冰息术施放(锥形冰伤)",
 	massivegeyser_trigger = "加兹兰卡开始施放巨型喷泉。",
-	massivegeyser_bar = "巨型喷泉",
+	massivegeyser_bar = "巨型喷泉(击飞)",
 	slam_trigger = "加兹兰卡的加兹兰卡猛击",
 	slam_bar = "猛击CD",
 

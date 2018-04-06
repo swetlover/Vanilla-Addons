@@ -17,7 +17,7 @@ L:RegisterTranslations("zhCN", function() return {
 	mcplayerotherend = "充实效果从(.*)身上消失。",
 	mcplayer_message = "你被精神控制!",
 	mcplayerother_message = "%s 被精神控制!",
-	mindcontrol_bar = "精神控制: %s",
+	mindcontrol_bar = "精神控制: %s (羊,恐惧他)",
 	deathyou_trigger = "你死了。",
 	deathother_trigger = "(.*)死亡了。",
 	splitsoon_message = "即将分裂! 准备!",

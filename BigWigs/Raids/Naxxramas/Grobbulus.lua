@@ -40,19 +40,19 @@ L:RegisterTranslations("zhCN", function() return {
 	are = "受到了",
 
 	startwarn = "葛罗巴斯来势汹汹, 12分钟后进入激怒!",
-	enragebar = "激怒",
+	enragebar = "激怒(伤害,攻速提高)",
 	enrage10min = "激怒 10分钟",
 	enrage5min = "激怒 5分钟",
 	enrage1min = "激怒 1分钟",
 	enrage30sec = "激怒 30秒",
 	enrage10sec = "激怒 10秒",
 	bomb_message_you = "你中了变异注射!",
-	bomb_message_other = "%s 中了变异注射!",
+	bomb_message_other = "%s 变异注射!",
 	bomb_bar = "%s 变异注射",
 
 	cloud_trigger = "葛罗巴斯施放了毒性云雾。",
 	cloud_warn = "下个毒性云雾大约 15 秒!",
-	cloud_bar = "毒性云雾",
+	cloud_bar = "毒性云雾(近战走位)",
 	bomb_onme = "对+.施放了毒性云雾",
 
 	slimespray_cmd = "slimespray",

@@ -52,7 +52,7 @@ L:RegisterTranslations("zhCN", function() return {
 	adddeath = "No... more... Feugen...",
 	adddeath2 = "Master save me...",
 
-	teslaoverload = "超负荷！",
+	teslaoverload = "overloads!",
 
 	pstrigger = "Now YOU feel pain!",
 	trigger_polarity_cast = "泰迪斯开始施放极性转化",
@@ -82,11 +82,11 @@ L:RegisterTranslations("zhCN", function() return {
 	warn_enrage_30 = "激怒 30 秒",
 	warn_enrage_10 = "激怒 10 秒",
 	stalaggwarn = "能量涌动 - 加大对坦克的治疗！",
-	powersurgebar = "能量涌动",
+	powersurgebar = "能量涌动(怪物攻速提高)",
 
 	bar1text = "极性转化",
 
-	throwbar = "投掷",
+	throwbar = "MT投掷",
 	throwwarn = "大约5秒投掷！MT注意！",
 
 	phasebar = "阶段 2",

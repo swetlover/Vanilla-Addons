@@ -42,7 +42,7 @@ L:RegisterTranslations("zhCN", function() return {
 	meteor_desc = "流星的警报",
 	
 	meteortrigger = "阿努比萨斯守卫者的流星",
-	meteorbar = "流星 CD",
+	meteorbar = "流星CD (AOE伤害)",
 	meteorwarn = "流星!",
 
 	explodetrigger = "阿努比萨斯守卫者获得了爆炸的效果。",

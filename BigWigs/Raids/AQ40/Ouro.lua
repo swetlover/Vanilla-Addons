@@ -85,21 +85,21 @@ L:RegisterTranslations("zhCN", function() return {
 	sweeptrigger = "奥罗开始施放横扫",
 	sweepannounce = "横扫!近战躲!",
 	sweepwarn = "5秒后横扫!",
-	sweepbartext = "横扫",
+	sweepbartext = "横扫(近战躲)",
 
 	sandblasttrigger = "奥罗开始施展沙尘爆裂",
 	sandblastannounce = "沙尘爆裂来临!",
 	sandblastwarn = "5秒后沙尘爆裂!",
-	sandblastbartext = "沙尘爆裂",
+	sandblastbartext = "沙尘爆裂(180度半圆型吐息)",
 
 	engage_message = "奥罗相遇! 59秒后可能钻地!",
-	possible_submerge_bar = "可能钻地",
+	possible_submerge_bar = "可能钻地(准备跑)",
 
 	--emergetrigger = "Dirt Mound casts Summon Ouro Scarabs.",
 	emergetrigger = "大地破裂",
 	emergeannounce = "奥罗现身了!",
 	emergewarn = "15秒后可能钻地!",
-	emergebartext = "奥罗钻地",
+	emergebartext = "奥罗钻地(远离土堆)",
 
 	submergetrigger = "奥罗施放了召唤奥罗土堆。", -- ?
 	submergeannounce = "奥罗潜入地下!",
@@ -107,7 +107,7 @@ L:RegisterTranslations("zhCN", function() return {
 	submergebartext = "奥罗现身",
 
 	berserktrigger = "奥罗获得了狂暴的效果。",
-	berserkannounce = "狂暴 - 狂暴!",
+	berserkannounce = "狂暴!攻击速度增加150%,奥罗不会再钻地!",
 	berserksoonwarn = "即将狂暴 - 做好准备！",
 } end )
 

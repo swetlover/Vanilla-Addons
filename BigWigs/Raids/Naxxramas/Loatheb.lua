@@ -35,13 +35,13 @@ L:RegisterTranslations("zhCN", function() return {
 	groups_name = "孢子队伍",
 	groups_desc = "显示小队成员的孢子计时 (7组策略)",
 
-	doombar = "必然的厄运 %d",
+	doombar = "必然的厄运(10秒后2550暗伤) %d",
 	doomwarn = "必然的厄运 %d! %d 秒下一个!",
 	doomwarn5sec = "必然的厄运 %d 5秒后!",
 	doomtrigger = "必然的厄运效果的影响。",
 
 	cursewarn = "解除诅咒! 重新诅咒!",
-	cursebar = "解除诅咒",
+	cursebar = "解除诅咒(SS重新诅咒)",
 	cursetrigger  = "憎恨者的(.+)诅咒被移除了。",
 
 

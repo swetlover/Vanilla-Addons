@@ -31,8 +31,8 @@ L:RegisterTranslations("zhCN", function() return {
 	trigger10 = "I lied...",
 	
 	shield_trigger ="获得了拉贾克斯之盾效果",
-	shield = "拉贾克斯之盾",
-	shield_cd = "拉贾克斯之盾 CD",
+	shield = "拉贾克斯之盾(免疫魔法)",
+	shield_cd = "拉贾克斯之盾CD (免疫魔法)",
     
     trigger2_2 = "Kill ",
             

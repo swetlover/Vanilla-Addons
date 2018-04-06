@@ -25,7 +25,7 @@ L:RegisterTranslations("zhCN", function() return {
     entangle_desc = "警报纠缠和虫子来临",
     entangleplayer = "你受到了纠缠效果的影响。",
 	entangleplayerother = "(.*)受到了纠缠效果的影响。",
-    entanglewarn = "纠缠!",
+    entanglewarn = "有人被纠缠了!",
 } end )
 
 L:RegisterTranslations("deDE", function() return {

@@ -1,0 +1,14 @@
+## Interface: 11200
+## Title: CML 
+## Title-zhCN: |CFF00FF00团队|r 队长拾取大师 
+## Notes-zhCN: |CFFDD66DDClassMasterLoot|r 快速分配战利品给roll点胜利玩家，或者按职业，或者给设定的指定成员|N设置命令/cml|N快速拾取人设置命令：/cml add 名字
+## Version: 1.10
+## Author: Nitram@DE-Azshara
+## X-Credits: Roadblock
+## X-Website: https://github.com/Road-block/Select_AddOns
+## DefaultState: disabled
+## SavedVariables: CML_Vars
+CML_Language.lua
+CML_Main.lua
+ClassMasterLoot.xml
+## Q-CAT-Version: 000100

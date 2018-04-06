@@ -15,7 +15,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	avatar_trigger = "格里雷克获得了天神下凡效果。",
 	preavatar_warn = "天神下凡马上! 近战退!",
-	avatar_bar = "天神下凡",
+	avatar_bar = "天神下凡(物理伤害,护甲提高50%)",
 	avatar_message = "天神下凡! 远离BOss!",
 	avatar_end = "天神下凡效果从格里雷克身上消失。",
 	avatar_whisper_you = "格里雷克朝你来了! 跑!",
