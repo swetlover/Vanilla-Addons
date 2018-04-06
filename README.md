@@ -2,7 +2,13 @@
 建立这个项目只是用来存放自己在60级版本魔兽世界所使用的一些插件，也为了记录插件的更新情况。 
 大部分的插件来自[60addons.com](http://60addons.com/ "60addons.com")，感谢站长Qcat的无私奉献！  
 插件的更新情况及更新说明基本都来自60addons.com。  
+团队插件和职业插件默认为不启用状态，需要根据自身需求在人物选择界面点击左下角插件按钮进行启用。  
 ## 插件更新日志
+***
+2018年4月6日
+1. 更新了`BigWigs`插件，现在BOSS计时条将会显示技能效果。
+2. 调整了`Cartographer_Mining`（地图显示矿石）、`Cartographer_Herbalism`（地图显示草药）、`Cartographer_Minimap_Coords`（小地图显示坐标）插件，默认不启用。
+3. 增加了`ClassMasterLoot`插件，在队长拾取模式下，点击掉落物品后可以直接分配给指定人员或自己。
 ***
 2018年3月17日
 1. 更新了`!Libs`插件，完善了Babble-Spell-2.2模块。
