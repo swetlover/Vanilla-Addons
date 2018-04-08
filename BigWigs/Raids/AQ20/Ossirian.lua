@@ -34,7 +34,7 @@ L:RegisterTranslations("zhCN", function() return {
 	["cyclone_trigger"] = "包围之风",
 	["stomp_trigger"] = "战争践踏",
 	
-	["WarStomp"] = "战争践踏",
+	["WarStomp"] = "战争践踏(AOE击飞)",
 	["Cyclone"] = "飓风术",
 
 	["Shadow"] = "暗影",

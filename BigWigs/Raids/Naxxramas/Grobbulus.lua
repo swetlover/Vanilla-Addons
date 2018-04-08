@@ -59,7 +59,7 @@ L:RegisterTranslations("zhCN", function() return {
 	slimespray_name = "软泥喷射",
 	slimespray_desc = "显示软泥喷射计时",
 
-	slimeSpray_bar = "可能软泥喷射",
+	slimeSpray_bar = "可能软泥喷射(锥形AOE自然)",
 	slimeSpray_trigger = "软泥喷射",
 
 } end )

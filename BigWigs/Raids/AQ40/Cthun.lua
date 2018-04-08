@@ -17,7 +17,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	eye_beam_trigger = "巨眼触须开始施放眼棱。",
 	eye_beam_trigger_cthun = "克苏恩之眼开始施放眼棱。",
-	eyebeam		= "眼棱对 %s",
+	eyebeam		= "眼棱对 %s (远离10码别连人)",
 	Unknown = "未知", -- Eye Beam on Unknown
 
 	tentacle_cmd = "tentacle",
@@ -758,11 +758,11 @@ function module:OnTooltipUpdate()
 			end
 			
 			cat_tentacle:AddLine(
-				'text', L["text_tentacle"].." 1血量:",
+				'text', L["text_tentacle"].."1血量:",
 				'text2', (tentacleDead and other) or hp
 			)
 			cat_tentacle:AddLine(
-				'text', L["text_tentacle"].." 2血量:",
+				'text', L["text_tentacle"].."2血量:",
 				'text2', (tentacleDead and hp) or other
 			)
 		end

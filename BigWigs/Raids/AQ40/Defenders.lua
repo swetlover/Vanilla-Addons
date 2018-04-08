@@ -55,7 +55,7 @@ L:RegisterTranslations("zhCN", function() return {
 	plagueyou = "你",
 	plagueare = "受到了",
 	plague_onme = "对(+.)施放了瘟疫",
-	thunderclaptrigger = "^阿努比萨斯防御者的雷霆一击击中([^%s]+)造成%d+点伤害。",
+	thunderclaptrigger = "^阿努比萨斯防御者的雷霆一击击中([^%s]+)造成",
 	thunderclapwarn = "雷霆一击!",
 } end )
 

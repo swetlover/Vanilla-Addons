@@ -49,7 +49,7 @@ local firstbomb = true
 ----------------------------
 
 L:RegisterTranslations("zhCN", function() return {
-	inferno_trigger = "迦顿男爵受到了地狱火效果的影响。",
+	inferno_trigger = "迦顿男爵获得了地狱火的效果。",
 	service_trigger = "performs one last service for Ragnaros",
 	ignitemana_trigger = "受到了点燃法力效果的影响。",
 	bombyou_trigger = "你受到了活化炸弹效果的影响。",

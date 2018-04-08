@@ -31,7 +31,7 @@ L:RegisterTranslations("zhCN", function() return {
 
 	frenzygain_trigger = "哈霍兰公主获得了疯狂的效果。",
     frenzyend_trigger = "疯狂效果从哈霍兰公主身上消失。",
-    frenzy_bar = "疯狂(注意宁神)",
+    frenzy_bar = "疯狂(立刻宁神)",
     frenzy_Nextbar = "可能疯狂(注意宁神)",
 	frenzy_message = "疯狂 - 立刻宁神!",
             

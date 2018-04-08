@@ -32,8 +32,8 @@ L:RegisterTranslations("zhCN", function() return {
 	gainendwarn = "虫群风暴结束!",
 	gainnextwarn = "下一个虫群风暴在大约 90 秒",
 	gainwarn10sec = "大约 10秒后虫群风暴",
-	gainincbar = "可能虫群风暴(自然伤DOT,不能攻击,施法)",
-	gainbar = "虫群风暴(自然伤DOT,不能攻击,施法)",
+	gainincbar = "可能虫群(自然DOT,不能攻击,施法)",
+	gainbar = "虫群风暴(自然DOT,不能攻击,施法)",
 
 	casttrigger = "阿努布雷坎开始施放虫群风暴。",
 	castwarn = "虫群风暴来临!",

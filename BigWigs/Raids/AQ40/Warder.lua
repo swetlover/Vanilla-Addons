@@ -43,11 +43,11 @@ L:RegisterTranslations("zhCN", function() return {
 
 	rootsTrigger = "阿努比萨斯守卫开始施放纠缠根须。",
 	rootsBar = "定身!",
-	rootsBar_next = "可能定身",
+	rootsBar_next = "纠缠根须(定身)",
 
 	dustTrigger = "阿努比萨斯守卫开始施展灰尘之云。",
 	dustBar = "灰尘之云!",
-	dustBar_next = "可能灰尘之云",
+	dustBar_next = "可能灰尘之云(命中降低85%)",
 
 	dustWarn = "灰尘之云",
 	dustWarn2 = "(定身或恐惧)",
@@ -77,10 +77,10 @@ module.trashMod = true
 -- locals
 local timer = {
 	earliestFear = 14,
- 	latestFear = 19,
+ 	latestFear = 25,
 	fearCast = 1.5,
 	earliestSilence = 15,
- 	latestSilence = 19,
+ 	latestSilence = 30,
 	silenceCast = 1.5,
 	earliestRoots = 15,
  	latestRoots = 14,

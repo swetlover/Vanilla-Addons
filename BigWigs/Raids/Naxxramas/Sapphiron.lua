@@ -29,7 +29,7 @@ L:RegisterTranslations("zhCN", function() return {
 	icebolt_name = "冰块通报",
 	icebolt_desc = "当你成为一个冰块时警报.",
 	
-	berserk_bar = "狂暴",
+	berserk_bar = "狂暴(伤害攻速提高)",
 	berserk_warn_10min = "10分钟后狂暴!",
 	berserk_warn_5min = "5分钟后狂暴!",
 	berserk_warn_rest = "%s 秒后狂暴!",

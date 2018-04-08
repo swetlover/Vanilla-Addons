@@ -54,7 +54,7 @@ L:RegisterTranslations("zhCN", function() return {
 	summonwarriortrigger = "阿努比萨斯守卫者施放了召唤阿努比萨斯战士。",
 	summonwarriorwarn = "阿努比萨斯战士已被召唤出来",
 	plaguetrigger = "^([^%s]+)([^%s]+)瘟疫效果的影响。",
-	plaguewarn = " 受到瘟疫的影响！快躲开！",
+	plaguewarn = " 瘟疫的影响！快跑出人群！",
 	plaguewarnyou = "你受到瘟疫的影响！快跑开!",
 	plagueyou = "你",
 	plagueare = "受到了",

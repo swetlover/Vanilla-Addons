@@ -84,7 +84,7 @@ L:RegisterTranslations("zhCN", function() return {
 	stalaggwarn = "能量涌动 - 加大对坦克的治疗！",
 	powersurgebar = "能量涌动(怪物攻速提高)",
 
-	bar1text = "极性转化",
+	bar1text = "极性转化(监视你的debuff)",
 
 	throwbar = "MT投掷",
 	throwwarn = "大约5秒投掷！MT注意！",

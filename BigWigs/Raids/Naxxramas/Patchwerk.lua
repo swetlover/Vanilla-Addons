@@ -22,7 +22,7 @@ L:RegisterTranslations("zhCN", function() return {
 	hateful_desc = "显示一个仇恨打击计时条",
 
 	hatefultrigger = "仇恨打击",
-	hatefulbar = "仇恨打击",
+	hatefulbar = "仇恨打击(5500-8000伤害)",
 
 	enragetrigger = "%s goes into a berserker rage!",
 
@@ -30,7 +30,7 @@ L:RegisterTranslations("zhCN", function() return {
 	starttrigger1 = "Patchwerk want to play!",
 	starttrigger2 = "Kel'Thuzad make Patchwerk his Avatar of War!",
 	startwarn = "帕奇维克来陪你玩儿! 7分钟后狂暴!",
-	enragebartext = "狂暴",
+	enragebartext = "狂暴(秒杀任何人)",
 	warn5m = "狂暴 5 分钟",
 	warn3m = "狂暴 3 分钟",
 	warn90 = "狂暴 90 秒",
