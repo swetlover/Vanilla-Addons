@@ -1,0 +1,17 @@
+## Interface: 11200
+## Version: 2.0 beta
+## Title: SimpleTranqShot
+## Title-zhCN: |CFFFFFFCC职业|R |CFFAAD372猎人|R凝神射击通告
+## Author: Brodrick (aka Kirov)
+## Notes: Watches for Tranquilizing Shot hits and misses and broadcasts a message to the desired channel when either occurs.  Also displays a message on the screen when the Tranquilizing Shot misses or fails.
+## Notes-zhCN:|CFFDD66DDSimpleTranqShot|R 在聊天框通知凝神射击命中或者未命中|N设置命令/stranq
+## DefaultState: disabled
+## SavedVariables: STranq_Saved
+## OptionalDeps: CT_RaidAssist, Sky, DamageMeters
+localization.lua
+localization.frFR.lua
+localization.deDE.lua
+localization.zhCN.lua
+localization.zhTW.lua
+SimpleTranqShot.lua
+SimpleTranqShot.xml

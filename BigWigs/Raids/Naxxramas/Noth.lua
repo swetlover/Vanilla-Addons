@@ -40,7 +40,7 @@ L:RegisterTranslations("zhCN", function() return {
 	blinkwarn = "闪现术!",
 	blinkwarn5 = "闪现术大约 5 秒!",
 	blinkwarn10 = "闪现术大约 10 秒!",
-	blinkbar = "可能闪现术",
+	blinkbar = "可能闪现术(清空仇恨)",
 
 	teleportToBalconyTrigger = "Noth the Plaguebringer teleports to the balcony above!",
 	teleportToRoomTrigger = "Noth the Plaguebringer teleports back into the battle!",
@@ -59,7 +59,7 @@ L:RegisterTranslations("zhCN", function() return {
 	cursewarn = "诅咒! 下一个大约 28 秒",
 	curse10secwarn = "诅咒大约 10 秒",
 
-	cursebar = "下一次诅咒",
+	cursebar = "下一次诅咒(1000暗伤DOT)",
 
 	wave1bar = "第 1 波",
 	wave2bar = "第 2 波",

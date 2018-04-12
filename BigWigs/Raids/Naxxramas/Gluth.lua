@@ -18,7 +18,7 @@ L:RegisterTranslations("zhCN", function() return {
 	fear_desc = "群体恐惧术的警报",
 
 	frenzy_cmd = "frenzy",
-	frenzy_name = "疯狂警报",
+	frenzy_name = "疯狂警报(只有猎人可见)",
 	frenzy_desc = "疯狂的警报",
 
 	enrage_cmd = "enrage",

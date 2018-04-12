@@ -1,0 +1,151 @@
+<html>
+<title>EkBomb - A World of Warcraft addon</title>
+<body>
+Addon: <b>EkBomb</b><br>
+Author: Dargen.<br>
+Guild: Eternal Keggers<br>
+Server: Norgannon<br>
+<br>
+
+<hr>
+
+<p><b>Description:</b></p>
+
+<p>This addon displays a very large attention-getting warning window in the
+center of your screen when you get certain "bomb" type debuffs. These are
+debuffs where you either want to run away from everyone else, or
+stop whatever you are doing immediately.</p>
+
+<p>There are options to play a sound when the window appears, make the window
+flash slowly, display a timer, and change the opacity, scale, and colours.
+Each debuff warning can be individually enabled, and there is a test button
+to try it out at any time.</p>
+
+<p>The window will not prevent you from clicking on something behind it. You can
+either leave the warning on screen until the warning's timer counts down to zero,
+or you can click on the close button to hide the warning.</p>
+
+<p>The debuffs currently supported by the addon are:</p>
+<ul>
+	<li>Burning Adrenaline (Vaelastrasz the Corrupt, Blackwing Lair)</li>
+	<li>Corrupted Healing (Nefarian, Blackwing Lair)</li>
+	<li>Living Bomb (Baron Geddon, Molten Core)</li>
+	<li>Mutating Injection (Grobbulus, Naxxramas)</li>
+	<li>Plague (Anubisath Defender, Temple of Ahn'Qiraj)</li>
+	<li>Threatening gaze (Bloodlord Mandokir, Zul'Gurub)</li>
+</ul>
+
+<hr>
+
+<p><b>Command summary:</b></p>
+
+<ul>
+        <li><b>/ekbomb</b> -- Open the EkBomb configuration window.</li>
+        <li><b>/ekbomb help</b> -- Display this command summary.</li>
+        <li><b>/ekbomb reset</b> -- Reset position of configuration window.</li>
+        <li><b>/ekbomb test</b> -- Test bomb warning window.</li>
+</ul>
+
+<hr>
+
+<p><b>Calling from another addon</b></p>
+
+<p>If you are writing an addon and want to show or hide a custom warning using EkBomb,
+you can use these two functions: EkBomb_Show("bigText", "smallText", seconds)
+and EkBomb_Hide(). Refer to the notes at the top of the EkBomb.lua file for more details.</p>
+
+<hr>
+
+<p><b>Change History</b></p>
+
+<p><b>Version 1.44 changes (Aug 22, 2006):</b></p>
+<ul>
+	<li>Fixed the issue of it not scaling the warning window unless you had opened
+	the EkBomb options window at least once after logging in.</li>
+	<li>Added warning for Mutating Injection (Grobbulus, Naxxramas)</li>
+	<li>Updated the UI version to 11200 to match the WoW 1.12 patch.</li>
+</ul>
+
+<p><b>Version 1.42 changes (Jul 3, 2006):</b></p>
+<ul>
+	<li>Some minor internal changes.</li>
+	<li>Now shows the version number in the title of the EkBomb configuration window.</li>
+</ul>
+
+<p><b>Version 1.41 changes (Jun 22, 2006):</b></p>
+<ul>
+	<li>Added an option to display (on the warning window's close button) the time
+	remaining until the warning window automatically closes.</li>
+
+	<li>Changed the name of the debuff warning for Bloodlord Mandokir from "Watched" to
+	"Threatening gaze" on the options window.</li>
+
+	<li>Changed the "Threatening gaze" warning timer from 30 to 10 seconds.</li>
+
+	<li>If you are making an addon and want to use EkBomb to show a warning you can
+	call the following LUA function:
+	EkBomb_Show("bigText", "smallText", seconds)</li>
+
+	<li>If you are making an addon and want to use EkBomb to hide the current bomb warning
+	you can call the following LUA function:
+	EkBomb_Hide()</li>
+
+	<li>If you want to show a custom warning in a macro, you can type something like this:
+	/script EkBomb_Show("bigText", "smallText", 30)</li>
+
+	<li>If you want to hide the current bomb warning in a macro, you can type this:
+	/script EkBomb_Hide()</li>
+</ul>
+
+<p><b>Version 1.4 changes (Jun 18, 2006):</b></p>
+<ul>
+	<li>Added a "stop" warning when Bloodlord Mandokir (Zul'Gurub) is watching you.</li>
+	<li>Updated the UI version to 11100 to match the WoW 1.11 patch.</li>
+</ul>
+
+<p><b>Version 1.3 changes (May 31, 2006):</b></p>
+<ul>
+	<li>Added option to hide the background of the warning window so you just see the text.</li>
+	<li>Added slider to change the scale of the warning window.</li>
+	<li>Added ability to change the color of the small text, large text, and background.</li>
+</ul>
+
+<p><b>Version 1.2 changes (May 29, 2006):</b></p>
+<ul>
+	<li>Changed Anubisath Defender plague timer to 30 seconds instead of 20. This now matches the actual duration of the debuff.</li>
+	<li>Changed Nefarian's corrupted healing timer to 30 seconds instead of 8. This now matches the actual duration of the debuff.</li>
+	<li>Localized the text strings for english.</li>
+	<li>Initial public release.</li>
+</ul>
+
+<p><b>Version 1.1.1 changes (Mar 28, 2006):</b></p>
+<ul>
+	<li>Updated UI version from 10900 to 11000 (to match the 1.10 WoW patch).</li>
+</ul>
+
+<p><b>Version 1.1 changes (Mar 5, 2006):</b></p>
+<ul>
+	<li>Added a configuration window for EkBomb.</li>
+	<li>Typing "/ekbomb" will now open the configuration window instead of showing
+	a command summary. To show a command summary use "/ekbomb help".</li>
+	<li>Removed the command line configuration options.</li>
+	<li>Added an option to play a sound when the warning window appears.</li>
+	<li>Added a test for Anubisath Defender's plague (Temple of Ahn'Qiraj).</li>
+	<li>Added a test for Nefarian's corrupt healing (for priests in Blackwind Lair).</li>
+	<li>Added a "/ekbomb reset" command to reset the position of the configuration window.</li>
+</ul>
+
+<p><b>Version 1.0.1 changes (Jan 3, 2006):</b></p>
+<ul>
+	<li>Updated UI version from 1800 to 10900 (to match the 1.9 WoW patch).</li>
+</ul>
+
+<p><b>Version 1.0 changes (Sep 14, 2005):</b></p>
+<ul>
+	<li>Initial release.</li>
+	<li>Oct 22, 2005: Updated UI version from 1700 to 1800 (to match the 1.8 WoW patch).</li>
+</ul>
+
+</body>
+</html>
+

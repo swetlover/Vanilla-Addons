@@ -61,7 +61,7 @@ L:RegisterTranslations("zhCN", function() return {
 ---------------------------------
 
 -- module variables
-module.revision = 20012 -- To be overridden by the module!
+module.revision = 20011 -- To be overridden by the module!
 module.enabletrigger = module.translatedName -- string or table {boss, add1, add2}
 --module.wipemobs = { L["add_name"] } -- adds which will be considered in CheckForEngage
 module.toggleoptions = {"spray", "poison", "cocoon", "enrage", "bosskill"}
@@ -69,7 +69,8 @@ module.toggleoptions = {"spray", "poison", "cocoon", "enrage", "bosskill"}
 
 -- locals
 local timer = {
-    poison = {5, 10},
+	poison = {5, 10},
+	firstPoison = 15,
 	cocoon = 20,
 	spider = 30,
 	webspray = 40,
@@ -79,7 +80,6 @@ local icon = {
 	cocoon = "Spell_Nature_Web",
 	poison = "Ability_Creature_Poison_03",
 	webspray = "Ability_Ensnare",
-	enrage = "Spell_Shadow_UnholyFrenzy",
 }
 local syncName = {
 	webspray = "MaexxnaWebspray"..module.revision,
@@ -119,7 +119,7 @@ end
 -- called after boss is engaged
 function module:OnEngage()
 	self:KTM_SetTarget(self:ToString())
-	self:IntervalBar(L["poisonbar"], timer.poison[1], timer.poison[2], icon.poison)
+	self:Bar(L["poisonbar"], timer.firstPoison, icon.poison)
 	self:Webspray()
 end
 
@@ -155,12 +155,12 @@ end
 function module:UNIT_HEALTH( msg )
 	if UnitName(msg) == boss then
 		local health = UnitHealth(msg)
-		if (math.ceil(100*health/maxHealth) > 27 and math.ceil(100*health/maxHealth) <= 34 and not enrageannounced) then
+		if (health > 30 and health <= 33 and not enrageannounced) then
 			if self.db.profile.enrage then
 				self:Message(L["enragesoonwarn"], "Important")
 			end
 			enrageannounced = true
-		elseif (math.ceil(100*health/maxHealth) > 34 and enrageannounced) then
+		elseif (health > 40 and enrageannounced) then
 			enrageannounced = false
 		end
 	end
@@ -170,7 +170,6 @@ function module:Enrage( msg )
 	if string.find(msg, L["etrigger1"]) then
 		if self.db.profile.enrage then
 			self:Message(L["enragewarn"], "Important", nil, "Beware")
-			self:WarningSign(icon.enrage, 5)
 		end
 	end
 end
@@ -215,7 +214,7 @@ end
 function module:Poison()
 	if self.db.profile.poison then
 		self:Message(L["poisonwarn"], "Important")
-		self:IntervalBar(L["poisonbar"], timer.poison[1], timer.poison[2], icon.poison, true, "Green")
+		self:IntervalBar(L["poisonbar"], timer.poison[1], timer.poison[2], icon.poison)
 	end
 end
 

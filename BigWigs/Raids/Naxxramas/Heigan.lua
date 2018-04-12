@@ -47,7 +47,7 @@ L:RegisterTranslations("zhCN", function() return {
 	-- [[ Warnings ]]--
 	engage_message = "肮脏者海根开始战斗!",
 
-	dwarn = "衰弱瘟疫",
+	dwarn = "衰弱瘟疫!",
 
 	on_platform_message = "传送! 跳舞 %d 秒!",
 
@@ -58,7 +58,7 @@ L:RegisterTranslations("zhCN", function() return {
 	-- [[ Bars ]]--
 	toPlatform_bar = "传送!",
 	toFloor_bar = "回到地面!",
-	dbar = "衰弱瘟疫",
+	dbar = "瘟疫(生命上限降低50%,自然DOT)",
 	erruptionbar = "爆发(蛇皮走位!)",
 	dancingshoes = "穿上你的舞鞋!你要开始跳舞了~",
 	--manaburn_bar = "法力燃烧",

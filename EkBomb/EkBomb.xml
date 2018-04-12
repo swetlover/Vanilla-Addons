@@ -1,0 +1,985 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="localization.lua"/>
+	<Script file="EkBomb.lua"/>
+	<Frame name="EkBomb_Frame" frameStrata="HIGH" toplevel="true" enableMouse="false" movable="true" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				EkBomb_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				EkBomb_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	<Frame name="EkBomb_WarningFrame" frameStrata="BACKGROUND" alpha="0" toplevel="true" enableMouse="false" visible="true" movable="false" parent="UIParent">
+		<Size>
+			<AbsDimension x="700" y="310"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_Background" file="Interface\ChatFrame\ChatFrameBackground">
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parent_Message1" font="Fonts\FRIZQT__.TTF" outline="THICK" text="">
+					<FontHeight>
+						<AbsValue val="102"/>
+					</FontHeight>
+					<Color r="0.0" g="0.22" b="1.0"/>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="100"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Message2" font="Fonts\FRIZQT__.TTF" outline="THICK" text="">
+					<FontHeight>
+						<AbsValue val="102"/>
+					</FontHeight>
+					<Color r="1.0" g="0.03137" b="0.08235"/>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="10" y="-35"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_CloseButton" inherits="UIPanelButtonTemplate" text="Close">
+				<Size>
+					<AbsDimension x="100" y="31"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM" relativePoint="BOTTOM" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="0" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EkBomb_Hide();
+					</OnClick>
+						<OnEnter>
+						GameTooltip_AddNewbieTip(EkBomb_TEXT_Warning_Close_Tooltip1, 1.0, 1.0, 1.0, EkBomb_TEXT_Warning_Close_Tooltip2, 1);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				EkBomb_WarningFrame_OnLoad();
+			</OnLoad>
+			<OnShow>
+				EkBomb_WarningFrame_OnShow();
+			</OnShow>
+			<OnHide>
+				EkBomb_WarningFrame_OnHide();
+			</OnHide>
+			<OnUpdate>
+				EkBomb_WarningFrame_OnUpdate(arg1);
+			</OnUpdate>
+			<OnEvent>
+				EkBomb_WarningFrame_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+
+	<Frame name="EkBomb_MainFrame_OptionFrameBoxTemplate" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="9" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+				this:SetBackdropColor(0.5, 0.5, 0.5);
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Button name="EkBomb_MainFrame_BombButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="378" y="24"/>
+		</Size>
+<!--
+		<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+-->
+		<Frames>
+			<CheckButton name="$parent_BombCB" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<HitRectInsets>
+					<AbsInset left="0" right="0" top="0" bottom="0"/>
+				</HitRectInsets>
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Scripts>
+					<OnClick>
+						EkBomb_MainFrame_BombCB_OnClick();
+					</OnClick>
+					<OnEnter>
+						EkBomb_MainFrame_BombCB_OnEnter();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</CheckButton>
+			<Frame>
+				<Layers>
+					<Layer level="BORDER">
+						<FontString name="$parent_BombText" inherits="ChatFontNormal" justifyH="LEFT" text="">
+							<Size>
+								<AbsDimension x="340" y="14"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parent_BombCB" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="5" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
+		</Frames>
+	</Button>
+
+	<Frame name="EkBomb_MainFrame" toplevel="true" movable="true" enableMouse="true" hidden="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="450" y="490"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_HeaderTexture" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="300" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parent_Title" inherits="GameFontNormal" text="EkBomb_Addon">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parent_HeaderTexture">
+							<Offset>
+								<AbsDimension x="0" y="-14"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_Help" inherits="GameFontNormalSmall" text="EkBomb_TEXT_Config_Help">
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="15"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parent_Drag">
+				<Size>
+					<AbsDimension x="150" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						if ( arg1 == "LeftButton" ) then
+							this:GetParent():StartMoving();
+						elseif ( arg1 == "RightButton" ) then
+							EkBomb_ResetWindows();
+						end
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+					</OnMouseUp>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText(EkBomb_TEXT_Config_Drag_Tooltip);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Frame>
+
+			<Frame name="$parent_Opacity" inherits="EkBomb_MainFrame_OptionFrameBoxTemplate">
+				<Size>
+					<AbsDimension x="400" y="120"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Slider name="$parent_ScaleSlider" id="2" inherits="OptionsSliderTemplate">
+						<Size>
+							<AbsDimension x="380" y="17"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="0" y="-22"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>
+								EkBomb_MainFrame_Scale_OnValueChanged();
+							</OnValueChanged>
+							<OnShow>
+								EkBomb_MainFrame_Scale_OnShow();
+							</OnShow>
+						</Scripts>
+					</Slider>
+					<Slider name="$parent_Slider" id="1" inherits="OptionsSliderTemplate">
+						<Size>
+							<AbsDimension x="380" y="17"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="0" y="-57"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>
+								EkBomb_MainFrame_Opacity_OnValueChanged();
+							</OnValueChanged>
+							<OnShow>
+								EkBomb_MainFrame_Opacity_OnShow();
+							</OnShow>
+						</Scripts>
+					</Slider>
+					<Button name="$parent_SmallColorSwatch" hidden="false">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Slider">
+								<Offset>
+									<AbsDimension x="0" y="-18"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="$parentBG">
+									<Size>
+										<AbsDimension x="14" y="14"/>
+									</Size>
+									<Color r="1.0" g="1.0" b="1.0"/>
+									<Anchors>
+										<Anchor point="CENTER"/>
+									</Anchors>
+								</Texture>
+							</Layer>
+							<Layer level="ARTWORK">
+								<FontString name="$parentText" inherits="ChatFontNormal" text="EkBomb_TEXT_Config_SmallColor">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								EkBomb_ColorPicker("small");
+							</OnClick>
+							<OnEnter>
+								getglobal(this:GetName().."BG"):SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
+							</OnEnter>
+							<OnLeave>
+								getglobal(this:GetName().."BG"):SetVertexColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+							</OnLeave>
+						</Scripts>
+						<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\ChatFrameColorSwatch"/>
+					</Button>
+					<Button name="$parent_LargeColorSwatch" hidden="false">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_SmallColorSwatch">
+								<Offset>
+									<AbsDimension x="110" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="$parentBG">
+									<Size>
+										<AbsDimension x="14" y="14"/>
+									</Size>
+									<Color r="1.0" g="1.0" b="1.0"/>
+									<Anchors>
+										<Anchor point="CENTER"/>
+									</Anchors>
+								</Texture>
+							</Layer>
+							<Layer level="ARTWORK">
+								<FontString name="$parentText" inherits="ChatFontNormal" text="EkBomb_TEXT_Config_LargeColor">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								EkBomb_ColorPicker("large");
+							</OnClick>
+							<OnEnter>
+								getglobal(this:GetName().."BG"):SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
+							</OnEnter>
+							<OnLeave>
+								getglobal(this:GetName().."BG"):SetVertexColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+							</OnLeave>
+						</Scripts>
+						<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\ChatFrameColorSwatch"/>
+					</Button>
+					<Button name="$parent_BackgroundColorSwatch" hidden="false">
+						<Size>
+							<AbsDimension x="16" y="16"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_LargeColorSwatch">
+								<Offset>
+									<AbsDimension x="110" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="$parentBG">
+									<Size>
+										<AbsDimension x="14" y="14"/>
+									</Size>
+									<Color r="1.0" g="1.0" b="1.0"/>
+									<Anchors>
+										<Anchor point="CENTER"/>
+									</Anchors>
+								</Texture>
+							</Layer>
+							<Layer level="ARTWORK">
+								<FontString name="$parentText" inherits="ChatFontNormal" text="EkBomb_TEXT_Config_BackgroundColor">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								EkBomb_ColorPicker("back");
+							</OnClick>
+							<OnEnter>
+								getglobal(this:GetName().."BG"):SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
+							</OnEnter>
+							<OnLeave>
+								getglobal(this:GetName().."BG"):SetVertexColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+							</OnLeave>
+						</Scripts>
+						<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\ChatFrameColorSwatch"/>
+					</Button>
+
+
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+						this:SetBackdropColor(0.15, 0.15, 0.15);
+--						getglobal(this:GetName().."Title"):SetText("");
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<Frame name="$parent_Warnings" inherits="EkBomb_MainFrame_OptionFrameBoxTemplate">
+				<Size>
+					<AbsDimension x="400" y="260"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Opacity" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<Frames>
+					<CheckButton name="$parent_FlashCB" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="10" y="-10"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<HitRectInsets>
+							<AbsInset left="0" right="0" top="0" bottom="0"/>
+						</HitRectInsets>
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="$parent_Text" inherits="ChatFontNormal" text="EkBomb_TEXT_Config_Flash">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								EkBomb_MainFrame_FlashCB_OnClick();
+							</OnClick>
+							<OnEnter>
+								EkBomb_MainFrame_FlashCB_OnEnter();
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_BackgroundCB" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_FlashCB" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<HitRectInsets>
+							<AbsInset left="0" right="0" top="0" bottom="0"/>
+						</HitRectInsets>
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="$parent_Text" inherits="ChatFontNormal" text="EkBomb_TEXT_Config_Background">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								EkBomb_MainFrame_BackgroundCB_OnClick();
+							</OnClick>
+							<OnEnter>
+								EkBomb_MainFrame_BackgroundCB_OnEnter();
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_SoundCB" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_FlashCB" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="180" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<HitRectInsets>
+							<AbsInset left="0" right="0" top="0" bottom="0"/>
+						</HitRectInsets>
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="$parent_Text" inherits="ChatFontNormal" text="EkBomb_TEXT_Config_Sound">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								EkBomb_MainFrame_SoundCB_OnClick();
+							</OnClick>
+							<OnEnter>
+								EkBomb_MainFrame_SoundCB_OnEnter();
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_ShowTimerCB" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_SoundCB" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<HitRectInsets>
+							<AbsInset left="0" right="0" top="0" bottom="0"/>
+						</HitRectInsets>
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="$parent_Text" inherits="ChatFontNormal" text="EkBomb_TEXT_Config_ShowTimer">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								EkBomb_MainFrame_ShowTimerCB_OnClick();
+							</OnClick>
+							<OnEnter>
+								EkBomb_MainFrame_ShowTimerCB_OnEnter();
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_EnableCB" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_BackgroundCB" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<HitRectInsets>
+							<AbsInset left="0" right="0" top="0" bottom="0"/>
+						</HitRectInsets>
+						<Size>
+							<AbsDimension x="24" y="24"/>
+						</Size>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="$parent_Text" inherits="ChatFontNormal" text="EkBomb_TEXT_Config_Enable">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="5" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								EkBomb_MainFrame_EnableCB_OnClick();
+							</OnClick>
+							<OnEnter>
+								EkBomb_MainFrame_EnableCB_OnEnter();
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<Button name="$parent_BombButton1" inherits="EkBomb_MainFrame_BombButtonTemplate" id="1" hidden="false">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_EnableCB" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="25" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parent_BombButton2" inherits="EkBomb_MainFrame_BombButtonTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_BombButton1" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parent_BombButton3" inherits="EkBomb_MainFrame_BombButtonTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_BombButton2" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parent_BombButton4" inherits="EkBomb_MainFrame_BombButtonTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_BombButton3" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parent_BombButton5" inherits="EkBomb_MainFrame_BombButtonTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_BombButton4" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parent_BombButton6" inherits="EkBomb_MainFrame_BombButtonTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_BombButton5" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</Button>
+				</Frames>
+	
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+						this:SetBackdropColor(0.15, 0.15, 0.15);
+--						getglobal(this:GetName().."Title"):SetText("");
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<Button name="$parent_TestButton" hidden="false" inherits="UIPanelButtonTemplate" text="EkBomb_TEXT_Config_Test">
+				<Size>
+					<AbsDimension x="110" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="-90" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EkBomb_MainFrame_TestButton_OnClick();
+					</OnClick>
+					<OnEnter>
+						GameTooltip_AddNewbieTip(EkBomb_TEXT_Config_Test_Tooltip1, 1.0, 1.0, 1.0, EkBomb_TEXT_Config_Test_Tooltip2, 1);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>
+
+			<Button name="$parent_CloseButton" hidden="false" inherits="UIPanelButtonTemplate" text="EkBomb_TEXT_Config_Close">
+				<Size>
+					<AbsDimension x="110" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="90" y="30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EkBomb_MainFrame_CloseButton_OnClick();
+					</OnClick>
+					<OnEnter>
+						GameTooltip_AddNewbieTip(EkBomb_TEXT_Config_Close_Tooltip1, 1.0, 1.0, 1.0, EkBomb_TEXT_Config_Close_Tooltip2, 1);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				tinsert(UISpecialFrames, "EkBomb_MainFrame");
+			</OnLoad>
+			<OnShow>
+				EkBomb_MainFrame_OnShow();
+			</OnShow>
+			<OnHide>
+				EkBomb_MainFrame_OnHide();
+			</OnHide>
+		</Scripts>
+	</Frame>
+
+	<ColorSelect name="EkBomb_ColorPickerFrame" toplevel="true" parent="EkBomb_MainFrame" movable="true" enableMouse="true" hidden="true">
+		<Size>
+			<AbsDimension x="280" y="200"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="EkBomb_ColorSwatch">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="225" y="-32"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0"/>
+				</Texture>
+				<Texture name="EkBomb_ColorPickerFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="256" y="64"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="EkBomb_ColorPickerFrameTitle" inherits="GameFontNormal" text="">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="EkBomb_ColorPickerFrameHeader">
+							<Offset>
+								<AbsDimension x="0" y="-14"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="EkBomb_ColorPickerCancelButton" inherits="GameMenuButtonTemplate" text="Cancel">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="-60" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="100" y="24"/>
+				</Size>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(this:GetParent());
+						if ( EkBomb_ColorPickerFrame.cancelFunc ) then
+							EkBomb_ColorPickerFrame.cancelFunc();
+						end
+						PlaySound("igMainMenuOptionCheckBoxOn");
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EkBomb_ColorPickerOkayButton" inherits="GameMenuButtonTemplate" text="Ok">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="60" y="14"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="100" y="24"/>
+				</Size>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(this:GetParent());
+						if ( EkBomb_ColorPickerFrame.func ) then
+							EkBomb_ColorPickerFrame.func();
+						end
+						PlaySound("igMainMenuOptionCheckBoxOn");
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnColorSelect>
+				EkBomb_ColorSwatch:SetTexture(arg1, arg2, arg3);
+				if ( this.func ) then
+					this.func();
+				end
+			</OnColorSelect>
+<!--
+			<OnKeyDown>
+				if (arg1 == "ESCAPE") then
+					HideUIPanel(this);
+					if ( EkBomb_ColorPickerFrame.cancelFunc ) then
+						EkBomb_ColorPickerFrame.cancelFunc();
+					end
+				end
+			</OnKeyDown>
+-->
+		</Scripts>
+		<ColorWheelTexture name="EkBomb_ColorPickerWheel">
+			<Size>
+				<AbsDimension x="128" y="128"/>
+			</Size>
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="16" y="-32"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</ColorWheelTexture>
+		<ColorWheelThumbTexture file="Interface\Buttons\UI-ColorPicker-Buttons">
+			<Size>
+				<AbsDimension x="10" y="10"/>
+			</Size>
+			<TexCoords left="0" right="0.15625" top="0" bottom="0.625"/>
+		</ColorWheelThumbTexture>
+		<ColorValueTexture>
+			<Size>
+				<AbsDimension x="32" y="128"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativeTo="EkBomb_ColorPickerWheel" relativePoint="RIGHT">
+					<Offset>
+						<AbsDimension x="24" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</ColorValueTexture>
+		<ColorValueThumbTexture file="Interface\Buttons\UI-ColorPicker-Buttons">
+			<Size>
+				<AbsDimension x="48" y="14"/>
+			</Size>
+			<TexCoords left="0.25" right="1.0" top="0" bottom="0.875"/>
+		</ColorValueThumbTexture>
+	</ColorSelect>
+</Ui>
