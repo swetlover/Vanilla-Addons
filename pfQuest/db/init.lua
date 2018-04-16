@@ -1,7 +1,8 @@
 pfDB = {
-  ["items"] = {},
-  ["spawns"] = {},
+  ["units"] = {},
+  ["objects"] = {},
   ["quests"] = {},
-  ["vendors"] = {},
+  ["items"] = {},
   ["zones"] = {},
 }
+  

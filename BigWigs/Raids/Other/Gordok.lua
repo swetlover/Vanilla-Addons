@@ -14,13 +14,15 @@ module.toggleoptions = {"stomp", "ms", "charge", "bosskill"}
 ------------------------------
 
 local timer = {
-	firstWarStomp = {13, 24}, --13,
-	warStomp = {17, 26}, --17.5, 22
+	firstWarStomp = 7.5,
+	secondWarStomp = {28,40},
+	warStomp = {20,30},
 
-	firstMortalStrike = {24, 30}, --24,
-	mortalStrike = {17, 26}, --24, 25, 22, 17, 26
+	firstMortalStrike = {15,25},
+	mortalStrike = {12,20},
 
-	charge = {6, 7},
+	secondCharge = {34,42},
+	charge = {25,30},
 }
 
 local icon = {
@@ -28,40 +30,72 @@ local icon = {
 	mortalStrike = "Ability_Warrior_SavageBlow",
 	charge = "Ability_Warrior_Charge",
 }
-local lastStomp = 0
-local lastMS = 0
+
+local syncName = {
+	warStomp = "gordokWarStomp"..module.revision,
+	mortalStrike = "gordokMortalStrike"..module.revision,
+	charge = "gordokCharge"..module.revision,
+}
+
+local lastWarStomp = 0
+local lastMortalStrike = 0
+local lastCharge = 0
+
+----------------------------
+--      Localization      --
+----------------------------
 
 ----------------------------
 --      Localization      --
 ----------------------------
 
 L:RegisterTranslations("zhCN", function() return {
-	cmd = "Gordok",
-	
 	ms_cmd = "ms",
 	ms_name = "致死打击",
-	ms_desc = "当别人受到致死打击时警报",
+	ms_desc = "当有人受到致死打击的时候警报",
 
 	stomp_cmd = "stomp",
 	stomp_name = "战争践踏",
-	stomp_desc = "当别人受到战争践踏时警报",
+	stomp_desc = "当有人受到战争践踏的时候警报",
 
 	charge_cmd = "charge",
 	charge_name = "冲锋",
-	charge_desc = "当别人受到冲锋时警报",
+	charge_desc = "当有儿女受到冲锋的时候警报",
 
-	ms_trigger = "戈多克大王的致死打击",
-	warstomp_trigger = "戈多克大王的战争践踏",
-	
-	ms_bar = "致死打击 CD",
-	warstomp_bar = "战争践踏 CD",
-	charge_bar = "冲锋 CD",
+	-- AceConsole strings
+	cmd = "Gordok",
+
+	warStomp_bar = "战争践踏",
+	warStomp2_bar = "第二次战争践踏",
+	ms_bar = "致死打击",
+	charge_bar = "冲锋",
+
+} end )
+
+L:RegisterTranslations("esES", function() return {
+	--ms_cmd = "ms",
+	ms_name = "Golpe mortal",
+	ms_desc = "Avisa cuando alguien reciba Golpe mortal",
+
+	--stomp_cmd = "stomp",
+	stomp_name = "Pisotón de guerra",
+	stomp_desc = "Avisa cuando alguien reciba Pisotón de guerra",
+
+	--charge_cmd = "charge",
+	charge_name = "Embestir",
+	charge_desc = "Avisa para Embestir",
+
+	-- AceConsole strings
+	--cmd = "Gordok",
+
+	warStomp_bar = "Pisotón de guerra",
+	warStomp2_bar = "2º Pisotón de guerra",
+	ms_bar = "Golpe mortal",
+	charge_bar = "Embestir",
 
 } end )
 
 L:RegisterTranslations("deDE", function() return {
-	cmd = "Gordok",
-	
 	ms_cmd = "ms",
 	ms_name = "Mortal Strike",
 	ms_desc = "Warn when someone gets Mortal Strike",
@@ -74,12 +108,8 @@ L:RegisterTranslations("deDE", function() return {
 	charge_name = "Charge",
 	charge_desc = "Warn when someone gets Charge",
 
-	ms_trigger = "King Gordok's Mortal Strike",
-	warstomp_trigger = "King Gordok's War Stomp",
-	
-	ms_bar = "Mortal Strike CD",
-	warstomp_bar = "Warstomp CD",
-	charge_bar = "Charge CD",
+	-- AceConsole strings
+	cmd = "Gordok",
 
 } end )
 
@@ -95,25 +125,32 @@ function module:OnEnable()
 	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE", "Event")
 	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_PARTY_DAMAGE", "Event")
 	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_CREATURE_DAMAGE", "Event")
-	--self:ThrottleSync(2, syncName.debuff)
+	self:ThrottleSync(5, syncName.warStomp)
+	self:ThrottleSync(5, syncName.mortalStrike)
+	self:ThrottleSync(5, syncName.charge)
 end
 
 -- called after module is enabled and after each wipe
 function module:OnSetup()
+	self.started = false
+	lastWarStomp = 0
+	lastMortalStrike = 0
+	lastCharge = 0
 end
 
 -- called after boss is engaged
 function module:OnEngage()
-	lastStomp = 0
-	lastMS = 0
 	if self.db.profile.stomp then
-		self:IntervalBar(L["warstomp_bar"], timer.firstWarStomp[1], timer.firstWarStomp[2], icon.warStomp, true, "White")
+		self:Bar(L["warStomp_bar"], timer.firstWarStomp, icon.warStomp, true, "Red")
+	end
+	if self.db.profile.stomp then
+		self:IntervalBar(L["warStomp2_bar"], timer.secondWarStomp[1], timer.secondWarStomp[2], icon.warStomp, true, "Red")
 	end
 	if self.db.profile.ms then
 		self:IntervalBar(L["ms_bar"], timer.firstMortalStrike[1], timer.firstMortalStrike[2], icon.mortalStrike, true, "Black")
 	end
 	if self.db.profile.charge then
-		self:IntervalBar(L["charge_bar"], timer.charge[1], timer.charge[2], icon.charge, true, "Yellow")
+		self:IntervalBar(L["charge_bar"], timer.secondCharge[1], timer.secondCharge[2], icon.charge, true, "Yellow") -- change name here and in event handlers (x2)
 	end
 end
 
@@ -126,23 +163,26 @@ end
 ------------------------------
 
 function module:Event(msg)
-	if self.db.profile.stomp and string.find(msg, L["warstomp_trigger"]) then
-		if GetTime() > lastStomp + 2 then
-			lastStomp = GetTime()
-			self:Warstomp()
-		end
-	elseif self.db.profile.ms and string.find(msg, L["ms_trigger"]) then
-		if GetTime() > lastMS + 2 then
-			lastMS = GetTime()
-			self:MortalStrike()
-		end
+	if string.find(msg, "战争践踏") then
+		self:Sync(syncName.warStomp)
+	elseif string.find(msg, "致死打击") then
+		self:Sync(syncName.mortalStrike)
+	elseif string.find(msg, "冲锋") then
+		self:Sync(syncName.charge)
 	end
 end
 
-function module:Warstomp()
-	self:IntervalBar(L["warstomp_bar"], timer.warStomp[1], timer.warStomp[2], icon.warStomp, true, "White")
-end
+------------------------------
+--      Synchronization	    --
+------------------------------
 
-function module:MortalStrike()
-	self:IntervalBar(L["ms_bar"], timer.mortalStrike[1], timer.mortalStrike[2], icon.mortalStrike, true, "Black")
+function module:BigWigs_RecvSync( sync, rest, nick )
+	if sync == syncName.warStomp and self.db.profile.stomp then
+		self:RemoveBar(L["warStomp2_bar"])
+		self:IntervalBar(L["warStomp_bar"], timer.warStomp[1], timer.warStomp[2], icon.warStomp, true, "Red")
+	elseif sync == syncName.mortalStrike and self.db.profile.ms then
+		self:IntervalBar(L["ms_bar"], timer.mortalStrike[1], timer.mortalStrike[2], icon.mortalStrike, true, "Black")
+	elseif sync == syncName.charge and self.db.profile.charge then
+		self:IntervalBar(L["charge_bar"], timer.charge[1], timer.charge[2], icon.charge, true, "Yellow")
+	end
 end

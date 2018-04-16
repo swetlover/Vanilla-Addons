@@ -1,12 +1,12 @@
 ## Title: EkBomb
 ## Title-zhCN: |CFF00FF00团队|r 炸弹类技能警报
+## Notes: A large attention-getting warning window for certain bomb type debuffs.
 ## Notes-zhCN: |CFFDD66DDEkBomb|r 在你中了某些BOSS需要跑出人群或者停止行动的技能后，屏幕上会出现特大号的警报窗口|N设置命令/ekbomb
+## DefaultState: disabled
 ## Author: Dargen (Guild: Eternal Keggers, Server: Norgannon)
 ## Version: 1.44
 ## Interface: 11200
-## Q-CAT-Version: 000100
-## Notes: A large attention-getting warning window for certain bomb type debuffs.
-## DefaultState: disabled
+## Q-CAT-Version: 000200
 ## SavedVariables: EkBomb_Status
 ## SavedVariables: EkBomb_Opacity
 ## SavedVariables: EkBomb_BombsConfig

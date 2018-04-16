@@ -25,7 +25,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 				</Texture>
 			</Layer>
 			<Layer level="OVERLAY">
-				<FontString name="$parent_Message1" font="Fonts\FRIZQT__.TTF" outline="THICK" text="">
+				<FontString name="$parent_Message1" font="Fonts\FZXHLJW.TTF" outline="THICK" text="">
 					<FontHeight>
 						<AbsValue val="102"/>
 					</FontHeight>
@@ -38,7 +38,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parent_Message2" font="Fonts\FRIZQT__.TTF" outline="THICK" text="">
+				<FontString name="$parent_Message2" font="Fonts\FZXHLJW.TTF" outline="THICK" text="">
 					<FontHeight>
 						<AbsValue val="102"/>
 					</FontHeight>

@@ -53,7 +53,7 @@ L:RegisterTranslations("zhCN", function() return {
 	meteorwarn = "流星 - 注意集中",
 	meteorbar = "流星(集中分摊伤害)",
 
-	wrathtrigger = "瑟里耶克爵士的神圣之怒击中",
+	wrathtrigger = "札里克爵士的神圣之怒击中",
 	wrathwarn = "神圣之怒 - 注意加好战士的血",
 	wrathbar = "神圣之怒(5码连锁反弹)",
 

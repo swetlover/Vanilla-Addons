@@ -118,7 +118,7 @@ end
 
 -- called after boss is engaged
 function module:OnEngage()
-	self:KTM_SetTarget(self:ToString())
+	--self:KTM_SetTarget(self:ToString())
 	self:Bar(L["poisonbar"], timer.firstPoison, icon.poison)
 	self:Webspray()
 end
@@ -214,7 +214,7 @@ end
 function module:Poison()
 	if self.db.profile.poison then
 		self:Message(L["poisonwarn"], "Important")
-		self:IntervalBar(L["poisonbar"], timer.poison[1], timer.poison[2], icon.poison)
+		self:IntervalBar(L["poisonbar"], timer.poison[1], timer.poison[2], icon.poison, true, "Green")
 	end
 end
 
