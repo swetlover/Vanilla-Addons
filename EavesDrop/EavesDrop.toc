@@ -1,20 +1,21 @@
 ## Interface: 11200
 ## Name: EavesDrop
-## Title: EavesDrop |cff7fff7f|r
+## Title: EavesDrop |cff7fff7fv3|r
 ## Title-zhCN: |CFFCCFFFF界面|r 战斗图形事件框
 ## Notes: A simple combat log that displays events similar to SCT
 ## Notes-zhCN: |CFFDD66DDEavesDrop|r 实时记录你对目标的伤害、技能、减益、等等|N设置命令/EavesDrop
 ## DefaultState: disabled
-## Version: 1.3.2
-## Q-CAT-Version: 000300
-## Author: Grayhoof, Snelf
+## Notes-ruRU: Простой журнал боевых действий, в котором отображаются события, похожие на SCT
+## Version: 1.4.2
+## Author: Grayhoof, Cabro, laytya
 ## SavedVariables: EavesDropDB
 ## SavedVariablesPerCharacter: EavesDropStatsDB
-## X-Website: http://grayhoof.wowinterface.com/
+## X-Email: laytya@gmail.com
+## X-Website: https://github.com/Cabro/EavesDrop
 ## X-Category: Combat
-## X-RelSite-WoWI: 5332
 ## X-Embeds: Ace2, Babble-2.2, Metrognome, ParserLib, DewdropLib 
 ## OptionalDeps: Ace2, Babble-2.2, Metrognome, ParserLib, DewdropLib 
+## Q-CAT-Version: 000400
 
 libs\AceLibrary\AceLibrary.lua
 libs\AceOO-2.0\AceOO-2.0.lua
@@ -28,8 +29,10 @@ libs\Metrognome-2.0\Metrognome-2.0.lua
 libs\ParserLib-1.1\ParserLib.lua
 libs\Dewdrop-2.0\Dewdrop-2.0.lua
 libs\Babble-Spell-2.2\Babble-Spell-2.2.lua
+libs\Waterfall-1.0\Waterfall-1.0.lua
 
 localization-enUS.lua
+localization-ruRU.lua
 localization-koKR.lua
 EavesDrop.lua
 EavesDropStats.lua

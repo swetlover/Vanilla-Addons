@@ -1,6 +1,6 @@
 ## Interface: 11200
 ## Version: 4.43
-## Title: Mik's Scrolling Battle Text
+## Title: Mik's Scrolling Battle Text v2
 ## Title-zhCN: |CFFCCFFFF界面|r 战斗数值增强
 ## Notes: Scrolls battle information around the character model.
 ## Notes-zhCN: |CFFDD66DDMikScrollingBattleText|r 在角色周围滚动显示战斗信息|N设置命令/msbt
@@ -21,3 +21,4 @@ MikCombatEventHelper.lua
 MikScrollingBattleText.lua
 MikCombatEventHelper.xml
 MikScrollingBattleText.xml
+## Q-CAT-Version: 000200

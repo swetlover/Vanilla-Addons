@@ -123,6 +123,8 @@ local icon = {
 	powerSurge = "Spell_Shadow_UnholyFrenzy",
 	enrage = "Spell_Shadow_UnholyFrenzy",
 	polarityShift = "Spell_Nature_Lightning",
+	positive = "Spell_ChargePositive",
+	negative = "Spell_ChargeNegative",
 }
 local syncName = {
 	powerSurge = "StalaggPower"..module.revision,
@@ -258,12 +260,13 @@ function module:NewPolarity(chargetype)
 			self:Message(L["nochange"], "Urgent", true, "Long")
 		elseif chargetype == L["positivetype"] then
 			self:Message(L["poswarn"], "Positive", true, "RunAway")
-			self:WarningSign(chargetype, 5)
+			self:Bar(L["polaritytickbar"], timer.polarityTick, icon.positive, "Important")
+			self:WarningSign(icon.positive, 5)
 		elseif chargetype == L["negativetype"] then
 			self:Message(L["negwarn"], "Important", true, "RunAway")
-			self:WarningSign(chargetype, 5)
+			self:Bar(L["polaritytickbar"], timer.polarityTick, icon.negative, "Important")
+			self:WarningSign(icon.negative, 5)
 		end
-		self:Bar(L["polaritytickbar"], timer.polarityTick, chargetype, "Important")
 	end
 	self.previousCharge = chargetype
 end

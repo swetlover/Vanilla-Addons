@@ -4,11 +4,23 @@ function EavesDrop:SetupOptions()
 	self.options = {
 		type = "group",
 		args = {
+			lock = {
+				name = L["MLock"], type = "toggle",
+				desc = L["MLockD"],
+				order = 1,
+				get = function()
+					return self.db.profile["LOCKED"]
+				end,
+				set = function(v)
+					self.db.profile["LOCKED"] = v;
+					EavesDropFrame:EnableMouse(not self.db.profile["LOCKED"]);
+				end
+			},
 			events = {
 				name = L["Events"],
 				desc = L["Events"],
 				type = "group",
-				order = 1,
+				order = 2,
 				args = {
 					combat = {
 						name = L["ECombat"],
@@ -181,7 +193,7 @@ function EavesDrop:SetupOptions()
 				name = L["Colors"],
 				desc = L["Colors"],
 				type = "group",
-				order = 2,
+				order = 3,
 				args = {			
 					icolor = {
 						name = L["IColors"],
@@ -472,7 +484,7 @@ function EavesDrop:SetupOptions()
 				name = L["Frame"],
 				desc = L["Frame"],
 				type = "group",
-				order = 3,
+				order = 4,
 				args = {		
 					lines = {
 						name = L["FNumber"], type = "range",
@@ -567,25 +579,13 @@ function EavesDrop:SetupOptions()
 				        end
 				    end,
 					},
-					lock = {
-						name = L["MLock"], type = "toggle",
-				    desc = L["MLockD"],
-				    order = 7,
-				    get = function()
-				        return self.db.profile["LOCKED"]
-				    end,
-				    set = function(v)
-				        self.db.profile["LOCKED"] = v;
-				        EavesDropFrame:EnableMouse(not self.db.profile["LOCKED"]);
-				    end
-					},
 				},
 			},
 			misc = {
 				name = L["Misc"],
 				desc = L["Misc"],
 				type = "group",
-				order = 4,
+				order = 5,
 				args = {	
 					buttons = {
 						name = L["MButtons"] , type = "toggle",
@@ -702,7 +702,7 @@ function EavesDrop:SetupOptions()
 			reset = {
 				name = L["MReset"], type = 'execute',
 		    desc = L["MResetD"],
-		    order = 5,
+		    order = 6,
 		    func = function()
 		        self:Reset();
     		end

@@ -504,9 +504,13 @@
 			</OnLoad>
 			<OnMouseDown>
 				GameTooltip:Hide();
-       	if arg1 == "RightButton" then
-			  	EavesDrop:DropMenu()
-			  end
+				if arg1 == "RightButton" then
+					if IsShiftKeyDown() then
+						EavesDrop:DropMenu()
+					else
+						EavesDrop:DewDropMenu()
+					end
+				end
 			</OnMouseDown>
 			<OnEnter>
 				EavesDropTab:SetAlpha(1);
